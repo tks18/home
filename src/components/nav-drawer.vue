@@ -1,11 +1,5 @@
 <template>
-  <v-navigation-drawer
-    v-bind:key="navBarKey"
-    app
-    temporary
-    v-model="drawer"
-    :src="drawerBackImg"
-  >
+  <v-navigation-drawer app temporary v-model="drawer" :src="drawerBackImg">
     <v-container>
       <v-list-item three-line class="px-2">
         <v-list-item-avatar>
@@ -21,15 +15,17 @@
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
-      <v-switch
-        v-model="darkmode"
-        @click="changeTheme"
-        dense
-        inset
-        label="Dark Mode"
-      ></v-switch>
       <v-list class="text-left">
         <v-list-item-group>
+          <v-list-item @click="changeTheme">
+            <v-switch
+              v-model="darkmode"
+              dense
+              inset
+              :value="darkmode"
+              label="Dark Mode"
+            ></v-switch>
+          </v-list-item>
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-home </v-icon>
@@ -59,23 +55,26 @@ export default {
     return {
       drawer: false,
       avatar:
-        'https://s.gravatar.com/avatar/c0ec2e063895760baa493c36d2d28387?s=400',
+        'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
       darkmode: false,
-      navBarKey: 0,
     };
   },
   methods: {
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      this.navBarKey++;
+      localStorage.setItem(
+        'themecache',
+        JSON.stringify({ dark: this.$vuetify.theme.dark }),
+      );
+      this.darkmode = this.$vuetify.theme.dark;
     },
   },
   computed: {
     drawerBackImg() {
       if (!this.$vuetify.theme.dark) {
-        return 'https://unsplash.com/photos/kkfBE9qBSxA/download?force=true&w=1920';
+        return 'https://i.ibb.co/CW7SGhf/download-force-true-w-1920.jpg';
       } else {
-        return 'https://unsplash.com/photos/IaVXvH_z2PY/download?force=true&w=1920';
+        return 'https://i.ibb.co/p3Tgrt6/download-force-true-w-1920.jpg';
       }
     },
   },
@@ -87,6 +86,11 @@ export default {
         this.drawer = false;
       }
     });
+    var darkCache = JSON.parse(localStorage.getItem('themecache'));
+    if (darkCache && darkCache != null) {
+      this.darkmode = darkCache.dark;
+      this.$vuetify.theme.dark = darkCache.dark;
+    }
   },
 };
 </script>

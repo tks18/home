@@ -1,7 +1,9 @@
 {
   "name": "portfolio-mat-dark",
   "version": "0.1.0",
-  "private": true,
+  "title": "Shan.tk 🤔😁✌",
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -12,6 +14,7 @@
     "core-js": "^3.6.5",
     "minify-css-string": "^1.0.0",
     "vue": "^2.6.11",
+    "vue-meta": "^2.4.0",
     "vuetify": "^2.2.11"
   },
   "devDependencies": {

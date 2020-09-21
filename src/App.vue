@@ -18,6 +18,9 @@ export default {
     navbar,
     navDrawer,
   },
+  beforeMount() {
+    console.log(this.$vuetify.theme);
+  },
 };
 </script>
 <style lang="scss">

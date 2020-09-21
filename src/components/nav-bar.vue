@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat collapse-on-scroll>
+  <v-app-bar app dense flat collapse-on-scroll>
     <v-app-bar-nav-icon @click="navclick()"></v-app-bar-nav-icon>
     <v-tooltip bottom transition="slide-y-transition">
       <template v-slot:activator="{ on, attrs }">

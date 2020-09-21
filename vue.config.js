@@ -3,6 +3,7 @@ const vueSrc = "./src/";
 
 module.exports = {
   runtimeCompiler: true,
+  publicPath: '',
   css: {
     requireModuleExtension: true
   },
@@ -13,6 +14,13 @@ module.exports = {
       },
       extensions: ['.js', '.vue', '.json', '.css', '.scss']
     }
+  },
+  chainWebpack: (config) => {
+    let title = require('./package.json').title
+    config.plugin('html').tap((args) => {
+      args[0].title = title;
+      return args;
+    })
   },
   "lintOnSave": false,
   "transpileDependencies": [
