@@ -1,0 +1,45 @@
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: white;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(0%, 0%, 15%);
+  border-radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.non-touch {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.point-cursor {
+  cursor: pointer;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}

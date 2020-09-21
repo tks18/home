@@ -1,21 +1,25 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-app id="app has-navbar-fixed-top">
+    <navDrawer />
+    <navbar />
+    <v-container>
+      <v-main>
+        <p>Welcome to Vue App</p>
+      </v-main>
+    </v-container>
+  </v-app>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-
+import navbar from './components/nav-bar';
+import navDrawer from './components/nav-drawer';
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    navbar,
+    navDrawer,
   },
 };
 </script>
-
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
