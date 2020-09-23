@@ -14,7 +14,7 @@
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-divider></v-divider>
+      <v-divider> </v-divider>
       <v-list class="text-left">
         <v-list-item-group>
           <v-list-item @click="changeTheme">
@@ -26,22 +26,17 @@
               label="Dark Mode"
             ></v-switch>
           </v-list-item>
-          <v-list-item>
+          <v-list-item
+            v-for="(nav, index) in navPaths"
+            v-bind:key="index"
+            @click="routerPush(nav.link)"
+          >
             <v-list-item-icon>
-              <v-icon>mdi-home </v-icon>
+              <v-icon> {{ nav.icon }} </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
-              <v-list-item-subtitle>Home</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon> mdi-web </v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title> About </v-list-item-title>
-              <v-list-item-subtitle>About</v-list-item-subtitle>
+              <v-list-item-title>{{ nav.title }}</v-list-item-title>
+              <v-list-item-subtitle>{{ nav.subtitle }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -57,6 +52,20 @@ export default {
       avatar:
         'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
       darkmode: false,
+      navPaths: [
+        {
+          icon: 'mdi-home',
+          title: 'Home',
+          subtitle: 'Home',
+          link: '/',
+        },
+        {
+          icon: 'mdi-web',
+          title: 'Careers',
+          subtitle: 'About my Careers',
+          link: '/careers',
+        },
+      ],
     };
   },
   methods: {
@@ -67,6 +76,13 @@ export default {
         JSON.stringify({ dark: this.$vuetify.theme.dark }),
       );
       this.darkmode = this.$vuetify.theme.dark;
+    },
+    windowClick(url) {
+      window.open(url);
+      return;
+    },
+    routerPush(link) {
+      this.$router.push(link);
     },
   },
   computed: {

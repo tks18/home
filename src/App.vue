@@ -4,22 +4,22 @@
     <navbar />
     <v-container>
       <v-main>
-        <p>Welcome to Vue App</p>
+        <router-view></router-view>
       </v-main>
     </v-container>
+    <foot />
   </v-app>
 </template>
 <script>
 import navbar from './components/nav-bar';
 import navDrawer from './components/nav-drawer';
+import foot from './components/footer';
 export default {
   name: 'App',
   components: {
     navbar,
     navDrawer,
-  },
-  beforeMount() {
-    console.log(this.$vuetify.theme);
+    foot,
   },
 };
 </script>

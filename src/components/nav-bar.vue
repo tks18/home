@@ -6,6 +6,7 @@
         <v-toolbar-title
           v-bind="attrs"
           v-on="on"
+          @click="routerPush('/')"
           class="font-weight-bold non-touch point-cursor"
           v-ripple
         >
@@ -15,20 +16,34 @@
       <span>Sudharshan TK</span>
     </v-tooltip>
     <v-spacer></v-spacer>
-    <v-btn icon> <v-icon>mdi-github</v-icon> </v-btn>
+    <v-btn icon @click="windowClick(github.link)">
+      <v-icon>{{ github.icon }}</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 <script>
 export default {
   name: 'Nav-Bar',
   data: function () {
-    return {};
+    return {
+      github: {
+        link: 'https://github.com/tks18',
+        icon: 'mdi-github',
+      },
+    };
   },
   methods: {
     navclick() {
       this.$state.navbar.key++;
       this.$state.navbar.active = true;
       this.$bus.$emit('nav', 'navigation');
+    },
+    routerPush(link) {
+      this.$router.push(link);
+    },
+    windowClick(url) {
+      window.open(url);
+      return;
     },
   },
 };
