@@ -17,15 +17,7 @@
       <v-divider> </v-divider>
       <v-list class="text-left">
         <v-list-item-group>
-          <v-list-item @click="changeTheme">
-            <v-switch
-              v-model="darkmode"
-              dense
-              inset
-              :value="darkmode"
-              label="Dark Mode"
-            ></v-switch>
-          </v-list-item>
+          <colorSelector />
           <v-list-item
             v-for="(nav, index) in navPaths"
             v-bind:key="index"
@@ -45,13 +37,16 @@
   </v-navigation-drawer>
 </template>
 <script>
+import colorSelector from './color-selector';
 export default {
+  components: {
+    colorSelector,
+  },
   data: function () {
     return {
       drawer: false,
       avatar:
         'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
-      darkmode: false,
       navPaths: [
         {
           icon: 'mdi-home',
@@ -69,14 +64,6 @@ export default {
     };
   },
   methods: {
-    changeTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      localStorage.setItem(
-        'themecache',
-        JSON.stringify({ dark: this.$vuetify.theme.dark }),
-      );
-      this.darkmode = this.$vuetify.theme.dark;
-    },
     windowClick(url) {
       window.open(url);
       return;
@@ -102,11 +89,6 @@ export default {
         this.drawer = false;
       }
     });
-    var darkCache = JSON.parse(localStorage.getItem('themecache'));
-    if (darkCache && darkCache != null) {
-      this.darkmode = darkCache.dark;
-      this.$vuetify.theme.dark = darkCache.dark;
-    }
   },
 };
 </script>
