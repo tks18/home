@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer app temporary v-model="drawer" :src="drawerBackImg">
-    <v-container>
+    <v-container class="back-blur">
       <v-list-item three-line class="px-2">
         <v-list-item-avatar>
           <v-img :src="avatar"></v-img>
@@ -24,7 +24,7 @@
             @click="routerPush(nav.link)"
           >
             <v-list-item-icon>
-              <v-icon> {{ nav.icon }} </v-icon>
+              <v-icon color="primary"> {{ nav.icon }} </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>{{ nav.title }}</v-list-item-title>

@@ -1,7 +1,7 @@
 <template>
   <v-footer elevation="12" inset rounded shaped>
     <v-row>
-      <v-col align="start" justify="start">
+      <v-col align="start" justify="end">
         <v-btn
           v-for="(social, index) in socials"
           v-bind:key="index"
@@ -12,10 +12,13 @@
           <v-icon>{{ social.icon }}</v-icon>
         </v-btn>
       </v-col>
+      <v-col align="end" justify="start">
+        <div class="font-weight-light primary--text">{{ now }}</div>
+      </v-col>
     </v-row>
     <v-row>
       <v-col align="end" justify="end">
-        <div class="font-weight-black">
+        <div :class="'font-weight-black' + (ismobile ? ' text-center' : '')">
           Shan.tk 🤔😁✌ | <v-icon color="default">mdi-copyright</v-icon>
           {{ new Date().getFullYear() }}
         </div>
@@ -27,6 +30,8 @@
 export default {
   data: function () {
     return {
+      now: new Date().toLocaleTimeString(),
+      clockDiag: false,
       socials: [
         {
           icon: 'mdi-twitter',
@@ -51,6 +56,21 @@ export default {
       window.open(url);
       return;
     },
+  },
+  computed: {
+    ismobile() {
+      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+      if (width > 966) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      this.now = new Date().toLocaleTimeString();
+    }, 1000);
   },
 };
 </script>

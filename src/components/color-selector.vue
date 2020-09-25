@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on, attrs }">
       <v-list-item v-bind="attrs" v-on="on">
         <v-list-item-icon>
-          <v-icon>mdi-cog-refresh</v-icon>
+          <v-icon color="primary">mdi-cog-refresh</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title> Settings </v-list-item-title>
@@ -14,7 +14,7 @@
     <v-sheet class="pa-6" height="200px">
       <v-row align="start" justify="end">
         <v-btn icon @click="activated = !activated"
-          ><v-icon>mdi-close</v-icon></v-btn
+          ><v-icon color="primary">mdi-close</v-icon></v-btn
         >
       </v-row>
       <v-row align="center" justify="center">
@@ -33,12 +33,22 @@
           <v-card>
             <v-card-title class="headline"> Choose Accent Color </v-card-title>
             <v-card-text>
-              <v-color-picker show-swatches></v-color-picker>
+              <v-color-picker
+                show-swatches
+                elevation="6"
+                hide-inputs
+                v-model="accent"
+              ></v-color-picker>
             </v-card-text>
             <v-card-actions>
               <v-spacer />
               <v-col>
-                <v-btn class="subtitle text-bold" color="primary" text>
+                <v-btn
+                  class="subtitle text-bold"
+                  color="primary"
+                  @click="changeAccent()"
+                  text
+                >
                   Accept
                 </v-btn>
               </v-col>
@@ -69,6 +79,7 @@ export default {
       activated: false,
       colorDiag: false,
       darkmode: false,
+      accent: null,
     };
   },
   methods: {
@@ -80,6 +91,20 @@ export default {
       );
       this.darkmode = this.$vuetify.theme.dark;
     },
+    changeAccent() {
+      this.$vuetify.theme.themes.light.primary = this.accent.hex;
+      this.$vuetify.theme.themes.dark.primary = this.accent.hex;
+      console.log(this.$vuetify.theme);
+      localStorage.setItem(
+        'themecache',
+        JSON.stringify({
+          dark: this.$vuetify.theme.dark,
+          theme: {
+            accent: this.accent.hex,
+          },
+        }),
+      );
+    },
   },
   mounted() {
     var darkCache = JSON.parse(localStorage.getItem('themecache'));
@@ -87,6 +112,11 @@ export default {
       this.darkmode = darkCache.dark;
       this.$vuetify.theme.dark = darkCache.dark;
     }
+  },
+  watch: {
+    accent: function (newval) {
+      console.log(newval);
+    },
   },
 };
 </script>
