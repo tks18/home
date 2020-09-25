@@ -33,8 +33,12 @@
 }
 
 .back-blur {
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(2px) saturate(100%) contrast(100%);
   height: inherit;
+}
+
+.width-min {
+  min-width: 40%;
 }
 
 .slide-fade-enter-active {

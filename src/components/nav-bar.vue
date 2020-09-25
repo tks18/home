@@ -16,9 +16,14 @@
       <span>Sudharshan TK</span>
     </v-tooltip>
     <v-spacer></v-spacer>
-    <v-btn icon @click="windowClick(github.link)">
-      <v-icon>{{ github.icon }}</v-icon>
-    </v-btn>
+    <v-tooltip bottom transition="slide-y-transition">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" v-on="on" icon @click="windowClick(github.link)">
+          <v-icon color="primary">{{ github.icon }}</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ github.title }}</span>
+    </v-tooltip>
   </v-app-bar>
 </template>
 <script>
@@ -29,6 +34,7 @@ export default {
       github: {
         link: 'https://github.com/tks18',
         icon: 'mdi-github',
+        title: "Shan.tk's Github Profile",
       },
     };
   },
