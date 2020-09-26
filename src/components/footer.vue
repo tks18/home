@@ -3,26 +3,31 @@
     <v-row align="center" justify="center">
       <v-col :cols="ismobile ? 6 : 4">
         <v-row>
-          <v-col align="start" justify="center">
-            <v-tooltip
-              top
-              transition="slide-y-transition"
-              v-for="(social, index) in socials"
-              v-bind:key="index"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  icon
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="windowLink(social.link)"
-                  color="primary"
-                >
-                  <v-icon>{{ social.icon }}</v-icon>
-                </v-btn>
-              </template>
-              <span>{{ social.title }}</span>
-            </v-tooltip>
+          <v-col align="start" justify="center" class="ma-1">
+            <v-row>
+              <div class="text ml-4 font-weight-bold">Follow Me on:</div>
+            </v-row>
+            <v-row>
+              <v-tooltip
+                top
+                transition="slide-y-transition"
+                v-for="(social, index) in socials"
+                v-bind:key="index"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="windowLink(social.link)"
+                    color="primary"
+                  >
+                    <v-icon>{{ social.icon }}</v-icon>
+                  </v-btn>
+                </template>
+                <span>{{ social.title }}</span>
+              </v-tooltip>
+            </v-row>
           </v-col>
         </v-row>
       </v-col>
@@ -89,6 +94,16 @@ export default {
           icon: 'mdi-github',
           title: 'Github',
           link: 'https://github.com/tks18',
+        },
+        {
+          icon: 'mdi-gitlab',
+          title: 'Gitlab',
+          link: 'https://gitlab.com/tks18',
+        },
+        {
+          icon: 'mdi-bitbucket',
+          title: 'Bit Bucket',
+          link: 'https://bitbucket.org/Shan-tk/',
         },
         {
           icon: 'mdi-quality-medium',
