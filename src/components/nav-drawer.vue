@@ -1,24 +1,36 @@
 <template>
   <v-navigation-drawer app temporary v-model="drawer" :src="drawerBackImg">
     <v-container class="back-blur">
-      <v-list-item three-line class="px-2">
-        <v-list-item-avatar>
+      <v-row align="center" justify="center">
+        <v-avatar
+          @click="routerPush('/about')"
+          class="point-cursor non-touch"
+          size="125"
+        >
           <v-img :src="avatar"></v-img>
-        </v-list-item-avatar>
+        </v-avatar>
+      </v-row>
+      <v-list-item three-line class="px-2">
         <v-list-item-content>
-          <v-list-item-title class="text-left non-touch font-weight-medium">
+          <v-list-item-title
+            @click="routerPush('/about')"
+            class="text-center point-cursor non-touch font-weight-medium"
+          >
             Sudharshan TK
           </v-list-item-title>
-          <v-list-item-subtitle class="text-left non-touch font-weight-light">
+          <v-list-item-subtitle class="text-center non-touch font-weight-thin">
+            (aka Shan.tk)
+          </v-list-item-subtitle>
+          <v-list-item-subtitle class="text-center non-touch font-weight-light">
             Web Developer/Aspiring Chartered Accountant
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list class="text-left">
         <v-list-item-group>
-          <v-divider> </v-divider>
+          <v-divider class="ma-1"> </v-divider>
           <bottomSettings />
-          <v-divider> </v-divider>
+          <v-divider class="ma-1"> </v-divider>
           <v-list-item
             v-for="(nav, index) in navPaths"
             v-bind:key="index"
@@ -56,10 +68,22 @@ export default {
           link: '/',
         },
         {
+          icon: 'mdi-information',
+          title: 'About',
+          subtitle: 'About Me',
+          link: '/about',
+        },
+        {
           icon: 'mdi-web',
           title: 'Careers',
-          subtitle: 'About my Careers',
+          subtitle: 'Careers',
           link: '/careers',
+        },
+        {
+          icon: 'mdi-google-photos',
+          title: 'Gallery',
+          subtitle: 'My Photography Skills',
+          link: '/gallery',
         },
       ],
     };
@@ -76,7 +100,7 @@ export default {
   computed: {
     drawerBackImg() {
       if (!this.$vuetify.theme.dark) {
-        return 'https://i.ibb.co/CW7SGhf/download-force-true-w-1920.jpg';
+        return 'https://i.ibb.co/bKsBjMj/download-force-true-w-2400.jpg';
       } else {
         return 'https://i.ibb.co/p3Tgrt6/download-force-true-w-1920.jpg';
       }

@@ -16,7 +16,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click="windowLink(social.link)"
-                  :color="social.color != null ? social.color : 'default'"
+                  color="primary"
                 >
                   <v-icon>{{ social.icon }}</v-icon>
                 </v-btn>
@@ -79,19 +79,31 @@ export default {
           icon: 'mdi-twitter',
           title: 'Twitter',
           link: 'https://twitter.com/shantk18',
-          color: 'primary',
         },
         {
           icon: 'mdi-instagram',
           title: 'Instagram',
           link: 'https://instagram.com/shantk18',
-          color: 'primary',
         },
         {
           icon: 'mdi-github',
           title: 'Github',
           link: 'https://github.com/tks18',
-          color: 'primary',
+        },
+        {
+          icon: 'mdi-quality-medium',
+          title: 'Medium',
+          link: 'https://medium.com/@tksudharshan',
+        },
+        {
+          icon: 'mdi-email-edit',
+          title: 'Email Me',
+          link: 'mailto:tksudharshan@infozy.tk',
+        },
+        {
+          icon: 'mdi-google-photos',
+          title: 'Photography',
+          link: 'https://unsplash.com/@shantk18',
         },
       ],
       quotes: [

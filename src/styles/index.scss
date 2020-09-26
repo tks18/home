@@ -33,22 +33,10 @@
 }
 
 .back-blur {
-  backdrop-filter: blur(2px) saturate(100%) contrast(100%);
+  backdrop-filter: blur(25px) saturate(1.2) contrast(1.2);
   height: inherit;
 }
 
 .width-min {
   min-width: 40%;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
 }
