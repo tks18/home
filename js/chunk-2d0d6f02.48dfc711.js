@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d6f02"],{"754b":function(t,e,n){"use strict";n.r(e);var u=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("p",{staticClass:"text"},[t._v("Welcome to About Vue Page")])},a=[],c={data:function(){return{}}},l=c,o=n("2877"),s=Object(o["a"])(l,u,a,!1,null,null,null);e["default"]=s.exports}}]);
+//# sourceMappingURL=chunk-2d0d6f02.48dfc711.js.map

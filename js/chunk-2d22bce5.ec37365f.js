@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22bce5"],{f115:function(e,t,n){"use strict";n.r(t);var a=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("p",{staticClass:"text"},[e._v("Welcome to Gallery Vue Page")])},c=[],l={data:function(){return{}}},u=l,r=n("2877"),s=Object(r["a"])(u,a,c,!1,null,null,null);t["default"]=s.exports}}]);
+//# sourceMappingURL=chunk-2d22bce5.ec37365f.js.map
