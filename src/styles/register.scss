@@ -30,5 +30,8 @@ $headings: (
   ),
 );
 
+$animationDuration: 1s;
+
 @import 'bulma';
+@import 'vue2-animate/src/sass/vue2-animate.scss';
 @import 'index.scss';

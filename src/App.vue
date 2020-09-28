@@ -2,11 +2,11 @@
   <v-app id="app has-navbar-fixed-top">
     <navDrawer />
     <navbar />
-    <v-container>
-      <v-main>
+    <v-main>
+      <div class="content">
         <router-view></router-view>
-      </v-main>
-    </v-container>
+      </div>
+    </v-main>
     <foot />
   </v-app>
 </template>

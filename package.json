@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.4.3",
+    "vue2-animate": "^2.1.4",
     "vuetify": "^2.2.11"
   },
   "devDependencies": {
