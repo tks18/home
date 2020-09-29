@@ -2,7 +2,7 @@
   <div class="content">
     <div
       :class="
-        'hero is-medium' +
+        (ismobile ? 'hero is-fullheight' : 'hero is-medium' ) +
         ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
       "
     >
@@ -12,20 +12,20 @@
               class="columns is-multiline is-centered is-vcentered"
             >
               <div class="column is-half ma-0 pa-0">
-                <transition name="bounceUp" mode="out-in">
+                <transition name="fadeLeft" mode="out-in">
                 <figure v-bind:key="heroImgKey">
                   <img :src="currentHeroImg.image" alt="Main Image" />
                 </figure>
                 </transition>
               </div>
               <div class="column is-half">
-                <transition name="bounceUp" mode="out-in">
+                <transition name="fadeRight" mode="out-in">
                 <v-card v-bind:key="heroDatakey">
                   <div class="content text pa-4">
                     <div class="text-h4">
                       {{ currentHeroData.title }}
                     </div>
-                    <div class="text-subtitle-1 mt-3">
+                    <div class="text-subtitle-1 font-weight-thin mt-3">
                       {{ currentHeroData.subtitle }}
                     </div>
                   </div>
@@ -64,6 +64,16 @@ export default {
       heroDatakey: 0,
       heroImgKey: 0,
     };
+  },
+  computed: {
+    ismobile() {
+      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+      if (width > 966) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   mounted() {
     this.currentHeroData = this.heroData[0];
