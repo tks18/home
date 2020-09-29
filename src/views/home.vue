@@ -67,7 +67,7 @@
             :height="ismobile ? 200 : 250"
             :width="ismobile ? 300 : 350"
           >
-            <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
+            <div class="text-center">{{ n }}</div>
           </v-card>
         </v-slide-item>
       </v-slide-group>
