@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="column is-full ml-2 mt-2">
+    <div class="column is-full ma-2">
       <div
         :class="
           'text-h5 non-touch point-cursor ml-6' +
@@ -54,25 +54,23 @@
       >
         Latest Posts <v-icon>mdi-arrow-right-circle</v-icon>
       </div>
-      <div
-        :class="
-          'columns scrollable-x is-mobile mt-2 mb-2 mr-0 pr-0' +
-          (ismobile ? ' ml-1 ' : ' ml-2')
-        "
+      <v-slide-group
+        :show-arrows="!ismobile"
+        class="mt-2 mb-2"
+        active-class="success"
+        prev-icon="mdi-arrow-left-circle-outline"
+        next-icon="mdi-arrow-right-circle-outline"
       >
-        <div
-          v-for="n in 7"
-          v-bind:key="n"
-          :class="
-            'scrollable-x-child column mx-0 px-1' +
-            (ismobile ? ' is-11' : ' is-3')
-          "
-        >
-          <v-card>
+        <v-slide-item v-for="n in 10" v-bind:key="n">
+          <v-card
+            class="mx-2"
+            :height="ismobile ? 200 : 250"
+            :width="ismobile ? 300 : 350"
+          >
             <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
           </v-card>
-        </div>
-      </div>
+        </v-slide-item>
+      </v-slide-group>
     </div>
   </div>
 </template>
