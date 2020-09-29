@@ -1,5 +1,5 @@
 <template>
-  <v-footer elevation="15" inset rounded shaped>
+  <v-footer elevation="15" inset dense rounded shaped>
     <v-row align="center" justify="center">
       <v-col :cols="ismobile ? 6 : 4">
         <v-row>
