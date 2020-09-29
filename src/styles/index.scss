@@ -63,42 +63,8 @@
   animation: fluid 15s ease infinite;
 }
 
-.border-light {
-  border: 1px solid
-    linear-gradient(
-      to right,
-      #4fff9c,
-      #18fdb8,
-      #00fbd0,
-      #00f7e4,
-      #00f2f2,
-      #14f3ee,
-      #23f5e9,
-      #2ff6e4,
-      #66fdc8,
-      #98ffaa,
-      #c8ff8f,
-      #f9ff7a
-    );
-}
-
-.border-dark {
-  border: 1px solid
-    linear-gradient(
-      to right,
-      #5d54a4,
-      #8750a6,
-      #ac4aa0,
-      #ce4292,
-      #e83f7e,
-      #e74386,
-      #e6478f,
-      #e54c97,
-      #bc5db6,
-      #886dc4,
-      #4d75c0,
-      #0278ae
-    );
+.border-max {
+  border-radius: 50%;
 }
 
 .grad-back-dark {
