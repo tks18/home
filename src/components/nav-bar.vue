@@ -1,6 +1,14 @@
 <template>
   <v-app-bar app dense flat collapse-on-scroll>
     <v-app-bar-nav-icon @click="navclick()"></v-app-bar-nav-icon>
+    <v-avatar
+      @click="$router.push('/')"
+      size="38"
+      class="mx-2 non-touch point-cursor"
+      color="primary"
+    >
+      <v-img :src="avatar"></v-img>
+    </v-avatar>
     <v-tooltip bottom transition="slide-y-transition">
       <template v-slot:activator="{ on, attrs }">
         <v-toolbar-title
@@ -36,6 +44,8 @@ export default {
         icon: 'mdi-github',
         title: "Shan.tk's Github Profile",
       },
+      avatar:
+        'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
     };
   },
   methods: {

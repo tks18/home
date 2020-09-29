@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-avatar
           @click="routerPush('/about')"
-          class="point-cursor non-touch"
+          class="point-cursor non-touch border-light"
           size="125"
         >
           <v-img :src="avatar"></v-img>
