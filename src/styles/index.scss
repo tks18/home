@@ -100,6 +100,18 @@
   }
 }
 
+.fab-button-bottom {
+  margin-bottom: 120px;
+  z-index: 1;
+  transition: margin-bottom 0.5s ease-in-out;
+}
+
+.fab-button {
+  margin-bottom: 40px;
+  z-index: 1;
+  transition: margin-bottom 0.5s ease-in-out;
+}
+
 .underhover-light {
   width: fit-content;
   text-decoration: none;

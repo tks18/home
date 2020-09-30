@@ -7,6 +7,7 @@
         <router-view></router-view>
       </div>
     </v-main>
+    <fabComponent />
     <foot />
   </v-app>
 </template>
@@ -14,12 +15,14 @@
 import navbar from './components/nav-bar';
 import navDrawer from './components/nav-drawer';
 import foot from './components/footer';
+import fabComponent from './components/fab-component';
 export default {
   name: 'App',
   components: {
     navbar,
     navDrawer,
     foot,
+    fabComponent,
   },
 };
 </script>

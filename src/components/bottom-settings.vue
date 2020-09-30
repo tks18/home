@@ -1,7 +1,7 @@
 <template>
   <v-bottom-sheet inset v-model="activated" persistent>
     <template v-slot:activator="{ on, attrs }">
-      <v-list-item v-bind="attrs" v-on="on">
+      <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
           <v-icon>mdi-cog-refresh</v-icon>
         </v-list-item-icon>
@@ -10,8 +10,23 @@
           <v-list-item-subtitle> Change the Accent Color </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+      <v-card
+        v-if="model == 'icon'"
+        class="ma-1 pa-2 non-touch point-cursor"
+        v-bind="attrs"
+        v-on="on"
+      >
+        <v-row align="center" class="mb-2" justify="center">
+          <v-btn fab small color="primary">
+            <v-icon>mdi-cog-refresh</v-icon>
+          </v-btn>
+        </v-row>
+        <v-row align="center" justify="center">
+          <div class="text font-weight-semibold">Settings</div>
+        </v-row>
+      </v-card>
     </template>
-    <v-sheet class="pa-8" height="260px">
+    <v-sheet class="pa-8 mt-auto">
       <v-row align="start" justify="end">
         <v-col>
           <h2 class="title primary--text">Settings</h2>
@@ -90,16 +105,49 @@
           <v-btn color="primary" filled @click="colorDiag = true">Change</v-btn>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col align="start" justify="center">
+          <p class="text">Enable Navigation Bar Image and Blur</p>
+        </v-col>
+        <v-col align="end" justify="center">
+          <v-dialog v-model="blurDiag" max-width="400">
+            <v-card>
+              <v-card-title>
+                Enable Navigation Bar Image and Blur
+              </v-card-title>
+              <v-card-text>
+                <v-switch
+                  v-model="navBlur"
+                  dense
+                  inset
+                  color="primary"
+                  @click="enableBlur"
+                  :value="navBlur"
+                  :label="navBlur ? ' Disable' : ' Enable'"
+                ></v-switch>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+          <v-btn color="primary" @click="blurDiag = true"> Change </v-btn>
+        </v-col>
+      </v-row>
     </v-sheet>
   </v-bottom-sheet>
 </template>
 <script>
 export default {
+  props: {
+    model: {
+      type: String,
+    },
+  },
   data: function () {
     return {
       activated: false,
       colorDiag: false,
       darkmode: false,
+      navBlur: false,
+      blurDiag: false,
       accent: null,
       darkdiag: false,
     };
@@ -111,12 +159,29 @@ export default {
         'themecache',
         JSON.stringify({
           dark: this.$vuetify.theme.dark,
+          blur: this.navBlur,
           theme: {
             accent: this.$vuetify.theme.themes.light.primary,
           },
         }),
       );
       this.darkmode = this.$vuetify.theme.dark;
+    },
+    enableBlur() {
+      localStorage.setItem(
+        'themecache',
+        JSON.stringify({
+          dark: this.$vuetify.theme.dark,
+          blur: this.navBlur,
+          theme: {
+            accent: this.$vuetify.theme.themes.light.primary,
+          },
+        }),
+      );
+      this.emitNow('navBlur', this.navBlur);
+    },
+    emitNow(event, value) {
+      this.$bus.$emit(event, value);
     },
     changeAccent() {
       this.$vuetify.theme.themes.light.primary = this.accent.hex;
@@ -125,6 +190,7 @@ export default {
         'themecache',
         JSON.stringify({
           dark: this.$vuetify.theme.dark,
+          blur: this.navBlur,
           theme: {
             accent: this.accent.hex,
           },
@@ -133,12 +199,13 @@ export default {
     },
   },
   mounted() {
-    var darkCache = JSON.parse(localStorage.getItem('themecache'));
-    if (darkCache && darkCache != null) {
-      this.darkmode = darkCache.dark;
-      this.$vuetify.theme.dark = darkCache.dark;
-      this.$vuetify.theme.themes.light.primary = darkCache.theme.accent;
-      this.$vuetify.theme.themes.dark.primary = darkCache.theme.accent;
+    var themecache = JSON.parse(localStorage.getItem('themecache'));
+    if (themecache && themecache != null) {
+      this.darkmode = themecache.dark;
+      this.navBlur = themecache.blur;
+      this.$vuetify.theme.dark = themecache.dark;
+      this.$vuetify.theme.themes.light.primary = themecache.theme.accent;
+      this.$vuetify.theme.themes.dark.primary = themecache.theme.accent;
     }
   },
 };

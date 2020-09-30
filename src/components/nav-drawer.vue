@@ -1,6 +1,11 @@
 <template>
-  <v-navigation-drawer app temporary v-model="drawer" :src="drawerBackImg">
-    <v-container class="back-blur">
+  <v-navigation-drawer
+    app
+    temporary
+    v-model="drawer"
+    :src="blurImage ? drawerBackImg : undefined"
+  >
+    <v-container :class="blurImage ? 'back-blur' : ' '">
       <v-row align="center" justify="center">
         <v-avatar
           @click="routerPush('/about')"
@@ -29,7 +34,7 @@
       <v-list class="text-left">
         <v-list-item-group>
           <v-divider class="ma-1"> </v-divider>
-          <bottomSettings />
+          <bottomSettings model="list" />
           <v-divider class="ma-1"> </v-divider>
           <v-list-item
             v-for="(nav, index) in navPaths"
@@ -58,6 +63,7 @@ export default {
   data: function () {
     return {
       drawer: false,
+      blurImage: false,
       avatar:
         'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
       navPaths: [
@@ -113,12 +119,19 @@ export default {
     },
   },
   mounted() {
+    var themecache = JSON.parse(localStorage.getItem('themecache'));
+    if (themecache && themecache != null) {
+      this.blurImage = themecache.blur;
+    }
     this.$bus.$on('nav', () => {
       if (this.$state.navbar.active) {
         this.drawer = true;
       } else {
         this.drawer = false;
       }
+    });
+    this.$bus.$on('navBlur', (e) => {
+      this.blurImage = e;
     });
   },
 };

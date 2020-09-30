@@ -47,6 +47,7 @@
     </div>
     <div class="column is-full ma-2">
       <div
+        @click="$router.push('/blog')"
         :class="
           'text-h5 non-touch point-cursor ml-6' +
           ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -56,16 +57,21 @@
       </div>
       <v-slide-group
         :show-arrows="!ismobile"
-        class="mt-2 mb-2"
+        class="mt-2 mb-2 scrollable-x"
         active-class="success"
         prev-icon="mdi-arrow-left-circle-outline"
         next-icon="mdi-arrow-right-circle-outline"
       >
-        <v-slide-item v-for="n in 10" v-bind:key="n">
+        <v-slide-item
+          v-for="n in 10"
+          class="scrollable-x-child non-touch point-cursor"
+          v-bind:key="n"
+        >
           <v-card
+            @click="ismobile"
             class="mx-2"
-            :height="ismobile ? 200 : 250"
-            :width="ismobile ? 300 : 350"
+            :height="ismobile ? 200 : 225"
+            :width="ismobile ? 300 : 325"
           >
             <div class="text-center">{{ n }}</div>
           </v-card>
