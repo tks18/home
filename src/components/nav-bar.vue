@@ -50,8 +50,8 @@ export default {
   },
   methods: {
     navclick() {
-      this.$state.navbar.key++;
-      this.$state.navbar.active = true;
+      this.$state.mutate.navbar.key++;
+      this.$state.mutate.navbar.active = true;
       this.$bus.$emit('nav', 'navigation');
     },
     routerPush(link) {
