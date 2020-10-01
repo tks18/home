@@ -67,14 +67,31 @@
           class="scrollable-x-child non-touch point-cursor"
           v-bind:key="n"
         >
-          <v-card
-            @click="ismobile"
-            class="mx-2"
-            :height="ismobile ? 200 : 225"
-            :width="ismobile ? 300 : 325"
-          >
-            <div class="text-center">{{ n }}</div>
-          </v-card>
+          <v-hover>
+            <template v-slot:default="{ hover }">
+              <v-card
+                @click="ismobile"
+                class="mx-2"
+                :width="ismobile ? 300 : 325"
+              >
+                <v-img
+                  src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"
+                ></v-img>
+                <v-card-text>
+                  <h2 class="title primary--text">Sample Post</h2>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
+                  voluptates neque saepe tempora animi vitae aliquam magnam, eum
+                  at, numquam ex fugiat veniam! Iure facilis dolorum, assumenda
+                  ex dignissimos alias.
+                </v-card-text>
+                <v-fade-transition>
+                  <v-overlay v-if="hover" absolute color="#036358">
+                    <v-btn>Read More</v-btn>
+                  </v-overlay>
+                </v-fade-transition>
+              </v-card>
+            </template>
+          </v-hover>
         </v-slide-item>
       </v-slide-group>
     </div>

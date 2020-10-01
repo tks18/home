@@ -1,5 +1,10 @@
 <template>
-  <v-bottom-sheet inset v-model="activated" persistent>
+  <v-bottom-sheet
+    v-bind:key="$state.botSettings.key"
+    inset
+    v-model="activated"
+    persistent
+  >
     <template v-slot:activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
@@ -166,6 +171,7 @@ export default {
         }),
       );
       this.darkmode = this.$vuetify.theme.dark;
+      this.$state.botSettings.key++;
     },
     enableBlur() {
       localStorage.setItem(
@@ -179,6 +185,7 @@ export default {
         }),
       );
       this.emitNow('navBlur', this.navBlur);
+      this.$state.botSettings.key++;
     },
     emitNow(event, value) {
       this.$bus.$emit(event, value);
@@ -196,6 +203,7 @@ export default {
           },
         }),
       );
+      this.$state.botSettings.key++;
     },
   },
   mounted() {

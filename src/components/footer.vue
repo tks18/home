@@ -5,7 +5,9 @@
         <v-row>
           <v-col align="start" justify="center" class="ma-1">
             <v-row>
-              <div class="text ml-4 font-weight-bold">Follow Me on:</div>
+              <div class="text ml-4 font-weight-bold non-touch">
+                Follow Me on:
+              </div>
             </v-row>
             <v-row>
               <v-tooltip
