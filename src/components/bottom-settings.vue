@@ -1,10 +1,5 @@
 <template>
-  <v-bottom-sheet
-    v-bind:key="$state.botSettings.key"
-    inset
-    v-model="activated"
-    persistent
-  >
+  <v-bottom-sheet inset v-model="activated" persistent>
     <template v-slot:activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
@@ -52,13 +47,17 @@
               <v-card-title> Change Primary Theme </v-card-title>
               <v-card-text>
                 <v-switch
-                  v-model="darkmode"
+                  v-model="$state.store.botSettings.darkmode"
                   dense
                   inset
                   color="primary"
                   @click="changeTheme"
-                  :value="darkmode"
-                  :label="'Turn' + (darkmode ? ' Off' : ' On') + ' Dark Mode'"
+                  :value="$state.store.botSettings.darkmode"
+                  :label="
+                    'Turn' +
+                    ($state.store.botSettings.darkmode ? ' Off' : ' On') +
+                    ' Dark Mode'
+                  "
                 ></v-switch>
               </v-card-text>
             </v-card>
@@ -122,13 +121,15 @@
               </v-card-title>
               <v-card-text>
                 <v-switch
-                  v-model="navBlur"
+                  v-model="$state.store.botSettings.navBlur"
                   dense
                   inset
                   color="primary"
                   @click="enableBlur"
-                  :value="navBlur"
-                  :label="navBlur ? ' Disable' : ' Enable'"
+                  :value="$state.store.botSettings.navBlur"
+                  :label="
+                    $state.store.botSettings.navBlur ? ' Disable' : ' Enable'
+                  "
                 ></v-switch>
               </v-card-text>
             </v-card>
@@ -150,8 +151,6 @@ export default {
     return {
       activated: false,
       colorDiag: false,
-      darkmode: false,
-      navBlur: false,
       blurDiag: false,
       accent: null,
       darkdiag: false,
@@ -164,28 +163,26 @@ export default {
         'themecache',
         JSON.stringify({
           dark: this.$vuetify.theme.dark,
-          blur: this.navBlur,
+          blur: this.$state.store.botSettings.navBlur,
           theme: {
             accent: this.$vuetify.theme.themes.light.primary,
           },
         }),
       );
-      this.darkmode = this.$vuetify.theme.dark;
-      this.$state.botSettings.key++;
+      this.$state.mutate.botSettings.darkmode = this.$vuetify.theme.dark;
     },
     enableBlur() {
       localStorage.setItem(
         'themecache',
         JSON.stringify({
           dark: this.$vuetify.theme.dark,
-          blur: this.navBlur,
+          blur: this.$state.store.botSettings.navBlur,
           theme: {
             accent: this.$vuetify.theme.themes.light.primary,
           },
         }),
       );
-      this.emitNow('navBlur', this.navBlur);
-      this.$state.botSettings.key++;
+      this.emitNow('navBlur', this.$state.store.botSettings.navBlur);
     },
     emitNow(event, value) {
       this.$bus.$emit(event, value);
@@ -197,20 +194,19 @@ export default {
         'themecache',
         JSON.stringify({
           dark: this.$vuetify.theme.dark,
-          blur: this.navBlur,
+          blur: this.$state.store.botSettings.navBlur,
           theme: {
             accent: this.accent.hex,
           },
         }),
       );
-      this.$state.botSettings.key++;
     },
   },
   mounted() {
     var themecache = JSON.parse(localStorage.getItem('themecache'));
     if (themecache && themecache != null) {
-      this.darkmode = themecache.dark;
-      this.navBlur = themecache.blur;
+      this.$state.mutate.botSettings.darkmode = themecache.dark;
+      this.$state.mutate.botSettings.navBlur = themecache.blur;
       this.$vuetify.theme.dark = themecache.dark;
       this.$vuetify.theme.themes.light.primary = themecache.theme.accent;
       this.$vuetify.theme.themes.dark.primary = themecache.theme.accent;

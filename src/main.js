@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import state from './plugins/state';
+import store, { mutations, getters } from './plugins/state';
 import EventBus from './EventBus';
 import router from './router';
 import lodash from 'lodash';
@@ -12,7 +12,11 @@ import 'swiper/swiper-bundle.css'
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false;
 Vue.prototype.$bus = EventBus;
-Vue.prototype.$state = state
+Vue.prototype.$state = {
+  store: store,
+  mutate: mutations,
+  get: getters,
+}
 Vue.prototype.$_ = lodash;
 
 new Vue({

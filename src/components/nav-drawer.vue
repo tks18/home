@@ -124,7 +124,7 @@ export default {
       this.blurImage = themecache.blur;
     }
     this.$bus.$on('nav', () => {
-      if (this.$state.navbar.active) {
+      if (this.$state.get.navbar.active) {
         this.drawer = true;
       } else {
         this.drawer = false;
