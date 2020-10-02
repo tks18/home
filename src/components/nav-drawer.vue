@@ -2,10 +2,10 @@
   <v-navigation-drawer
     app
     temporary
-    v-model="drawer"
-    :src="blurImage ? drawerBackImg : undefined"
+    v-model="$state.store.navbar.active"
+    :src="$state.store.botSettings.navBlur ? drawerBackImg : undefined"
   >
-    <v-container :class="blurImage ? 'back-blur' : ' '">
+    <v-container :class="$state.store.botSettings.navBlur ? 'back-blur' : ' '">
       <v-row align="center" justify="center">
         <v-avatar
           @click="routerPush('/about')"
@@ -62,8 +62,6 @@ export default {
   },
   data: function () {
     return {
-      drawer: false,
-      blurImage: false,
       avatar:
         'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
       navPaths: [
@@ -117,22 +115,6 @@ export default {
         return 'https://i.ibb.co/p3Tgrt6/download-force-true-w-1920.jpg';
       }
     },
-  },
-  mounted() {
-    var themecache = JSON.parse(localStorage.getItem('themecache'));
-    if (themecache && themecache != null) {
-      this.blurImage = themecache.blur;
-    }
-    this.$bus.$on('nav', () => {
-      if (this.$state.get.navbar.active) {
-        this.drawer = true;
-      } else {
-        this.drawer = false;
-      }
-    });
-    this.$bus.$on('navBlur', (e) => {
-      this.blurImage = e;
-    });
   },
 };
 </script>

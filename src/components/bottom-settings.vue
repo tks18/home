@@ -182,7 +182,6 @@ export default {
           },
         }),
       );
-      this.emitNow('navBlur', this.$state.store.botSettings.navBlur);
     },
     emitNow(event, value) {
       this.$bus.$emit(event, value);

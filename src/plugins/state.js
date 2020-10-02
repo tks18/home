@@ -2,7 +2,6 @@ import Vue from 'vue';
 
 const state = Vue.observable({
   navbar: {
-    key: 0,
     active: false,
   },
   botSettings: {
