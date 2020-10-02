@@ -95,6 +95,57 @@
         </v-slide-item>
       </v-slide-group>
     </div>
+    <div class="column is-full">
+      <v-container>
+        <v-row>
+          <v-col cols="12">
+            <div
+              @click="$router.push('/about')"
+              :class="
+                'text-h5 non-touch point-cursor ml-6' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              About Me <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <v-row align="center" justify="center">
+              <v-col :cols="ismobile ? 12 : 9" align="start" justify="center">
+                <div
+                  :class="
+                    'text font-weight-semibold' +
+                    (ismobile ? ' mx-2 px-2' : ' ')
+                  "
+                >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Natus, eius amet odio nihil cumque, iusto voluptatibus debitis
+                  quasi cum id nostrum ullam ut, eaque suscipit quod deleniti
+                  fugit reprehenderit similique.lore Lorem ipsum dolor sit, amet
+                  consectetur adipisicing elit. Ratione sequi repellat, adipisci
+                  voluptates possimus laborum rerum iste exercitationem veniam
+                  quos inventore esse cupiditate quam amet perferendis quas ea
+                  aliquam assumenda. Lorem ipsum, dolor sit amet consectetur
+                  adipisicing elit. Totam, consequatur ipsum explicabo veniam
+                  quam obcaecati accusamus? Accusantium, eligendi odio? Eum
+                  fugit ipsum officiis non.
+                </div>
+              </v-col>
+              <v-col v-if="!ismobile" cols="3" align="center" justify="center">
+                <v-avatar
+                  size="180"
+                  :class="
+                    $vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light'
+                  "
+                >
+                  <v-img :src="aboutData.image"></v-img>
+                </v-avatar>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -109,6 +160,9 @@ export default {
         rounded: true,
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
+      },
+      aboutData: {
+        image: 'https://i.ibb.co/2cN5DdQ/IMG-20200308-172339.jpg',
       },
     };
   },
