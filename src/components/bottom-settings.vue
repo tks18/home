@@ -169,7 +169,7 @@ export default {
           },
         }),
       );
-      this.$state.mutate.botSettings.darkmode = this.$vuetify.theme.dark;
+      this.$state.store.botSettings.darkmode = this.$vuetify.theme.dark;
     },
     enableBlur() {
       localStorage.setItem(
@@ -182,7 +182,6 @@ export default {
           },
         }),
       );
-      this.emitNow('navBlur', this.$state.store.botSettings.navBlur);
     },
     emitNow(event, value) {
       this.$bus.$emit(event, value);
@@ -205,8 +204,8 @@ export default {
   mounted() {
     var themecache = JSON.parse(localStorage.getItem('themecache'));
     if (themecache && themecache != null) {
-      this.$state.mutate.botSettings.darkmode = themecache.dark;
-      this.$state.mutate.botSettings.navBlur = themecache.blur;
+      this.$state.store.botSettings.darkmode = themecache.dark;
+      this.$state.store.botSettings.navBlur = themecache.blur;
       this.$vuetify.theme.dark = themecache.dark;
       this.$vuetify.theme.themes.light.primary = themecache.theme.accent;
       this.$vuetify.theme.themes.dark.primary = themecache.theme.accent;
