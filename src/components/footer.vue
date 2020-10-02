@@ -1,9 +1,13 @@
 <template>
   <v-footer elevation="15" inset dense rounded shaped>
     <v-row align="center" justify="center">
-      <v-col :cols="ismobile ? 6 : 4">
+      <v-col :cols="ismobile ? 12 : 6">
         <v-row>
-          <v-col align="start" justify="center" class="ma-1">
+          <v-col
+            :align="ismobile ? 'center' : 'start'"
+            justify="center"
+            class="ma-1"
+          >
             <v-row>
               <div class="text ml-4 font-weight-bold non-touch">
                 Follow Me on:
@@ -33,36 +37,9 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col :cols="ismobile ? 6 : 4">
+      <v-col :cols="ismobile ? 12 : 6">
         <v-row>
-          <v-col :align="ismobile ? 'end' : 'center'" justify="center">
-            <v-tooltip top transition="slide-y-transition">
-              <template v-slot:activator="{ on, attrs }">
-                <div
-                  v-bind="attrs"
-                  v-on="on"
-                  class="font-weight-bold primary--text"
-                >
-                  {{ now.replace(/( PM| AM)/, '') }}
-                </div>
-              </template>
-              <span class="width-min">
-                <div>
-                  <p class="text">
-                    {{ randomQuote.quote }}
-                  </p>
-                  <p class="text-right font-weight-bold">
-                    - {{ randomQuote.author }}
-                  </p>
-                </div>
-              </span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col :cols="ismobile ? 12 : 4">
-        <v-row>
-          <v-col :align="ismobile ? 'center' : 'end'" justify="center">
+          <v-col :align="ismobile ? 'center' : 'start'" justify="center">
             <div
               :class="'font-weight-black' + (ismobile ? ' text-center' : '')"
             >
@@ -123,31 +100,6 @@ export default {
           link: 'https://unsplash.com/@shantk18',
         },
       ],
-      quotes: [
-        {
-          quote:
-            "All the world's a stage, and all the men and women merely players: they have their exits and their entrances; and one man in his time plays many parts, his acts being seven ages.",
-          author: 'William Shakespeare',
-        },
-        {
-          quote:
-            "My favorite things in life don't cost any money. It's really clear that the most precious resource we all have is time.",
-          author: 'Steve Jobs',
-        },
-        {
-          quote: 'Time is Money',
-          author: 'Benjamin Franklin',
-        },
-        {
-          quote: "Don't wait. The time will never be just right",
-          author: 'Napoleon Hill',
-        },
-        {
-          quote:
-            "If you spend too much time thinking about a thing, you'll never get it done.",
-          author: 'Bruce Lee',
-        },
-      ],
     };
   },
   methods: {
@@ -165,14 +117,6 @@ export default {
         return true;
       }
     },
-    randomQuote() {
-      return this.$_.shuffle(this.quotes)[0];
-    },
-  },
-  mounted() {
-    setInterval(() => {
-      this.now = new Date().toLocaleTimeString('en-GB');
-    }, 1000);
   },
 };
 </script>

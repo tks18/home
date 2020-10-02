@@ -22,7 +22,9 @@
     <navbar />
     <v-main>
       <div class="content">
-        <router-view></router-view>
+        <transition name="fadeDownBig" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </v-main>
     <fabComponent />
