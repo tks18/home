@@ -33,7 +33,7 @@
 }
 
 .back-blur {
-  backdrop-filter: blur(25px) saturate(1.2) contrast(1.2);
+  backdrop-filter: blur(3px) grayscale(1);
   height: inherit;
 }
 
@@ -58,9 +58,9 @@
     #f9ff7a
   );
   background-size: 1000% 1000%;
-  -webkit-animation: fluid 15s ease infinite;
-  -moz-animation: fluid 15s ease infinite;
-  animation: fluid 15s ease infinite;
+  -webkit-animation: fluid 10s ease infinite;
+  -moz-animation: fluid 10s ease infinite;
+  animation: fluid 10s ease infinite;
 }
 
 .border-max {
@@ -84,17 +84,20 @@
     #0278ae
   );
   background-size: 1000% 1000%;
-  -webkit-animation: fluid 15s ease infinite;
-  -moz-animation: fluid 15s ease infinite;
-  animation: fluid 15s ease infinite;
+  -webkit-animation: fluid 10s ease infinite;
+  -moz-animation: fluid 10s ease infinite;
+  animation: fluid 10s ease infinite;
 }
 
 .scrollable-x {
   overflow-x: auto;
+
   &::-webkit-scrollbar {
     display: none;
   }
+
   -webkit-overflow-scrolling: touch;
+
   &.scrollable-x-child {
     display: inline-block;
   }
@@ -102,19 +105,20 @@
 
 .fab-button-bottom {
   margin-bottom: 120px;
-  z-index: 1;
+  z-index: 9999;
   transition: margin-bottom 0.5s ease-in-out;
 }
 
 .fab-button {
   margin-bottom: 40px;
-  z-index: 1;
+  z-index: 9999;
   transition: margin-bottom 0.5s ease-in-out;
 }
 
 .underhover-light {
   width: fit-content;
   text-decoration: none;
+
   &:after {
     content: ' ';
     display: block;
@@ -123,6 +127,7 @@
     background: transparent;
     transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
   }
+
   &:hover:after {
     width: 100%;
     background: white;
@@ -136,6 +141,7 @@
 .underhover-dark {
   width: fit-content;
   text-decoration: none;
+
   &:after {
     content: ' ';
     display: block;
@@ -144,6 +150,7 @@
     background: transparent;
     transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
   }
+
   &:hover:after {
     width: 100%;
     background: #121212;
@@ -154,31 +161,39 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 @-moz-keyframes fluid {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 @keyframes fluid {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

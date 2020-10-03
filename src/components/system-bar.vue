@@ -1,7 +1,12 @@
 <template>
   <v-system-bar fixed window lights-out>
     <v-spacer></v-spacer>
-    <v-snackbar v-model="snackbar" multi-line :timeout="6000">
+    <v-snackbar
+      v-if="!$vuetify.theme.dark"
+      v-model="snackbar"
+      multi-line
+      :timeout="6000"
+    >
       Dark Mode Available Now ! Turn on Using Settings in the Nav-bar.
       <template v-slot:action="{ attrs }">
         <v-btn color="primary" v-bind="attrs" @click="snackbar = false">
