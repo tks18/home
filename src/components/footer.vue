@@ -1,5 +1,5 @@
 <template>
-  <v-footer elevation="15" inset dense rounded shaped>
+  <v-footer elevation="15" inset dense small rounded shaped>
     <v-row align="center" justify="center">
       <v-col :cols="ismobile ? 12 : 6">
         <v-row>
@@ -39,7 +39,7 @@
       </v-col>
       <v-col :cols="ismobile ? 12 : 6">
         <v-row>
-          <v-col :align="ismobile ? 'center' : 'start'" justify="center">
+          <v-col :align="ismobile ? 'center' : 'end'" justify="center">
             <div
               :class="'font-weight-black' + (ismobile ? ' text-center' : '')"
             >
