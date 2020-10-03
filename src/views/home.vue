@@ -12,33 +12,29 @@
         >
           <div class="container">
             <div class="columns is-multiline is-centered is-vcentered">
-              <div class="column is-half ma-0 pa-0">
-                <figure>
-                  <img
-                    :src="heroData.image"
-                    :class="heroData.rounded ? 'border-max' : ' '"
-                    alt="Main Image"
-                  />
-                </figure>
+              <div class="column is-full">
+                <div
+                  :class="
+                    'text text-center font-weight-bold' +
+                    (ismobile ? ' text-h4' : ' text-h2')
+                  "
+                >
+                  Designer, Front-end & Backend Developer
+                </div>
+                <div
+                  :class="
+                    'text text-center font-weight-bold' +
+                    (ismobile ? ' text-caption' : ' text-body-1')
+                  "
+                >
+                  I design and code beautifully simple things, and I love what I
+                  do.
+                </div>
               </div>
-              <div class="column is-half">
-                <v-card>
-                  <div class="content text pa-4">
-                    <div class="text-h4">
-                      {{ heroData.title }}
-                    </div>
-                    <div
-                      class="text-subtitle-1 font-weight-thin"
-                      v-html="heroData.subtitle"
-                    ></div>
-                    <v-btn
-                      class="mt-2"
-                      color="primary"
-                      @click="$router.push(heroData.buttonUrl)"
-                      >{{ heroData.buttontext }}</v-btn
-                    >
-                  </div>
-                </v-card>
+              <div class="column has-text-centered is-half ma-2">
+                <v-avatar :size="ismobile ? 190 : 380">
+                  <v-img :src="heroData.image" alt="Main Image" />
+                </v-avatar>
               </div>
             </div>
           </div>
@@ -53,7 +49,7 @@
           ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
         "
       >
-        Latest Posts <v-icon>mdi-arrow-right-circle</v-icon>
+        My Blog <v-icon>mdi-arrow-right-circle</v-icon>
       </div>
       <v-slide-group
         :show-arrows="!ismobile"
@@ -117,23 +113,13 @@
                     'text font-weight-semibold' +
                     (ismobile ? ' mx-2 px-2' : ' ')
                   "
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Natus, eius amet odio nihil cumque, iusto voluptatibus debitis
-                  quasi cum id nostrum ullam ut, eaque suscipit quod deleniti
-                  fugit reprehenderit similique.lore Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ratione sequi repellat, adipisci
-                  voluptates possimus laborum rerum iste exercitationem veniam
-                  quos inventore esse cupiditate quam amet perferendis quas ea
-                  aliquam assumenda. Lorem ipsum, dolor sit amet consectetur
-                  adipisicing elit. Totam, consequatur ipsum explicabo veniam
-                  quam obcaecati accusamus? Accusantium, eligendi odio? Eum
-                  fugit ipsum officiis non.
-                </div>
+                  v-html="heroData.subtitle"
+                ></div>
+                <v-btn text color="primary">Read More</v-btn>
               </v-col>
               <v-col v-if="!ismobile" cols="3" align="center" justify="center">
                 <v-avatar
-                  size="180"
+                  size="220"
                   :class="
                     $vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light'
                   "
@@ -179,13 +165,13 @@ export default {
       heroData: {
         title: 'Hello There !',
         image: 'https://i.ibb.co/GTcS2kb/profile.png',
-        subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><br> <span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Also I am Doing Chartered Accountancy Course as my Profession. <br><br></span><span class="text-overline">Feel Free to Contact Me !!</span>`,
+        subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
         rounded: true,
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
       },
       aboutData: {
-        image: 'https://i.ibb.co/2cN5DdQ/IMG-20200308-172339.jpg',
+        image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
       },
     };
   },
