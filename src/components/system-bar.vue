@@ -19,8 +19,9 @@
         'clip-text-back' +
         ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
       "
-      >mdi-wifi-strength-4</v-icon
     >
+      mdi-wifi-strength-4
+    </v-icon>
     <span
       :class="
         'non-touch point-cursor clip-text-back' +

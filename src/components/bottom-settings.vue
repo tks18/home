@@ -12,6 +12,7 @@
       </v-list-item>
       <v-card
         v-if="model == 'icon'"
+        elevation="0"
         class="ma-1 pa-2 non-touch point-cursor"
         v-bind="attrs"
         v-on="on"
