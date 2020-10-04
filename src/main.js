@@ -7,12 +7,14 @@ import moment from 'vue-moment';
 import lodash from 'lodash';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import vuetify from './plugins/vuetify';
+import { gsap } from 'gsap';
 import '@/styles/register.scss';
 import 'swiper/swiper-bundle.css'
  
 Vue.use(VueAwesomeSwiper)
 Vue.use(moment);
 Vue.config.productionTip = false;
+Vue.prototype.$gsap = gsap;
 Vue.prototype.$bus = EventBus;
 Vue.prototype.$state = {
   store: store,

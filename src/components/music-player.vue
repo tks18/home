@@ -1,7 +1,12 @@
 <template>
   <v-bottom-sheet v-model="activated" inset>
     <template v-slot:activator="{ on, attrs }">
-      <v-card v-bind="attrs" class="ma-1 pa-2 non-touch point-cursor" v-on="on">
+      <v-card
+        elevation="0"
+        v-bind="attrs"
+        class="ma-1 pa-2 non-touch point-cursor"
+        v-on="on"
+      >
         <v-row align="center" class="mb-2" justify="center">
           <v-btn fab small color="primary" v-bind="attrs" v-on="on">
             <v-icon>mdi-music</v-icon>
