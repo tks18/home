@@ -134,12 +134,13 @@
           <v-col cols="12" class="my-0 mx-2 px-2 py-0">
             <div
               @click="$router.push('/about')"
+              id="summa"
               :class="
-                'text-h5 non-touch point-cursor' +
+                'text-h5 non-touch point-cursor text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
-              About Me <v-icon>mdi-arrow-right-circle</v-icon>
+              {{ actual }} <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
           </v-col>
           <v-col cols="12" class="my-0 py-0">
@@ -282,6 +283,10 @@ export default {
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
       },
+      letters: '?><{}|//~-+abcdefghijklmnopqrstuvwxyz $#@!()*&^'.split(''),
+      word: [39, 41, 45, 43, 42, 44, 46, 38],
+      wordMap: [11, 12, 25, 31, 30, 37, 23, 15],
+      actual: '',
       codeLinesEnd: 1000000,
       codeLinesValue: 0,
       aboutData: {
@@ -298,6 +303,40 @@ export default {
       const content = 'this.$refs.' + func;
       scrollTo(eval(content), 400, 300);
     },
+    createObserver(elem, wordMap, word, stringText) {
+      let observer;
+      let target = document.querySelector(elem);
+      let options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0,
+      };
+      let handleIntersect = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.onScroll(wordMap, word, stringText);
+          }
+        });
+      };
+      observer = new IntersectionObserver(handleIntersect, options);
+      observer.observe(target);
+    },
+    update(word, stringText) {
+      var html = '';
+      word.forEach((map) => {
+        html += this.letters[Math.round(map) % 47];
+      });
+      this[stringText] = html;
+    },
+    async onScroll(wordMap, word, stringText) {
+      var tl = this.$gsap.timeline({ onUpdate: () => {
+        this.update(word, stringText)
+      } });
+      wordMap.forEach((range, index) => {
+        tl.to(word, { [index]: 47 * 2 + range , ease: 'power4', duration: index + 1 }, 0);
+      });
+
+    },
   },
   computed: {
     ismobile() {
@@ -308,6 +347,9 @@ export default {
         return true;
       }
     },
+  },
+  mounted() {
+    this.createObserver('#summa', this.wordMap, this.word, 'actual');
   },
   created() {
     this.$gsap.to(this.$data, {
