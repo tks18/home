@@ -46,12 +46,13 @@
         <v-col align="start" justify="start">
           <div
             @click="$router.push('/blog')"
+            id="blogtitle"
             :class="
-              'text-h5 non-touch point-cursor ml-6' +
+              'text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
             "
           >
-            My Blog <v-icon>mdi-arrow-right-circle</v-icon>
+            {{ animatedArray.blog }} <v-icon>mdi-arrow-right-circle</v-icon>
           </div>
         </v-col>
         <v-col align="end" justify="start" class="mr-4">
@@ -134,13 +135,13 @@
           <v-col cols="12" class="my-0 mx-2 px-2 py-0">
             <div
               @click="$router.push('/about')"
-              id="summa"
+              id="abouttitle"
               :class="
                 'text-h5 non-touch point-cursor text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
-              {{ actual }} <v-icon>mdi-arrow-right-circle</v-icon>
+              {{ animatedArray.about }} <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
           </v-col>
           <v-col cols="12" class="my-0 py-0">
@@ -185,12 +186,13 @@
           <v-col cols="12" align="center" class="my-0 mx-2 px-2 py-0">
             <div
               @click="$router.push('/about')"
+              id="stattitle"
               :class="
-                'text-h5 non-touch point-cursor' +
+                'text-h5 non-touch point-cursor text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
-              My Stats <v-icon>mdi-arrow-right-circle</v-icon>
+              {{ animatedArray.stat }} <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
           </v-col>
           <v-col
@@ -284,9 +286,25 @@ export default {
         buttontext: 'Contact Me !',
       },
       letters: '?><{}|//~-+abcdefghijklmnopqrstuvwxyz $#@!()*&^'.split(''),
-      word: [39, 41, 45, 43, 42, 44, 46, 38],
-      wordMap: [11, 12, 25, 31, 30, 37, 23, 15],
-      actual: '',
+      wordMaps: {
+        blog: {
+          map: [23, 35, 37, 12, 22, 25, 17],
+          initial: [46, 1, 3, 2, 40, 43, 10],
+        },
+        about: {
+          map: [11, 12, 25, 31, 30, 37, 23, 15],
+          initial: [39, 41, 45, 43, 42, 44, 46, 38],
+        },
+        stat: {
+          map: [23, 35, 37, 29, 30, 11, 30, 29],
+          initial: [1, 6, 8, 40, 43, 45, 42, 3],
+        },
+      },
+      animatedArray: {
+        blog: '',
+        about: '',
+        stat: '',
+      },
       codeLinesEnd: 1000000,
       codeLinesValue: 0,
       aboutData: {
@@ -326,16 +344,21 @@ export default {
       word.forEach((map) => {
         html += this.letters[Math.round(map) % 47];
       });
-      this[stringText] = html;
+      this.$set(this.animatedArray, stringText, html);
     },
     async onScroll(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({ onUpdate: () => {
-        this.update(word, stringText)
-      } });
-      wordMap.forEach((range, index) => {
-        tl.to(word, { [index]: 47 * 2 + range , ease: 'power4', duration: index + 1 }, 0);
+      var tl = this.$gsap.timeline({
+        onUpdate: () => {
+          this.update(word, stringText);
+        },
       });
-
+      wordMap.forEach((range, index) => {
+        tl.to(
+          word,
+          { [index]: 47 * 2 + range, ease: 'power4', duration: index + 0.5 },
+          0,
+        );
+      });
     },
   },
   computed: {
@@ -349,7 +372,24 @@ export default {
     },
   },
   mounted() {
-    this.createObserver('#summa', this.wordMap, this.word, 'actual');
+    this.createObserver(
+      '#abouttitle',
+      this.wordMaps.about.map,
+      this.wordMaps.about.initial,
+      'about',
+    );
+    this.createObserver(
+      '#blogtitle',
+      this.wordMaps.blog.map,
+      this.wordMaps.blog.initial,
+      'blog',
+    );
+    this.createObserver(
+      '#stattitle',
+      this.wordMaps.stat.map,
+      this.wordMaps.stat.initial,
+      'stat',
+    );
   },
   created() {
     this.$gsap.to(this.$data, {
