@@ -23,6 +23,14 @@
                 </div>
                 <div
                   :class="
+                    'text text-center font-weight-bold my-2' +
+                    (ismobile ? ' text-h6' : ' text-h3')
+                  "
+                >
+                  {{ animatedArray.randEmoji }}
+                </div>
+                <div
+                  :class="
                     'text text-center font-weight-bold' +
                     (ismobile ? ' text-caption' : ' text-body-1')
                   "
@@ -272,7 +280,7 @@
 </template>
 
 <script>
-import { alphaArray } from '../templates/emoji-array';
+import { alphaArray, safeEmojis } from '../templates/emoji-array';
 import { TimelineMax } from 'gsap';
 import { scrollTo } from '../plugins/helpers';
 export default {
@@ -287,10 +295,37 @@ export default {
         buttontext: 'Contact Me !',
       },
       letters: alphaArray,
+      randEmoji: {
+        map: [
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+        ],
+        initial: [
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+        ],
+      },
       animatedArray: {
         blog: '',
         about: '',
         stat: '',
+        randEmoji: '',
       },
       codeLinesEnd: 1000000,
       codeLinesValue: 0,
@@ -314,12 +349,12 @@ export default {
       let options = {
         root: null,
         rootMargin: '0px',
-        threshold: 1.0,
+        threshold: 0.7,
       };
       let handleIntersect = (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            this.onScroll(wordMap, word, stringText);
+            this.transitWord(wordMap, word, stringText);
           }
         });
       };
@@ -333,7 +368,69 @@ export default {
       });
       this.$set(this.animatedArray, stringText, html);
     },
-    async onScroll(wordMap, word, stringText) {
+    transitRandEmoji(wordMap, word, stringText) {
+      var tl = this.$gsap.timeline({
+        onUpdate: () => {
+          var html = '';
+          word.forEach((map) => {
+            html += safeEmojis[Math.round(map) % safeEmojis.length];
+          });
+          this.$set(this.animatedArray, stringText, html);
+        },
+      });
+      wordMap.forEach((range, index) => {
+        tl.to(
+          word,
+          {
+            [index]: safeEmojis.length * 2 + range,
+            ease: 'elastic',
+            duration: index + 3,
+          },
+          0,
+        );
+      });
+    },
+    loopRandEmoji() {
+      this.transitRandEmoji(
+        this.randEmoji.map,
+        this.randEmoji.initial,
+        'randEmoji',
+      );
+      setInterval(() => {
+        this.randEmoji = {
+          map: [
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+          ],
+          initial: [
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+          ],
+        };
+        this.transitRandEmoji(
+          this.randEmoji.map,
+          this.randEmoji.initial,
+          'randEmoji',
+        );
+      }, 7000);
+    },
+    transitWord(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
         onUpdate: () => {
           this.update(word, stringText);
@@ -345,7 +442,7 @@ export default {
           {
             [index]: alphaArray.length * 2 + range,
             ease: 'power4',
-            duration: index / 4 + 0.5,
+            duration: index / 4 + 1,
           },
           0,
         );
@@ -405,6 +502,7 @@ export default {
     },
   },
   mounted() {
+    this.loopRandEmoji();
     this.createObserver(
       '#abouttitle',
       this.wordMaps.about.map,
