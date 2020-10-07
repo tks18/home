@@ -16,7 +16,7 @@
                 <div
                   :class="
                     'text text-center font-weight-bold' +
-                    (ismobile ? ' text-h4' : ' text-h2')
+                    (ismobile ? ' text-h3' : ' text-h2')
                   "
                 >
                   Designer, Front-end & Backend Developer
@@ -24,7 +24,7 @@
                 <div
                   :class="
                     'text text-center font-weight-bold my-2' +
-                    (ismobile ? ' text-h6' : ' text-h3')
+                    (ismobile ? ' text-h4' : ' text-h3')
                   "
                 >
                   {{ animatedArray.randEmoji }}
@@ -32,7 +32,7 @@
                 <div
                   :class="
                     'text text-center font-weight-bold' +
-                    (ismobile ? ' text-caption' : ' text-body-1')
+                    (ismobile ? ' text-body-2' : ' text-body-1')
                   "
                 >
                   I design and code beautifully simple things, and I love what I
