@@ -272,6 +272,7 @@
 </template>
 
 <script>
+import { alphaArray } from '../templates/emoji-array';
 import { TimelineMax } from 'gsap';
 import { scrollTo } from '../plugins/helpers';
 export default {
@@ -285,21 +286,7 @@ export default {
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
       },
-      letters: '?><{}|//~-+abcdefghijklmnopqrstuvwxyz $#@!()*&^'.split(''),
-      wordMaps: {
-        blog: {
-          map: [23, 35, 37, 12, 22, 25, 17],
-          initial: [46, 1, 3, 2, 40, 43, 10],
-        },
-        about: {
-          map: [11, 12, 25, 31, 30, 37, 23, 15],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        stat: {
-          map: [23, 35, 37, 29, 30, 11, 30, 29],
-          initial: [1, 6, 8, 40, 43, 45, 42, 3],
-        },
-      },
+      letters: alphaArray,
       animatedArray: {
         blog: '',
         about: '',
@@ -342,7 +329,7 @@ export default {
     update(word, stringText) {
       var html = '';
       word.forEach((map) => {
-        html += this.letters[Math.round(map) % 47];
+        html += this.letters[Math.round(map) % alphaArray.length];
       });
       this.$set(this.animatedArray, stringText, html);
     },
@@ -355,7 +342,11 @@ export default {
       wordMap.forEach((range, index) => {
         tl.to(
           word,
-          { [index]: 47 * 2 + range, ease: 'power4', duration: index + 0.5 },
+          {
+            [index]: alphaArray.length * 2 + range,
+            ease: 'power4',
+            duration: index / 4 + 0.5,
+          },
           0,
         );
       });
@@ -369,6 +360,48 @@ export default {
       } else {
         return true;
       }
+    },
+    wordMaps() {
+      return {
+        blog: {
+          map: [
+            alphaArray.indexOf('m'),
+            alphaArray.indexOf('y'),
+            alphaArray.indexOf(' '),
+            alphaArray.indexOf('b'),
+            alphaArray.indexOf('l'),
+            alphaArray.indexOf('o'),
+            alphaArray.indexOf('g'),
+          ],
+          initial: [46, 1, 3, 2, 40, 43, 10],
+        },
+        about: {
+          map: [
+            alphaArray.indexOf('a'),
+            alphaArray.indexOf('b'),
+            alphaArray.indexOf('o'),
+            alphaArray.indexOf('u'),
+            alphaArray.indexOf('t'),
+            alphaArray.indexOf(' '),
+            alphaArray.indexOf('m'),
+            alphaArray.indexOf('e'),
+          ],
+          initial: [39, 41, 45, 43, 42, 44, 46, 38],
+        },
+        stat: {
+          map: [
+            alphaArray.indexOf('m'),
+            alphaArray.indexOf('y'),
+            alphaArray.indexOf(' '),
+            alphaArray.indexOf('s'),
+            alphaArray.indexOf('t'),
+            alphaArray.indexOf('a'),
+            alphaArray.indexOf('t'),
+            alphaArray.indexOf('s'),
+          ],
+          initial: [1, 6, 8, 40, 43, 45, 42, 3],
+        },
+      };
     },
   },
   mounted() {
