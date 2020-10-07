@@ -16,7 +16,7 @@
                 <div
                   :class="
                     'text text-center font-weight-bold' +
-                    (ismobile ? ' text-h3' : ' text-h2')
+                    (ismobile ? ' text-h4' : ' text-h2')
                   "
                 >
                   Designer, Front-end & Backend Developer
@@ -280,7 +280,7 @@
 </template>
 
 <script>
-import { alphaArray, safeEmojis } from '../templates/emoji-array';
+import { lettersArray, safeEmojis } from '../templates/emoji-array';
 import { TimelineMax } from 'gsap';
 import { scrollTo } from '../plugins/helpers';
 export default {
@@ -294,7 +294,7 @@ export default {
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
       },
-      letters: alphaArray,
+      letters: lettersArray,
       randEmoji: {
         map: [
           safeEmojis.indexOf(
@@ -364,7 +364,7 @@ export default {
     update(word, stringText) {
       var html = '';
       word.forEach((map) => {
-        html += this.letters[Math.round(map) % alphaArray.length];
+        html += this.letters[Math.round(map) % lettersArray.length];
       });
       this.$set(this.animatedArray, stringText, html);
     },
@@ -440,7 +440,7 @@ export default {
         tl.to(
           word,
           {
-            [index]: alphaArray.length * 2 + range,
+            [index]: lettersArray.length * 2 + range,
             ease: 'power4',
             duration: index / 4 + 1,
           },
@@ -462,39 +462,39 @@ export default {
       return {
         blog: {
           map: [
-            alphaArray.indexOf('m'),
-            alphaArray.indexOf('y'),
-            alphaArray.indexOf(' '),
-            alphaArray.indexOf('b'),
-            alphaArray.indexOf('l'),
-            alphaArray.indexOf('o'),
-            alphaArray.indexOf('g'),
+            lettersArray.indexOf('m'),
+            lettersArray.indexOf('y'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('b'),
+            lettersArray.indexOf('l'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('g'),
           ],
           initial: [46, 1, 3, 2, 40, 43, 10],
         },
         about: {
           map: [
-            alphaArray.indexOf('a'),
-            alphaArray.indexOf('b'),
-            alphaArray.indexOf('o'),
-            alphaArray.indexOf('u'),
-            alphaArray.indexOf('t'),
-            alphaArray.indexOf(' '),
-            alphaArray.indexOf('m'),
-            alphaArray.indexOf('e'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('b'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('u'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('m'),
+            lettersArray.indexOf('e'),
           ],
           initial: [39, 41, 45, 43, 42, 44, 46, 38],
         },
         stat: {
           map: [
-            alphaArray.indexOf('m'),
-            alphaArray.indexOf('y'),
-            alphaArray.indexOf(' '),
-            alphaArray.indexOf('s'),
-            alphaArray.indexOf('t'),
-            alphaArray.indexOf('a'),
-            alphaArray.indexOf('t'),
-            alphaArray.indexOf('s'),
+            lettersArray.indexOf('m'),
+            lettersArray.indexOf('y'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('s'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf('s'),
           ],
           initial: [1, 6, 8, 40, 43, 45, 42, 3],
         },
