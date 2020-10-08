@@ -57,7 +57,7 @@
                 (ismobile ? ' text-center' : '')
               "
             >
-              {{ animatedArray.name.trim() + '.TK' }} |
+              Sudharshan TK |
               <v-icon color="primary">mdi-copyright</v-icon>
               {{ new Date().getFullYear() }}
             </div>
@@ -74,9 +74,6 @@ export default {
     return {
       now: new Date().toLocaleTimeString(),
       clockDiag: false,
-      animatedArray: {
-        name: '',
-      },
       socials: [
         {
           icon: 'mdi-twitter',
@@ -126,34 +123,6 @@ export default {
       window.open(url);
       return;
     },
-    update(word, stringText) {
-      var html = '';
-      word.forEach((map) => {
-        html += lettersArray[Math.round(map) % lettersArray.length];
-      });
-      this.$set(this.animatedArray, stringText, html);
-    },
-    transitWord(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        repeat: -1,
-        yoyo: true,
-        repeatDelay: 2,
-        onUpdate: () => {
-          this.update(word, stringText);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: lettersArray.length * 2 + range,
-            ease: 'power4',
-            duration: index / 4 + 1,
-          },
-          0,
-        );
-      });
-    },
   },
   computed: {
     ismobile() {
@@ -164,37 +133,6 @@ export default {
         return true;
       }
     },
-    nameMap() {
-      return {
-        initial: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-        ],
-        map: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('u'),
-          lettersArray.indexOf('d'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('r'),
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-        ],
-      };
-    },
-  },
-  mounted() {
-    this.transitWord(this.nameMap.map, this.nameMap.initial, 'name');
   },
 };
 </script>

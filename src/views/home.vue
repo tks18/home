@@ -57,9 +57,7 @@
             id="blogtitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-              ($vuetify.theme.dark
-                ? ' underhover-light grad-back-dark'
-                : ' underhover-dark grad-back-light')
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
             "
           >
             {{ animatedArray.blog }} <v-icon>mdi-arrow-right-circle</v-icon>
@@ -148,9 +146,7 @@
               id="abouttitle"
               :class="
                 'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-                ($vuetify.theme.dark
-                  ? ' underhover-light grad-back-dark'
-                  : ' underhover-dark grad-back-light')
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
               {{ animatedArray.about }} <v-icon>mdi-arrow-right-circle</v-icon>
@@ -201,9 +197,7 @@
               id="stattitle"
               :class="
                 'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-                ($vuetify.theme.dark
-                  ? ' underhover-light grad-back-dark'
-                  : ' underhover-dark grad-back-light')
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
               {{ animatedArray.stat }} <v-icon>mdi-arrow-right-circle</v-icon>
