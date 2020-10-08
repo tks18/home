@@ -209,7 +209,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Currently Working in
@@ -230,7 +230,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Working as
@@ -251,7 +251,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Industry of Profession
@@ -272,7 +272,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Passion
@@ -293,7 +293,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Known Languages
@@ -314,7 +314,7 @@
                 <v-row v-ripple>
                   <v-col
                     cols="6"
-                    align="end"
+                    align="start"
                     class="text-overline text my-1 py-0 font-weight-medium"
                   >
                     Lines Coded till Now 😜
