@@ -56,8 +56,10 @@
             @click="$router.push('/blog')"
             id="blogtitle"
             :class="
-              'text-h5 non-touch point-cursor ml-6 text-capitalize' +
-              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark
+                ? ' underhover-light grad-back-dark'
+                : ' underhover-dark grad-back-light')
             "
           >
             {{ animatedArray.blog }} <v-icon>mdi-arrow-right-circle</v-icon>
@@ -145,8 +147,10 @@
               @click="$router.push('/about')"
               id="abouttitle"
               :class="
-                'text-h5 non-touch point-cursor text-capitalize' +
-                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+                'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+                ($vuetify.theme.dark
+                  ? ' underhover-light grad-back-dark'
+                  : ' underhover-dark grad-back-light')
               "
             >
               {{ animatedArray.about }} <v-icon>mdi-arrow-right-circle</v-icon>
@@ -190,88 +194,154 @@
     </div>
     <div class="column is-full">
       <v-container>
-        <v-row>
-          <v-col cols="12" align="center" class="my-0 mx-2 px-2 py-0">
+        <v-row justify="center">
+          <v-col cols="12" align="center" class="my-0 mx-3 py-0">
             <div
               @click="$router.push('/about')"
               id="stattitle"
               :class="
-                'text-h5 non-touch point-cursor text-capitalize' +
-                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+                'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+                ($vuetify.theme.dark
+                  ? ' underhover-light grad-back-dark'
+                  : ' underhover-dark grad-back-light')
               "
             >
               {{ animatedArray.stat }} <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
           </v-col>
-          <v-col
-            cols="6"
-            align="end"
-            class="text-overline text my-1 py-0 font-weight-medium"
-          >
-            Currently Working in
-          </v-col>
-          <v-col
-            cols="6"
-            align="start"
-            class="text-overline text my-1 py-0 primary--text font-weight-medium"
-          >
-            Ford Rhodes Parks & Co LLP
-          </v-col>
-          <v-col
-            cols="6"
-            align="end"
-            class="text-overline text my-1 py-0 font-weight-medium"
-          >
-            Working as
-          </v-col>
-          <v-col
-            cols="6"
-            align="start"
-            class="text-overline text my-1 py-0 primary--text font-weight-medium"
-          >
-            Article Assistant
-          </v-col>
-          <v-col
-            cols="6"
-            align="end"
-            class="text-overline text my-1 py-0 font-weight-medium"
-          >
-            Industry of Profession
-          </v-col>
-          <v-col
-            cols="6"
-            align="start"
-            class="text-overline text primary--text my-1 py-0 font-weight-medium"
-          >
-            Accounts and Auditing
-          </v-col>
-          <v-col
-            cols="6"
-            align="end"
-            class="text-overline text my-1 py-0 font-weight-medium"
-          >
-            Passion
-          </v-col>
-          <v-col
-            cols="6"
-            align="start"
-            class="text-overline text my-1 py-0 primary--text font-weight-medium"
-          >
-            Web Development and Mobile Development
-          </v-col>
-          <v-col
-            cols="6"
-            align="end"
-            class="text-overline text my-1 py-0 font-weight-medium"
-          >
-            Lines Coded till Now 😜
-          </v-col>
-          <v-col
-            cols="6"
-            align="start"
-            class="text-overline text my-1 py-0 primary--text font-weight-medium"
-          >
-            {{ codeLinesValue.toFixed(0) }}
+          <v-col :cols="ismobile ? 12 : 6" align="center" justify="center">
+            <v-card elevation="8" outlined shaped>
+              <v-row class="my-2">
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Currently Working in
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  >
+                    Ford Rhodes Parks & Co LLP
+                  </v-col>
+                </v-row>
+                <v-col cols="12" class="my-0 py-0">
+                  <v-col cols="10" class="my-0 py-0">
+                    <v-divider class="my-1 py-0"></v-divider>
+                  </v-col>
+                </v-col>
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Working as
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  >
+                    Article Assistant
+                  </v-col>
+                </v-row>
+                <v-col cols="12" class="my-0 py-0">
+                  <v-col cols="10" class="my-0 py-0">
+                    <v-divider class="my-1 py-0"></v-divider>
+                  </v-col>
+                </v-col>
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Industry of Profession
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text primary--text my-1 py-0 font-weight-medium"
+                  >
+                    Accounts and Auditing
+                  </v-col>
+                </v-row>
+                <v-col cols="12" class="my-0 py-0">
+                  <v-col cols="10" class="my-0 py-0">
+                    <v-divider class="my-1 py-0"></v-divider>
+                  </v-col>
+                </v-col>
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Passion
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  >
+                    Web Development and Mobile Development
+                  </v-col>
+                </v-row>
+                <v-col cols="12" class="my-0 py-0">
+                  <v-col cols="10" class="my-0 py-0">
+                    <v-divider class="my-1 py-0"></v-divider>
+                  </v-col>
+                </v-col>
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Known Languages
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  >
+                    HTML, CSS, Javascript, Vuejs, Nodejs, Flutter, React(Basics)
+                  </v-col>
+                </v-row>
+                <v-col cols="12" class="my-0 py-0">
+                  <v-col cols="10" class="my-0 py-0">
+                    <v-divider class="my-1 py-0"></v-divider>
+                  </v-col>
+                </v-col>
+                <v-row v-ripple>
+                  <v-col
+                    cols="6"
+                    align="end"
+                    class="text-overline text my-1 py-0 font-weight-medium"
+                  >
+                    Lines Coded till Now 😜
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    align="start"
+                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  >
+                    {{
+                      new Intl.NumberFormat().format(codeLinesValue.toFixed(0))
+                    }}
+                  </v-col>
+                </v-row>
+                <v-col align="center" justify="center" cols="12">
+                  <v-col cols="12">
+                    <v-btn color="primary" small>Know More</v-btn>
+                  </v-col>
+                </v-col>
+              </v-row>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -281,7 +351,6 @@
 
 <script>
 import { lettersArray, safeEmojis } from '../templates/emoji-array';
-import { TimelineMax } from 'gsap';
 import { scrollTo } from '../plugins/helpers';
 export default {
   data: function () {
@@ -307,8 +376,18 @@ export default {
               Math.floor(Math.random() * safeEmojis.length)
             ],
           ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
         ],
         initial: [
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
           safeEmojis.indexOf(
             this.$_.shuffle(safeEmojis)[
               Math.floor(Math.random() * safeEmojis.length)
@@ -327,7 +406,6 @@ export default {
         stat: '',
         randEmoji: '',
       },
-      codeLinesEnd: 1000000,
       codeLinesValue: 0,
       aboutData: {
         image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
@@ -349,7 +427,7 @@ export default {
       let options = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.7,
+        threshold: 0.6,
       };
       let handleIntersect = (entries, observer) => {
         entries.forEach((entry) => {
@@ -383,8 +461,8 @@ export default {
           word,
           {
             [index]: safeEmojis.length * 2 + range,
-            ease: 'elastic',
-            duration: index + 3,
+            ease: 'ease-in',
+            duration: index + 6,
           },
           0,
         );
@@ -409,8 +487,18 @@ export default {
                 Math.floor(Math.random() * safeEmojis.length)
               ],
             ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
           ],
           initial: [
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
             safeEmojis.indexOf(
               this.$_.shuffle(safeEmojis)[
                 Math.floor(Math.random() * safeEmojis.length)
@@ -428,7 +516,18 @@ export default {
           this.randEmoji.initial,
           'randEmoji',
         );
-      }, 7000);
+      }, 9000);
+    },
+    loopCodeLines() {
+      let endValue = 0;
+      setInterval(() => {
+        endValue = endValue + 300;
+        this.codeLinesEnd = this.codeLinesEnd + 50;
+        this.$gsap.to(this.$data, {
+          duration: 3,
+          codeLinesValue: endValue,
+        });
+      }, 1000);
     },
     transitWord(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
@@ -447,6 +546,28 @@ export default {
           0,
         );
       });
+    },
+    render() {
+      this.loopRandEmoji();
+      this.loopCodeLines();
+      this.createObserver(
+        '#abouttitle',
+        this.wordMaps.about.map,
+        this.wordMaps.about.initial,
+        'about',
+      );
+      this.createObserver(
+        '#blogtitle',
+        this.wordMaps.blog.map,
+        this.wordMaps.blog.initial,
+        'blog',
+      );
+      this.createObserver(
+        '#stattitle',
+        this.wordMaps.stat.map,
+        this.wordMaps.stat.initial,
+        'stat',
+      );
     },
   },
   computed: {
@@ -502,33 +623,7 @@ export default {
     },
   },
   mounted() {
-    this.loopRandEmoji();
-    this.createObserver(
-      '#abouttitle',
-      this.wordMaps.about.map,
-      this.wordMaps.about.initial,
-      'about',
-    );
-    this.createObserver(
-      '#blogtitle',
-      this.wordMaps.blog.map,
-      this.wordMaps.blog.initial,
-      'blog',
-    );
-    this.createObserver(
-      '#stattitle',
-      this.wordMaps.stat.map,
-      this.wordMaps.stat.initial,
-      'stat',
-    );
-  },
-  created() {
-    this.$gsap.to(this.$data, {
-      duration: 15,
-      codeLinesValue: this.codeLinesEnd,
-    });
+    this.render();
   },
 };
 </script>
-
-<style></style>
