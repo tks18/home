@@ -100,7 +100,7 @@
                     This is a Lorem Ipsum Post
                   </h2>
                 </v-card-text>
-                <transition name="zoomUp" mode="out-in">
+                <transition name="fade" mode="out-in">
                   <v-overlay
                     v-if="hover"
                     absolute
@@ -191,128 +191,70 @@
     <div class="column is-full">
       <v-container>
         <v-row justify="center">
-          <v-col cols="12" align="center" class="my-0 mx-3 py-0">
-            <div
-              @click="$router.push('/about')"
-              id="stattitle"
-              :class="
-                'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-              "
-            >
-              {{ animatedArray.stat }} <v-icon>mdi-arrow-right-circle</v-icon>
-            </div>
-          </v-col>
-          <v-col :cols="ismobile ? 12 : 6" align="center" justify="center">
+          <v-col
+            :cols="ismobile ? 12 : 6"
+            align="center"
+            justify="center"
+            class="mx-2 non-touch"
+          >
             <v-row class="my-2">
               <v-row v-ripple>
                 <v-col
-                  cols="6"
-                  align="start"
+                  cols="12"
+                  align="center"
                   class="text-overline text my-1 py-0 font-weight-medium"
                 >
-                  Currently Working in
+                  Up and Active for 🤙
                 </v-col>
                 <v-col
-                  cols="6"
-                  align="start"
+                  cols="12"
+                  align="center"
                   class="text-overline text my-1 py-0 primary--text font-weight-medium"
                 >
-                  Ford Rhodes Parks & Co LLP
+                  <v-row>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(lifeTimeCountDown.years)
+                      }}
+                      <br />Years
+                    </v-col>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(lifeTimeCountDown.weeks)
+                      }}
+                      <br />Weeks
+                    </v-col>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(lifeTimeCountDown.days)
+                      }}
+                      <br />Days
+                    </v-col>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(lifeTimeCountDown.hours)
+                      }}
+                      <br />Hours
+                    </v-col>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.minutes,
+                        )
+                      }}
+                      <br />Minutes
+                    </v-col>
+                    <v-col :cols="ismobile ? 6 : 2">
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.seconds,
+                        )
+                      }}
+                      <br />Seconds
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-row>
-              <v-col cols="12" class="my-0 py-0">
-                <v-col cols="10" class="my-0 py-0">
-                  <v-divider class="my-1 py-0"></v-divider>
-                </v-col>
-              </v-col>
-              <v-row v-ripple>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 font-weight-medium"
-                >
-                  Working as
-                </v-col>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                >
-                  Article Assistant
-                </v-col>
-              </v-row>
-              <v-row v-ripple>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 font-weight-medium"
-                >
-                  Industry of Profession
-                </v-col>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text primary--text my-1 py-0 font-weight-medium"
-                >
-                  Accounts and Auditing
-                </v-col>
-              </v-row>
-              <v-row v-ripple>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 font-weight-medium"
-                >
-                  Passion
-                </v-col>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                >
-                  Web Development and Mobile Development
-                </v-col>
-              </v-row>
-              <v-row v-ripple>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 font-weight-medium"
-                >
-                  Known Languages
-                </v-col>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                >
-                  HTML, CSS, Javascript, Vuejs, Nodejs, Flutter, React(Basics)
-                </v-col>
-              </v-row>
-              <v-row v-ripple>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 font-weight-medium"
-                >
-                  Lines Coded till Now 😜
-                </v-col>
-                <v-col
-                  cols="6"
-                  align="start"
-                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                >
-                  {{
-                    new Intl.NumberFormat().format(codeLinesValue.toFixed(0))
-                  }}
-                </v-col>
-              </v-row>
-              <v-col align="center" justify="center" cols="12">
-                <v-col cols="12">
-                  <v-btn color="primary" small>Know More</v-btn>
-                </v-col>
-              </v-col>
             </v-row>
           </v-col>
         </v-row>
@@ -336,13 +278,13 @@ export default {
         buttontext: 'Contact Me !',
       },
       letters: lettersArray,
+      lifeTimeCountDown: {},
       animatedArray: {
         blog: '',
         about: '',
         stat: '',
         randEmoji: '',
       },
-      codeLinesValue: 0,
       aboutData: {
         image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
       },
@@ -384,7 +326,7 @@ export default {
     },
     transitRandEmoji(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
-        repeat: 3,
+        repeat: 2,
         repeatDelay: 2,
         yoyo: true,
         onUpdate: () => {
@@ -414,17 +356,6 @@ export default {
         'randEmoji',
       );
     },
-    loopCodeLines() {
-      let endValue = 0;
-      setInterval(() => {
-        endValue = endValue + 300;
-        this.codeLinesEnd = this.codeLinesEnd + 50;
-        this.$gsap.to(this.$data, {
-          duration: 3,
-          codeLinesValue: endValue,
-        });
-      }, 1000);
-    },
     transitWord(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
         onUpdate: () => {
@@ -443,9 +374,29 @@ export default {
         );
       });
     },
+    staticTimeCounter() {
+      let constants = {
+        birthDate: this.$moment([2000, 5, 16]),
+        now: this.$moment(),
+      };
+      let constructors = {
+        seconds: constants.now.diff(constants.birthDate, 'seconds'),
+        hours: constants.now.diff(constants.birthDate, 'hours'),
+        minutes: constants.now.diff(constants.birthDate, 'minutes'),
+        days: constants.now.diff(constants.birthDate, 'days'),
+        weeks: constants.now.diff(constants.birthDate, 'weeks'),
+        years: constants.now.diff(constants.birthDate, 'years'),
+      };
+      this.lifeTimeCountDown = constructors;
+    },
+    lifeTimeCounter() {
+      this.staticTimeCounter();
+      setInterval(() => {
+        this.staticTimeCounter();
+      }, 1000);
+    },
     render() {
       this.loopRandEmoji();
-      this.loopCodeLines();
       this.createObserver(
         '#abouttitle',
         this.wordMaps.about.map,
@@ -458,12 +409,7 @@ export default {
         this.wordMaps.blog.initial,
         'blog',
       );
-      this.createObserver(
-        '#stattitle',
-        this.wordMaps.stat.map,
-        this.wordMaps.stat.initial,
-        'stat',
-      );
+      this.lifeTimeCounter();
     },
   },
   computed: {
@@ -501,19 +447,6 @@ export default {
             lettersArray.indexOf('e'),
           ],
           initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        stat: {
-          map: [
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('s'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('s'),
-          ],
-          initial: [1, 6, 8, 40, 43, 45, 42, 3],
         },
         randEmoji: {
           map: [
