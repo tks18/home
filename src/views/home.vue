@@ -204,138 +204,116 @@
             </div>
           </v-col>
           <v-col :cols="ismobile ? 12 : 6" align="center" justify="center">
-            <v-card elevation="8" outlined shaped>
-              <v-row class="my-2">
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Currently Working in
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                  >
-                    Ford Rhodes Parks & Co LLP
-                  </v-col>
-                </v-row>
-                <v-col cols="12" class="my-0 py-0">
-                  <v-col cols="10" class="my-0 py-0">
-                    <v-divider class="my-1 py-0"></v-divider>
-                  </v-col>
+            <v-row class="my-2">
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Currently Working in
                 </v-col>
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Working as
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                  >
-                    Article Assistant
-                  </v-col>
-                </v-row>
-                <v-col cols="12" class="my-0 py-0">
-                  <v-col cols="10" class="my-0 py-0">
-                    <v-divider class="my-1 py-0"></v-divider>
-                  </v-col>
-                </v-col>
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Industry of Profession
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text primary--text my-1 py-0 font-weight-medium"
-                  >
-                    Accounts and Auditing
-                  </v-col>
-                </v-row>
-                <v-col cols="12" class="my-0 py-0">
-                  <v-col cols="10" class="my-0 py-0">
-                    <v-divider class="my-1 py-0"></v-divider>
-                  </v-col>
-                </v-col>
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Passion
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                  >
-                    Web Development and Mobile Development
-                  </v-col>
-                </v-row>
-                <v-col cols="12" class="my-0 py-0">
-                  <v-col cols="10" class="my-0 py-0">
-                    <v-divider class="my-1 py-0"></v-divider>
-                  </v-col>
-                </v-col>
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Known Languages
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                  >
-                    HTML, CSS, Javascript, Vuejs, Nodejs, Flutter, React(Basics)
-                  </v-col>
-                </v-row>
-                <v-col cols="12" class="my-0 py-0">
-                  <v-col cols="10" class="my-0 py-0">
-                    <v-divider class="my-1 py-0"></v-divider>
-                  </v-col>
-                </v-col>
-                <v-row v-ripple>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 font-weight-medium"
-                  >
-                    Lines Coded till Now 😜
-                  </v-col>
-                  <v-col
-                    cols="6"
-                    align="start"
-                    class="text-overline text my-1 py-0 primary--text font-weight-medium"
-                  >
-                    {{
-                      new Intl.NumberFormat().format(codeLinesValue.toFixed(0))
-                    }}
-                  </v-col>
-                </v-row>
-                <v-col align="center" justify="center" cols="12">
-                  <v-col cols="12">
-                    <v-btn color="primary" small>Know More</v-btn>
-                  </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                >
+                  Ford Rhodes Parks & Co LLP
                 </v-col>
               </v-row>
-            </v-card>
+              <v-col cols="12" class="my-0 py-0">
+                <v-col cols="10" class="my-0 py-0">
+                  <v-divider class="my-1 py-0"></v-divider>
+                </v-col>
+              </v-col>
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Working as
+                </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                >
+                  Article Assistant
+                </v-col>
+              </v-row>
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Industry of Profession
+                </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text primary--text my-1 py-0 font-weight-medium"
+                >
+                  Accounts and Auditing
+                </v-col>
+              </v-row>
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Passion
+                </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                >
+                  Web Development and Mobile Development
+                </v-col>
+              </v-row>
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Known Languages
+                </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                >
+                  HTML, CSS, Javascript, Vuejs, Nodejs, Flutter, React(Basics)
+                </v-col>
+              </v-row>
+              <v-row v-ripple>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 font-weight-medium"
+                >
+                  Lines Coded till Now 😜
+                </v-col>
+                <v-col
+                  cols="6"
+                  align="start"
+                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                >
+                  {{
+                    new Intl.NumberFormat().format(codeLinesValue.toFixed(0))
+                  }}
+                </v-col>
+              </v-row>
+              <v-col align="center" justify="center" cols="12">
+                <v-col cols="12">
+                  <v-btn color="primary" small>Know More</v-btn>
+                </v-col>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-container>
