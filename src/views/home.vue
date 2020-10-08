@@ -358,42 +358,6 @@ export default {
         buttontext: 'Contact Me !',
       },
       letters: lettersArray,
-      randEmoji: {
-        map: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-        initial: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-      },
       animatedArray: {
         blog: '',
         about: '',
@@ -442,6 +406,9 @@ export default {
     },
     transitRandEmoji(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
+        repeat: 3,
+        repeatDelay: 2,
+        yoyo: true,
         onUpdate: () => {
           var html = '';
           word.forEach((map) => {
@@ -454,9 +421,9 @@ export default {
         tl.to(
           word,
           {
-            [index]: safeEmojis.length * 2 + range,
-            ease: 'ease-in',
-            duration: index + 6,
+            [index]: safeEmojis.length * 3 + range,
+            ease: 'ease-out',
+            duration: index + 5,
           },
           0,
         );
@@ -464,53 +431,10 @@ export default {
     },
     loopRandEmoji() {
       this.transitRandEmoji(
-        this.randEmoji.map,
-        this.randEmoji.initial,
+        this.wordMaps.randEmoji.map,
+        this.wordMaps.randEmoji.initial,
         'randEmoji',
       );
-      setInterval(() => {
-        this.randEmoji = {
-          map: [
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-          ],
-          initial: [
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-          ],
-        };
-        this.transitRandEmoji(
-          this.randEmoji.map,
-          this.randEmoji.initial,
-          'randEmoji',
-        );
-      }, 9000);
     },
     loopCodeLines() {
       let endValue = 0;
@@ -612,6 +536,42 @@ export default {
             lettersArray.indexOf('s'),
           ],
           initial: [1, 6, 8, 40, 43, 45, 42, 3],
+        },
+        randEmoji: {
+          map: [
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+          ],
+          initial: [
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+            safeEmojis.indexOf(
+              this.$_.shuffle(safeEmojis)[
+                Math.floor(Math.random() * safeEmojis.length)
+              ],
+            ),
+          ],
         },
       };
     },
