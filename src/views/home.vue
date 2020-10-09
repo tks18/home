@@ -34,7 +34,6 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <span
-                        v-ripple
                         v-bind="attrs"
                         v-on="on"
                         @click="loopRandEmoji()"
@@ -271,6 +270,66 @@
         </v-row>
       </v-container>
     </div>
+    <div class="column is-full ma-2">
+      <v-row>
+        <v-col align="start" justify="start">
+          <div
+            @click="$router.push('/projects')"
+            id="projtitle"
+            :class="
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.projtitle }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col align="end" justify="start" class="mr-4">
+          <v-btn icon color="primary" @click="swipeLeft('posts')"
+            ><v-icon>mdi-arrow-left</v-icon></v-btn
+          >
+          <v-btn icon color="primary" @click="swipeRight('posts')"
+            ><v-icon>mdi-arrow-right</v-icon></v-btn
+          >
+        </v-col>
+      </v-row>
+      <div
+        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+        v-if="projects.loading"
+        ref="posts"
+      >
+        <div
+          v-for="n in 5"
+          class="scrollable-x-child column my-0 mx-1 px-1 py-0 non-touch point-cursor"
+          v-bind:key="n"
+        >
+          <v-card>
+            <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
+          </v-card>
+        </div>
+      </div>
+      <div
+        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+        v-if="!projects.loading"
+        ref="posts"
+      >
+        <div
+          v-for="(project, index) in projects.projects"
+          class="scrollable-x-child column my-0 mx-1 px-1 py-0 non-touch point-cursor"
+          v-bind:key="index"
+        >
+          <v-card width="250" height="300">
+            <v-img
+              src="https://portswigger.net/cms/images/54/14/6efb9bc5d143-article-190612-github-body-text.jpg"
+            ></v-img>
+            <v-card-title class="text-overline">
+              {{ project.name }}
+            </v-card-title>
+          </v-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -290,6 +349,10 @@ export default {
       },
       letters: lettersArray,
       birthday: false,
+      projects: {
+        loading: false,
+        projects: {},
+      },
       toggleTooltip: true,
       lifeTimeCountDown: {
         years: 0,
@@ -303,6 +366,7 @@ export default {
         blog: '',
         about: '',
         stat: '',
+        projtitle: '',
         randEmoji: '',
       },
       aboutData: {
@@ -458,6 +522,29 @@ export default {
       observer = new IntersectionObserver(handleIntersect, options);
       observer.observe(target);
     },
+    getProjects() {
+      this.$set(this.projects, 'loading', true);
+      let url =
+        'https://api.github.com/users/tks18/repos?sort=updated&per_page=20';
+      this.$axios
+        .get(url)
+        .then((resp) => {
+          if (resp.data.length > 0) {
+            this.$set(this.projects, 'loading', false);
+            let repos = this.$_.shuffle(resp.data);
+            let slicedRepos = repos.slice(0, 10);
+            console.log(slicedRepos);
+            this.$set(this.projects, 'projects', slicedRepos);
+          } else {
+            this.$set(this.projects, 'loading', false);
+            this.$set(this.projects, 'projects', {});
+          }
+        })
+        .catch((e) => {
+          this.$set(this.projects, 'loading', false);
+          this.$set(this.projects, 'projects', {});
+        });
+    },
     render() {
       this.loopRandEmoji();
       this.createObserver(
@@ -468,12 +555,20 @@ export default {
         'about',
       );
       this.createObserver(
+        '#projtitle',
+        'transitWord',
+        this.wordMaps.projtitle.map,
+        this.wordMaps.projtitle.initial,
+        'projtitle',
+      );
+      this.createObserver(
         '#blogtitle',
         'transitWord',
         this.wordMaps.blog.map,
         this.wordMaps.blog.initial,
         'blog',
       );
+      this.getProjects();
       this.lifeTimeCounter('#lifetime');
     },
   },
@@ -512,6 +607,22 @@ export default {
             lettersArray.indexOf('e'),
           ],
           initial: [39, 41, 45, 43, 42, 44, 46, 38],
+        },
+        projtitle: {
+          map: [
+            lettersArray.indexOf('m'),
+            lettersArray.indexOf('y'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('p'),
+            lettersArray.indexOf('r'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('j'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('c'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf('s'),
+          ],
+          initial: [39, 41, 45, 43, 42, 44, 46, 38, 2, 1, 44],
         },
       };
     },

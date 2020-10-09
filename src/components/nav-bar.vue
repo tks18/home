@@ -18,7 +18,7 @@
           class="font-weight-bold non-touch point-cursor"
           v-ripple
         >
-          Shan.tk 🤔😁✌
+          Shan.tk ✌
         </v-toolbar-title>
       </template>
       <span>Sudharshan TK</span>
