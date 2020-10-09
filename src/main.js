@@ -5,6 +5,7 @@ import EventBus from './EventBus';
 import router from './router';
 import moment from 'vue-moment';
 import lodash from 'lodash';
+import axios from 'axios';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import vuetify from './plugins/vuetify';
 import { gsap } from 'gsap';
@@ -14,6 +15,7 @@ import 'swiper/swiper-bundle.css';
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);
 Vue.config.productionTip = false;
+Vue.prototype.$axios = axios;
 Vue.prototype.$gsap = gsap;
 Vue.prototype.$bus = EventBus;
 Vue.prototype.$state = {
