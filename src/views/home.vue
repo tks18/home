@@ -23,11 +23,28 @@
                 </div>
                 <div
                   :class="
-                    'text text-center font-weight-bold my-2' +
+                    'text font-weight-bold my-2 py-2 mx-2 px-2 text-center' +
                     (ismobile ? ' text-h4' : ' text-h3')
                   "
                 >
-                  {{ animatedArray.randEmoji }}
+                  <v-tooltip
+                    v-model="toggleTooltip"
+                    top
+                    transition="slide-y-transition"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <span
+                        v-ripple
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="loopRandEmoji()"
+                        class="fit-text non-touch point-cursor"
+                      >
+                        {{ animatedArray.randEmoji }}
+                      </span>
+                    </template>
+                    <span>Click here to Shuffle Emoji's</span>
+                  </v-tooltip>
                 </div>
                 <div
                   :class="
@@ -197,23 +214,23 @@
             justify="center"
             class="mx-2 my-1 py-0 non-touch"
           >
-            <v-row class="my-2">
+            <v-row class="my-2" id="lifetime">
               <v-row v-ripple>
                 <v-col
                   :cols="ismobile ? 12 : 6"
                   :align="ismobile ? 'center' : 'end'"
                   :class="
-                    (ismobile ? 'text-body-2' : 'text-body-1') +
+                    (ismobile ? 'text-body-2' : 'text-h6') +
                     ' text my-1 py-0 font-weight-bold'
                   "
                 >
-                  I am Up and Running for 🤙 xD
+                  Time Travelling for 🤙 xD
                 </v-col>
                 <v-col
                   :cols="ismobile ? 12 : 6"
                   :align="ismobile ? 'center' : 'start'"
                   :class="
-                    (ismobile ? 'text-body-2' : 'text-body-1') +
+                    (ismobile ? 'text-body-2' : 'text-h6') +
                     ' text my-1 py-0 primary--text font-weight-bold'
                   "
                 >
@@ -273,6 +290,7 @@ export default {
       },
       letters: lettersArray,
       birthday: false,
+      toggleTooltip: true,
       lifeTimeCountDown: {
         years: 0,
         weeks: 0,
@@ -328,9 +346,6 @@ export default {
     },
     transitRandEmoji(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
-        repeat: 2,
-        repeatDelay: 2,
-        yoyo: true,
         onUpdate: () => {
           var html = '';
           word.forEach((map) => {
@@ -343,20 +358,55 @@ export default {
         tl.to(
           word,
           {
-            [index]: safeEmojis.length * 3 + range,
+            [index]: safeEmojis.length * 2 + range,
             ease: 'ease-out',
-            duration: index + 5,
+            duration: index + 2.5,
           },
           0,
         );
       });
     },
     loopRandEmoji() {
-      this.transitRandEmoji(
-        this.wordMaps.randEmoji.map,
-        this.wordMaps.randEmoji.initial,
-        'randEmoji',
-      );
+      let randEmoji = {
+        map: [
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+        ],
+        initial: [
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+          safeEmojis.indexOf(
+            this.$_.shuffle(safeEmojis)[
+              Math.floor(Math.random() * safeEmojis.length)
+            ],
+          ),
+        ],
+      };
+      this.transitRandEmoji(randEmoji.map, randEmoji.initial, 'randEmoji');
+      setTimeout(() => {
+        this.toggleTooltip = false;
+      }, 5000);
     },
     transitWord(wordMap, word, stringText) {
       var tl = this.$gsap.timeline({
@@ -376,20 +426,37 @@ export default {
         );
       });
     },
-    lifeTimeCounter() {
-      let newVals = countUpFromTime('May 16, 2000 16:21:00');
-      let tl = this.$gsap.timeline();
-      for (const [key] of Object.entries(this.lifeTimeCountDown)) {
-        tl.to(this.$data.lifeTimeCountDown, {
-          [key]: newVals[key],
-          duration: 0.8,
+    lifeTimeCounter(elem) {
+      let observer;
+      let target = document.querySelector(elem);
+      let options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6,
+      };
+      let handleIntersect = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let newVals = countUpFromTime('May 16, 2000 16:21:00');
+            let tl = this.$gsap.timeline();
+            for (const [key] of Object.entries(this.lifeTimeCountDown)) {
+              tl.to(this.$data.lifeTimeCountDown, {
+                [key]: newVals[key],
+                duration: 0.8,
+              });
+            }
+            setTimeout(() => {
+              setInterval(() => {
+                this.lifeTimeCountDown = countUpFromTime(
+                  'May 16, 2000 16:21:00',
+                );
+              }, 1000);
+            }, 3800);
+          }
         });
-      }
-      setTimeout(() => {
-        setInterval(() => {
-          this.lifeTimeCountDown = countUpFromTime('May 16, 2000 16:21:00');
-        }, 1000);
-      }, 3800);
+      };
+      observer = new IntersectionObserver(handleIntersect, options);
+      observer.observe(target);
     },
     render() {
       this.loopRandEmoji();
@@ -407,7 +474,7 @@ export default {
         this.wordMaps.blog.initial,
         'blog',
       );
-      this.lifeTimeCounter();
+      this.lifeTimeCounter('#lifetime');
     },
   },
   computed: {
@@ -445,42 +512,6 @@ export default {
             lettersArray.indexOf('e'),
           ],
           initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        randEmoji: {
-          map: [
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-          ],
-          initial: [
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-            safeEmojis.indexOf(
-              this.$_.shuffle(safeEmojis)[
-                Math.floor(Math.random() * safeEmojis.length)
-              ],
-            ),
-          ],
         },
       };
     },
