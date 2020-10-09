@@ -25,3 +25,45 @@ export function scrollTo(element, scrollPixels, duration) {
     window.requestAnimationFrame(scroll);
   }
 }
+
+export function countUpFromTime(countFrom) {
+  countFrom = new Date(countFrom).getTime();
+  var now = new Date(),
+    countFrom = new Date(countFrom),
+    timeDifference = now - countFrom;
+
+  var secondsInAHour = 60 * 60 * 1000;
+  var secondsInADay = secondsInAHour * 24;
+  var secondsInAWeek = secondsInADay * 7;
+  var secondsInAYear = secondsInADay * 365;
+
+  let years = Math.floor((timeDifference / secondsInAYear) * 1);
+  let weeks = Math.floor(
+    ((timeDifference % secondsInAYear) / secondsInAWeek) * 1,
+  );
+  let days = Math.floor(
+    ((timeDifference % secondsInAWeek) / secondsInADay) * 1,
+  );
+  let hours = Math.floor(
+    ((timeDifference % secondsInADay) / secondsInAHour) * 1,
+  );
+  let mins = Math.floor(
+    (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1,
+  );
+  let secs = Math.floor(
+    ((((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) /
+      1000) *
+      1,
+  );
+
+  let returnVals = {
+    years: years,
+    weeks: weeks,
+    days: days,
+    hours: hours,
+    minutes: mins,
+    seconds: secs,
+  };
+
+  return returnVals;
+}
