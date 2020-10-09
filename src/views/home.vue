@@ -188,71 +188,65 @@
         </v-row>
       </v-container>
     </div>
-    <div class="column is-full">
+    <div class="column is-full my-2 py-0">
       <v-container>
         <v-row justify="center">
           <v-col
-            :cols="ismobile ? 12 : 6"
+            cols="12"
             align="center"
             justify="center"
-            class="mx-2 non-touch"
+            class="mx-2 my-1 py-0 non-touch"
           >
             <v-row class="my-2">
               <v-row v-ripple>
                 <v-col
-                  cols="12"
-                  align="center"
-                  class="text-overline text my-1 py-0 font-weight-medium"
+                  :cols="ismobile ? 12 : 6"
+                  :align="ismobile ? 'center' : 'end'"
+                  :class="
+                    (ismobile ? 'text-body-2' : 'text-body-1') +
+                    ' text my-1 py-0 font-weight-bold'
+                  "
                 >
-                  Up and Active for 🤙
+                  I am Up and Running for 🤙 xD
                 </v-col>
                 <v-col
-                  cols="12"
-                  align="center"
-                  class="text-overline text my-1 py-0 primary--text font-weight-medium"
+                  :cols="ismobile ? 12 : 6"
+                  :align="ismobile ? 'center' : 'start'"
+                  :class="
+                    (ismobile ? 'text-body-2' : 'text-body-1') +
+                    ' text my-1 py-0 primary--text font-weight-bold'
+                  "
                 >
-                  <v-row>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(lifeTimeCountDown.years)
-                      }}
-                      <br />Years
-                    </v-col>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(lifeTimeCountDown.weeks)
-                      }}
-                      <br />Weeks
-                    </v-col>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(lifeTimeCountDown.days)
-                      }}
-                      <br />Days
-                    </v-col>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(lifeTimeCountDown.hours)
-                      }}
-                      <br />Hours
-                    </v-col>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.minutes,
-                        )
-                      }}
-                      <br />Minutes
-                    </v-col>
-                    <v-col :cols="ismobile ? 6 : 2">
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.seconds,
-                        )
-                      }}
-                      <br />Seconds
-                    </v-col>
-                  </v-row>
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.years.toFixed(0),
+                    ) + 'Y :'
+                  }}
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.weeks.toFixed(0),
+                    ) + 'W :'
+                  }}
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.days.toFixed(0),
+                    ) + 'D :'
+                  }}
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.hours.toFixed(0),
+                    ) + 'H :'
+                  }}
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.minutes.toFixed(0),
+                    ) + 'M :'
+                  }}
+                  {{
+                    new Intl.NumberFormat().format(
+                      lifeTimeCountDown.seconds.toFixed(0),
+                    ) + 'S'
+                  }}
                 </v-col>
               </v-row>
             </v-row>
@@ -265,7 +259,7 @@
 
 <script>
 import { lettersArray, safeEmojis } from '../templates/emoji-array';
-import { scrollTo } from '../plugins/helpers';
+import { scrollTo, countUpFromTime } from '../plugins/helpers';
 export default {
   data: function () {
     return {
@@ -278,7 +272,15 @@ export default {
         buttontext: 'Contact Me !',
       },
       letters: lettersArray,
-      lifeTimeCountDown: {},
+      birthday: false,
+      lifeTimeCountDown: {
+        years: 0,
+        weeks: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      },
       animatedArray: {
         blog: '',
         about: '',
@@ -299,7 +301,7 @@ export default {
       const content = 'this.$refs.' + func;
       scrollTo(eval(content), 400, 300);
     },
-    createObserver(elem, wordMap, word, stringText) {
+    createObserver(elem, callback, wordMap, word, stringText) {
       let observer;
       let target = document.querySelector(elem);
       let options = {
@@ -310,7 +312,7 @@ export default {
       let handleIntersect = (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            this.transitWord(wordMap, word, stringText);
+            this[callback](wordMap, word, stringText);
           }
         });
       };
@@ -374,37 +376,33 @@ export default {
         );
       });
     },
-    staticTimeCounter() {
-      let constants = {
-        birthDate: this.$moment([2000, 5, 16]),
-        now: this.$moment(),
-      };
-      let constructors = {
-        seconds: constants.now.diff(constants.birthDate, 'seconds'),
-        hours: constants.now.diff(constants.birthDate, 'hours'),
-        minutes: constants.now.diff(constants.birthDate, 'minutes'),
-        days: constants.now.diff(constants.birthDate, 'days'),
-        weeks: constants.now.diff(constants.birthDate, 'weeks'),
-        years: constants.now.diff(constants.birthDate, 'years'),
-      };
-      this.lifeTimeCountDown = constructors;
-    },
     lifeTimeCounter() {
-      this.staticTimeCounter();
-      setInterval(() => {
-        this.staticTimeCounter();
-      }, 1000);
+      let newVals = countUpFromTime('May 16, 2000 16:21:00');
+      let tl = this.$gsap.timeline();
+      for (const [key] of Object.entries(this.lifeTimeCountDown)) {
+        tl.to(this.$data.lifeTimeCountDown, {
+          [key]: newVals[key],
+          duration: 0.8,
+        });
+      }
+      setTimeout(() => {
+        setInterval(() => {
+          this.lifeTimeCountDown = countUpFromTime('May 16, 2000 16:21:00');
+        }, 1000);
+      }, 3800);
     },
     render() {
       this.loopRandEmoji();
       this.createObserver(
         '#abouttitle',
+        'transitWord',
         this.wordMaps.about.map,
         this.wordMaps.about.initial,
         'about',
       );
       this.createObserver(
         '#blogtitle',
+        'transitWord',
         this.wordMaps.blog.map,
         this.wordMaps.blog.initial,
         'blog',
