@@ -84,6 +84,12 @@ export default {
           link: '/about',
         },
         {
+          icon: 'mdi-notebook-multiple',
+          title: 'Projects',
+          subtitle: 'Currently Working Projects and Issues',
+          link: '/projects',
+        },
+        {
           icon: 'mdi-web',
           title: 'Careers',
           subtitle: 'Careers',

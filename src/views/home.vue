@@ -270,9 +270,9 @@
         </v-row>
       </v-container>
     </div>
-    <div class="column is-full ma-2">
-      <v-row>
-        <v-col align="start" justify="start">
+    <div class="column is-full">
+      <v-row :class="ismobile ? 'ma-0' : 'ma-2'">
+        <v-col cols="12" align="start" justify="start">
           <div
             @click="$router.push('/projects')"
             id="projtitle"
@@ -285,50 +285,122 @@
             <v-icon>mdi-arrow-right-circle</v-icon>
           </div>
         </v-col>
-        <v-col align="end" justify="start" class="mr-4">
-          <v-btn icon color="primary" @click="swipeLeft('posts')"
-            ><v-icon>mdi-arrow-left</v-icon></v-btn
-          >
-          <v-btn icon color="primary" @click="swipeRight('posts')"
-            ><v-icon>mdi-arrow-right</v-icon></v-btn
-          >
+        <v-col cols="12" v-if="projects.loading">
+          <v-card>
+            <v-skeleton-loader class="mx-auto" type="card"> </v-skeleton-loader>
+          </v-card>
+        </v-col>
+        <v-col cols="12">
+          <v-row v-if="!projects.loading" class="mx-2 non-touch">
+            <v-col
+              v-for="(project, index) in projects.projects"
+              class="mx-0 px-1"
+              :cols="ismobile && 12"
+              v-bind:key="index"
+            >
+              <v-card>
+                <v-img
+                  :max-height="ismobile ? null : 150"
+                  :max-width="ismobile ? null : 250"
+                  :src="githubPhoto"
+                ></v-img>
+                <v-row justify="space-between" class="ma-0 pa-0">
+                  <v-col
+                    align="start"
+                    justify="start"
+                    class="ma-0 pa-0"
+                    cols="12"
+                  >
+                    <v-card-title class="text-overline ma-1 pa-1">
+                      {{ project.name }}
+                    </v-card-title>
+                  </v-col>
+                  <v-col cols="12">
+                    <div class="caption grey--text">Description:</div>
+                    <div class="text-subtitle-2">
+                      {{ project.description }}
+                    </div>
+                  </v-col>
+                  <v-col v-if="project.license" cols="12">
+                    <div class="caption grey--text">
+                      Licensed under
+                      <span
+                        @click="windowClick(project.license.url)"
+                        class="primary--text point-cursor"
+                      >
+                        {{ project.license.name }}
+                      </span>
+                    </div>
+                  </v-col>
+                  <v-col>
+                    <div class="caption grey--text">Details:</div>
+                    <div class="text-subtitle-2">
+                      Created on
+                      {{ project.created_at | moment('ddd of MMM, YY') }}
+                    </div>
+                    <div class="text-subtitle-2">
+                      Last Commit on
+                      {{ project.updated_at | moment('ddd of MMM, YY') }}
+                    </div>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-btn
+                      @click="
+                        project.homepage == null
+                          ? windowClick(project.html_url)
+                          : windowClick(project.homepage)
+                      "
+                      rounded
+                      block
+                      color="primary"
+                      small
+                    >
+                      Project Home
+                    </v-btn>
+                  </v-col>
+                  <v-col class="ma-0 pa-0" cols="12">
+                    <v-col align="end">
+                      <v-chip
+                        class="text-right ma-1"
+                        color="primary"
+                        small
+                        outlined
+                        pill
+                      >
+                        <v-icon small left>mdi-language-javascript</v-icon>
+                        {{ project.language }}
+                      </v-chip>
+                      <v-chip
+                        class="text-right ma-1"
+                        color="primary"
+                        small
+                        outlined
+                        pill
+                      >
+                        <v-icon left small>mdi-source-branch</v-icon>
+                        {{ project.default_branch }}
+                      </v-chip>
+                      <v-chip
+                        class="text-right ma-1"
+                        color="primary"
+                        @click="windowClick(project.html_url)"
+                        outlined
+                        small
+                        pill
+                      >
+                        <v-avatar size="10" left>
+                          <v-img :src="project.owner.avatar_url"></v-img>
+                        </v-avatar>
+                        {{ project.owner.login }}
+                      </v-chip>
+                    </v-col>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
-      <div
-        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
-        v-if="projects.loading"
-        ref="posts"
-      >
-        <div
-          v-for="n in 5"
-          class="scrollable-x-child column my-0 mx-1 px-1 py-0 non-touch point-cursor"
-          v-bind:key="n"
-        >
-          <v-card>
-            <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
-          </v-card>
-        </div>
-      </div>
-      <div
-        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
-        v-if="!projects.loading"
-        ref="posts"
-      >
-        <div
-          v-for="(project, index) in projects.projects"
-          class="scrollable-x-child column my-0 mx-1 px-1 py-0 non-touch point-cursor"
-          v-bind:key="index"
-        >
-          <v-card width="250" height="300">
-            <v-img
-              src="https://portswigger.net/cms/images/54/14/6efb9bc5d143-article-190612-github-body-text.jpg"
-            ></v-img>
-            <v-card-title class="text-overline">
-              {{ project.name }}
-            </v-card-title>
-          </v-card>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -354,6 +426,8 @@ export default {
         projects: {},
       },
       toggleTooltip: true,
+      githubPhoto:
+        'https://portswigger.net/cms/images/54/14/6efb9bc5d143-article-190612-github-body-text.jpg',
       lifeTimeCountDown: {
         years: 0,
         weeks: 0,
@@ -375,6 +449,10 @@ export default {
     };
   },
   methods: {
+    windowClick(url) {
+      window.open(url);
+      return;
+    },
     swipeLeft(func) {
       const content = 'this.$refs.' + func;
       scrollTo(eval(content), -400, 300);
@@ -531,9 +609,10 @@ export default {
         .then((resp) => {
           if (resp.data.length > 0) {
             this.$set(this.projects, 'loading', false);
-            let repos = this.$_.shuffle(resp.data);
-            let slicedRepos = repos.slice(0, 10);
-            console.log(slicedRepos);
+            let repos = resp.data;
+            let slicedRepos = this.ismobile
+              ? repos.slice(0, 2)
+              : repos.slice(0, 5);
             this.$set(this.projects, 'projects', slicedRepos);
           } else {
             this.$set(this.projects, 'loading', false);
@@ -610,9 +689,6 @@ export default {
         },
         projtitle: {
           map: [
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf(' '),
             lettersArray.indexOf('p'),
             lettersArray.indexOf('r'),
             lettersArray.indexOf('o'),
@@ -622,7 +698,7 @@ export default {
             lettersArray.indexOf('t'),
             lettersArray.indexOf('s'),
           ],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38, 2, 1, 44],
+          initial: [39, 41, 45, 43, 42, 44, 46, 38],
         },
       };
     },
