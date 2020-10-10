@@ -388,6 +388,50 @@
                         class="back-blur"
                       >
                         <v-row class="ma-1">
+                          <v-col align="center" cols="12">
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on }">
+                                <v-chip
+                                  v-on="on"
+                                  class="text-right ma-1"
+                                  color="primary"
+                                  pill
+                                >
+                                  <v-icon left small>mdi-eye</v-icon>
+                                  {{ project.watchers }}
+                                </v-chip>
+                              </template>
+                              <span>Watchers</span>
+                            </v-tooltip>
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on }">
+                                <v-chip
+                                  v-on="on"
+                                  class="text-right ma-1"
+                                  color="primary"
+                                  pill
+                                >
+                                  <v-icon left small>mdi-source-fork</v-icon>
+                                  {{ project.forks }}
+                                </v-chip>
+                              </template>
+                              <span>Forks</span>
+                            </v-tooltip>
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on }">
+                                <v-chip
+                                  v-on="on"
+                                  class="text-right ma-1"
+                                  color="primary"
+                                  pill
+                                >
+                                  <v-icon left small>mdi-star</v-icon>
+                                  {{ project.stargazers_count }}
+                                </v-chip>
+                              </template>
+                              <span>Stars</span>
+                            </v-tooltip>
+                          </v-col>
                           <v-col cols="12">
                             <div class="caption grey--text">Description:</div>
                             <div class="text-subtitle-2">
@@ -429,32 +473,6 @@
                                 </v-btn>
                               </v-col>
                             </v-row>
-                          </v-col>
-                          <v-col align="center" cols="12">
-                            <v-chip
-                              class="text-right ma-1"
-                              color="primary"
-                              pill
-                            >
-                              <v-icon left small>mdi-eye-settings</v-icon>
-                              {{ project.watchers }}
-                            </v-chip>
-                            <v-chip
-                              class="text-right ma-1"
-                              color="primary"
-                              pill
-                            >
-                              <v-icon left small>mdi-source-fork</v-icon>
-                              {{ project.forks }}
-                            </v-chip>
-                            <v-chip
-                              class="text-right ma-1"
-                              color="primary"
-                              pill
-                            >
-                              <v-icon left small>mdi-star</v-icon>
-                              {{ project.stargazers_count }}
-                            </v-chip>
                           </v-col>
                         </v-row>
                       </v-overlay>
