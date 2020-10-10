@@ -298,105 +298,170 @@
               :cols="ismobile && 12"
               v-bind:key="index"
             >
-              <v-card>
-                <v-img
-                  :max-height="ismobile ? null : 150"
-                  :max-width="ismobile ? null : 250"
-                  :src="githubPhoto"
-                ></v-img>
-                <v-row justify="space-between" class="ma-0 pa-0">
-                  <v-col
-                    align="start"
-                    justify="start"
-                    class="ma-0 pa-0"
-                    cols="12"
-                  >
-                    <v-card-title class="text-overline ma-1 pa-1">
-                      {{ project.name }}
-                    </v-card-title>
-                  </v-col>
-                  <v-col cols="12">
-                    <div class="caption grey--text">Description:</div>
-                    <div class="text-subtitle-2">
-                      {{ project.description }}
-                    </div>
-                  </v-col>
-                  <v-col v-if="project.license" cols="12">
-                    <div class="caption grey--text">
-                      Licensed under
-                      <span
-                        @click="windowClick(project.license.url)"
-                        class="primary--text point-cursor"
-                      >
-                        {{ project.license.name }}
-                      </span>
-                    </div>
-                  </v-col>
-                  <v-col>
-                    <div class="caption grey--text">Details:</div>
-                    <div class="text-subtitle-2">
-                      Created on
-                      {{ project.created_at | moment('ddd of MMM, YY') }}
-                    </div>
-                    <div class="text-subtitle-2">
-                      Last Commit on
-                      {{ project.updated_at | moment('ddd of MMM, YY') }}
-                    </div>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-btn
-                      @click="
-                        project.homepage == null
-                          ? windowClick(project.html_url)
-                          : windowClick(project.homepage)
-                      "
-                      rounded
-                      block
-                      color="primary"
-                      small
-                    >
-                      Project Home
-                    </v-btn>
-                  </v-col>
-                  <v-col class="ma-0 pa-0" cols="12">
-                    <v-col align="end">
-                      <v-chip
-                        class="text-right ma-1"
+              <v-hover>
+                <template v-slot:default="{ hover }">
+                  <v-card height="530">
+                    <v-img
+                      :max-height="ismobile ? null : 150"
+                      :max-width="ismobile ? null : 250"
+                      :src="githubPhoto"
+                    ></v-img>
+                    <v-row justify="space-between" class="ma-0 pa-0">
+                      <v-col class="ma-0 pa-0" cols="12">
+                        <v-card-title class="text-overline ma-1 pa-1">
+                          {{ project.name }}
+                        </v-card-title>
+                      </v-col>
+                      <v-col cols="12">
+                        <div class="caption grey--text">Description:</div>
+                        <div class="text-subtitle-2">
+                          {{ project.description }}
+                        </div>
+                      </v-col>
+                      <v-col v-if="project.license" cols="12">
+                        <div class="caption grey--text">
+                          Licensed under
+                          <span
+                            @click="windowClick(project.license.url)"
+                            class="primary--text point-cursor"
+                          >
+                            {{ project.license.name }}
+                          </span>
+                        </div>
+                      </v-col>
+                      <v-col>
+                        <div class="caption grey--text">Details:</div>
+                        <div class="text-subtitle-2">
+                          Created on
+                          {{ project.created_at | moment('ddd of MMM, YY') }}
+                        </div>
+                        <div class="text-subtitle-2">
+                          Last Commit on
+                          {{ project.updated_at | moment('ddd of MMM, YY') }}
+                        </div>
+                      </v-col>
+                      <v-col class="ma-0 pa-0" cols="12">
+                        <v-col align="end">
+                          <v-chip
+                            class="text-right ma-1"
+                            color="primary"
+                            small
+                            outlined
+                            pill
+                          >
+                            <v-icon small left>mdi-language-javascript</v-icon>
+                            {{ project.language }}
+                          </v-chip>
+                          <v-chip
+                            class="text-right ma-1"
+                            color="primary"
+                            small
+                            outlined
+                            pill
+                          >
+                            <v-icon left small>mdi-source-branch</v-icon>
+                            {{ project.default_branch }}
+                          </v-chip>
+                          <v-chip
+                            class="text-right ma-1"
+                            color="primary"
+                            @click="windowClick(project.html_url)"
+                            outlined
+                            small
+                            pill
+                          >
+                            <v-avatar size="10" left>
+                              <v-img :src="project.owner.avatar_url"></v-img>
+                            </v-avatar>
+                            {{ project.owner.login }}
+                          </v-chip>
+                        </v-col>
+                      </v-col>
+                    </v-row>
+                    <transition name="fade" mode="out-in">
+                      <v-overlay
+                        v-if="hover"
+                        absolute
+                        z-index="2"
+                        opacity="0.4"
                         color="primary"
-                        small
-                        outlined
-                        pill
+                        class="back-blur"
                       >
-                        <v-icon small left>mdi-language-javascript</v-icon>
-                        {{ project.language }}
-                      </v-chip>
-                      <v-chip
-                        class="text-right ma-1"
-                        color="primary"
-                        small
-                        outlined
-                        pill
-                      >
-                        <v-icon left small>mdi-source-branch</v-icon>
-                        {{ project.default_branch }}
-                      </v-chip>
-                      <v-chip
-                        class="text-right ma-1"
-                        color="primary"
-                        @click="windowClick(project.html_url)"
-                        outlined
-                        small
-                        pill
-                      >
-                        <v-avatar size="10" left>
-                          <v-img :src="project.owner.avatar_url"></v-img>
-                        </v-avatar>
-                        {{ project.owner.login }}
-                      </v-chip>
-                    </v-col>
-                  </v-col>
-                </v-row>
-              </v-card>
+                        <v-row class="ma-1">
+                          <v-col cols="12">
+                            <div class="caption grey--text">Description:</div>
+                            <div class="text-subtitle-2">
+                              {{ project.description }}
+                            </div>
+                          </v-col>
+                          <v-col class="my-0 py-0">
+                            <v-row>
+                              <v-col cols="12">
+                                <v-btn block color="primary" rounded>
+                                  <v-icon small>mdi-folder-star</v-icon> Project
+                                  Breif
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn small block rounded color="primary">
+                                  <v-icon small>mdi-web</v-icon> Website
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn small block rounded color="primary">
+                                  <v-icon small>mdi-git</v-icon> Git
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="12">
+                                <v-btn block rounded color="primary">
+                                  <v-icon small>mdi-github</v-icon> on Github
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn color="primary" block small rounded>
+                                  <v-icon small>mdi-webpack</v-icon> Api
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn color="primary" block small rounded>
+                                  <v-icon small>mdi-source-branch-sync</v-icon>
+                                  Clone
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-col>
+                          <v-col align="center" cols="12">
+                            <v-chip
+                              class="text-right ma-1"
+                              color="primary"
+                              pill
+                            >
+                              <v-icon left small>mdi-eye-settings</v-icon>
+                              {{ project.watchers }}
+                            </v-chip>
+                            <v-chip
+                              class="text-right ma-1"
+                              color="primary"
+                              pill
+                            >
+                              <v-icon left small>mdi-source-fork</v-icon>
+                              {{ project.forks }}
+                            </v-chip>
+                            <v-chip
+                              class="text-right ma-1"
+                              color="primary"
+                              pill
+                            >
+                              <v-icon left small>mdi-star</v-icon>
+                              {{ project.stargazers_count }}
+                            </v-chip>
+                          </v-col>
+                        </v-row>
+                      </v-overlay>
+                    </transition>
+                  </v-card>
+                </template>
+              </v-hover>
             </v-col>
           </v-row>
         </v-col>
