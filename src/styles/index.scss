@@ -37,6 +37,11 @@
   height: inherit;
 }
 
+.back-blur-hard {
+  backdrop-filter: blur(10px);
+  height: inherit;
+}
+
 .width-min {
   min-width: 40%;
 }

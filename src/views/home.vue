@@ -214,57 +214,62 @@
             class="mx-2 my-1 py-0 non-touch"
           >
             <v-row class="my-2" id="lifetime">
-              <v-row v-ripple>
-                <v-col
-                  :cols="ismobile ? 12 : 6"
-                  :align="ismobile ? 'center' : 'end'"
-                  :class="
-                    (ismobile ? 'text-body-2' : 'text-h6') +
-                    ' text my-1 py-0 font-weight-bold'
-                  "
-                >
-                  Time Travelling for 🤙 xD
-                </v-col>
-                <v-col
-                  :cols="ismobile ? 12 : 6"
-                  :align="ismobile ? 'center' : 'start'"
-                  :class="
-                    (ismobile ? 'text-body-2' : 'text-h6') +
-                    ' text my-1 py-0 primary--text font-weight-bold'
-                  "
-                >
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.years.toFixed(0),
-                    ) + 'Y :'
-                  }}
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.weeks.toFixed(0),
-                    ) + 'W :'
-                  }}
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.days.toFixed(0),
-                    ) + 'D :'
-                  }}
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.hours.toFixed(0),
-                    ) + 'H :'
-                  }}
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.minutes.toFixed(0),
-                    ) + 'M :'
-                  }}
-                  {{
-                    new Intl.NumberFormat().format(
-                      lifeTimeCountDown.seconds.toFixed(0),
-                    ) + 'S'
-                  }}
-                </v-col>
-              </v-row>
+              <v-tooltip top transition="slide-y-transition">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-row v-ripple v-bind="attrs" v-on="on">
+                    <v-col
+                      :cols="ismobile ? 12 : 6"
+                      :align="ismobile ? 'center' : 'end'"
+                      :class="
+                        (ismobile ? 'text-body-2' : 'text-h6') +
+                        ' text my-1 py-0 font-weight-bold'
+                      "
+                    >
+                      Time Travelling for 🤙 xD
+                    </v-col>
+                    <v-col
+                      :cols="ismobile ? 12 : 6"
+                      :align="ismobile ? 'center' : 'start'"
+                      :class="
+                        (ismobile ? 'text-body-2' : 'text-h6') +
+                        ' text my-1 py-0 primary--text font-weight-bold'
+                      "
+                    >
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.years.toFixed(0),
+                        ) + 'Y :'
+                      }}
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.weeks.toFixed(0),
+                        ) + 'W :'
+                      }}
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.days.toFixed(0),
+                        ) + 'D :'
+                      }}
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.hours.toFixed(0),
+                        ) + 'H :'
+                      }}
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.minutes.toFixed(0),
+                        ) + 'M :'
+                      }}
+                      {{
+                        new Intl.NumberFormat().format(
+                          lifeTimeCountDown.seconds.toFixed(0),
+                        ) + 'S'
+                      }}
+                    </v-col>
+                  </v-row>
+                </template>
+                <span> Counting from my Birthday 16th May, 2000 </span>
+              </v-tooltip>
             </v-row>
           </v-col>
         </v-row>
@@ -286,9 +291,14 @@
           </div>
         </v-col>
         <v-col cols="12" v-if="projects.loading">
-          <v-card>
-            <v-skeleton-loader class="mx-auto" type="card"> </v-skeleton-loader>
-          </v-card>
+          <v-row>
+            <v-col v-for="n in ismobile ? 1 : 5" v-bind:key="n">
+              <v-card>
+                <v-skeleton-loader class="mx-auto" type="card">
+                </v-skeleton-loader>
+              </v-card>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col cols="12">
           <v-row v-if="!projects.loading" class="mx-2 non-touch">
@@ -300,7 +310,7 @@
             >
               <v-hover>
                 <template v-slot:default="{ hover }">
-                  <v-card height="530">
+                  <v-card>
                     <v-img
                       :max-height="ismobile ? null : 150"
                       :max-width="ismobile ? null : 250"
@@ -485,6 +495,59 @@
         </v-col>
       </v-row>
     </div>
+    <div class="column is-full">
+      <v-parallax
+        src="https://media.giphy.com/media/vy0dT6fL4LYhoY1856/giphy-downsized-large.gif"
+      >
+        <div class="hero is-fullheight ma-2">
+          <div
+            :class="
+              'hero-title white--text ' +
+              (ismobile ? 'text-h5' : 'text-h3') +
+              ' text-center font-weight-black'
+            "
+          >
+            Contact Me
+          </div>
+          <div class="hero-body">
+            <div class="container">
+              <div class="columns is-multiline is-centered is-vcentered">
+                <div class="column is-9">
+                  <div
+                    class="columns is-multiline is-centered is-vcentered back-blur-hard"
+                  >
+                    <div class="column is-full">
+                      <v-text-field
+                        prepend-icon="mdi-webhook"
+                        dense
+                        :persistent-hint="true"
+                        hint="Latest Version will be Served"
+                        label="Version"
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="column is-full">
+                      <v-textarea
+                        class="is-maximum"
+                        no-resize
+                        width="100%"
+                        height="100%"
+                        :full-width="true"
+                        :persistent-hint="true"
+                        label="Your Template Goes Here"
+                        :filled="true"
+                        :outlined="true"
+                      ></v-textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </v-parallax>
+    </div>
   </div>
 </template>
 
@@ -525,6 +588,7 @@ export default {
         stat: '',
         projtitle: '',
         randEmoji: '',
+        contactTitle: '',
       },
       aboutData: {
         image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
@@ -730,6 +794,7 @@ export default {
         this.wordMaps.blog.initial,
         'blog',
       );
+
       this.getProjects();
       this.lifeTimeCounter('#lifetime');
     },
@@ -782,6 +847,18 @@ export default {
             lettersArray.indexOf('s'),
           ],
           initial: [39, 41, 45, 43, 42, 44, 46, 38],
+        },
+        contactTitle: {
+          map: [
+            lettersArray.indexOf('g'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('l'),
+            lettersArray.indexOf('l'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('r'),
+            lettersArray.indexOf('y'),
+          ],
+          initial: [42, 46, 40, 1, 32, 45, 14],
         },
       };
     },
