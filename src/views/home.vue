@@ -496,33 +496,38 @@
       </v-row>
     </div>
     <div class="column is-full">
+      <div :class="(ismobile ? 'text-h6' : 'text-h4')+' font-weight-bold ma-2 text-center'">
+        Submit Your Feedback
+      </div>
       <v-parallax
         src="https://media.giphy.com/media/vy0dT6fL4LYhoY1856/giphy-downsized-large.gif"
       >
-        <div class="hero is-fullheight ma-2">
-          <div
-            :class="
-              'hero-title white--text ' +
-              (ismobile ? 'text-h5' : 'text-h3') +
-              ' text-center font-weight-black'
-            "
-          >
-            Contact Me
-          </div>
-          <div class="hero-body">
-            <div class="container">
-              <div class="columns is-multiline is-centered is-vcentered">
-                <div class="column is-9">
+        <div class="hero is-large">
+          <div :class="'hero-body '+ (ismobile ? 'ma-1 pa-1' : '')">
+            <div class="content">
+              <div :class="'columns is-multiline is-centered is-vcentered '+(ismobile ? 'ma-1 pa-1' : 'ma-4 pa-4')">
+                <div :class="'column '+ (ismobile ? 'is-12' : 'is-9')">
                   <div
                     class="columns is-multiline is-centered is-vcentered back-blur-hard"
                   >
                     <div class="column is-full">
                       <v-text-field
-                        prepend-icon="mdi-webhook"
+                        prepend-icon="mdi-form-textbox"
                         dense
                         :persistent-hint="true"
-                        hint="Latest Version will be Served"
-                        label="Version"
+                        hint="Your Name"
+                        label="Enter Your Name"
+                        hide-details="auto"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="column is-full">
+                      <v-text-field
+                        prepend-icon="mdi-email"
+                        dense
+                        :persistent-hint="true"
+                        hint="Your Email"
+                        label="Enter Your Email ID"
                         hide-details="auto"
                         outlined
                       ></v-text-field>
@@ -530,17 +535,34 @@
                     <div class="column is-full">
                       <v-textarea
                         class="is-maximum"
+                        prepend-icon="mdi-comment-quote"
                         no-resize
                         width="100%"
                         height="100%"
                         :full-width="true"
                         :persistent-hint="true"
-                        label="Your Template Goes Here"
+                        label="Your Feedback bruh ?"
                         :filled="true"
                         :outlined="true"
                       ></v-textarea>
                     </div>
                   </div>
+                </div>
+                <div class="column is-9 mt-0 pt-1 mb-3">
+                  <v-row align="center">
+                    <v-col cols="6" align="right">
+                      <v-btn color="green">
+                        <v-icon>mdi-cards-heart</v-icon>
+                        Submit
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" align="left">
+                      <v-btn color="grey">
+                        <v-icon>mdi-heart-broken</v-icon>
+                        Cancel
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </div>
               </div>
             </div>
