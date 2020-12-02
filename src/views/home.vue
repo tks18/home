@@ -496,8 +496,13 @@
       </v-row>
     </div>
     <div class="column is-full">
-      <div :class="(ismobile ? 'text-h6' : 'text-h4')+' font-weight-bold ma-2 text-center'">
-        Submit Your Feedback
+      <div
+        id="feedbacktitile"
+        :class="
+          'text-center text-capitalize '+ (ismobile ? 'text-h6' : 'text-h4') +' font-weight-bold my-2' 
+        "
+      >
+        {{ animatedArray.feedBack }}
       </div>
       <v-parallax
         src="https://media.giphy.com/media/vy0dT6fL4LYhoY1856/giphy-downsized-large.gif"
@@ -551,13 +556,13 @@
                 <div class="column is-9 mt-0 pt-1 mb-3">
                   <v-row align="center">
                     <v-col cols="6" align="right">
-                      <v-btn color="green">
+                      <v-btn color="primary">
                         <v-icon>mdi-cards-heart</v-icon>
                         Submit
                       </v-btn>
                     </v-col>
                     <v-col cols="6" align="left">
-                      <v-btn color="grey">
+                      <v-btn color="error">
                         <v-icon>mdi-heart-broken</v-icon>
                         Cancel
                       </v-btn>
@@ -611,6 +616,7 @@ export default {
         projtitle: '',
         randEmoji: '',
         contactTitle: '',
+        feedBack: '',
       },
       aboutData: {
         image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
@@ -816,7 +822,13 @@ export default {
         this.wordMaps.blog.initial,
         'blog',
       );
-
+      this.createObserver(
+        '#feedbacktitile',
+        'transitWord',
+        this.wordMaps.feedBackTitle.map,
+        this.wordMaps.feedBackTitle.initial,
+        'feedBack',
+      );
       this.getProjects();
       this.lifeTimeCounter('#lifetime');
     },
@@ -882,6 +894,31 @@ export default {
           ],
           initial: [42, 46, 40, 1, 32, 45, 14],
         },
+        feedBackTitle: {
+          map: [
+            lettersArray.indexOf('s'),
+            lettersArray.indexOf('u'),
+            lettersArray.indexOf('b'),
+            lettersArray.indexOf('m'),
+            lettersArray.indexOf('i'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('y'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('u'),
+            lettersArray.indexOf('r'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('f'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('d'),
+            lettersArray.indexOf('b'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('c'),
+            lettersArray.indexOf('k'),
+          ],
+          initial: [42, 46, 40, 1, 32, 45, 14, 42, 46, 40, 1, 32, 45, 14, 42, 46, 40, 1, 32, 45],
+        }
       };
     },
   },
