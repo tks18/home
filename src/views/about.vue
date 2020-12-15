@@ -1,8 +1,8 @@
 <template>
   <div class="columns is-multiline mb-2">
     <div class="column is-full">
-      <v-card class="cyberpunk-bg" elevation="13" outlined shaped>
-        <div class="hero is-medium">
+      <v-card :style="{background: 'center', backgroundImage: bgBack, backgroundSize: 'cover', minWidth: '100%'}" elevation="13">
+        <div class="hero is-medium non-touch">
           <div class="hero-body">
             <v-row>
               <v-col cols="5" align="left" justify="center">
@@ -26,14 +26,23 @@
             </v-row>
           </div>
           <div class="hero-footer">
-            <div class="container text-center non-touch">
-              <div class="text-overline font-weight-bold">
-                It Looks Like You want to Know About Me !
-              </div>
-              <v-btn text @click="" class="text-overline font-weight-bold">
-                <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon> Swipe Down <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon>
-              </v-btn>
-            </div>
+            <v-row align="end" class="px-2">
+              <v-col cols="9" align="right" justify="end">
+                <div class="container non-touch">
+                  <div class="text-overline white--text font-weight-bold">
+                    It Looks Like You want to Know About Me !
+                  </div>
+                  <v-btn text outlined dark @click="" class="text-overline font-weight-bold">
+                    <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon> Swipe Down / Click Here <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon>
+                  </v-btn>
+                </div>
+              </v-col>
+              <v-col cols="3" align="right" justify="end">
+                <div class="back-blur fit-text px-2 text-overline font-weight-bold">
+                  <span class="white--text"> We are </span><span :class="($vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light')+' pa-2'"> {{animatedArray.hashTag}} </span> <span class="white--text"> {{' Squad'}} </span>
+                </div>
+              </v-col>
+            </v-row>
           </div>
         </div>
       </v-card>
@@ -44,9 +53,56 @@
 </template>
 
 <script>
+import { lettersArray, safeEmojis } from '../templates/emoji-array';
 export default {
   data: function () {
-    return {};
+    return {
+      bgBackImgs: [
+        'https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif',
+        'https://i.ibb.co/kqzY6r6/giphy.gif',
+        'https://i.ibb.co/7Gryd0M/giphy.gif',
+        'https://i.ibb.co/Bcksm5z/giphy.gif',
+        'https://i.ibb.co/qrXxfLz/giphy.gif',
+        'https://i.ibb.co/YTsx3FQ/giphy.gif',
+        'https://i.ibb.co/HKhJr5t/giphy.gif'
+      ],
+      bgkey: 0,
+      bgBack: "",
+      keyFrames: [3500,1510,1200,900,1050,3130,2800],
+      animatedArray: {
+        hashTag: '',
+      },
+    };
+  },
+  methods: {
+    transitWord(wordMap, word, stringText) {
+      var tl = this.$gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 2,
+        onUpdate: () => {
+          this.update(word, stringText);
+        },
+      });
+      wordMap.forEach((range, index) => {
+        tl.to(
+          word,
+          {
+            [index]: lettersArray.length * 2 + range,
+            ease: 'power4',
+            duration: index / 4 + 1,
+          },
+          0,
+        );
+      });
+    },
+    update(word, stringText) {
+      var html = '';
+      word.forEach((map) => {
+        html += lettersArray[Math.round(map) % lettersArray.length];
+      });
+      this.$set(this.animatedArray, stringText, html);
+    },
   },
   computed: {
     ismobile() {
@@ -57,6 +113,55 @@ export default {
         return true;
       }
     },
+    wordMaps() {
+      return {
+        hash: {
+          initial: [
+            lettersArray.indexOf('#'),
+            lettersArray.indexOf('k'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('n'),
+            lettersArray.indexOf('u'),
+            lettersArray.indexOf('r'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('v'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('s'),
+          ],
+          map: [
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('#'),
+            lettersArray.indexOf('j'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('h'),
+            lettersArray.indexOf('n'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('w'),
+            lettersArray.indexOf('i'),
+            lettersArray.indexOf('c'),
+            lettersArray.indexOf('k'),
+            lettersArray.indexOf(' '),
+          ]
+        }
+      }
+    }
+  },
+  beforeMount() {
+    this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
+    setInterval(() => {
+      this.bgkey++;
+      if(this.bgkey > this.bgBackImgs.length - 1){
+        this.bgkey = 0;
+        this.bgBack = "url('"+this.bgBackImgs[0]+"')"
+      } else {
+        this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
+      }
+    }, this.keyFrames[this.bgkey + 1])
+  },
+  mounted() {
+    this.transitWord(this.wordMaps.hash.map, this.wordMaps.hash.initial, 'hashTag');
   }
 };
 </script>

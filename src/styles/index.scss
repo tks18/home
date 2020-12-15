@@ -114,17 +114,6 @@
   transition: margin-bottom 0.5s ease-in-out;
 }
 
-.cyberpunk-bg {
-  background: center;
-  background-image: url('https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif');
-  background-size:cover;
-  min-width:100%;
-}
-
-.inherit-height {
-  height: inherit;
-}
-
 .fab-button {
   margin-bottom: 40px;
   z-index: 9999;
@@ -183,6 +172,24 @@
     width: 100%;
     background: #121212;
   }
+}
+
+.cyberpunk-bg {
+  background: center;
+  background-image: url('https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif');
+  background-size:cover;
+  min-width:100%;
+}
+
+.cyberpunk-bg-static {
+  background: center;
+  background-image: url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif');
+  background-size:cover;
+  min-width:100%;
+}
+
+.inherit-height {
+  height: inherit;
 }
 
 @-webkit-keyframes fluid {
