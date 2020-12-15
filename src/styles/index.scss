@@ -114,6 +114,17 @@
   transition: margin-bottom 0.5s ease-in-out;
 }
 
+.cyberpunk-bg {
+  background: center;
+  background-image: url('https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif');
+  background-size:cover;
+  min-width:100%;
+}
+
+.inherit-height {
+  height: inherit;
+}
+
 .fab-button {
   margin-bottom: 40px;
   z-index: 9999;
@@ -145,6 +156,10 @@
 
 .center-align-div {
   margin: auto;
+}
+
+.border-max {
+  border-radius: 100%;
 }
 
 .fit-text {
