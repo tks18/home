@@ -5,17 +5,17 @@
         <div class="hero is-medium non-touch">
           <div class="hero-body">
             <v-row>
-              <v-col cols="5" align="left" justify="center">
+              <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
                 <div class="back-blur white--text pa-2 fit-text">
-                  <div class="text-h2 font-weight-black">
+                  <div :class="(ismobile ? 'text-h4 text-center' : 'text-h2') + ' font-weight-black'">
                     Come face to face Huh?
                   </div>
                 </div>
               </v-col>
               <v-spacer></v-spacer>
-              <v-col cols="5" align="right" justify="center">
+              <v-col :cols="ismobile ? 12 : 5" :align="ismobile ? 'center' : 'right'" justify="center">
                 <div class="back-blur white--text pa-2 fit-text">
-                  <div class="text-overline font-weight-bold">
+                  <div :class="(ismobile ? 'text-center' : '') + 'text-overline font-weight-bold'">
                     "Before picking fights, learn to assess your opponents."
                   </div>
                   <div class="text-body-2 text-right font-weight-light">
@@ -27,7 +27,7 @@
           </div>
           <div class="hero-footer">
             <v-row align="end" class="px-2">
-              <v-col cols="9" align="right" justify="end">
+              <v-col :cols="ismobile ? 12 : 9" :align="ismobile ? 'center' : 'right'" justify="end">
                 <div class="container non-touch">
                   <div class="text-overline white--text font-weight-bold">
                     It Looks Like You want to Know About Me !
@@ -37,7 +37,7 @@
                   </v-btn>
                 </div>
               </v-col>
-              <v-col cols="3" align="right" justify="end">
+              <v-col :cols="ismobile ? 12 : 3" align="right" justify="end">
                 <div class="back-blur fit-text px-2 text-overline font-weight-bold">
                   <span class="white--text"> We are </span><span :class="($vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light')+' pa-2'"> {{animatedArray.hashTag}} </span> <span class="white--text"> {{' Squad'}} </span>
                 </div>
