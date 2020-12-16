@@ -48,6 +48,7 @@
       </v-card>
     </div>
     <div class="column is-full">
+      
     </div>
   </div>
 </template>
@@ -68,7 +69,7 @@ export default {
       ],
       bgkey: 0,
       bgBack: "",
-      keyFrames: [3500,1510,1200,900,1050,3130,2800],
+      keyFrames: [5000,1510,1120,800,1000,3130,2800],
       animatedArray: {
         hashTag: '',
       },
