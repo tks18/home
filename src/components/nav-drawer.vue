@@ -72,16 +72,16 @@ export default {
           link: '/',
         },
         {
-          icon: 'mdi-blogger',
-          title: 'Blog',
-          subtitle: 'My Personal Blog',
-          link: '/blog',
-        },
-        {
           icon: 'mdi-information',
           title: 'About',
           subtitle: 'About Me',
           link: '/about',
+        },
+        {
+          icon: 'mdi-blogger',
+          title: 'Blog',
+          subtitle: 'My Personal Blog',
+          link: '/blog',
         },
         {
           icon: 'mdi-notebook-multiple',

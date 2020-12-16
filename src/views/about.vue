@@ -1,5 +1,5 @@
 <template>
-  <div class="columns is-multiline mb-2">
+  <div class="columns is-multiline">
     <div class="column is-full">
       <v-card :style="{background: 'center', backgroundImage: bgBack, backgroundSize: 'cover', minWidth: '100%'}" elevation="13">
         <div class="hero is-medium non-touch">
@@ -46,8 +46,31 @@
           </div>
         </div>
       </v-card>
+      <v-col class="px-0 mx-1 py-0 my-1">
+        <v-tooltip bottom transition="slide-y-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon color="primary" v-on="on" v-bind="attrs" @click="playPauseBg"><v-icon>{{ bgPlay ? 'mdi-pause' : 'mdi-play' }}</v-icon></v-btn>
+          </template>
+          <span>Click here to Play / Pause the BG</span>
+        </v-tooltip>
+      </v-col>
     </div>
     <div class="column is-full">
+      <v-container>
+        <v-row>
+          <v-col cols="12" align="left" justify="start">
+            <div
+              @click="$router.push('/blog')"
+              :class="
+                'clip-text-back text-h5 non-touch ml-6 text-capitalize' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              Pastime and Expertise <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>
@@ -67,8 +90,9 @@ export default {
         'https://i.ibb.co/HKhJr5t/giphy.gif'
       ],
       bgkey: 0,
+      bgPlay: true,
       bgBack: "",
-      keyFrames: [3500,1510,1200,900,1050,3130,2800],
+      keyFrames: [5000,1510,1120,800,1000,3130,2800],
       animatedArray: {
         hashTag: '',
       },
@@ -103,6 +127,30 @@ export default {
       });
       this.$set(this.animatedArray, stringText, html);
     },
+    playBg() {
+      if(this.bgPlay){
+        this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
+        var interVal = setInterval(() => {
+          if(this.bgPlay){
+            this.bgkey++;
+            if(this.bgkey > this.bgBackImgs.length - 1){
+              this.bgkey = 0;
+              this.bgBack = "url('"+this.bgBackImgs[0]+"')"
+            } else {
+              this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
+            }
+          } else {
+            clearInterval(interVal);
+          }
+        }, this.keyFrames[this.bgkey + 1])
+      } else {
+        this.bgBack = "url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif')"
+      }
+    },
+    playPauseBg() {
+      this.bgPlay = !this.bgPlay;
+      this.playBg();
+    }
   },
   computed: {
     ismobile() {
@@ -149,16 +197,7 @@ export default {
     }
   },
   beforeMount() {
-    this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
-    setInterval(() => {
-      this.bgkey++;
-      if(this.bgkey > this.bgBackImgs.length - 1){
-        this.bgkey = 0;
-        this.bgBack = "url('"+this.bgBackImgs[0]+"')"
-      } else {
-        this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
-      }
-    }, this.keyFrames[this.bgkey + 1])
+    this.playBg();
   },
   mounted() {
     this.transitWord(this.wordMaps.hash.map, this.wordMaps.hash.initial, 'hashTag');
