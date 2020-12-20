@@ -2,7 +2,7 @@
   <div class="columns is-multiline">
     <div class="column is-full">
       <v-card :style="{background: 'center', backgroundImage: bgBack, backgroundSize: 'cover', minWidth: '100%'}" elevation="13">
-        <div class="hero is-medium non-touch">
+        <div class="hero is-fullheight non-touch">
           <div class="hero-body">
             <v-row>
               <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
@@ -26,18 +26,30 @@
             </v-row>
           </div>
           <div class="hero-footer">
-            <v-row align="end" class="px-2">
-              <v-col :cols="ismobile ? 12 : 9" :align="ismobile ? 'center' : 'right'" justify="end">
-                <div class="container non-touch">
-                  <div class="text-overline white--text font-weight-bold">
-                    It Looks Like You want to Know About Me !
-                  </div>
-                  <v-btn text outlined dark @click="" class="text-overline font-weight-bold">
-                    <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon> Swipe Down / Click Here <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon>
-                  </v-btn>
-                </div>
+            <v-row align="end" class="py-1 px-1">
+              <v-col :cols="ismobile ? 12 : 9"  justify="end" class="py-0">
+                <v-row align="end" class="py-0">
+                  <v-col cols="2" align="left" justify="end" class="py-1">
+                    <v-tooltip bottom transition="slide-y-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn fab small color="primary" v-on="on" v-bind="attrs" @click="playPauseBg"><v-icon>{{ bgPlay ? 'mdi-pause' : 'mdi-play' }}</v-icon></v-btn>
+                      </template>
+                      <span>Click here to Play / Pause the BG</span>
+                    </v-tooltip>
+                  </v-col>
+                  <v-col cols="10" :align="ismobile ? 'center' : 'right'" justify="end" class="py-0">
+                    <div class="container non-touch py-0">
+                      <div class="text-overline white--text font-weight-bold">
+                        It Looks Like You want to Know About Me !
+                      </div>
+                      <v-btn text outlined dark @click="$vuetify.goTo('#scrolltarget')" class="text-overline font-weight-bold">
+                        <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon> Swipe Down / Click Here <v-icon>mdi-arrow-down</v-icon><v-icon>mdi-arrow-down</v-icon>
+                      </v-btn>
+                    </div>
+                  </v-col>
+                </v-row>
               </v-col>
-              <v-col :cols="ismobile ? 12 : 3" align="right" justify="end">
+              <v-col :cols="ismobile ? 12 : 3" align="right" justify="end" class="py-0">
                 <div class="back-blur fit-text px-2 text-overline font-weight-bold">
                   <span class="white--text"> We are </span><span :class="($vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light')+' pa-2'"> {{animatedArray.hashTag}} </span> <span class="white--text"> {{' Squad'}} </span>
                 </div>
@@ -46,28 +58,91 @@
           </div>
         </div>
       </v-card>
-      <v-col class="px-0 mx-1 py-0 my-1">
-        <v-tooltip bottom transition="slide-y-transition">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon color="primary" v-on="on" v-bind="attrs" @click="playPauseBg"><v-icon>{{ bgPlay ? 'mdi-pause' : 'mdi-play' }}</v-icon></v-btn>
-          </template>
-          <span>Click here to Play / Pause the BG</span>
-        </v-tooltip>
-      </v-col>
     </div>
-    <div class="column is-full">
+    <div class="column is-full py-2">
       <v-container>
         <v-row>
           <v-col cols="12" align="left" justify="start">
             <div
-              @click="$router.push('/blog')"
+              id="scrolltarget"
               :class="
-                'clip-text-back text-h5 non-touch ml-6 text-capitalize' +
+                'clip-text-back text-h5 font-weight-bold non-touch ml-6 text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
-              Pastime and Expertise <v-icon>mdi-arrow-right-circle</v-icon>
+              Profile Card <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
+          </v-col>
+          <v-col cols="12">
+            <v-row align="center">
+              <v-col :cols="ismobile ? 12 : 4">
+                <v-card height="450" outlined elevation="6" color="primary">
+                  <v-card-title class="text-h5 text-center">
+                    About Me
+                  </v-card-title>
+                  <v-card-subtitle>
+                    (If You are Bad, I am Your Dad <span class="font-weight-bold">Hehe Lol xD 😉</span>)
+                  </v-card-subtitle>
+                  <v-divider inset class="opaque mx-2 my-0"></v-divider>
+                </v-card>
+              </v-col>
+              <v-col :cols="ismobile ? 12 : 8">
+                <v-row>
+                  <v-scroll-y-transition mode="out-in">
+                    <v-col v-bind:key="cardbgs.leftKey" :cols="ismobile ? 12 : 4">
+                      <v-card height="150" outlined elevation="6">
+                        <v-img cover height="150" :src="cardbgs.lefttop" ></v-img>
+                      </v-card>
+                    </v-col>
+                  </v-scroll-y-transition>
+                  <v-col :cols="ismobile ? 12 : 8">
+                    <v-card height="150" outlined elevation="6" color="error" @click="">
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="100" outlined elevation="6">
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col :cols="ismobile ? 12: 8">
+                    <v-card height="150" outlined elevation="6">
+                    </v-card>
+                  </v-col>
+                  <v-scroll-y-transition mode="out-in">
+                    <v-col v-bind:key="cardbgs.rightKey" :cols="ismobile ? 12 : 4">
+                      <v-card height="150" outlined elevation="6">
+                        <v-img cover height="150" :src="cardbgs.rightbottom"></v-img>
+                      </v-card>
+                    </v-col>
+                  </v-scroll-y-transition>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col cols="12">
+            <v-row>
+              <v-col cols="8">
+                <v-card height="450" outlined elevation="6" color="error" @click="">
+                </v-card>
+              </v-col>
+              <v-col cols="4">
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6">
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6" >
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-container>
@@ -80,19 +155,27 @@ import { lettersArray, safeEmojis } from '../templates/emoji-array';
 export default {
   data: function () {
     return {
-      bgBackImgs: [
-        'https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif',
-        'https://i.ibb.co/kqzY6r6/giphy.gif',
-        'https://i.ibb.co/7Gryd0M/giphy.gif',
-        'https://i.ibb.co/Bcksm5z/giphy.gif',
-        'https://i.ibb.co/qrXxfLz/giphy.gif',
-        'https://i.ibb.co/YTsx3FQ/giphy.gif',
-        'https://i.ibb.co/HKhJr5t/giphy.gif'
-      ],
-      bgkey: 0,
+      bg: {
+        static: "url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif')",
+        anim: "url('https://i.ibb.co/1zZ8KZy/ezgif-6-e3c7e0fc8f79.gif')"
+      },
       bgPlay: true,
+      bgs: [
+        'https://i.ibb.co/sv0Y5mn/IMG-20200130-134312.jpg',
+        'https://i.ibb.co/TgcjrY1/20191229-170937.jpg',
+        'https://i.ibb.co/9gbWynG/IMG-20191218-222419-347.jpg',
+        'https://i.ibb.co/zSVyqnP/00100sr-PORTRAIT-00100-BURST20201011083336744-COVER-3.jpg',
+        'https://i.ibb.co/DKhHqwY/IMG-20200118-172203-1.jpg',
+        'https://i.ibb.co/KGjkwzn/IMG-20191028-170205.jpg'
+      ],
+      cardbgs: {
+        lefttop: '',
+        leftKey: 0,
+        rightbottom: '',
+        rightKey: 0
+      },
       bgBack: "",
-      keyFrames: [5000,1510,1120,800,1000,3130,2800],
+      summa: false,
       animatedArray: {
         hashTag: '',
       },
@@ -129,28 +212,37 @@ export default {
     },
     playBg() {
       if(this.bgPlay){
-        this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
-        var interVal = setInterval(() => {
-          if(this.bgPlay){
-            this.bgkey++;
-            if(this.bgkey > this.bgBackImgs.length - 1){
-              this.bgkey = 0;
-              this.bgBack = "url('"+this.bgBackImgs[0]+"')"
-            } else {
-              this.bgBack = "url('"+this.bgBackImgs[this.bgkey]+"')"
-            }
-          } else {
-            clearInterval(interVal);
-          }
-        }, this.keyFrames[this.bgkey + 1])
+        this.bgBack = this.bg.anim
       } else {
-        this.bgBack = "url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif')"
+        this.bgBack = this.bg.static
       }
     },
     playPauseBg() {
       this.bgPlay = !this.bgPlay;
-      this.playBg();
-    }
+      this.playBg()
+    },
+    setCardBgs() {
+      let firstInt = this.$_.random(0, this.bgs.length - 1)
+      let secondInt = this.$_.random(0, this.bgs.length - 1)
+      while (secondInt == firstInt){
+        secondInt = this.$_.random(0, this.bgs.length - 1)
+      }
+      this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt])
+      this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1)
+      this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt])
+      this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1)
+      setInterval(() => {
+        let firstInt = this.$_.random(0, this.bgs.length - 1)
+        let secondInt = this.$_.random(0, this.bgs.length - 1)
+        while (secondInt == firstInt){
+          secondInt = this.$_.random(0, this.bgs.length - 1)
+        }
+        this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt])
+        this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1)
+        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt])
+        this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1)
+      }, Math.floor(Math.random() + 5) * 1000)
+    },
   },
   computed: {
     ismobile() {
@@ -201,6 +293,7 @@ export default {
   },
   mounted() {
     this.transitWord(this.wordMaps.hash.map, this.wordMaps.hash.initial, 'hashTag');
+    this.setCardBgs();
   }
 };
 </script>
