@@ -1,5 +1,5 @@
 <template>
-  <div class="columns is-multiline">
+  <div class="columns is-multiline non-touch">
     <div class="column is-full">
       <v-card :style="{background: 'center', backgroundImage: bgBack, backgroundSize: 'cover', minWidth: '100%'}" elevation="13">
         <div class="hero is-fullheight non-touch">
@@ -76,14 +76,42 @@
           <v-col cols="12">
             <v-row align="center">
               <v-col :cols="ismobile ? 12 : 4">
-                <v-card height="450" outlined elevation="6" color="primary">
+                <v-card height="450" outlined elevation="6">
                   <v-card-title class="text-h5 text-center">
                     About Me
                   </v-card-title>
                   <v-card-subtitle>
                     (If You are Bad, I am Your Dad <span class="font-weight-bold">Hehe Lol xD 😉</span>)
                   </v-card-subtitle>
-                  <v-divider inset class="opaque mx-2 my-0"></v-divider>
+                  <v-divider class="opaque mx-2 my-0"></v-divider>
+                  <v-card-text>
+                    <v-row class="my-0">
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Name:  </span><span class="text-body-2">{{ authorData.name }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Nickname:  </span><span class="text-body-2">{{ authorData.nickName }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Status:  </span><span class="text-body-2">{{ authorData.status }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Age:  </span><span class="text-body-2">{{ authorData.age }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Nationality:  </span><span class="text-body-2">{{ authorData.nationality }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Professional Education:  </span><span class="text-body-2">{{ authorData.profComp }}</span>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Technicalities:  </span><v-chip-group><v-chip small color="primary" v-for="(skills, index) in authorData.techSkills" class="my-1 mx-1" v-bind:key="index">{{skills}}</v-chip></v-chip-group>
+                      </v-col>
+                      <v-col class="my-0 py-0" cols="12" align="left">
+                        <span class="text-body-1 font-weight-bold">Areas of Interest:  </span><v-chip-group><v-chip small color="primary" v-for="(interests, index) in authorData.aOfInt" class="my-1 mx-1" v-bind:key="index">{{interests}}</v-chip></v-chip-group>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
                 </v-card>
               </v-col>
               <v-col :cols="ismobile ? 12 : 8">
@@ -152,6 +180,7 @@
 
 <script>
 import { lettersArray, safeEmojis } from '../templates/emoji-array';
+import { countUpFromTime } from '../plugins/helpers';
 export default {
   data: function () {
     return {
@@ -174,8 +203,28 @@ export default {
         rightbottom: '',
         rightKey: 0
       },
+      authorData: {
+        name: 'Sudharshan TK',
+        nickName: 'Shan.tk',
+        status: 'Currently Automating Workflows',
+        age: countUpFromTime('May 16, 2000 16:21:00').years,
+        nationality: 'A Proud Indian',
+        profComp: 'Chartered Accountant Student',
+        techSkills: [
+          'Web Development',
+          'Python',
+          'Backend Development',
+          'MS Office Tools'
+        ],
+        aOfInt: [
+          'AI',
+          'ReactJs',
+          'VueJs',
+          'Gsap',
+          'NodeJs'
+        ]
+      },
       bgBack: "",
-      summa: false,
       animatedArray: {
         hashTag: '',
       },
