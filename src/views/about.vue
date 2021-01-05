@@ -32,7 +32,7 @@
                   <v-col cols="2" align="left" justify="end" class="py-1">
                     <v-tooltip bottom transition="slide-y-transition">
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn fab small color="primary" v-on="on" v-bind="attrs" @click="playPauseBg"><v-icon>{{ bgPlay ? 'mdi-pause' : 'mdi-play' }}</v-icon></v-btn>
+                        <v-btn fab small color="primary" v-on="on" v-bind="attrs" @click="playPauseBg"><v-icon>mdi-play</v-icon></v-btn>
                       </template>
                       <span>Click here to Play / Pause the BG</span>
                     </v-tooltip>
@@ -105,10 +105,10 @@
                         <span class="text-body-1 font-weight-bold">Professional Education:  </span><span class="text-body-2">{{ authorData.profComp }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Technicalities:  </span><v-chip-group><v-chip small color="primary" v-for="(skills, index) in authorData.techSkills" class="my-1 mx-1" v-bind:key="index">{{skills}}</v-chip></v-chip-group>
+                        <span class="text-body-1 font-weight-bold">Technicalities:  </span><v-chip-group column><v-chip small color="primary" v-for="(skills, index) in authorData.techSkills" class="my-1 mx-1" v-bind:key="index">{{skills}}</v-chip></v-chip-group>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Areas of Interest:  </span><v-chip-group><v-chip small color="primary" v-for="(interests, index) in authorData.aOfInt" class="my-1 mx-1" v-bind:key="index">{{interests}}</v-chip></v-chip-group>
+                        <span class="text-body-1 font-weight-bold">Areas of Interest:  </span><v-chip-group columnz><v-chip small color="primary" v-for="(interests, index) in authorData.aOfInt" class="my-1 mx-1" v-bind:key="index">{{interests}}</v-chip></v-chip-group>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -124,7 +124,20 @@
                     </v-col>
                   </v-scroll-y-transition>
                   <v-col :cols="ismobile ? 12 : 8">
-                    <v-card height="150" outlined elevation="6" color="error" @click="">
+                    <v-card height="150" outlined elevation="6" color="purple darken-1" @click="">
+                      <v-row justify="space-between" class="mx-0">
+                        <v-col cols="6" class="mx-0 my-0 px-0 py-0">
+                          <v-card-title>Work Profile</v-card-title>
+                          <v-card-text class="font-weight-light">
+                            Working in <span class="font-weight-bold">Ford Rhodes Parks</span><br>
+                            as <span class="font-weight-bold">Audit Assistant</span>
+                          </v-card-text>
+                        </v-col>
+                        <v-divider vertical class="opaque"></v-divider>
+                        <v-col align="right" justify="end" cols="5" class="mx-0 my-0 py-0 px-0">
+                          <v-img contain height="150" src="https://i.ibb.co/Ltf1SNX/fabian-irsara-67l-Quj-B14w-unsplash.jpg"></v-img>
+                        </v-col>
+                      </v-row>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -186,9 +199,8 @@ export default {
     return {
       bg: {
         static: "url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif')",
-        anim: "url('https://i.ibb.co/1zZ8KZy/ezgif-6-e3c7e0fc8f79.gif')"
+        anim: "url('https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif')"
       },
-      bgPlay: true,
       bgs: [
         'https://i.ibb.co/sv0Y5mn/IMG-20200130-134312.jpg',
         'https://i.ibb.co/TgcjrY1/20191229-170937.jpg',
@@ -197,6 +209,7 @@ export default {
         'https://i.ibb.co/DKhHqwY/IMG-20200118-172203-1.jpg',
         'https://i.ibb.co/KGjkwzn/IMG-20191028-170205.jpg'
       ],
+      bgPlay: true,
       cardbgs: {
         lefttop: '',
         leftKey: 0,
@@ -260,11 +273,10 @@ export default {
       this.$set(this.animatedArray, stringText, html);
     },
     playBg() {
-      if(this.bgPlay){
-        this.bgBack = this.bg.anim
-      } else {
+      this.bgBack = this.bg.anim
+      setTimeout(() => {
         this.bgBack = this.bg.static
-      }
+      }, 3342)
     },
     playPauseBg() {
       this.bgPlay = !this.bgPlay;
