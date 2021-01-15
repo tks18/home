@@ -51,7 +51,13 @@
             <v-row align="end" class="py-1 px-1">
               <v-col :cols="ismobile ? 12 : 9" justify="end" class="py-0">
                 <v-row align="end" class="py-0">
-                  <v-col cols="2" align="left" justify="end" class="py-1">
+                  <v-col
+                    v-if="!ismobile"
+                    cols="2"
+                    align="left"
+                    justify="end"
+                    class="py-1"
+                  >
                     <v-tooltip bottom transition="slide-y-transition">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn
@@ -69,6 +75,7 @@
                   </v-col>
                   <v-col
                     cols="10"
+                    v-if="!ismobile"
                     :align="ismobile ? 'center' : 'right'"
                     justify="end"
                     class="py-0"
@@ -95,7 +102,7 @@
               </v-col>
               <v-col
                 :cols="ismobile ? 12 : 3"
-                align="right"
+                :align="ismobile ? 'center' : 'right'"
                 justify="end"
                 class="py-0"
               >
