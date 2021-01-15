@@ -27,6 +27,7 @@ export default {
     fabComponent,
     sysBar,
   },
+  methods: {},
 };
 </script>
 <style lang="scss">

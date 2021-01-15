@@ -1,0 +1,63 @@
+.fab-button-bottom {
+  margin-bottom: 120px;
+  z-index: 9999;
+  transition: margin-bottom 0.5s ease-in-out;
+}
+
+.fab-button {
+  margin-bottom: 40px;
+  z-index: 9999;
+  transition: margin-bottom 0.5s ease-in-out;
+}
+
+.scrollable-x {
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  &.scrollable-x-child {
+    display: inline-block;
+  }
+}
+
+.underhover-light {
+  width: fit-content;
+  text-decoration: none;
+
+  &:after {
+    content: ' ';
+    display: block;
+    height: 2.3px;
+    width: 0;
+    background: transparent;
+    transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  }
+
+  &:hover:after {
+    width: 100%;
+    background: white;
+  }
+}
+
+.underhover-dark {
+  width: fit-content;
+  text-decoration: none;
+
+  &:after {
+    content: ' ';
+    display: block;
+    height: 2.3px;
+    width: 0;
+    background: transparent;
+    transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  }
+
+  &:hover:after {
+    width: 100%;
+    background: #121212;
+  }
+}
