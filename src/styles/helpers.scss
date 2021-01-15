@@ -1,0 +1,53 @@
+.non-touch {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.point-cursor {
+  cursor: pointer;
+}
+
+.back-blur {
+  backdrop-filter: blur(3px) grayscale(1);
+  height: inherit;
+}
+
+.back-blur-hard {
+  backdrop-filter: blur(10px);
+  height: inherit;
+}
+
+.width-min {
+  min-width: 40%;
+}
+
+.border-max {
+  border-radius: 50%;
+}
+
+.clip-text-back {
+  background-clip: text;
+}
+
+.center-align-div {
+  margin: auto;
+}
+
+.border-max {
+  border-radius: 100%;
+}
+
+.fit-text {
+  width: fit-content;
+}
+
+.opaque {
+  opacity: 0.4;
+}
+
+.inherit-height {
+  height: inherit;
+}

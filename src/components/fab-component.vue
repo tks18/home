@@ -13,7 +13,7 @@
       rounded
       fab
     >
-      <v-icon>mdi-text-account</v-icon>
+      <v-icon>mdi-tune</v-icon>
     </v-btn>
     <v-dialog v-model="fab" max-width="400">
       <v-card>

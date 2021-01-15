@@ -178,7 +178,7 @@
                   ></div>
                 </v-row>
                 <v-row align="end" justify="end" class="my-1 mx-2 px-2 py-1">
-                  <v-btn color="primary">
+                  <v-btn @click="$router.push('about')" color="primary">
                     <v-icon>mdi-text-box-multiple</v-icon>{{ ' Read More' }}
                   </v-btn>
                 </v-row>
@@ -332,7 +332,7 @@
                         <div class="caption grey--text">
                           Licensed under
                           <span
-                            @click="windowClick(project.license.url)"
+                            @click="gotoUrl(project.license.url)"
                             class="primary--text point-cursor"
                           >
                             {{ project.license.name }}
@@ -375,7 +375,7 @@
                           <v-chip
                             class="text-right ma-1"
                             color="primary"
-                            @click="windowClick(project.html_url)"
+                            @click="gotoUrl(project.html_url)"
                             outlined
                             small
                             pill
@@ -499,7 +499,9 @@
       <div
         id="feedbacktitile"
         :class="
-          'text-center text-capitalize '+ (ismobile ? 'text-h6' : 'text-h4') +' font-weight-bold my-2' 
+          'text-center text-capitalize ' +
+          (ismobile ? 'text-h6' : 'text-h4') +
+          ' font-weight-bold my-2'
         "
       >
         {{ animatedArray.feedBack }}
@@ -508,10 +510,15 @@
         src="https://media.giphy.com/media/vy0dT6fL4LYhoY1856/giphy-downsized-large.gif"
       >
         <div class="hero is-large">
-          <div :class="'hero-body '+ (ismobile ? 'ma-1 pa-1' : '')">
+          <div :class="'hero-body ' + (ismobile ? 'ma-1 pa-1' : '')">
             <div class="content">
-              <div :class="'columns is-multiline is-centered is-vcentered '+(ismobile ? 'ma-1 pa-1' : 'ma-4 pa-4')">
-                <div :class="'column '+ (ismobile ? 'is-12' : 'is-9')">
+              <div
+                :class="
+                  'columns is-multiline is-centered is-vcentered ' +
+                  (ismobile ? 'ma-1 pa-1' : 'ma-4 pa-4')
+                "
+              >
+                <div :class="'column ' + (ismobile ? 'is-12' : 'is-9')">
                   <div
                     class="columns is-multiline is-centered is-vcentered back-blur-hard"
                   >
@@ -624,7 +631,7 @@ export default {
     };
   },
   methods: {
-    windowClick(url) {
+    gotoUrl(url) {
       window.open(url);
       return;
     },
@@ -917,8 +924,29 @@ export default {
             lettersArray.indexOf('c'),
             lettersArray.indexOf('k'),
           ],
-          initial: [42, 46, 40, 1, 32, 45, 14, 42, 46, 40, 1, 32, 45, 14, 42, 46, 40, 1, 32, 45],
-        }
+          initial: [
+            42,
+            46,
+            40,
+            1,
+            32,
+            45,
+            14,
+            42,
+            46,
+            40,
+            1,
+            32,
+            45,
+            14,
+            42,
+            46,
+            40,
+            1,
+            32,
+            45,
+          ],
+        },
       };
     },
   },

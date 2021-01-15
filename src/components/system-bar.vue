@@ -1,5 +1,5 @@
 <template>
-  <v-system-bar fixed window lights-out>
+  <v-system-bar @click="$vuetify.goTo(0)" fixed window lights-out>
     <v-spacer></v-spacer>
     <v-snackbar
       v-if="!$vuetify.theme.dark"
@@ -40,6 +40,12 @@ export default {
       now: Date.now(),
       snackbar: true,
     };
+  },
+  methods: {
+    scrollTop() {
+      window.scrollTo(0, 0);
+      return;
+    },
   },
   mounted() {
     setInterval(() => {
