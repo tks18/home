@@ -1,0 +1,23 @@
+{
+  "name": "Sudharshan TK",
+  "short_name": "Shan.tk",
+  "theme_color": "#F44336",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "https://shan-tk.ga/",
+  "description": "Blog and Portfolio Website for Sudharshan TK",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
