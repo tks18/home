@@ -1,5 +1,7 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
 
@@ -12,6 +14,21 @@ module.exports = {
     requireModuleExtension: true,
   },
   configureWebpack: {
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            preset: [
+              'default',
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
+          },
+        }),
+      ],
+    },
     plugins: [
       new SitemapPlugin({
         base: baseSite,
