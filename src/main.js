@@ -11,7 +11,6 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import vuetify from './plugins/vuetify';
 import { gsap } from 'gsap';
 import '@/styles/register.scss';
-import 'swiper/swiper-bundle.css';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);

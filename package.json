@@ -14,6 +14,7 @@
     "axios": "^0.20.0",
     "bulma": "^0.9.0",
     "core-js": "^3.6.5",
+    "css-minimizer-webpack-plugin": "^1.2.0",
     "gsap": "^3.5.1",
     "lodash": "^4.17.20",
     "minify-css-string": "^1.0.0",
