@@ -589,6 +589,11 @@
 import { lettersArray, safeEmojis } from '../templates/emoji-array';
 import { scrollTo, countUpFromTime } from '../plugins/helpers';
 export default {
+  metaInfo: function () {
+    return {
+      title: 'Home',
+    };
+  },
   data: function () {
     return {
       heroData: {
