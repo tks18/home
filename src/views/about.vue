@@ -11,7 +11,7 @@
         elevation="13"
       >
         <div class="hero is-fullheight non-touch">
-          <div class="hero-body">
+          <div id="initscroll" class="hero-body">
             <v-row>
               <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
                 <div class="back-blur white--text pa-2 fit-text">
@@ -440,6 +440,11 @@
 import { lettersArray } from '../templates/emoji-array';
 import { countUpFromTime } from '../plugins/helpers';
 export default {
+  metaInfo: function() {
+    return {
+      title: 'About'
+    }
+  },
   data: function () {
     return {
       bg: {
@@ -606,6 +611,7 @@ export default {
       'hashTag',
     );
     this.setCardBgs();
+    this.$vuetify.goTo('#initscroll');
   },
 };
 </script>

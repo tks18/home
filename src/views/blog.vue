@@ -7,6 +7,11 @@
 
 <script>
 export default {
+  metaInfo: function () {
+    return {
+      title: 'Blog',
+    };
+  },
   data: function () {
     return {};
   },

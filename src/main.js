@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import meta from 'vue-meta';
 import App from './App.vue';
 import store, { mutations, getters } from './plugins/state';
 import EventBus from './EventBus';
@@ -14,6 +15,10 @@ import 'swiper/swiper-bundle.css';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);
+Vue.use(meta, {
+  tagIDKeyName: 'sh-tk-id',
+  refreshOnceOnNavigation: true,
+});
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 Vue.prototype.$gsap = gsap;

@@ -20,6 +20,18 @@ import fabComponent from './components/fab-component';
 import sysBar from './components/system-bar';
 export default {
   name: 'App',
+  metaInfo: {
+    title: 'Sudharshan TK',
+    titleTemplate: (insertedTitle) => {
+      if (insertedTitle == 'Sudharshan TK') {
+        return insertedTitle;
+      } else if (insertedTitle == 'Careers') {
+        return `${insertedTitle} @ Sudharshan TK`;
+      } else {
+        return `${insertedTitle} | Sudharshan TK`;
+      }
+    },
+  },
   components: {
     navbar,
     navDrawer,

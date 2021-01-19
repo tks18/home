@@ -1,7 +1,8 @@
 {
   "name": "portfolio-mat-dark",
   "version": "0.1.0",
-  "title": "Shan.tk ✌",
+  "title": "Sudharshan TK",
+  "baseSite": "https://shan-tk.ga",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -16,6 +17,7 @@
     "gsap": "^3.5.1",
     "lodash": "^4.17.20",
     "minify-css-string": "^1.0.0",
+    "sitemap-webpack-plugin": "^1.0.0",
     "swiper": "^6.3.2",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
