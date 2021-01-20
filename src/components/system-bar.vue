@@ -14,20 +14,8 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-icon
-      :class="
-        'clip-text-back' +
-        ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
-      "
-    >
-      mdi-wifi-strength-4
-    </v-icon>
-    <span
-      :class="
-        'non-touch point-cursor clip-text-back' +
-        ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
-      "
-    >
+    <v-icon> mdi-wifi-strength-4 </v-icon>
+    <span class="non-touch point-cursor">
       {{ now | moment('h:mm:ss a') }}
     </span>
   </v-system-bar>
