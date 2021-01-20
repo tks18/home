@@ -60,6 +60,21 @@
                   <v-img :src="heroData.image" alt="Main Image" />
                 </v-avatar>
               </div>
+              <div
+                class="column is-centered is-full text text-center text-overline font-weight-bold"
+              >
+                <v-btn
+                  :large="ismobile ? false : true"
+                  elevation="24"
+                  text
+                  @click="$vuetify.goTo('#feedbacktitile')"
+                  raised
+                  outlined
+                >
+                  <v-icon> mdi-alarm-bell </v-icon>
+                  Contact Me
+                </v-btn>
+              </div>
             </div>
           </div>
         </div>
@@ -310,12 +325,8 @@
             >
               <v-hover>
                 <template v-slot:default="{ hover }">
-                  <v-card>
-                    <v-img
-                      :max-height="ismobile ? null : 150"
-                      :max-width="ismobile ? null : 250"
-                      :src="githubPhoto"
-                    ></v-img>
+                  <v-card :max-width="ismobile ? null : 250">
+                    <v-img contain :src="githubPhoto"></v-img>
                     <v-row justify="space-between" class="ma-0 pa-0">
                       <v-col class="ma-0 pa-0" cols="12">
                         <v-card-title class="text-overline ma-1 pa-1">
@@ -506,81 +517,75 @@
       >
         {{ animatedArray.feedBack }}
       </div>
-      <v-parallax
-        src="https://media.giphy.com/media/vy0dT6fL4LYhoY1856/giphy-downsized-large.gif"
-      >
-        <div class="hero is-large">
-          <div :class="'hero-body ' + (ismobile ? 'ma-1 pa-1' : '')">
-            <div class="content">
-              <div
-                :class="
-                  'columns is-multiline is-centered is-vcentered ' +
-                  (ismobile ? 'ma-1 pa-1' : 'ma-4 pa-4')
-                "
-              >
-                <div :class="'column ' + (ismobile ? 'is-12' : 'is-9')">
-                  <div
-                    class="columns is-multiline is-centered is-vcentered back-blur-hard"
-                  >
-                    <div class="column is-full">
-                      <v-text-field
-                        prepend-icon="mdi-form-textbox"
-                        dense
-                        :persistent-hint="true"
-                        hint="Your Name"
-                        label="Enter Your Name"
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
-                    </div>
-                    <div class="column is-full">
-                      <v-text-field
-                        prepend-icon="mdi-email"
-                        dense
-                        :persistent-hint="true"
-                        hint="Your Email"
-                        label="Enter Your Email ID"
-                        hide-details="auto"
-                        outlined
-                      ></v-text-field>
-                    </div>
-                    <div class="column is-full">
-                      <v-textarea
-                        class="is-maximum"
-                        prepend-icon="mdi-comment-quote"
-                        no-resize
-                        width="100%"
-                        height="100%"
-                        :full-width="true"
-                        :persistent-hint="true"
-                        label="Your Feedback bruh ?"
-                        :filled="true"
-                        :outlined="true"
-                      ></v-textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-9 mt-0 pt-1 mb-3">
-                  <v-row align="center">
-                    <v-col cols="6" align="right">
-                      <v-btn color="primary">
-                        <v-icon>mdi-cards-heart</v-icon>
-                        Submit
-                      </v-btn>
-                    </v-col>
-                    <v-col cols="6" align="left">
-                      <v-btn color="error">
-                        <v-icon>mdi-heart-broken</v-icon>
-                        Cancel
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </div>
-              </div>
-            </div>
+      <div class="hero is-fullheight">
+        <div :class="'hero-body contact-bg ' + (ismobile ? 'ma-0 pa-0' : '')">
+          <div class="container">
+            <v-row align="center" justify="center">
+              <v-col align="center" :cols="ismobile ? 12 : 7" class="back-blur">
+                <v-row>
+                  <v-col cols="12" class="my-0 py-0" align="left">
+                    <v-text-field
+                      dark
+                      prepend-icon="mdi-form-textbox"
+                      dense
+                      :persistent-hint="true"
+                      hint="Your Name"
+                      label="Enter Your Name"
+                      hide-details="auto"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" class="my-0 py-0" align="left">
+                    <v-text-field
+                      dark
+                      prepend-icon="mdi-email"
+                      dense
+                      :persistent-hint="true"
+                      hint="Your Email"
+                      label="Enter Your Email ID"
+                      hide-details="auto"
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" class="my-0 py-0" align="left">
+                    <v-textarea
+                      dark
+                      class="is-maximum"
+                      prepend-icon="mdi-comment-quote"
+                      no-resize
+                      width="100%"
+                      height="100%"
+                      :full-width="true"
+                      :persistent-hint="true"
+                      label="Your Feedback bruh ?"
+                      :filled="true"
+                      :outlined="true"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+                <v-row align="center">
+                  <v-col cols="6" class="my-0 py-0" align="right">
+                    <v-btn dark color="primary">
+                      <v-icon>mdi-cards-heart</v-icon>
+                      Submit
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" align="left">
+                    <v-btn dark color="error">
+                      <v-icon>mdi-heart-broken</v-icon>
+                      Cancel
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
           </div>
         </div>
-      </v-parallax>
+      </div>
     </div>
   </div>
 </template>
@@ -598,7 +603,7 @@ export default {
     return {
       heroData: {
         title: 'Hello There !',
-        image: 'https://i.ibb.co/GTcS2kb/profile.png',
+        image: 'https://i.ibb.co/CQqRR3b/profile.png',
         subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
         rounded: true,
         buttonUrl: '/about',
@@ -612,7 +617,7 @@ export default {
       },
       toggleTooltip: true,
       githubPhoto:
-        'https://portswigger.net/cms/images/54/14/6efb9bc5d143-article-190612-github-body-text.jpg',
+        'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       lifeTimeCountDown: {
         years: 0,
         weeks: 0,
@@ -631,7 +636,7 @@ export default {
         feedBack: '',
       },
       aboutData: {
-        image: 'https://i.ibb.co/VVxzT9s/profile-2.jpg',
+        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
       },
     };
   },
@@ -656,7 +661,7 @@ export default {
         rootMargin: '0px',
         threshold: 0.6,
       };
-      let handleIntersect = (entries, observer) => {
+      let handleIntersect = (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this[callback](wordMap, word, stringText);
@@ -763,7 +768,7 @@ export default {
         rootMargin: '0px',
         threshold: 0.6,
       };
-      let handleIntersect = (entries, observer) => {
+      let handleIntersect = (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             let newVals = countUpFromTime('May 16, 2000 16:21:00');
@@ -807,6 +812,7 @@ export default {
           }
         })
         .catch((e) => {
+          console.error(e);
           this.$set(this.projects, 'loading', false);
           this.$set(this.projects, 'projects', {});
         });

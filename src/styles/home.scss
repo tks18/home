@@ -42,6 +42,13 @@
   animation: fluid 10s ease infinite;
 }
 
+.contact-bg {
+  background: center;
+  background-image: url('https://i.ibb.co/Prn5KD1/contact.webp');
+  background-size: cover;
+  min-width: 100%;
+}
+
 @-webkit-keyframes fluid {
   0% {
     background-position: 0% 50%;
