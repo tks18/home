@@ -1,16 +1,39 @@
 <template>
   <div class="columns is-multiline non-touch">
+    <div
+      :class="
+        'column is-full text-center text font-weight-bold mt-3 mb-0 pb-0 ' +
+        (ismobile ? 'text-h5' : 'text-h4')
+      "
+    >
+      About Me
+    </div>
+    <div
+      class="column is-full text-center text text-overline font-weight-bold mt-0 pt-0 pb-1"
+    >
+      <v-btn
+        class="ma-0 pa-0"
+        @click="$vuetify.goTo('#aboutme')"
+        text
+        flat
+        color="primary"
+      >
+        (Skip to Main Content)
+      </v-btn>
+    </div>
     <div class="column is-full">
       <v-card
         :style="{
           background: 'center',
-          backgroundImage: bgBack,
+          backgroundImage: mainBg,
           backgroundSize: 'cover',
           minWidth: '100%',
         }"
-        elevation="13"
+        elevation="15"
+        shaped
+        outlined
       >
-        <div class="hero is-fullheight non-touch">
+        <div class="hero is-medium non-touch">
           <div id="initscroll" class="hero-body">
             <v-row>
               <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
@@ -49,61 +72,10 @@
           </div>
           <div class="hero-footer">
             <v-row align="end" class="py-1 px-1">
-              <v-col :cols="ismobile ? 12 : 9" justify="end" class="py-0">
-                <v-row align="end" class="py-0">
-                  <v-col
-                    v-if="!ismobile"
-                    cols="2"
-                    align="left"
-                    justify="end"
-                    class="py-1"
-                  >
-                    <v-tooltip bottom transition="slide-y-transition">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          fab
-                          small
-                          color="primary"
-                          v-on="on"
-                          v-bind="attrs"
-                          @click="playPauseBg"
-                          ><v-icon>mdi-play</v-icon></v-btn
-                        >
-                      </template>
-                      <span>Click here to Play / Pause the BG</span>
-                    </v-tooltip>
-                  </v-col>
-                  <v-col
-                    cols="10"
-                    v-if="!ismobile"
-                    :align="ismobile ? 'center' : 'right'"
-                    justify="end"
-                    class="py-0"
-                  >
-                    <div class="container non-touch py-0">
-                      <div class="text-overline white--text font-weight-bold">
-                        It Looks Like You want to Know About Me !
-                      </div>
-                      <v-btn
-                        text
-                        outlined
-                        dark
-                        @click="$vuetify.goTo('#aboutme')"
-                        class="text-overline font-weight-bold"
-                      >
-                        <v-icon>mdi-arrow-down</v-icon
-                        ><v-icon>mdi-arrow-down</v-icon> Swipe Down / Click Here
-                        <v-icon>mdi-arrow-down</v-icon
-                        ><v-icon>mdi-arrow-down</v-icon>
-                      </v-btn>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-col>
               <v-col
-                :cols="ismobile ? 12 : 3"
+                cols="12"
                 :align="ismobile ? 'center' : 'right'"
-                justify="end"
+                :justify="ismobile ? 'center' : 'end'"
                 class="py-0"
               >
                 <div
@@ -269,7 +241,7 @@
                           <v-img
                             contain
                             height="150"
-                            src="https://i.ibb.co/Ltf1SNX/fabian-irsara-67l-Quj-B14w-unsplash.jpg"
+                            :src="workProfile.img"
                           ></v-img>
                         </v-col>
                       </v-row>
@@ -440,24 +412,22 @@
 import { lettersArray } from '../templates/emoji-array';
 import { countUpFromTime } from '../plugins/helpers';
 export default {
-  metaInfo: function() {
+  metaInfo: function () {
     return {
-      title: 'About'
-    }
+      title: 'About',
+    };
   },
   data: function () {
     return {
-      bg: {
-        static: "url('https://i.ibb.co/YR117RN/ezgif-6-6fa4128fb00b.gif')",
-        anim: "url('https://i.ibb.co/hKxmVtF/ezgif-3-71f4d039aaab.gif')",
-      },
+      mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
       bgs: [
-        'https://i.ibb.co/sv0Y5mn/IMG-20200130-134312.jpg',
-        'https://i.ibb.co/TgcjrY1/20191229-170937.jpg',
-        'https://i.ibb.co/9gbWynG/IMG-20191218-222419-347.jpg',
-        'https://i.ibb.co/zSVyqnP/00100sr-PORTRAIT-00100-BURST20201011083336744-COVER-3.jpg',
-        'https://i.ibb.co/DKhHqwY/IMG-20200118-172203-1.jpg',
-        'https://i.ibb.co/KGjkwzn/IMG-20191028-170205.jpg',
+        'https://i.ibb.co/GRFHNM2/IMG-20200130-134312.webp',
+        'https://i.ibb.co/mc49Ygn/20191229-170937.webp',
+        'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
+        'https://i.ibb.co/0jksbWY/IMG-20200118-172203-1.webp',
+        'https://i.ibb.co/NKpNqbt/IMG-20191028-170205.webp',
+        'https://i.ibb.co/FxT2W24/DJI-0566-1.webp',
+        'https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp',
       ],
       bgPlay: true,
       cardbgs: {
@@ -483,7 +453,10 @@ export default {
         ],
         aOfInt: ['AI', 'ReactJs', 'VueJs', 'Gsap', 'NodeJs'],
       },
-      bgBack: '',
+      workProfile: {
+        img:
+          'https://i.ibb.co/y0qfZD5/fabian-irsara-67l-Quj-B14w-unsplash.webp',
+      },
       animatedArray: {
         hashTag: '',
       },
@@ -521,16 +494,6 @@ export default {
         html += lettersArray[Math.round(map) % lettersArray.length];
       });
       this.$set(this.animatedArray, stringText, html);
-    },
-    playBg() {
-      this.bgBack = this.bg.anim;
-      setTimeout(() => {
-        this.bgBack = this.bg.static;
-      }, 3342);
-    },
-    playPauseBg() {
-      this.bgPlay = !this.bgPlay;
-      this.playBg();
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
@@ -601,9 +564,6 @@ export default {
       };
     },
   },
-  beforeMount() {
-    this.playBg();
-  },
   mounted() {
     this.transitWord(
       this.wordMaps.hash.map,
@@ -611,7 +571,6 @@ export default {
       'hashTag',
     );
     this.setCardBgs();
-    this.$vuetify.goTo('#initscroll');
   },
 };
 </script>
