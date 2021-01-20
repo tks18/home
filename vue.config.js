@@ -1,7 +1,6 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const Critters = require('critters-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
 
@@ -15,6 +14,27 @@ module.exports = {
   },
   configureWebpack: {
     optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 20000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
       minimize: true,
       minimizer: [
         new CssMinimizerPlugin({
@@ -30,10 +50,6 @@ module.exports = {
       ],
     },
     plugins: [
-      new Critters({
-        preload: 'swap',
-        preloadFonts: true,
-      }),
       new SitemapPlugin({
         base: baseSite,
         paths: routes,
