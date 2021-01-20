@@ -1,5 +1,7 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
@@ -13,6 +15,29 @@ module.exports = {
     requireModuleExtension: true,
   },
   configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.html$/i,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: ['sass-loader'],
+        },
+      ],
+    },
     optimization: {
       splitChunks: {
         chunks: 'async',
@@ -50,6 +75,11 @@ module.exports = {
       ],
     },
     plugins: [
+      new HtmlWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
+      }),
       new SitemapPlugin({
         base: baseSite,
         paths: routes,
