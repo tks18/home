@@ -1,6 +1,5 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Critters = require('critters-webpack-plugin');
 const path = require('path');
@@ -15,14 +14,6 @@ module.exports = {
     requireModuleExtension: true,
   },
   configureWebpack: {
-    module: {
-      rules: [
-        {
-          test: /\.(s*)css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-        },
-      ],
-    },
     optimization: {
       minimize: true,
       minimizer: [
@@ -39,7 +30,6 @@ module.exports = {
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin(),
       new Critters({
         preload: 'swap',
         preloadFonts: true,
