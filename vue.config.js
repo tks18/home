@@ -1,8 +1,8 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const Critters = require('critters-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
 
@@ -18,12 +18,48 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.(s*)css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+          test: /\.html$/i,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: ['sass-loader'],
         },
       ],
     },
     optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 20000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
       minimize: true,
       minimizer: [
         new CssMinimizerPlugin({
@@ -39,10 +75,10 @@ module.exports = {
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin(),
-      new Critters({
-        preload: 'swap',
-        preloadFonts: true,
+      new HtmlWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
       }),
       new SitemapPlugin({
         base: baseSite,

@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "css-minimizer-webpack-plugin": "^1.2.0",
     "gsap": "^3.5.1",
+    "html-minimizer-webpack-plugin": "^2.1.0",
     "lodash": "^4.17.20",
     "minify-css-string": "^1.0.0",
     "sitemap-webpack-plugin": "^1.0.0",
@@ -26,14 +27,14 @@
     "vue-moment": "^4.1.0",
     "vue-router": "^3.4.3",
     "vue2-animate": "^2.1.4",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "web-vitals": "^1.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
-    "critters-webpack-plugin": "^2.5.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
