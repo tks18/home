@@ -1,5 +1,3 @@
-import moment from 'vue-moment';
-
 export function scrollTo(element, scrollPixels, duration) {
   const scrollPos = element.scrollLeft;
   if (
@@ -29,8 +27,8 @@ export function scrollTo(element, scrollPixels, duration) {
 export function countUpFromTime(countFrom) {
   countFrom = new Date(countFrom).getTime();
   var now = new Date(),
-    countFrom = new Date(countFrom),
-    timeDifference = now - countFrom;
+    countTo = new Date(countFrom),
+    timeDifference = now - countTo;
 
   var secondsInAHour = 60 * 60 * 1000;
   var secondsInADay = secondsInAHour * 24;
@@ -68,13 +66,13 @@ export function countUpFromTime(countFrom) {
   return returnVals;
 }
 
-export function getOs(){
+export function getOs() {
   var userAgent = window.navigator.userAgent,
-      platform = window.navigator.platform,
-      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-      os = null;
+    platform = window.navigator.platform,
+    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+    os = null;
 
   if (macosPlatforms.indexOf(platform) !== -1) {
     os = 'Mac OS';
@@ -89,4 +87,23 @@ export function getOs(){
   }
 
   return os;
+}
+
+export function getViewport() {
+  var viewPortWidth;
+  var viewPortHeight;
+  if (typeof window.innerWidth != 'undefined') {
+    (viewPortWidth = window.innerWidth), (viewPortHeight = window.innerHeight);
+  } else if (
+    typeof document.documentElement != 'undefined' &&
+    typeof document.documentElement.clientWidth != 'undefined' &&
+    document.documentElement.clientWidth != 0
+  ) {
+    (viewPortWidth = document.documentElement.clientWidth),
+      (viewPortHeight = document.documentElement.clientHeight);
+  } else {
+    (viewPortWidth = document.getElementsByTagName('body')[0].clientWidth),
+      (viewPortHeight = document.getElementsByTagName('body')[0].clientHeight);
+  }
+  return { width: viewPortWidth, height: viewPortHeight };
 }
