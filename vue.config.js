@@ -22,7 +22,17 @@ module.exports = {
         },
         {
           test: /\.scss$/,
-          use: ['sass-loader'],
+          use: [
+            {
+              loader: 'sass-loader',
+              options: {
+                implementation: require('sass'),
+                sassOptions: {
+                  fiber: require('fibers'),
+                },
+              },
+            },
+          ],
         },
       ],
     },
@@ -63,10 +73,6 @@ module.exports = {
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css',
-      }),
       new SitemapPlugin({
         base: baseSite,
         paths: routes,

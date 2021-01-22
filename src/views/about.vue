@@ -35,7 +35,7 @@
       >
         <div class="hero is-medium non-touch">
           <div id="initscroll" class="hero-body">
-            <v-row>
+            <v-row v-if="!ismobile">
               <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
                 <div class="back-blur white--text pa-2 fit-text">
                   <div
@@ -100,9 +100,9 @@
       </v-card>
     </div>
     <div class="column is-full py-2">
-      <v-container>
-        <v-row>
-          <v-col cols="12">
+      <v-row>
+        <v-col cols="12">
+          <v-container>
             <v-row align="center">
               <v-col id="aboutme" :cols="ismobile ? 12 : 4">
                 <v-card height="450" outlined elevation="6">
@@ -381,29 +381,29 @@
                 </v-row>
               </v-col>
             </v-row>
-          </v-col>
-          <v-col id="projects" cols="12">
-            <v-row>
-              <v-col cols="8">
-                <v-card height="450" outlined elevation="6" color="error">
-                </v-card>
-              </v-col>
-              <v-col cols="4">
-                <v-row>
-                  <v-col cols="12">
-                    <v-card height="200" outlined elevation="6"> </v-card>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols="12">
-                    <v-card height="200" outlined elevation="6"> </v-card>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
+          </v-container>
+        </v-col>
+        <v-col id="projects" cols="12">
+          <v-row>
+            <v-col cols="8">
+              <v-card height="450" outlined elevation="6" color="error">
+              </v-card>
+            </v-col>
+            <v-col cols="4">
+              <v-row>
+                <v-col cols="12">
+                  <v-card height="200" outlined elevation="6"> </v-card>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-card height="200" outlined elevation="6"> </v-card>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>

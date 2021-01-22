@@ -325,7 +325,14 @@
             >
               <v-hover>
                 <template v-slot:default="{ hover }">
-                  <v-card :max-width="ismobile ? null : 250">
+                  <v-card
+                    :max-width="
+                      ismobile
+                        ? null
+                        : (contextInfo.viewport.width -
+                          (contextInfo.viewport.width * 0.1)) / 5
+                    "
+                  >
                     <v-img contain :src="githubPhoto"></v-img>
                     <v-row justify="space-between" class="ma-0 pa-0">
                       <v-col class="ma-0 pa-0" cols="12">
@@ -592,7 +599,12 @@
 
 <script>
 import { lettersArray, safeEmojis } from '../templates/emoji-array';
-import { scrollTo, countUpFromTime } from '../plugins/helpers';
+import {
+  scrollTo,
+  countUpFromTime,
+  getOs,
+  getViewport,
+} from '../plugins/helpers';
 export default {
   metaInfo: function () {
     return {
@@ -614,6 +626,10 @@ export default {
       projects: {
         loading: false,
         projects: {},
+      },
+      contextInfo: {
+        os: getOs(),
+        viewport: getViewport(),
       },
       toggleTooltip: true,
       githubPhoto:
