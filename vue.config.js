@@ -1,6 +1,5 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 const zlib = require('zlib');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const compressionPlugin = require('compression-webpack-plugin');
@@ -87,16 +86,6 @@ module.exports = {
         filename: 'offline.html',
         template: 'public/index.html',
       }),
-      new htmlWebpackPlugin({
-        inject: true,
-        title: title,
-        BASE_URL: '',
-        prefetch: ['**/*.*'],
-        preload: ['**/*.*'],
-        filename: 'offline.[contenthash].html',
-        template: 'public/index.html',
-      }),
-      new PreloadWebpackPlugin(),
       new SitemapPlugin({
         base: baseSite,
         paths: routes,
