@@ -1,11 +1,16 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const zlib = require('zlib');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const compressionPlugin = require('compression-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
 
 let baseSite = require('./package.json').baseSite;
+let title = require('./package.json').title;
 
 module.exports = {
   runtimeCompiler: true,
@@ -73,6 +78,25 @@ module.exports = {
       ],
     },
     plugins: [
+      new htmlWebpackPlugin({
+        inject: true,
+        title: title,
+        BASE_URL: '',
+        prefetch: ['**/*.*'],
+        preload: ['**/*.*'],
+        filename: 'offline.html',
+        template: 'public/index.html',
+      }),
+      new htmlWebpackPlugin({
+        inject: true,
+        title: title,
+        BASE_URL: '',
+        prefetch: ['**/*.*'],
+        preload: ['**/*.*'],
+        filename: 'offline.[contenthash].html',
+        template: 'public/index.html',
+      }),
+      new PreloadWebpackPlugin(),
       new SitemapPlugin({
         base: baseSite,
         paths: routes,
@@ -80,6 +104,18 @@ module.exports = {
           filename: 'sitemap.xml',
           lastmod: true,
         },
+      }),
+      new compressionPlugin({
+        filename: '[path][base].br',
+        algorithm: 'brotliCompress',
+        compressionOptions: {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        },
+        test: /\.js$|\.css$/,
+        threshold: 10240,
+        minRatio: 0.8,
       }),
     ],
     resolve: {
@@ -90,9 +126,9 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
-    let title = require('./package.json').title;
     config.plugin('html').tap((args) => {
       args[0].title = title;
+      args[0].BASE_URL = '';
       return args;
     });
   },
