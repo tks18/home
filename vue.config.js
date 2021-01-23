@@ -81,8 +81,6 @@ module.exports = {
         inject: true,
         title: title,
         BASE_URL: '',
-        prefetch: ['**/*.*'],
-        preload: ['**/*.*'],
         filename: 'offline.html',
         template: 'public/index.html',
       }),
