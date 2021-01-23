@@ -94,7 +94,6 @@ module.exports = {
         test: /\.js$|\.css$/,
         threshold: 10240,
         minRatio: 0.8,
-        deleteOriginalAssets: true,
       }),
     ],
     resolve: {
