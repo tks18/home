@@ -1,6 +1,8 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const zlib = require('zlib');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const compressionPlugin = require('compression-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 const vueSrc = './src/';
@@ -80,6 +82,19 @@ module.exports = {
           filename: 'sitemap.xml',
           lastmod: true,
         },
+      }),
+      new compressionPlugin({
+        filename: '[path][base].br',
+        algorithm: 'brotliCompress',
+        compressionOptions: {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        },
+        test: /\.js$|\.css$/,
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: true,
       }),
     ],
     resolve: {
