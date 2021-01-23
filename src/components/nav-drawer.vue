@@ -62,8 +62,7 @@ export default {
   },
   data: function () {
     return {
-      avatar:
-        'https://i.ibb.co/hRxTz1g/c0ec2e063895760baa493c36d2d28387-s-400.jpg',
+      avatar: 'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
       navPaths: [
         {
           icon: 'mdi-home',
