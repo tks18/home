@@ -10,6 +10,7 @@ const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
 const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 let title = require('../package.json').title;
 let baseSite = require('../package.json').baseSite;
@@ -65,6 +66,9 @@ let productionPlugins = [
     reportFilename: './stats/bundle-analyzer.html',
     reportTitle: 'Shan.tk Analysis',
     openAnalyzer: false,
+  }),
+  new WebpackManifestPlugin({
+    fileName: './stats/manifest.json',
   }),
   new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
   new StatsWriterPlugin({

@@ -5,6 +5,7 @@ module.exports = {
       '@babel/preset-env',
       {
         bugfixes: true,
+        modules: false,
         targets: 'last 2 versions',
       },
     ],
