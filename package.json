@@ -27,10 +27,13 @@
     "web-vitals": "^1.1.0"
   },
   "devDependencies": {
+    "@statoscope/ui-webpack": "^3.3.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-lodash": "^3.3.4",
     "compression-webpack-plugin": "6.1.1",
     "css-minimizer-webpack-plugin": "^1.2.0",
     "deepmerge": "^4.2.2",
@@ -39,6 +42,7 @@
     "fibers": "^5.0.0",
     "html-minimizer-webpack-plugin": "1.0.1",
     "html-webpack-plugin": "^4.5.1",
+    "lodash-webpack-plugin": "^0.11.6",
     "minify-css-string": "^1.0.0",
     "node-sass": "^4.12.0",
     "sass": "^1.19.0",
@@ -47,6 +51,11 @@
     "vue-cli-plugin-vuetify": "~2.0.7",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "1.5.0",
-    "webpack": "4.44.2"
+    "webpack": "4.44.2",
+    "webpack-bundle-analyzer": "^4.4.0",
+    "webpack-bundle-size-analyzer": "^3.1.0",
+    "webpack-bundle-tracker": "^1.0.0-alpha.1",
+    "webpack-stats-plugin": "^1.0.3",
+    "webpackbar": "^5.0.0-3"
   }
 }
