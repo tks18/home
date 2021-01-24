@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-multiline">
-    <div class="column is-full">
+    <div class="column is-full non-touch">
       <div
         :class="
           'hero is-fullheight' +
@@ -525,7 +525,7 @@
       >
         {{ animatedArray.feedBack }}
       </div>
-      <div class="hero is-fullheight">
+      <div class="hero is-medium">
         <div :class="'hero-body contact-bg ' + (ismobile ? 'ma-0 pa-0' : '')">
           <div class="container">
             <v-row align="center" justify="center">
