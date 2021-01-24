@@ -68,7 +68,7 @@
   </v-footer>
 </template>
 <script>
-import { lettersArray } from '../templates/emoji-array';
+import { lettersArray } from '@t/emoji-array';
 export default {
   data: function () {
     return {

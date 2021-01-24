@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import meta from 'vue-meta';
 import App from './App.vue';
-import store, { mutations, getters } from './plugins/state';
-import EventBus from './EventBus';
+import store, { mutations, getters } from '@state';
+import EventBus from '@eventbus';
 import router from './router';
 import moment from 'vue-moment';
 import lodash from 'lodash';
 import axios from 'axios';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-import vuetify from './plugins/vuetify';
+import vuetify from '@p/vuetify';
 import { gsap } from 'gsap';
-import '@/styles/register.scss';
+import '@styles/register.scss';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);

@@ -1,7 +1,5 @@
-const { loaders, optimizations, plugins } = require('./webpack');
+const { loaders, optimizations, plugins, resolvers } = require('./webpack');
 const WebpackBar = require('webpackbar');
-const path = require('path');
-const vueSrc = './src';
 
 module.exports = {
   module: {
@@ -9,11 +7,6 @@ module.exports = {
   },
   optimization: optimizations,
   plugins: [...plugins, new WebpackBar()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, vueSrc),
-    },
-    extensions: ['.js', '.vue', '.json', '.css', '.scss'],
-  },
+  resolve: resolvers(__dirname),
   stats: 'normal',
 };
