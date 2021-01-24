@@ -409,8 +409,8 @@
 </template>
 
 <script>
-import { lettersArray } from '../templates/emoji-array';
-import { countUpFromTime } from '../plugins/helpers';
+import { lettersArray } from '@t/emoji-array';
+import { countUpFromTime } from '@p/helpers';
 export default {
   metaInfo: function () {
     return {

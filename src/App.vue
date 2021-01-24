@@ -13,11 +13,11 @@
   </v-app>
 </template>
 <script>
-import navbar from './components/nav-bar';
-import navDrawer from './components/nav-drawer';
-import foot from './components/footer';
-import fabComponent from './components/fab-component';
-import sysBar from './components/system-bar';
+import navbar from '@c/nav-bar';
+import navDrawer from '@c/nav-drawer';
+import foot from '@c/footer';
+import fabComponent from '@c/fab-component';
+import sysBar from '@c/system-bar';
 export default {
   name: 'App',
   metaInfo: {

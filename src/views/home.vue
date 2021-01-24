@@ -330,7 +330,8 @@
                       ismobile
                         ? null
                         : (contextInfo.viewport.width -
-                          (contextInfo.viewport.width * 0.1)) / 5
+                            contextInfo.viewport.width * 0.1) /
+                          5
                     "
                   >
                     <v-img contain :src="githubPhoto"></v-img>
@@ -598,13 +599,8 @@
 </template>
 
 <script>
-import { lettersArray, safeEmojis } from '../templates/emoji-array';
-import {
-  scrollTo,
-  countUpFromTime,
-  getOs,
-  getViewport,
-} from '../plugins/helpers';
+import { lettersArray, safeEmojis } from '@t/emoji-array';
+import { scrollTo, countUpFromTime, getOs, getViewport } from '@p/helpers';
 export default {
   metaInfo: function () {
     return {
