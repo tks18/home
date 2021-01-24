@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import meta from 'vue-meta';
 import App from './App.vue';
-import store, { mutations, getters } from '@p/state';
+import store, { mutations, getters } from '@state';
 import EventBus from '@eventbus';
 import router from './router';
 import moment from 'vue-moment';
