@@ -15,7 +15,7 @@
         class="ma-0 pa-0"
         @click="$vuetify.goTo('#aboutme')"
         text
-        flat
+        plain
         color="primary"
       >
         (Skip to Main Content)
@@ -29,9 +29,7 @@
           backgroundSize: 'cover',
           minWidth: '100%',
         }"
-        elevation="15"
-        shaped
-        outlined
+        flat
       >
         <div class="hero is-medium non-touch">
           <div id="initscroll" class="hero-body">
@@ -81,8 +79,8 @@
                 <div
                   class="back-blur fit-text px-2 text-overline font-weight-bold"
                 >
-                  <span class="white--text"> We are </span
-                  ><span
+                  <span class="white--text"> We are </span>
+                  <span
                     :class="
                       ($vuetify.theme.dark
                         ? 'grad-back-dark'
