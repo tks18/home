@@ -5,6 +5,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const compressionPlugin = require('compression-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
+  .WebpackBundleSizeAnalyzerPlugin;
+const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
+const BundleTracker = require('webpack-bundle-tracker');
+const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const WebpackBar = require('webpackbar');
 const path = require('path');
 const vueSrc = './src/';
 
@@ -104,6 +112,34 @@ module.exports = {
         threshold: 10240,
         minRatio: 0.8,
       }),
+      new StatoscopeWebpackPlugin({
+        saveTo: './dist/stats/ui-stats.html',
+        saveStatsTo: './dist/stats/ui-stats.json',
+        watchMode: false,
+        name: 'Shan.tk-UI Analysis',
+        open: false,
+      }),
+      new BundleTracker({
+        path: __dirname,
+        filename: './dist/stats/bundle-stats.json',
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'json',
+        reportFilename: './stats/bundle-analyzer.json',
+        reportTitle: 'Shan.tk Analysis',
+        openAnalyzer: false,
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: './stats/bundle-analyzer.html',
+        reportTitle: 'Shan.tk Analysis',
+        openAnalyzer: false,
+      }),
+      new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
+      new StatsWriterPlugin({
+        filename: './stats/raw-stats.json',
+      }),
+      new WebpackBar(),
     ],
     resolve: {
       alias: {
@@ -111,6 +147,7 @@ module.exports = {
       },
       extensions: ['.js', '.vue', '.json', '.css', '.scss'],
     },
+    stats: 'normal',
   },
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {
