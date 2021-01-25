@@ -14,6 +14,9 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 let title = require('../package.json').title;
 let baseSite = require('../package.json').baseSite;
+let webSiteDesc =
+  'Building Online Answers for Your Next Design Challenge. Sometimes Writes Blogs about Latest Tech Developments and Frameworks. Forgot, this is Sudharshan TK hehe xD';
+
 let isProd = process.env.NODE_ENV != 'development';
 
 let productionPlugins = [
@@ -81,6 +84,8 @@ let devPlugins = [
     inject: true,
     title: title,
     BASE_URL: '',
+    desc: webSiteDesc,
+    url: baseSite,
     filename: 'offline.html',
     template: 'public/index.html',
   }),

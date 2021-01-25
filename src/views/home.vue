@@ -82,7 +82,7 @@
                       :large="ismobile ? false : true"
                       elevation="24"
                       text
-                      @click="$vuetify.goTo('#feedbacktitile')"
+                      @click="$vuetify.goTo('#emailme')"
                       raised
                       outlined
                     >
@@ -96,6 +96,54 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="column is-full ma-0 pa-0">
+      <v-container class="non-touch">
+        <v-row align="center" justify="center" class="ma-0 pa-0">
+          <v-col cols="12" align="center">
+            <div class="text text-center ma-0 pa-0 text-h4 font-weight-black">
+              What I Do ?
+            </div>
+          </v-col>
+          <v-col align="center" justify="center" class="text-center" cols="12">
+            <v-row align="center" justify="center">
+              <v-col
+                v-for="(activity, index) in activities"
+                v-bind:key="index"
+                :cols="ismobile ? 5 : 2"
+                align="center"
+                :class="ismobile ? 'mx-1 my-1' : 'mx-3 my-2'"
+                justify="center"
+              >
+                <v-row align="center">
+                  <v-col align="center" justify="center">
+                    <v-img
+                      :max-width="ismobile ? 80 : 110"
+                      :src="'/assets/icons/creator/' + activity.asset"
+                    ></v-img>
+                  </v-col>
+                </v-row>
+                <v-row align="center" class="text-center">
+                  <v-col
+                    cols="12"
+                    align="center"
+                    class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                  >
+                    {{ activity.activity }}
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    align="center"
+                    class="text-caption ma-0 pa-0 font-weight-light"
+                  >
+                    {{ activity.description }}
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
     <div class="column is-full ma-2">
       <v-row>
@@ -532,7 +580,7 @@
       </v-row>
     </div>
     <div class="column is-full">
-      <v-container>
+      <v-container id="emailme">
         <v-alert
           dense
           text
@@ -959,6 +1007,53 @@ export default {
       } else {
         return true;
       }
+    },
+    activities() {
+      return [
+        {
+          asset: 'web coding.svg',
+          activity: 'Developing Frontends',
+          description: 'Developing Classy, Sassy, Professional Grade Frontends',
+        },
+        {
+          asset: 'picture.svg',
+          activity: 'Image Manipulation',
+          description: 'Well Versed in Post Processing of Photographs',
+        },
+        {
+          asset: 'device.svg',
+          activity: 'App Development',
+          description: 'Mobile App Development Based on Flutter SDK',
+        },
+        {
+          asset: 'idea.svg',
+          activity: 'Hosting Solutions Guidance',
+          description:
+            'Advising on Suitable and Best Hosting Solutions for a Website / Server',
+        },
+        {
+          asset: 'programming.svg',
+          activity: 'Presentations',
+          description: 'Desgining Wonderful and Eye Catching Presentations',
+        },
+        {
+          asset: 'layer.svg',
+          activity: 'Architecting Backends',
+          description:
+            'Constructing Secure and Powerful Backends for Frontends',
+        },
+        {
+          asset: 'speed test.svg',
+          activity: 'Video Editing',
+          description: 'Editing and Color Grading Videos  for a Cinematic Look',
+        },
+        {
+          asset: 'binary code.svg',
+          activity: 'Data Analytics',
+          description:
+            'Crunching, Cleaning and Manipluating Data and Getting Insights',
+        },
+      ];
     },
     wordMaps() {
       return {

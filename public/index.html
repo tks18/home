@@ -4,10 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html" />
-    <meta
-      name="description"
-      content="This is Sudharshan TK Portfolio Website with Comprehensive Blog and Customization Options."
-    />
+    <meta name="description" content="<%= htmlWebpackPlugin.options.desc %>" />
     <link
       rel="sitemap"
       type="application/xml"
@@ -23,12 +20,12 @@
     />
     <meta
       name="twitter:description"
-      content="This is Shan.tk's Portfolio Website with Comprehensive Blog and Customization Options."
+      content="<%= htmlWebpackPlugin.options.desc %>"
     />
     <meta name="twitter:creator" content="@shantk18" />
     <meta
       name="twitter:image"
-      content="https://shan-tk.ga/icons/apple-touch-icon.png"
+      content="<%= htmlWebpackPlugin.options.url %>icons/apple-touch-icon.png"
     />
 
     <!-- Open Graph data -->
@@ -37,14 +34,14 @@
       content="<%= htmlWebpackPlugin.options.title %>"
     />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://www.shan-tk.ga/" />
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.url %>" />
     <meta
       property="og:image"
-      content="https://shan-tk.ga/icons/apple-touch-icon.png"
+      content="<%= htmlWebpackPlugin.options.url %>icons/apple-touch-icon.png"
     />
     <meta
       property="og:description"
-      content="This is Shan.tk's Portfolio Website with Comprehensive Blog and Customization Options."
+      content="<%= htmlWebpackPlugin.options.desc %>"
     />
     <meta
       property="og:site_name"
@@ -52,7 +49,7 @@
     />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
     />
     <link
       rel="icon"
