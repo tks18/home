@@ -63,17 +63,34 @@
               <div
                 class="column is-centered is-full text text-center text-overline font-weight-bold"
               >
-                <v-btn
-                  :large="ismobile ? false : true"
-                  elevation="24"
-                  text
-                  @click="$vuetify.goTo('#feedbacktitile')"
-                  raised
-                  outlined
-                >
-                  <v-icon> mdi-alarm-bell </v-icon>
-                  Contact Me
-                </v-btn>
+                <v-row align="center">
+                  <v-col cols="6" align="right">
+                    <v-btn
+                      :large="ismobile ? false : true"
+                      elevation="24"
+                      text
+                      @click="$vuetify.goTo('#feedbacktitile')"
+                      raised
+                      outlined
+                    >
+                      <v-icon> mdi-alarm-bell </v-icon>
+                      Contact Me
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" align="left">
+                    <v-btn
+                      :large="ismobile ? false : true"
+                      elevation="24"
+                      text
+                      @click="$vuetify.goTo('#feedbacktitile')"
+                      raised
+                      outlined
+                    >
+                      <v-icon> mdi-at </v-icon>
+                      Email Me
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </div>
             </div>
           </div>
@@ -515,6 +532,55 @@
       </v-row>
     </div>
     <div class="column is-full">
+      <v-container>
+        <v-alert
+          dense
+          text
+          v-ripple
+          outlined
+          class="non-touch point-cursor"
+          @click="handleEmailClick('me@shaaan.tk')"
+          :type="emailType"
+        >
+          <div class="text">
+            <span class="text-overline font-weight-black">Tip:</span>
+            <span class="text-subtitle-2">
+              Click Here to Contact / You can Contact me through
+            </span>
+            <span class="font-weight-black"> me@shaaan.tk</span>
+          </div>
+        </v-alert>
+        <v-snackbar v-model="copiedEmail" multi-line :timeout="4000">
+          Email ID has Been Copied to Your Clipboard. Do You Want to Open the
+          Email to Send Mail ?
+          <v-col align="center">
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              class="mx-1"
+              color="primary"
+              outlined
+              @click="
+                gotoUrl('mailto:me@shaaan.tk');
+                copiedEmail = false;
+              "
+            >
+              Open
+            </v-btn>
+            <v-btn
+              class="mx-1"
+              text
+              outlined
+              color="primary"
+              @click="copiedEmail = false"
+            >
+              Close
+            </v-btn>
+          </v-col>
+        </v-snackbar>
+      </v-container>
+    </div>
+    <div class="column is-full">
       <div
         id="feedbacktitile"
         :class="
@@ -638,6 +704,8 @@ export default {
         minutes: 0,
         seconds: 0,
       },
+      emailType: 'info',
+      copiedEmail: false,
       animatedArray: {
         blog: '',
         about: '',
@@ -828,6 +896,24 @@ export default {
           this.$set(this.projects, 'loading', false);
           this.$set(this.projects, 'projects', {});
         });
+    },
+    handleEmailClick(email) {
+      navigator.clipboard.writeText(email).then(
+        () => {
+          this.emailType = 'success';
+          this.copiedEmail = true;
+          setTimeout(() => {
+            this.emailType = 'info';
+          }, 3003);
+        },
+        () => {
+          this.emailType = 'error';
+          this.copiedEmail = false;
+          setTimeout(() => {
+            this.emailType = 'info';
+          }, 3003);
+        },
+      );
     },
     render() {
       this.loopRandEmoji();
