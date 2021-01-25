@@ -561,7 +561,7 @@
               color="primary"
               outlined
               @click="
-                gotoUrl('mailto:me@shaaan.tk');
+                gotoUrl(mailtoLink);
                 copiedEmail = false;
               "
             >
@@ -694,6 +694,8 @@ export default {
         viewport: getViewport(),
       },
       toggleTooltip: true,
+      mailtoLink:
+        'mailto:me@shaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
       githubPhoto:
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       lifeTimeCountDown: {
