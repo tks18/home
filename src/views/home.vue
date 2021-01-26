@@ -63,22 +63,113 @@
               <div
                 class="column is-centered is-full text text-center text-overline font-weight-bold"
               >
-                <v-btn
-                  :large="ismobile ? false : true"
-                  elevation="24"
-                  text
-                  @click="$vuetify.goTo('#feedbacktitile')"
-                  raised
-                  outlined
-                >
-                  <v-icon> mdi-alarm-bell </v-icon>
-                  Contact Me
-                </v-btn>
+                <v-row align="center">
+                  <v-col cols="6" align="right">
+                    <v-btn
+                      :large="ismobile ? false : true"
+                      elevation="24"
+                      text
+                      @click="$vuetify.goTo('#feedbacktitile')"
+                      raised
+                      outlined
+                    >
+                      <v-icon> mdi-alarm-bell </v-icon>
+                      Contact Me
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" align="left">
+                    <v-btn
+                      :large="ismobile ? false : true"
+                      elevation="24"
+                      text
+                      @click="$vuetify.goTo('#emailme')"
+                      raised
+                      outlined
+                    >
+                      <v-icon> mdi-at </v-icon>
+                      Email Me
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="column is-full ma-0 pa-0">
+      <v-container class="non-touch">
+        <v-row align="center" justify="center" class="ma-0 pa-0">
+          <v-col cols="12" align="center">
+            <div
+              id="whatiDo"
+              @click="
+                $router.push({
+                  name: 'About',
+                  params: { scroll: true, scrollid: '#aboutme' },
+                })
+              "
+              :class="
+                'text point-cursor text-center text-capitalize ma-0 pa-0 text-h4 font-weight-black ' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              {{ animatedArray.whatiDo }}
+              <v-icon large>mdi-arrow-down-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col align="center" justify="center" class="text-center" cols="12">
+            <v-row align="center" justify="center">
+              <v-tooltip
+                v-for="(activity, index) in activities"
+                v-bind:key="index"
+                top
+                transition="slide-y-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-col
+                    v-on="on"
+                    v-bind="attrs"
+                    v-ripple
+                    :cols="ismobile ? 5 : 2"
+                    align="center"
+                    :class="
+                      (ismobile ? 'mx-1 my-1' : 'mx-3 my-2') + ' point-cursor'
+                    "
+                    justify="center"
+                  >
+                    <v-row align="center">
+                      <v-col align="center" justify="center">
+                        <v-img
+                          :max-width="ismobile ? 80 : 110"
+                          :src="'/assets/icons/creator/' + activity.asset"
+                        ></v-img>
+                      </v-col>
+                    </v-row>
+                    <v-row align="center" class="text-center">
+                      <v-col
+                        cols="12"
+                        align="center"
+                        class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                      >
+                        {{ activity.activity }}
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        align="center"
+                        class="text-caption ma-0 pa-0 font-weight-light"
+                      >
+                        {{ activity.description }}
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                </template>
+                <span>{{ activity.tooltip }}</span>
+              </v-tooltip>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
     <div class="column is-full ma-2">
       <v-row>
@@ -515,6 +606,55 @@
       </v-row>
     </div>
     <div class="column is-full">
+      <v-container id="emailme">
+        <v-alert
+          dense
+          text
+          v-ripple
+          outlined
+          class="non-touch point-cursor"
+          @click="handleEmailClick('me@shaaan.tk')"
+          :type="emailType"
+        >
+          <div class="text">
+            <span class="text-overline font-weight-black">Tip:</span>
+            <span class="text-subtitle-2">
+              Click Here to Contact / You can Contact me through
+            </span>
+            <span class="font-weight-black"> me@shaaan.tk</span>
+          </div>
+        </v-alert>
+        <v-snackbar v-model="copiedEmail" multi-line :timeout="4000">
+          Email ID has Been Copied to Your Clipboard. Do You Want to Open the
+          Email to Send Mail ?
+          <v-col align="center">
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              class="mx-1"
+              color="primary"
+              outlined
+              @click="
+                gotoUrl(mailtoLink);
+                copiedEmail = false;
+              "
+            >
+              Open
+            </v-btn>
+            <v-btn
+              class="mx-1"
+              text
+              outlined
+              color="primary"
+              @click="copiedEmail = false"
+            >
+              Close
+            </v-btn>
+          </v-col>
+        </v-snackbar>
+      </v-container>
+    </div>
+    <div class="column is-full">
       <div
         id="feedbacktitile"
         :class="
@@ -627,7 +767,9 @@ export default {
         os: getOs(),
         viewport: getViewport(),
       },
-      toggleTooltip: true,
+      toggleTooltip: false,
+      mailtoLink:
+        'mailto:me@shaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
       githubPhoto:
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       lifeTimeCountDown: {
@@ -638,9 +780,12 @@ export default {
         minutes: 0,
         seconds: 0,
       },
+      emailType: 'info',
+      copiedEmail: false,
       animatedArray: {
         blog: '',
         about: '',
+        whatiDo: '',
         stat: '',
         projtitle: '',
         randEmoji: '',
@@ -829,8 +974,33 @@ export default {
           this.$set(this.projects, 'projects', {});
         });
     },
+    handleEmailClick(email) {
+      navigator.clipboard.writeText(email).then(
+        () => {
+          this.emailType = 'success';
+          this.copiedEmail = true;
+          setTimeout(() => {
+            this.emailType = 'info';
+          }, 3003);
+        },
+        () => {
+          this.emailType = 'error';
+          this.copiedEmail = false;
+          setTimeout(() => {
+            this.emailType = 'info';
+          }, 3003);
+        },
+      );
+    },
     render() {
       this.loopRandEmoji();
+      this.createObserver(
+        '#whatiDo',
+        'transitWord',
+        this.wordMaps.whatiDo.map,
+        this.wordMaps.whatiDo.initial,
+        'whatiDo',
+      );
       this.createObserver(
         '#abouttitle',
         'transitWord',
@@ -861,6 +1031,9 @@ export default {
       );
       this.getProjects();
       this.lifeTimeCounter('#lifetime');
+      setTimeout(() => {
+        this.toggleTooltip = true;
+      }, 2000);
     },
   },
   computed: {
@@ -871,6 +1044,63 @@ export default {
       } else {
         return true;
       }
+    },
+    activities() {
+      return [
+        {
+          asset: 'web coding.svg',
+          activity: 'Developing Frontends',
+          description: 'Developing Classy, Sassy, Professional Grade Frontends',
+          tooltip: 'Get to Know What Frameworks I Code for Development',
+        },
+        {
+          asset: 'picture.svg',
+          activity: 'Image Manipulation',
+          description: 'Well Versed in Post Processing of Photographs',
+          tooltip: 'Get to Know What Softwares I Use for Post Processing',
+        },
+        {
+          asset: 'device.svg',
+          activity: 'App Development',
+          description: 'Mobile App Development Based on Flutter SDK',
+          tooltip: 'Get to Know What i learnt in Flutter',
+        },
+        {
+          asset: 'idea.svg',
+          activity: 'Hosting Solutions Guidance',
+          description:
+            'Advising on Suitable and Best Hosting Solutions for a Website / Server',
+          tooltip: 'Get to Know What type of Consulting i will give',
+        },
+        {
+          asset: 'programming.svg',
+          activity: 'Presentations',
+          description: 'Desgining Wonderful and Eye Catching Presentations',
+          tooltip:
+            'Get to Know What Softwares i use for Designing Presentations',
+        },
+        {
+          asset: 'layer.svg',
+          activity: 'Architecting Backends',
+          description:
+            'Constructing Secure and Powerful Backends for Frontends',
+          tooltip: 'Get to Know What Languages I Use for Backends',
+        },
+        {
+          asset: 'speed test.svg',
+          activity: 'Video Editing',
+          description: 'Editing and Color Grading Videos  for a Cinematic Look',
+          tooltip: 'Get to Know What Softwares I Use for Video Editing',
+        },
+        {
+          asset: 'binary code.svg',
+          activity: 'Data Analytics',
+          description:
+            'Crunching, Cleaning and Manipluating Data and Getting Insights',
+          tooltip:
+            'Get to Know What Languages and Softwares with Which i Analyze Data',
+        },
+      ];
     },
     wordMaps() {
       return {
@@ -969,6 +1199,20 @@ export default {
             32,
             45,
           ],
+        },
+        whatiDo: {
+          map: [
+            lettersArray.indexOf('w'),
+            lettersArray.indexOf('h'),
+            lettersArray.indexOf('a'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('i'),
+            lettersArray.indexOf(' '),
+            lettersArray.indexOf('d'),
+            lettersArray.indexOf('o'),
+          ],
+          initial: [2, 20, 46, 40, 39, 27, 6, 42, 9],
         },
       };
     },

@@ -1,6 +1,5 @@
 const webpackConfig = require('./webpack.config');
-
-let title = require('./package.json').title;
+const metadata = require('./web-metadata');
 
 module.exports = {
   runtimeCompiler: true,
@@ -11,7 +10,10 @@ module.exports = {
   configureWebpack: webpackConfig,
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {
-      args[0].title = title;
+      args[0].title = metadata.title;
+      args[0].twitterData = metadata.twitterData;
+      args[0].desc = metadata.webSiteDesc;
+      args[0].url = metadata.baseSite;
       args[0].BASE_URL = '';
       return args;
     });

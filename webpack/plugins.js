@@ -1,5 +1,6 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const metadata = require('../web-metadata');
 const zlib = require('zlib');
 const compressionPlugin = require('compression-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,21 +11,23 @@ const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
 const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
-let title = require('../package.json').title;
-let baseSite = require('../package.json').baseSite;
 let isProd = process.env.NODE_ENV != 'development';
 
 let productionPlugins = [
   new htmlWebpackPlugin({
     inject: true,
-    title: title,
+    title: metadata.title,
+    twitterData: metadata.twitterData,
     BASE_URL: '',
+    desc: metadata.webSiteDesc,
+    url: metadata.baseSite,
     filename: 'offline.html',
     template: 'public/index.html',
   }),
   new SitemapPlugin({
-    base: baseSite,
+    base: metadata.baseSite,
     paths: routes,
     options: {
       filename: 'sitemap.xml',
@@ -66,6 +69,9 @@ let productionPlugins = [
     reportTitle: 'Shan.tk Analysis',
     openAnalyzer: false,
   }),
+  new WebpackManifestPlugin({
+    fileName: './stats/manifest.json',
+  }),
   new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
   new StatsWriterPlugin({
     filename: './stats/raw-stats.json',
@@ -75,13 +81,16 @@ let productionPlugins = [
 let devPlugins = [
   new htmlWebpackPlugin({
     inject: true,
-    title: title,
+    title: metadata.title,
+    twitterData: metadata.twitterData,
     BASE_URL: '',
+    desc: metadata.webSiteDesc,
+    url: metadata.baseSite,
     filename: 'offline.html',
     template: 'public/index.html',
   }),
   new SitemapPlugin({
-    base: baseSite,
+    base: metadata.baseSite,
     paths: routes,
     options: {
       filename: 'sitemap.xml',

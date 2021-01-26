@@ -2,7 +2,7 @@
   "name": "portfolio-mat-dark",
   "version": "0.1.0",
   "title": "Sudharshan TK",
-  "baseSite": "https://shan-tk.ga",
+  "baseSite": "https://shaaan.tk/",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "axios-jsonp": "^1.0.4",
     "bulma": "^0.9.0",
     "core-js": "^3.6.5",
     "gsap": "^3.5.1",
@@ -55,6 +56,8 @@
     "webpack-bundle-analyzer": "^4.4.0",
     "webpack-bundle-size-analyzer": "^3.1.0",
     "webpack-bundle-tracker": "^1.0.0-alpha.1",
+    "webpack-manifest-plugin": "^3.0.0",
+    "webpack-nano": "^1.1.1",
     "webpack-stats-plugin": "^1.0.3",
     "webpackbar": "^5.0.0-3"
   }
