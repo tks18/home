@@ -31,7 +31,7 @@
         }"
         flat
       >
-        <div class="hero is-medium non-touch">
+        <div class="hero non-touch">
           <div id="initscroll" class="hero-body">
             <v-row v-if="!ismobile">
               <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
@@ -79,7 +79,6 @@
                 <div
                   class="back-blur fit-text px-2 text-overline font-weight-bold"
                 >
-                  <span class="white--text"> We are </span>
                   <span
                     :class="
                       ($vuetify.theme.dark
@@ -184,35 +183,37 @@
               </v-col>
               <v-col :cols="ismobile ? 12 : 8">
                 <v-row>
-                  <v-scroll-y-transition mode="out-in">
-                    <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                      <v-skeleton-loader type="card-avatar" height="150">
-                      </v-skeleton-loader>
-                    </v-col>
-                    <v-col
-                      v-if="cardbgs.play"
-                      v-bind:key="cardbgs.leftKey"
-                      :cols="ismobile ? 12 : 4"
-                    >
-                      <v-card height="150" outlined elevation="6">
-                        <v-img
-                          cover
-                          height="150"
-                          :src="cardbgs.lefttop"
-                        ></v-img>
-                      </v-card>
-                    </v-col>
-                  </v-scroll-y-transition>
+                  <v-tooltip top transition="slide-y-transition">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-scroll-y-transition mode="out-in">
+                        <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
+                          <v-skeleton-loader type="card-avatar" height="150">
+                          </v-skeleton-loader>
+                        </v-col>
+                        <v-col
+                          v-on="on"
+                          v-bind="attrs"
+                          v-if="cardbgs.play"
+                          v-bind:key="cardbgs.leftKey"
+                          :cols="ismobile ? 12 : 4"
+                        >
+                          <v-card height="150" outlined elevation="6">
+                            <v-img
+                              cover
+                              height="150"
+                              :src="cardbgs.lefttop"
+                            ></v-img>
+                          </v-card>
+                        </v-col>
+                      </v-scroll-y-transition>
+                    </template>
+                    <span>Click here to View My Gallery</span>
+                  </v-tooltip>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-card
                       height="150"
                       outlined
                       elevation="6"
-                      :color="
-                        $vuetify.theme.dark
-                          ? 'purple darken-1'
-                          : 'purple lighten-3'
-                      "
                       @click="gotoUrl('http://fordrhodesparks.com')"
                     >
                       <v-row justify="space-between" class="mx-0">
@@ -324,58 +325,67 @@
                 </v-dialog>
                 <v-row>
                   <v-col :cols="ismobile ? 12 : 8">
-                    <v-card
-                      height="150"
-                      outlined
-                      elevation="6"
-                      @click="$vuetify.goTo('#projects')"
-                      class="happy-gif"
-                    >
-                      <v-card-text
-                        class="inherit-height text-center text-h6 font-weight-bold"
-                      >
-                        <v-row
-                          class="inherit-height"
-                          align="center"
-                          justify="space-around"
-                        >
-                          <v-col
-                            class="center-align-div"
-                            align="center"
-                            cols="12"
-                          >
-                            <div class="back-blur">
-                              Click here to Know about My Projects
-                            </div>
-                            <div class="back-blur">
-                              <v-icon v-for="n in 6" v-bind:key="n">
-                                mdi-arrow-down
-                              </v-icon>
-                            </div>
-                          </v-col>
-                        </v-row>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                  <v-scroll-y-transition mode="out-in">
-                    <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                      <v-skeleton-loader type="card-avatar" height="150">
-                      </v-skeleton-loader>
-                    </v-col>
-                    <v-col
-                      v-if="cardbgs.play"
-                      v-bind:key="cardbgs.rightKey"
-                      :cols="ismobile ? 12 : 4"
-                    >
-                      <v-card height="150" outlined elevation="6">
-                        <v-img
-                          cover
+                    <v-tooltip top transition="slide-y-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-card
                           height="150"
-                          :src="cardbgs.rightbottom"
-                        ></v-img>
-                      </v-card>
-                    </v-col>
-                  </v-scroll-y-transition>
+                          v-on="on"
+                          v-bind="attrs"
+                          outlined
+                          elevation="6"
+                          @click="$vuetify.goTo('#projects')"
+                        >
+                          <div
+                            class="font-weight-bold text-center my-1 pa-0 text-caption"
+                          >
+                            Past Week Coding Stats (in Minutes)
+                          </div>
+                          <v-sparkline
+                            :value="dailyData"
+                            :labels="dailyLabels"
+                            :gradient="dailyGradients"
+                            gradient-direction="top"
+                            :label-size="ismobile ? 9 : 7"
+                            stroke-linecap="round"
+                            :class="ismobile ? 'mx-1' : 'mx-2'"
+                            :height="ismobile ? 95 : 60"
+                            line-width="2"
+                            auto-draw
+                            type="trend"
+                            :smooth="7"
+                          >
+                          </v-sparkline>
+                        </v-card>
+                      </template>
+                      <span>Click here for More Stats</span>
+                    </v-tooltip>
+                  </v-col>
+                  <v-tooltip top transition="slide-y-transition">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-scroll-y-transition mode="out-in">
+                        <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
+                          <v-skeleton-loader type="card-avatar" height="150">
+                          </v-skeleton-loader>
+                        </v-col>
+                        <v-col
+                          v-if="cardbgs.play"
+                          v-bind:key="cardbgs.rightKey"
+                          v-on="on"
+                          v-bind="attrs"
+                          :cols="ismobile ? 12 : 4"
+                        >
+                          <v-card height="150" outlined elevation="6">
+                            <v-img
+                              cover
+                              height="150"
+                              :src="cardbgs.rightbottom"
+                            ></v-img>
+                          </v-card>
+                        </v-col>
+                      </v-scroll-y-transition>
+                    </template>
+                    <span>Click here to View My Gallery</span>
+                  </v-tooltip>
                 </v-row>
               </v-col>
             </v-row>
@@ -408,6 +418,7 @@
 
 <script>
 import { lettersArray } from '@t/emoji-array';
+import jsonadapter from 'axios-jsonp';
 import { countUpFromTime } from '@p/helpers';
 export default {
   metaInfo: function () {
@@ -435,6 +446,9 @@ export default {
         rightbottom: '',
         rightKey: 0,
       },
+      dailyData: [],
+      dailyLabels: [],
+      dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
       resumeDialog: false,
       authorData: {
         name: 'Sudharshan TK',
@@ -517,6 +531,39 @@ export default {
         this.$set(this.cardbgs, 'play', true);
       }, Math.floor(Math.random() + 5) * 1000);
     },
+    getLabels() {
+      let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      let today = new Date();
+      let dayInText = today.getDay();
+      let currLabels = [],
+        loopend = dayInText - 7;
+      for (let i = dayInText; i > loopend; i--) {
+        if (i < 0) {
+          let correctId = 7 + i;
+          currLabels.push(days[correctId]);
+        } else {
+          currLabels.push(days[i]);
+        }
+      }
+      this.dailyLabels = this.$_.reverse(currLabels);
+    },
+    getCodingData() {
+      this.$axios({
+        url: this.codingStats.dailyStats,
+        method: 'get',
+        adapter: jsonadapter,
+      }).then((resp) => {
+        let data = resp.data;
+        if (data) {
+          data.data.forEach((codeData) => {
+            let hours = codeData.grand_total.hours,
+              minutes = codeData.grand_total.minutes;
+            let totalMinutes = hours * 60 + minutes;
+            this.dailyData.push(totalMinutes);
+          });
+        }
+      });
+    },
   },
   computed: {
     ismobile() {
@@ -526,6 +573,12 @@ export default {
       } else {
         return true;
       }
+    },
+    codingStats() {
+      return {
+        dailyStats:
+          'https://wakatime.com/share/@tks18/64f77194-b682-4115-a9e9-8c43be07d016.json',
+      };
     },
     wordMaps() {
       return {
@@ -569,6 +622,16 @@ export default {
       'hashTag',
     );
     this.setCardBgs();
+    this.getLabels();
+    this.getCodingData();
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      let params = to.params;
+      if (params.scroll) {
+        vm.$vuetify.goTo(params.scrollid);
+      }
+    });
   },
 };
 </script>

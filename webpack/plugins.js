@@ -1,5 +1,6 @@
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const metadata = require('../web-metadata');
 const zlib = require('zlib');
 const compressionPlugin = require('compression-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,23 +13,21 @@ const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
-let title = require('../package.json').title;
-let baseSite = require('../package.json').baseSite;
-let webSiteDesc =
-  'Building Online Answers for Your Next Design Challenge. Sometimes Writes Blogs about Latest Tech Developments and Frameworks. Forgot, this is Sudharshan TK hehe xD';
-
 let isProd = process.env.NODE_ENV != 'development';
 
 let productionPlugins = [
   new htmlWebpackPlugin({
     inject: true,
-    title: title,
+    title: metadata.title,
+    twitterData: metadata.twitterData,
     BASE_URL: '',
+    desc: metadata.webSiteDesc,
+    url: metadata.baseSite,
     filename: 'offline.html',
     template: 'public/index.html',
   }),
   new SitemapPlugin({
-    base: baseSite,
+    base: metadata.baseSite,
     paths: routes,
     options: {
       filename: 'sitemap.xml',
@@ -82,15 +81,16 @@ let productionPlugins = [
 let devPlugins = [
   new htmlWebpackPlugin({
     inject: true,
-    title: title,
+    title: metadata.title,
+    twitterData: metadata.twitterData,
     BASE_URL: '',
-    desc: webSiteDesc,
-    url: baseSite,
+    desc: metadata.webSiteDesc,
+    url: metadata.baseSite,
     filename: 'offline.html',
     template: 'public/index.html',
   }),
   new SitemapPlugin({
-    base: baseSite,
+    base: metadata.baseSite,
     paths: routes,
     options: {
       filename: 'sitemap.xml',

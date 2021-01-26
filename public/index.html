@@ -8,12 +8,18 @@
     <link
       rel="sitemap"
       type="application/xml"
-      title="Sudharhshan TK"
+      title="<%= htmlWebpackPlugin.options.title %>"
       href="/sitemap.xml"
     />
     <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@shantk18" />
+    <meta
+      name="twitter:card"
+      content="<%= htmlWebpackPlugin.options.twitterData.type %>"
+    />
+    <meta
+      name="twitter:site"
+      content="<%= htmlWebpackPlugin.options.twitterData.username %>"
+    />
     <meta
       name="twitter:title"
       content="<%= htmlWebpackPlugin.options.title %>"
@@ -22,10 +28,13 @@
       name="twitter:description"
       content="<%= htmlWebpackPlugin.options.desc %>"
     />
-    <meta name="twitter:creator" content="@shantk18" />
+    <meta
+      name="twitter:creator"
+      content="<%= htmlWebpackPlugin.options.twitterData.username %>"
+    />
     <meta
       name="twitter:image"
-      content="<%= htmlWebpackPlugin.options.url %>icons/apple-touch-icon.png"
+      content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
     />
 
     <!-- Open Graph data -->
@@ -37,7 +46,7 @@
     <meta property="og:url" content="<%= htmlWebpackPlugin.options.url %>" />
     <meta
       property="og:image"
-      content="<%= htmlWebpackPlugin.options.url %>icons/apple-touch-icon.png"
+      content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
     />
     <meta
       property="og:description"
@@ -49,7 +58,7 @@
     />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link
       rel="icon"

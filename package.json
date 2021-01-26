@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "axios-jsonp": "^1.0.4",
     "bulma": "^0.9.0",
     "core-js": "^3.6.5",
     "gsap": "^3.5.1",
