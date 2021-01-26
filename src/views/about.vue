@@ -348,7 +348,7 @@
                             :label-size="ismobile ? 9 : 7"
                             stroke-linecap="round"
                             :class="ismobile ? 'mx-1' : 'mx-2'"
-                            :height="ismobile ? 95 : 60"
+                            :height="ismobile ? 90 : 60"
                             line-width="2"
                             auto-draw
                             type="trend"
@@ -390,6 +390,34 @@
               </v-col>
             </v-row>
           </v-container>
+        </v-col>
+        <v-col cols="12" id="languagesknown">
+          <v-card :height="ismobile ? 300 : 500" flat elevation="12">
+            <v-card-title class="mx-2 no-break-words">
+              Top Languages, Frameworks, Softwares that i Know
+            </v-card-title>
+            <v-card-subtitle class="mx-2 no-break-words">
+              (Scores upto 100)
+            </v-card-subtitle>
+            <v-card-text>
+              <v-sparkline
+                :value="languagesKnown.values"
+                :labels="languagesKnown.labels"
+                :gradient="languagesKnown.gradient"
+                gradient-direction="top"
+                :label-size="ismobile ? 10 : 3"
+                :height="ismobile ? 130 : 82"
+                :class="ismobile ? 'mx-0' : 'mx-2'"
+                line-width="3"
+                auto-draw
+                type="bar"
+              >
+                <template v-slot:label="item" class="text-caption">
+                  {{ item.value }}
+                </template>
+              </v-sparkline>
+            </v-card-text>
+          </v-card>
         </v-col>
         <v-col id="projects" cols="12">
           <v-row>
@@ -572,6 +600,40 @@ export default {
         return false;
       } else {
         return true;
+      }
+    },
+    languagesKnown() {
+      if (this.ismobile) {
+        return {
+          values: [80, 50, 30, 90, 40],
+          labels: [
+            'Nodejs(80)',
+            'Python(50)',
+            'ReactJs(30)',
+            'Vuejs(90)',
+            'Flutter(60)',
+          ],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
+      } else {
+        return {
+          values: [80, 50, 40, 30, 90, 40, 60, 20, 20, 100, 50, 60],
+          labels: [
+            'Nodejs(80)',
+            'Python(50)',
+            'Illustrator(40)',
+            'ReactJs(30)',
+            'Vuejs(90)',
+            'Adobe Xd(40)',
+            'Flutter(60)',
+            'Ruby(20)',
+            'Java(20)',
+            'Excel(100)',
+            'Photoshop(50)',
+            'Premiere(60)',
+          ],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
       }
     },
     codingStats() {
