@@ -340,21 +340,23 @@
                           >
                             Past Week Coding Stats (in Minutes)
                           </div>
-                          <v-sparkline
-                            :value="dailyData"
-                            :labels="dailyLabels"
-                            :gradient="dailyGradients"
-                            gradient-direction="top"
-                            :label-size="ismobile ? 9 : 7"
-                            stroke-linecap="round"
-                            :class="ismobile ? 'mx-1' : 'mx-2'"
-                            :height="ismobile ? 90 : 60"
-                            line-width="2"
-                            auto-draw
-                            type="trend"
-                            :smooth="7"
-                          >
-                          </v-sparkline>
+                          <v-card-text>
+                            <v-sparkline
+                              :value="dailyData"
+                              :labels="dailyLabels"
+                              :gradient="dailyGradients"
+                              gradient-direction="top"
+                              :label-size="ismobile ? 9 : 7"
+                              stroke-linecap="round"
+                              :class="ismobile ? 'mx-1' : 'mx-2'"
+                              line-width="2"
+                              :height="50"
+                              auto-draw
+                              type="trend"
+                              :smooth="7"
+                            >
+                            </v-sparkline>
+                          </v-card-text>
                         </v-card>
                       </template>
                       <span>Click here for More Stats</span>
@@ -406,7 +408,7 @@
                 :gradient="languagesKnown.gradient"
                 gradient-direction="top"
                 :label-size="ismobile ? 10 : 3"
-                :height="ismobile ? 130 : 82"
+                :height="ismobile ? 130 : 70"
                 :class="ismobile ? 'mx-0' : 'mx-2'"
                 line-width="3"
                 auto-draw
@@ -420,7 +422,81 @@
           <v-container>
             <v-row>
               <v-col :cols="ismobile ? 12 : 8">
-                <v-card height="450" outlined elevation="6"> </v-card>
+                <v-card height="450" outlined elevation="6">
+                  <v-card-title>SWOT Analysis - Programmers Way </v-card-title>
+                  <v-card-subtitle>
+                    (Strength-Weakness-Opportunity-Threats)
+                  </v-card-subtitle>
+                  <v-card-text>
+                    <v-row class="my-0 py-0">
+                      <v-col cols="12" class="my-0 py-0">
+                        <v-row class="my-0">
+                          <v-col cols="5" align="right" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Strengths
+                            </v-card-subtitle>
+                            <div
+                              v-for="(strength, index) in swot.strengths"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + strength }}
+                            </div>
+                          </v-col>
+                          <v-col cols="2" align="center" justify="center">
+                            <v-divider
+                              vertical
+                              class="opaque mx-0 my-0 px-0 py-0"
+                            ></v-divider>
+                          </v-col>
+                          <v-col cols="5" align="left" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Weakness
+                            </v-card-subtitle>
+                            <div
+                              v-for="(weakness, index) in swot.weakness"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + weakness }}
+                            </div>
+                          </v-col>
+                        </v-row>
+                        <v-divider
+                          class="opaque mx-0 my-0 px-0 py-0"
+                        ></v-divider>
+                        <v-row>
+                          <v-col cols="5" align="right" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Opportunities
+                            </v-card-subtitle>
+                            <div
+                              v-for="(oppor, index) in swot.opportunities"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + oppor }}
+                            </div>
+                          </v-col>
+                          <v-col cols="2" align="center" justify="center">
+                            <v-divider
+                              vertical
+                              class="opaque mx-0 my-0 px-0 py-0"
+                            ></v-divider>
+                          </v-col>
+                          <v-col cols="5" align="left" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Threats
+                            </v-card-subtitle>
+                            <div
+                              v-for="(threats, index) in swot.threats"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + threats }}
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
               </v-col>
               <v-col :cols="ismobile ? 12 : 4">
                 <v-row>
@@ -439,7 +515,7 @@
                         :label-size="ismobile ? 9 : 8"
                         stroke-linecap="round"
                         class="mx-1"
-                        :height="ismobile ? 90 : 110"
+                        :height="ismobile ? 90 : 97"
                         line-width="2"
                         auto-draw
                         type="trend"
@@ -462,7 +538,7 @@
                             v-for="(editor, index) in editorsTrendData"
                             v-bind:key="index"
                             cols="6"
-                            class="mx-1 my-0 py-1"
+                            class="my-0 py-1"
                           >
                             <div class="text-caption">
                               {{ index + 1 + '. '
@@ -521,6 +597,12 @@ export default {
       languageTrendGradients: [],
       editorsTrendData: [],
       editorsTrendLabels: [],
+      swot: {
+        strengths: ['Vuejs', 'NodeJs', 'Gsap'],
+        weakness: ['Java', 'Flutter', 'Ruby'],
+        opportunities: ['ReactJs', 'React-Native', 'Vue-Native'],
+        threats: ['Java', 'Premiere', 'Photoshop'],
+      },
       resumeDialog: false,
       authorData: {
         name: 'Sudharshan TK',
@@ -662,10 +744,10 @@ export default {
       }).then((resp) => {
         let data = resp.data;
         if (data) {
-          data.data.forEach((editor) => {
-            this.editorsTrendData.push(editor.percent);
-            this.editorsTrendLabels.push(editor.name);
-          });
+          for (let i = 0; i < 5; i++) {
+            this.editorsTrendData.push(data.data[i].percent);
+            this.editorsTrendLabels.push(data.data[i].name);
+          }
         }
       });
     },
@@ -764,7 +846,7 @@ export default {
     this.getCodingData();
     this.getLanguageTrend();
     this.getEditorsTrend();
-    this.getEditorsTrend();
+    console.log(this.editorsTrendData);
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
