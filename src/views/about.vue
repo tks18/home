@@ -350,7 +350,7 @@
                               stroke-linecap="round"
                               :class="ismobile ? 'mx-1' : 'mx-2'"
                               line-width="2"
-                              :height="50"
+                              :height="ismobile ? 82 : 60"
                               auto-draw
                               type="trend"
                               :smooth="7"
@@ -394,7 +394,7 @@
           </v-container>
         </v-col>
         <v-col cols="12" id="languagesknown">
-          <v-card :height="ismobile ? 300 : 500" flat elevation="12">
+          <v-card :height="ismobile ? 300 : 450" flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
               Top Languages, Frameworks, Softwares that i Know
             </v-card-title>
@@ -533,7 +533,7 @@
                       </v-card-title>
                       <v-card-subtitle>(All Time)</v-card-subtitle>
                       <v-card-text>
-                        <v-row class="mx-1">
+                        <v-row class="mx-0">
                           <v-col
                             v-for="(editor, index) in editorsTrendData"
                             v-bind:key="index"
@@ -745,7 +745,7 @@ export default {
         let data = resp.data;
         if (data) {
           for (let i = 0; i < 5; i++) {
-            this.editorsTrendData.push(data.data[i].percent);
+            this.editorsTrendData.push(Math.round(data.data[i].percent));
             this.editorsTrendLabels.push(data.data[i].name);
           }
         }
@@ -846,7 +846,6 @@ export default {
     this.getCodingData();
     this.getLanguageTrend();
     this.getEditorsTrend();
-    console.log(this.editorsTrendData);
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
