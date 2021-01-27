@@ -340,21 +340,23 @@
                           >
                             Past Week Coding Stats (in Minutes)
                           </div>
-                          <v-sparkline
-                            :value="dailyData"
-                            :labels="dailyLabels"
-                            :gradient="dailyGradients"
-                            gradient-direction="top"
-                            :label-size="ismobile ? 9 : 7"
-                            stroke-linecap="round"
-                            :class="ismobile ? 'mx-1' : 'mx-2'"
-                            :height="ismobile ? 95 : 60"
-                            line-width="2"
-                            auto-draw
-                            type="trend"
-                            :smooth="7"
-                          >
-                          </v-sparkline>
+                          <v-card-text>
+                            <v-sparkline
+                              :value="dailyData"
+                              :labels="dailyLabels"
+                              :gradient="dailyGradients"
+                              gradient-direction="top"
+                              :label-size="ismobile ? 9 : 7"
+                              stroke-linecap="round"
+                              :class="ismobile ? 'mx-1' : 'mx-2'"
+                              line-width="2"
+                              :height="ismobile ? 82 : 60"
+                              auto-draw
+                              type="trend"
+                              :smooth="7"
+                            >
+                            </v-sparkline>
+                          </v-card-text>
                         </v-card>
                       </template>
                       <span>Click here for More Stats</span>
@@ -391,25 +393,166 @@
             </v-row>
           </v-container>
         </v-col>
+        <v-col cols="12" id="languagesknown">
+          <v-card :height="ismobile ? 300 : 450" flat elevation="12">
+            <v-card-title class="mx-2 no-break-words">
+              Top Languages, Frameworks, Softwares that i Know
+            </v-card-title>
+            <v-card-subtitle class="mx-2 no-break-words">
+              (Scores upto 100)
+            </v-card-subtitle>
+            <v-card-text>
+              <v-sparkline
+                :value="languagesKnown.values"
+                :labels="languagesKnown.labels"
+                :gradient="languagesKnown.gradient"
+                gradient-direction="top"
+                :label-size="ismobile ? 10 : 3"
+                :height="ismobile ? 130 : 70"
+                :class="ismobile ? 'mx-0' : 'mx-2'"
+                line-width="3"
+                auto-draw
+                type="bar"
+              >
+              </v-sparkline>
+            </v-card-text>
+          </v-card>
+        </v-col>
         <v-col id="projects" cols="12">
-          <v-row>
-            <v-col cols="8">
-              <v-card height="450" outlined elevation="6" color="error">
-              </v-card>
-            </v-col>
-            <v-col cols="4">
-              <v-row>
-                <v-col cols="12">
-                  <v-card height="200" outlined elevation="6"> </v-card>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-card height="200" outlined elevation="6"> </v-card>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
+          <v-container>
+            <v-row>
+              <v-col :cols="ismobile ? 12 : 8">
+                <v-card height="450" outlined elevation="6">
+                  <v-card-title>SWOT Analysis - Programmers Way </v-card-title>
+                  <v-card-subtitle>
+                    (Strength-Weakness-Opportunity-Threats)
+                  </v-card-subtitle>
+                  <v-card-text>
+                    <v-row class="my-0 py-0">
+                      <v-col cols="12" class="my-0 py-0">
+                        <v-row class="my-0">
+                          <v-col cols="5" align="right" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Strengths
+                            </v-card-subtitle>
+                            <div
+                              v-for="(strength, index) in swot.strengths"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + strength }}
+                            </div>
+                          </v-col>
+                          <v-col cols="2" align="center" justify="center">
+                            <v-divider
+                              vertical
+                              class="opaque mx-0 my-0 px-0 py-0"
+                            ></v-divider>
+                          </v-col>
+                          <v-col cols="5" align="left" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Weakness
+                            </v-card-subtitle>
+                            <div
+                              v-for="(weakness, index) in swot.weakness"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + weakness }}
+                            </div>
+                          </v-col>
+                        </v-row>
+                        <v-divider
+                          class="opaque mx-0 my-0 px-0 py-0"
+                        ></v-divider>
+                        <v-row>
+                          <v-col cols="5" align="right" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Opportunities
+                            </v-card-subtitle>
+                            <div
+                              v-for="(oppor, index) in swot.opportunities"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + oppor }}
+                            </div>
+                          </v-col>
+                          <v-col cols="2" align="center" justify="center">
+                            <v-divider
+                              vertical
+                              class="opaque mx-0 my-0 px-0 py-0"
+                            ></v-divider>
+                          </v-col>
+                          <v-col cols="5" align="left" justify="center">
+                            <v-card-subtitle class="text-overline">
+                              Threats
+                            </v-card-subtitle>
+                            <div
+                              v-for="(threats, index) in swot.threats"
+                              v-bind:key="index"
+                            >
+                              {{ index + 1 + '. ' + threats }}
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col :cols="ismobile ? 12 : 4">
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6">
+                      <v-card-title
+                        class="text-caption my-2 py-1 font-weight-bold"
+                      >
+                        Language Trend (30 Days)
+                      </v-card-title>
+                      <v-sparkline
+                        :value="languageTrendData"
+                        :labels="languageTrendLabels"
+                        :gradient="languageTrendGradients"
+                        gradient-direction="top"
+                        :label-size="ismobile ? 9 : 8"
+                        stroke-linecap="round"
+                        class="mx-1"
+                        :height="ismobile ? 90 : 97"
+                        line-width="2"
+                        auto-draw
+                        type="trend"
+                        :smooth="7"
+                      >
+                      </v-sparkline>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6">
+                      <v-card-title class="font-weight-bold">
+                        Top Editors I Use
+                      </v-card-title>
+                      <v-card-subtitle>(All Time)</v-card-subtitle>
+                      <v-card-text>
+                        <v-row class="mx-0">
+                          <v-col
+                            v-for="(editor, index) in editorsTrendData"
+                            v-bind:key="index"
+                            cols="6"
+                            class="my-0 py-1"
+                          >
+                            <div class="text-caption">
+                              {{ index + 1 + '. '
+                              }}{{ editorsTrendLabels[index] }} - {{ editor }}%
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-col>
       </v-row>
     </div>
@@ -449,6 +592,17 @@ export default {
       dailyData: [],
       dailyLabels: [],
       dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
+      languageTrendData: [],
+      languageTrendLabels: [],
+      languageTrendGradients: [],
+      editorsTrendData: [],
+      editorsTrendLabels: [],
+      swot: {
+        strengths: ['Vuejs', 'NodeJs', 'Gsap'],
+        weakness: ['Java', 'Flutter', 'Ruby'],
+        opportunities: ['ReactJs', 'React-Native', 'Vue-Native'],
+        threats: ['Java', 'Premiere', 'Photoshop'],
+      },
       resumeDialog: false,
       authorData: {
         name: 'Sudharshan TK',
@@ -564,6 +718,39 @@ export default {
         }
       });
     },
+    getLanguageTrend() {
+      this.$axios({
+        url: this.codingStats.languageTrend,
+        method: 'get',
+        adapter: jsonadapter,
+      }).then((resp) => {
+        let data = resp.data;
+        if (data) {
+          for (let i = 0; i < 5; i++) {
+            this.languageTrendData.push(data.data[i].percent);
+            data.data[i].name == 'JavaScript'
+              ? this.languageTrendLabels.push('JS')
+              : this.languageTrendLabels.push(data.data[i].name);
+            this.languageTrendGradients.push(data.data[i].color);
+          }
+        }
+      });
+    },
+    getEditorsTrend() {
+      this.$axios({
+        url: this.codingStats.editors,
+        method: 'get',
+        adapter: jsonadapter,
+      }).then((resp) => {
+        let data = resp.data;
+        if (data) {
+          for (let i = 0; i < 5; i++) {
+            this.editorsTrendData.push(Math.round(data.data[i].percent));
+            this.editorsTrendLabels.push(data.data[i].name);
+          }
+        }
+      });
+    },
   },
   computed: {
     ismobile() {
@@ -574,10 +761,43 @@ export default {
         return true;
       }
     },
+    languagesKnown() {
+      if (this.ismobile) {
+        return {
+          values: [79, 47, 32, 93, 41],
+          labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
+      } else {
+        return {
+          values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
+          labels: [
+            'Nodejs',
+            'Python',
+            'Illustrator',
+            'ReactJs',
+            'Vuejs',
+            'Adobe Xd',
+            'Lightroom',
+            'Flutter',
+            'Ruby',
+            'Java',
+            'Excel',
+            'Photoshop',
+            'Premiere',
+          ],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
+      }
+    },
     codingStats() {
       return {
         dailyStats:
           'https://wakatime.com/share/@tks18/64f77194-b682-4115-a9e9-8c43be07d016.json',
+        languageTrend:
+          'https://wakatime.com/share/@tks18/0c4d783e-ccd7-421b-9330-5ae5cbd30847.json',
+        editors:
+          'https://wakatime.com/share/@tks18/51fe7a20-7425-4fd6-888b-cfbc69a22c1b.json',
       };
     },
     wordMaps() {
@@ -624,6 +844,8 @@ export default {
     this.setCardBgs();
     this.getLabels();
     this.getCodingData();
+    this.getLanguageTrend();
+    this.getEditorsTrend();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {

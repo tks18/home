@@ -513,6 +513,7 @@
                               <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
+                                  @click="gotoUrl(project.stargazers_url)"
                                   class="text-right ma-1"
                                   color="primary"
                                   pill
@@ -527,6 +528,7 @@
                               <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
+                                  @click="gotoUrl(project.forks_url)"
                                   class="text-right ma-1"
                                   color="primary"
                                   pill
@@ -541,6 +543,7 @@
                               <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
+                                  @click="gotoUrl(project.stargazers_url)"
                                   class="text-right ma-1"
                                   color="primary"
                                   pill
@@ -561,33 +564,67 @@
                           <v-col class="my-0 py-0">
                             <v-row>
                               <v-col cols="12">
-                                <v-btn block color="primary" rounded>
+                                <v-btn
+                                  @click="$router.push('/projects')"
+                                  block
+                                  color="primary"
+                                  rounded
+                                >
                                   <v-icon small>mdi-folder-star</v-icon> Project
                                   Breif
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
-                                <v-btn small block rounded color="primary">
+                                <v-btn
+                                  @click="gotoUrl(project.homepage)"
+                                  small
+                                  block
+                                  rounded
+                                  color="primary"
+                                >
                                   <v-icon small>mdi-web</v-icon> Website
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
-                                <v-btn small block rounded color="primary">
+                                <v-btn
+                                  @click="gotoUrl(project.git_url)"
+                                  small
+                                  block
+                                  rounded
+                                  color="primary"
+                                >
                                   <v-icon small>mdi-git</v-icon> Git
                                 </v-btn>
                               </v-col>
                               <v-col cols="12">
-                                <v-btn block rounded color="primary">
+                                <v-btn
+                                  @click="gotoUrl(project.html_url)"
+                                  block
+                                  rounded
+                                  color="primary"
+                                >
                                   <v-icon small>mdi-github</v-icon> on Github
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
-                                <v-btn color="primary" block small rounded>
+                                <v-btn
+                                  @click="gotoUrl(project.url)"
+                                  color="primary"
+                                  block
+                                  small
+                                  rounded
+                                >
                                   <v-icon small>mdi-webpack</v-icon> Api
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
-                                <v-btn color="primary" block small rounded>
+                                <v-btn
+                                  @click="gotoUrl(project.clone_url)"
+                                  color="primary"
+                                  block
+                                  small
+                                  rounded
+                                >
                                   <v-icon small>mdi-source-branch-sync</v-icon>
                                   Clone
                                 </v-btn>
