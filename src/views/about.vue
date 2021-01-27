@@ -412,32 +412,71 @@
                 auto-draw
                 type="bar"
               >
-                <template v-slot:label="item" class="text-caption">
-                  {{ item.value }}
-                </template>
               </v-sparkline>
             </v-card-text>
           </v-card>
         </v-col>
         <v-col id="projects" cols="12">
-          <v-row>
-            <v-col cols="8">
-              <v-card height="450" outlined elevation="6" color="error">
-              </v-card>
-            </v-col>
-            <v-col cols="4">
-              <v-row>
-                <v-col cols="12">
-                  <v-card height="200" outlined elevation="6"> </v-card>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-card height="200" outlined elevation="6"> </v-card>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
+          <v-container>
+            <v-row>
+              <v-col :cols="ismobile ? 12 : 8">
+                <v-card height="450" outlined elevation="6"> </v-card>
+              </v-col>
+              <v-col :cols="ismobile ? 12 : 4">
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6">
+                      <v-card-title
+                        class="text-caption my-2 py-1 font-weight-bold"
+                      >
+                        Language Trend (30 Days)
+                      </v-card-title>
+                      <v-sparkline
+                        :value="languageTrendData"
+                        :labels="languageTrendLabels"
+                        :gradient="languageTrendGradients"
+                        gradient-direction="top"
+                        :label-size="ismobile ? 9 : 8"
+                        stroke-linecap="round"
+                        class="mx-1"
+                        :height="ismobile ? 90 : 110"
+                        line-width="2"
+                        auto-draw
+                        type="trend"
+                        :smooth="7"
+                      >
+                      </v-sparkline>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-card height="200" outlined elevation="6">
+                      <v-card-title class="font-weight-bold">
+                        Top Editors I Use
+                      </v-card-title>
+                      <v-card-subtitle>(All Time)</v-card-subtitle>
+                      <v-card-text>
+                        <v-row class="mx-1">
+                          <v-col
+                            v-for="(editor, index) in editorsTrendData"
+                            v-bind:key="index"
+                            cols="6"
+                            class="mx-1 my-0 py-1"
+                          >
+                            <div class="text-caption">
+                              {{ index + 1 + '. '
+                              }}{{ editorsTrendLabels[index] }} - {{ editor }}%
+                            </div>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-col>
       </v-row>
     </div>
@@ -477,6 +516,11 @@ export default {
       dailyData: [],
       dailyLabels: [],
       dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
+      languageTrendData: [],
+      languageTrendLabels: [],
+      languageTrendGradients: [],
+      editorsTrendData: [],
+      editorsTrendLabels: [],
       resumeDialog: false,
       authorData: {
         name: 'Sudharshan TK',
@@ -592,6 +636,39 @@ export default {
         }
       });
     },
+    getLanguageTrend() {
+      this.$axios({
+        url: this.codingStats.languageTrend,
+        method: 'get',
+        adapter: jsonadapter,
+      }).then((resp) => {
+        let data = resp.data;
+        if (data) {
+          for (let i = 0; i < 5; i++) {
+            this.languageTrendData.push(data.data[i].percent);
+            data.data[i].name == 'JavaScript'
+              ? this.languageTrendLabels.push('JS')
+              : this.languageTrendLabels.push(data.data[i].name);
+            this.languageTrendGradients.push(data.data[i].color);
+          }
+        }
+      });
+    },
+    getEditorsTrend() {
+      this.$axios({
+        url: this.codingStats.editors,
+        method: 'get',
+        adapter: jsonadapter,
+      }).then((resp) => {
+        let data = resp.data;
+        if (data) {
+          data.data.forEach((editor) => {
+            this.editorsTrendData.push(editor.percent);
+            this.editorsTrendLabels.push(editor.name);
+          });
+        }
+      });
+    },
   },
   computed: {
     ismobile() {
@@ -605,32 +682,27 @@ export default {
     languagesKnown() {
       if (this.ismobile) {
         return {
-          values: [80, 50, 30, 90, 40],
-          labels: [
-            'Nodejs(80)',
-            'Python(50)',
-            'ReactJs(30)',
-            'Vuejs(90)',
-            'Flutter(60)',
-          ],
+          values: [79, 47, 32, 93, 41],
+          labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
           gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
       } else {
         return {
-          values: [80, 50, 40, 30, 90, 40, 60, 20, 20, 100, 50, 60],
+          values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
           labels: [
-            'Nodejs(80)',
-            'Python(50)',
-            'Illustrator(40)',
-            'ReactJs(30)',
-            'Vuejs(90)',
-            'Adobe Xd(40)',
-            'Flutter(60)',
-            'Ruby(20)',
-            'Java(20)',
-            'Excel(100)',
-            'Photoshop(50)',
-            'Premiere(60)',
+            'Nodejs',
+            'Python',
+            'Illustrator',
+            'ReactJs',
+            'Vuejs',
+            'Adobe Xd',
+            'Lightroom',
+            'Flutter',
+            'Ruby',
+            'Java',
+            'Excel',
+            'Photoshop',
+            'Premiere',
           ],
           gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
@@ -640,6 +712,10 @@ export default {
       return {
         dailyStats:
           'https://wakatime.com/share/@tks18/64f77194-b682-4115-a9e9-8c43be07d016.json',
+        languageTrend:
+          'https://wakatime.com/share/@tks18/0c4d783e-ccd7-421b-9330-5ae5cbd30847.json',
+        editors:
+          'https://wakatime.com/share/@tks18/51fe7a20-7425-4fd6-888b-cfbc69a22c1b.json',
       };
     },
     wordMaps() {
@@ -686,6 +762,9 @@ export default {
     this.setCardBgs();
     this.getLabels();
     this.getCodingData();
+    this.getLanguageTrend();
+    this.getEditorsTrend();
+    this.getEditorsTrend();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
