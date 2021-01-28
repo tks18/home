@@ -1,8 +1,8 @@
 {
   "name": "Sudharshan TK",
   "short_name": "Shan.tk",
-  "theme_color": "#F44336",
-  "background_color": "#ffffff",
+  "theme_color": "#121212",
+  "background_color": "#121212",
   "display": "standalone",
   "scope": "/",
   "start_url": "https://shaaan.tk/",
