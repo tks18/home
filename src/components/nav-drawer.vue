@@ -51,6 +51,38 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
+      <v-spacer></v-spacer>
+      <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header> Website Stats </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-list-item-group>
+              <v-tooltip
+                v-for="(stats, index) in siteStats"
+                v-bind:key="index"
+                top
+                transition="scroll-y-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-list-item
+                    @click="windowClick(stats.link)"
+                    v-on="on"
+                    v-bind="attrs"
+                  >
+                    <v-list-item-icon>
+                      <v-icon small>{{ stats.icon }}</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title> {{ stats.name }} </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+                <span>{{ stats.tooltip }}</span>
+              </v-tooltip>
+            </v-list-item-group>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-container>
   </v-navigation-drawer>
 </template>
@@ -99,6 +131,44 @@ export default {
           title: 'Gallery',
           subtitle: 'My Photography Skills',
           link: '/gallery',
+        },
+      ],
+      siteStats: [
+        {
+          name: 'Bundle Stats',
+          icon: 'mdi-bag-checked',
+          link: '/stats/bundle-analyzer.json',
+          tooltip: 'Website Bundle Statistics in JSON Data',
+        },
+        {
+          name: 'Bundle Analysis',
+          icon: 'mdi-bag-carry-on-check',
+          link: '/stats/bundle-analyzer.html',
+          tooltip: 'Visualization of Website Bundle Statistics',
+        },
+        {
+          name: 'UI Stats',
+          icon: 'mdi-database-check',
+          link: '/stats/ui-stats.json',
+          tooltip: 'Website UI Statistics in JSON Data',
+        },
+        {
+          name: 'UI Analysis',
+          icon: 'mdi-eye-check-outline',
+          link: '/stats/ui-stats.html',
+          tooltip: 'Visualization of Website Bundle Statistics',
+        },
+        {
+          name: 'Size Analysis',
+          icon: 'mdi-progress-check',
+          link: '/stats/size-analysis.txt',
+          tooltip: 'Size Analysis for this Website',
+        },
+        {
+          name: 'Sitemap',
+          icon: 'mdi-map-check-outline',
+          link: '/sitemap.xml',
+          tooltip: 'Sitemap of the Website',
         },
       ],
     };

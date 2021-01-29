@@ -82,6 +82,7 @@ let devPlugins = [
   new htmlWebpackPlugin({
     inject: true,
     title: metadata.title,
+    keywords: metadata.keyWords,
     twitterData: metadata.twitterData,
     BASE_URL: '',
     desc: metadata.webSiteDesc,
