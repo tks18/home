@@ -2,10 +2,13 @@ const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const metadata = require('../web-metadata');
 const zlib = require('zlib');
+const path = require('path');
 const compressionPlugin = require('compression-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
   .WebpackBundleSizeAnalyzerPlugin;
 const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
@@ -13,91 +16,107 @@ const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
+let routeNames = routes.map((route) => {
+  return route.path;
+});
+
 let isProd = process.env.NODE_ENV != 'development';
 
-let productionPlugins = [
-  new htmlWebpackPlugin({
-    inject: true,
-    title: metadata.title,
-    twitterData: metadata.twitterData,
-    BASE_URL: '',
-    desc: metadata.webSiteDesc,
-    url: metadata.baseSite,
-    filename: 'offline.html',
-    template: 'public/index.html',
-  }),
-  new SitemapPlugin({
-    base: metadata.baseSite,
-    paths: routes,
-    options: {
-      filename: 'sitemap.xml',
-      lastmod: true,
-    },
-  }),
-  new compressionPlugin({
-    filename: '[path][base].br',
-    algorithm: 'brotliCompress',
-    compressionOptions: {
-      params: {
-        [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+function productionPlugins(dir) {
+  return [
+    new htmlWebpackPlugin({
+      inject: true,
+      title: metadata.title,
+      twitterData: metadata.twitterData,
+      BASE_URL: '',
+      desc: metadata.webSiteDesc,
+      url: metadata.baseSite,
+      filename: 'offline.html',
+      template: 'public/index.html',
+    }),
+    new SitemapPlugin({
+      base: metadata.baseSite,
+      paths: routes,
+      options: {
+        filename: 'sitemap.xml',
+        lastmod: true,
       },
-    },
-    test: /\.js$|\.css$/,
-    threshold: 10240,
-    minRatio: 0.8,
-  }),
-  new StatoscopeWebpackPlugin({
-    saveTo: './dist/stats/ui-stats.html',
-    saveStatsTo: './dist/stats/ui-stats.json',
-    watchMode: false,
-    name: 'Shan.tk-UI Analysis',
-    open: false,
-  }),
-  new BundleTracker({
-    path: __dirname,
-    filename: '../dist/stats/bundle-stats.json',
-  }),
-  new BundleAnalyzerPlugin({
-    analyzerMode: 'json',
-    reportFilename: './stats/bundle-analyzer.json',
-    reportTitle: 'Shan.tk Analysis',
-    openAnalyzer: false,
-  }),
-  new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-    reportFilename: './stats/bundle-analyzer.html',
-    reportTitle: 'Shan.tk Analysis',
-    openAnalyzer: false,
-  }),
-  new WebpackManifestPlugin({
-    fileName: './stats/manifest.json',
-  }),
-  new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
-  new StatsWriterPlugin({
-    filename: './stats/raw-stats.json',
-  }),
-];
+    }),
+    new compressionPlugin({
+      filename: '[path][base].br',
+      algorithm: 'brotliCompress',
+      compressionOptions: {
+        params: {
+          [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+        },
+      },
+      test: /\.js$|\.css$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
+    new StatoscopeWebpackPlugin({
+      saveTo: './dist/stats/ui-stats.html',
+      saveStatsTo: './dist/stats/ui-stats.json',
+      watchMode: false,
+      name: 'Shan.tk-UI Analysis',
+      open: false,
+    }),
+    new BundleTracker({
+      path: __dirname,
+      filename: '../dist/stats/bundle-stats.json',
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'json',
+      reportFilename: './stats/bundle-analyzer.json',
+      reportTitle: 'Shan.tk Analysis',
+      openAnalyzer: false,
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: './stats/bundle-analyzer.html',
+      reportTitle: 'Shan.tk Analysis',
+      openAnalyzer: false,
+    }),
+    new WebpackManifestPlugin({
+      fileName: './stats/manifest.json',
+    }),
+    new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
+    new StatsWriterPlugin({
+      filename: './stats/raw-stats.json',
+    }),
+    new PrerenderSPAPlugin({
+      staticDir: path.join(dir, 'dist'),
+      routes: routeNames,
+      renderer: new Renderer({
+        renderAfterDocumentEvent: 'render-event',
+      }),
+    }),
+  ];
+}
 
-let devPlugins = [
-  new htmlWebpackPlugin({
-    inject: true,
-    title: metadata.title,
-    keywords: metadata.keyWords,
-    twitterData: metadata.twitterData,
-    BASE_URL: '',
-    desc: metadata.webSiteDesc,
-    url: metadata.baseSite,
-    filename: 'offline.html',
-    template: 'public/index.html',
-  }),
-  new SitemapPlugin({
-    base: metadata.baseSite,
-    paths: routes,
-    options: {
-      filename: 'sitemap.xml',
-      lastmod: true,
-    },
-  }),
-];
+function devPlugins(dir) {
+  return [
+    new htmlWebpackPlugin({
+      inject: true,
+      title: metadata.title,
+      keywords: metadata.keyWords,
+      twitterData: metadata.twitterData,
+      BASE_URL: '',
+      dir: dir,
+      desc: metadata.webSiteDesc,
+      url: metadata.baseSite,
+      filename: 'offline.html',
+      template: 'public/index.html',
+    }),
+    new SitemapPlugin({
+      base: metadata.baseSite,
+      paths: routes,
+      options: {
+        filename: 'sitemap.xml',
+        lastmod: true,
+      },
+    }),
+  ];
+}
 
 module.exports = isProd ? productionPlugins : devPlugins;
