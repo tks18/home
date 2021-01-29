@@ -88,42 +88,6 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-col cols="12" :class="'my-0 py-0 ' + (ismobile ? 'px-3' : 'px-16')">
-      <v-divider
-        :class="'opaque my-0 py-0 ' + (ismobile ? 'mx-3' : 'mx-16')"
-      ></v-divider>
-    </v-col>
-    <v-row align="center">
-      <v-col cols="12" align="center" justify="center" class="my-0 py-0">
-        <v-row align="center" class="my-0 py-0">
-          <v-col
-            v-for="(stat, index) in siteStats"
-            v-bind:key="index"
-            class="my-1 py-0"
-            :cols="ismobile ? 12 : 2"
-          >
-            <v-tooltip top transition="slide-y-transition">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  @click="windowLink(stat.link)"
-                  plain
-                  v-on="on"
-                  v-bind="attrs"
-                  :block="ismobile"
-                  text
-                  class="font-weight-bold"
-                  small
-                  color="primary"
-                >
-                  {{ stat.name }}
-                </v-btn>
-              </template>
-              <span>{{ stat.tooltip }}</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
   </v-footer>
 </template>
 <script>
@@ -179,38 +143,6 @@ export default {
           icon: 'mdi-google-photos',
           title: 'Photography',
           link: 'https://unsplash.com/@shantk18',
-        },
-      ],
-      siteStats: [
-        {
-          name: 'Website Bundle Stats',
-          link: '/stats/bundle-analyzer.json',
-          tooltip: 'Website Bundle Statistics in JSON Data',
-        },
-        {
-          name: 'Website Bundle Analysis',
-          link: '/stats/bundle-analyzer.html',
-          tooltip: 'Visualization of Website Bundle Statistics',
-        },
-        {
-          name: 'Website UI Stats',
-          link: '/stats/ui-stats.json',
-          tooltip: 'Website UI Statistics in JSON Data',
-        },
-        {
-          name: 'Website UI Analysis',
-          link: '/stats/ui-stats.html',
-          tooltip: 'Visualization of Website Bundle Statistics',
-        },
-        {
-          name: 'Website Size Analysis',
-          link: '/stats/size-analysis.txt',
-          tooltip: 'Size Analysis for this Website',
-        },
-        {
-          name: 'Sitemap',
-          link: '/sitemap.xml',
-          tooltip: 'Sitemap of the Website',
         },
       ],
     };

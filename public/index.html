@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html" />
-    <meta name="description" content="<%= htmlWebpackPlugin.options.desc %>" />
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="<%= htmlWebpackPlugin.options.title %>"
-      href="/sitemap.xml"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.desc %>" />
+    <meta name="keywords" content="<%= htmlWebpackPlugin.options.keywords %>" />
     <!-- Twitter Card data -->
     <meta
       name="twitter:card"
@@ -29,21 +28,16 @@
       content="<%= htmlWebpackPlugin.options.desc %>"
     />
     <meta
-      name="twitter:creator"
-      content="<%= htmlWebpackPlugin.options.twitterData.username %>"
-    />
-    <meta
-      name="twitter:image"
+      name="twitter:image:src"
       content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
     />
-
+    <!-- Twitter Card data - End -->
     <!-- Open Graph data -->
+    <meta property="og:url" content="<%= htmlWebpackPlugin.options.url %>" />
     <meta
       property="og:title"
       content="<%= htmlWebpackPlugin.options.title %>"
     />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="<%= htmlWebpackPlugin.options.url %>" />
     <meta
       property="og:image"
       content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
@@ -56,42 +50,42 @@
       property="og:site_name"
       content="<%= htmlWebpackPlugin.options.title %>"
     />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <!-- Open Graph data - End -->
+    <!-- Favicons -->
     <link
       rel="icon"
-      href="<%= htmlWebpackPlugin.options.BASE_URL %>favicon.ico"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>favicon.ico"
     />
-    <title><%= htmlWebpackPlugin.options.title %></title>
     <link
-      rel="apple-touch-icon"
+      rel="apple-touch-icon-precomposed"
       sizes="180x180"
-      href="<%= htmlWebpackPlugin.options.BASE_URL %>icons/apple-touch-icon.png"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-32x32.png"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-16x16.png"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-16x16.png"
     />
     <link
       rel="manifest"
-      href="<%= htmlWebpackPlugin.options.BASE_URL %>pwa/manifest.json"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>pwa/manifest.json"
     />
+    <meta name="application-name" content="Sudharshan TK" />
     <meta
       name="msapplication-config"
-      content="<%= htmlWebpackPlugin.options.BASE_URL %>icons/browserconfig.xml"
+      content="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/browserconfig.xml"
     />
-    <meta name="msapplication-TileColor" content="#A03232" />
-    <meta name="theme-color" content="#A03232" />
+    <meta name="msapplication-TileColor" content="#121212" />
+    <meta name="theme-color" content="#121212" />
+    <!-- Favicons - End -->
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.url %>" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
@@ -99,6 +93,12 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="<%= htmlWebpackPlugin.options.title %>"
+      href="/sitemap.xml"
     />
   </head>
   <body>
