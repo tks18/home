@@ -30,11 +30,7 @@ Vue.prototype.$state = {
 Vue.prototype.$_ = lodash;
 
 new Vue({
-  el: '#app',
   vuetify,
   router,
   render: (h) => h(App),
-  mounted() {
-    document.dispatchEvent(new Event('render-event'));
-  },
-});
+}).$mount('#app');

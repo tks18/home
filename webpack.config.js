@@ -6,7 +6,7 @@ module.exports = {
     rules: [...loaders],
   },
   optimization: optimizations,
-  plugins: [...plugins(__dirname), new WebpackBar()],
+  plugins: [...plugins, new WebpackBar()],
   resolve: resolvers(__dirname),
   stats: 'normal',
 };
