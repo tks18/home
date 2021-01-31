@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-multiline">
-    <div class="column is-full non-touch">
+    <div id="mainhero" class="column is-full non-touch">
       <div
         :class="
           'hero is-fullheight' +
@@ -55,18 +55,60 @@
                   do.
                 </div>
               </div>
-              <div class="column has-text-centered is-half ma-2">
+              <div
+                :class="
+                  'column is-half' +
+                  (ismobile ? ' has-text-centered ma-2 ' : ' has-text-right')
+                "
+              >
                 <v-avatar :size="ismobile ? 250 : 380">
                   <v-img :src="heroData.image" alt="Main Image" />
                 </v-avatar>
               </div>
               <div
-                class="column is-centered is-full text text-center text-overline font-weight-bold"
+                :class="
+                  'column is-centered' +
+                  (ismobile ? ' is-full ' : ' is-half ') +
+                  ' text text-center text-overline font-weight-bold'
+                "
               >
-                <v-row align="center">
+                <v-row v-if="!ismobile" align="center">
+                  <v-col
+                    v-for="(button, index) in heroButtons"
+                    v-bind:key="index"
+                    :cols="
+                      index == heroButtons.length - 1
+                        ? index % 2 == 0
+                          ? 12
+                          : 6
+                        : 6
+                    "
+                    :align="
+                      index == heroButtons.length - 1
+                        ? index % 2 == 0
+                          ? 'center'
+                          : 'right'
+                        : index % 2 == 0
+                        ? 'right'
+                        : 'left'
+                    "
+                  >
+                    <v-btn
+                      large
+                      elevation="24"
+                      text
+                      @click="$vuetify.goTo('#' + button.id)"
+                      raised
+                      outlined
+                    >
+                      <v-icon> {{ button.icon }} </v-icon>
+                      {{ button.name }}
+                    </v-btn>
+                  </v-col>
+                </v-row>
+                <v-row v-if="ismobile" align="center">
                   <v-col cols="6" align="right">
                     <v-btn
-                      :large="ismobile ? false : true"
                       elevation="24"
                       text
                       @click="$vuetify.goTo('#feedbacktitile')"
@@ -79,7 +121,6 @@
                   </v-col>
                   <v-col cols="6" align="left">
                     <v-btn
-                      :large="ismobile ? false : true"
                       elevation="24"
                       text
                       @click="$vuetify.goTo('#emailme')"
@@ -106,7 +147,7 @@
               @click="
                 $router.push({
                   name: 'About',
-                  params: { scroll: true, scrollid: '#aboutme' },
+                  params: { scroll: true, scrollid: '#languagesknown' },
                 })
               "
               :class="
@@ -305,77 +346,6 @@
                   <v-img :src="aboutData.image"></v-img>
                 </v-avatar>
               </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
-    <div class="column is-full my-2 py-0">
-      <v-container>
-        <v-row justify="center">
-          <v-col
-            cols="12"
-            align="center"
-            justify="center"
-            class="mx-2 my-1 py-0 non-touch"
-          >
-            <v-row class="my-2" id="lifetime">
-              <v-tooltip top transition="slide-y-transition">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-row v-ripple v-bind="attrs" v-on="on">
-                    <v-col
-                      :cols="ismobile ? 12 : 6"
-                      :align="ismobile ? 'center' : 'end'"
-                      :class="
-                        (ismobile ? 'text-body-2' : 'text-h6') +
-                        ' text my-1 py-0 font-weight-bold'
-                      "
-                    >
-                      Time Travelling for 🤙 xD
-                    </v-col>
-                    <v-col
-                      :cols="ismobile ? 12 : 6"
-                      :align="ismobile ? 'center' : 'start'"
-                      :class="
-                        (ismobile ? 'text-body-2' : 'text-h6') +
-                        ' text my-1 py-0 primary--text font-weight-bold'
-                      "
-                    >
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.years.toFixed(0),
-                        ) + 'Y :'
-                      }}
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.weeks.toFixed(0),
-                        ) + 'W :'
-                      }}
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.days.toFixed(0),
-                        ) + 'D :'
-                      }}
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.hours.toFixed(0),
-                        ) + 'H :'
-                      }}
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.minutes.toFixed(0),
-                        ) + 'M :'
-                      }}
-                      {{
-                        new Intl.NumberFormat().format(
-                          lifeTimeCountDown.seconds.toFixed(0),
-                        ) + 'S'
-                      }}
-                    </v-col>
-                  </v-row>
-                </template>
-                <span> Counting from my Birthday 16th May, 2000 </span>
-              </v-tooltip>
             </v-row>
           </v-col>
         </v-row>
@@ -695,12 +665,12 @@
       <div
         id="feedbacktitile"
         :class="
-          'text-center text-capitalize ' +
-          (ismobile ? 'text-h6' : 'text-h4') +
-          ' font-weight-bold my-2'
+          'non-touch text-center font-weight-black my-2 text-capitalize' +
+          (ismobile ? ' text-h6 ' : ' text-h4 ')
         "
       >
         {{ animatedArray.feedBack }}
+        <v-icon large>mdi-arrow-down-circle</v-icon>
       </div>
       <div class="hero is-medium">
         <div :class="'hero-body contact-bg ' + (ismobile ? 'ma-0 pa-0' : '')">
@@ -777,7 +747,7 @@
 
 <script>
 import { lettersArray, safeEmojis } from '@t/emoji-array';
-import { scrollTo, countUpFromTime, getOs, getViewport } from '@p/helpers';
+import { scrollTo, getOs, getViewport } from '@p/helpers';
 export default {
   metaInfo: function () {
     return {
@@ -794,8 +764,34 @@ export default {
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
       },
+      heroButtons: [
+        {
+          name: 'About Me',
+          icon: 'mdi-information-variant',
+          id: 'abouttitle',
+        },
+        {
+          name: 'What i Do',
+          icon: 'mdi-console-network',
+          id: 'whatiDo',
+        },
+        {
+          name: 'My Blog',
+          icon: 'mdi-post-outline',
+          id: 'blogtitle',
+        },
+        {
+          name: 'Projects',
+          icon: 'mdi-projector-screen',
+          id: 'projtitle',
+        },
+        {
+          name: 'Contact Me',
+          icon: 'mdi-contactless-payment',
+          id: 'feedbacktitile',
+        },
+      ],
       letters: lettersArray,
-      birthday: false,
       projects: {
         loading: false,
         projects: {},
@@ -806,17 +802,9 @@ export default {
       },
       toggleTooltip: false,
       mailtoLink:
-        'mailto:me@shaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
+        'mailto:me@shaaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
       githubPhoto:
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
-      lifeTimeCountDown: {
-        years: 0,
-        weeks: 0,
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      },
       emailType: 'info',
       copiedEmail: false,
       animatedArray: {
@@ -954,38 +942,6 @@ export default {
         );
       });
     },
-    lifeTimeCounter(elem) {
-      let observer;
-      let target = document.querySelector(elem);
-      let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-      let handleIntersect = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            let newVals = countUpFromTime('May 16, 2000 16:21:00');
-            let tl = this.$gsap.timeline();
-            for (const [key] of Object.entries(this.lifeTimeCountDown)) {
-              tl.to(this.$data.lifeTimeCountDown, {
-                [key]: newVals[key],
-                duration: 0.8,
-              });
-            }
-            setTimeout(() => {
-              setInterval(() => {
-                this.lifeTimeCountDown = countUpFromTime(
-                  'May 16, 2000 16:21:00',
-                );
-              }, 1000);
-            }, 3800);
-          }
-        });
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(target);
-    },
     getProjects() {
       this.$set(this.projects, 'loading', true);
       let url =
@@ -1067,7 +1023,6 @@ export default {
         'feedBack',
       );
       this.getProjects();
-      this.lifeTimeCounter('#lifetime');
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);

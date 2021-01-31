@@ -29,6 +29,12 @@ const routes = [
     priority: 0.6,
     changefreq: 'monthly',
   },
+  {
+    path: '/about-this-project',
+    lastmod: new Date().toISOString().slice(0, 10),
+    priority: 0.7,
+    changefreq: 'weekly',
+  },
 ];
 
 module.exports = routes;

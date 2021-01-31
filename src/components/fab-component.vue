@@ -58,12 +58,7 @@ export default {
           ) +
             window.innerHeight ===
           document.documentElement.offsetHeight;
-
-        if (bottomOfWindow) {
-          this.endofPage = true;
-        } else {
-          this.endofPage = false;
-        }
+        this.endofPage = bottomOfWindow;
       };
     },
   },

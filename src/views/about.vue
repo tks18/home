@@ -150,32 +150,38 @@
                         }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Technicalities: </span
-                        ><v-chip-group column
-                          ><v-chip
+                        <span class="text-body-1 font-weight-bold">
+                          Technicalities:
+                        </span>
+                        <v-chip-group column>
+                          <v-chip
                             small
                             color="primary"
                             v-for="(skills, index) in authorData.techSkills"
                             class="my-1 mx-1"
+                            @click="gotoUrl(skills.link)"
                             v-bind:key="index"
-                            >{{ skills }}</v-chip
-                          ></v-chip-group
-                        >
+                          >
+                            {{ skills.name }}
+                          </v-chip>
+                        </v-chip-group>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
                         <span class="text-body-1 font-weight-bold"
-                          >Areas of Interest: </span
-                        ><v-chip-group columnz
-                          ><v-chip
+                          >Areas of Interest:
+                        </span>
+                        <v-chip-group column>
+                          <v-chip
                             small
                             color="primary"
                             v-for="(interests, index) in authorData.aOfInt"
                             class="my-1 mx-1"
+                            @click="gotoUrl(interests.link)"
                             v-bind:key="index"
-                            >{{ interests }}</v-chip
-                          ></v-chip-group
-                        >
+                          >
+                            {{ interests.name }}
+                          </v-chip>
+                        </v-chip-group>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -333,12 +339,13 @@
                           v-bind="attrs"
                           outlined
                           elevation="6"
-                          @click="$vuetify.goTo('#projects')"
+                          @click="$vuetify.goTo('#moreStats')"
                         >
                           <div
                             class="font-weight-bold text-center my-1 pa-0 text-caption"
                           >
-                            Past Week Coding Stats (in Minutes)
+                            Past Week Coding Stats | This Week -
+                            {{ consolMinutes }} Minutes
                           </div>
                           <v-card-text>
                             <v-sparkline
@@ -393,6 +400,83 @@
             </v-row>
           </v-container>
         </v-col>
+        <v-col cols="12">
+          <v-container>
+            <v-row justify="center">
+              <v-col
+                cols="12"
+                align="center"
+                justify="center"
+                class="mx-2 my-0 py-0 non-touch"
+              >
+                <v-row id="lifetime">
+                  <v-tooltip top transition="slide-y-transition">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-row v-ripple v-bind="attrs" v-on="on">
+                        <v-col
+                          :cols="ismobile ? 12 : 6"
+                          :align="ismobile ? 'center' : 'end'"
+                          :class="
+                            (ismobile ? 'text-body-2' : 'text-h6') +
+                            ' text my-0 py-0 font-weight-bold'
+                          "
+                        >
+                          Time Travelling for 🤙 xD
+                        </v-col>
+                        <v-col
+                          :cols="ismobile ? 12 : 6"
+                          :align="ismobile ? 'center' : 'start'"
+                          :class="
+                            (ismobile ? 'text-body-2' : 'text-h6') +
+                            ' text my-0 py-0 primary--text font-weight-bold'
+                          "
+                        >
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.years.toFixed(0),
+                            ) + 'Y :'
+                          }}
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.weeks.toFixed(0),
+                            ) + 'W :'
+                          }}
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.days.toFixed(0),
+                            ) + 'D :'
+                          }}
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.hours.toFixed(0),
+                            ) + 'H :'
+                          }}
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.minutes.toFixed(0),
+                            ) + 'M :'
+                          }}
+                          {{
+                            new Intl.NumberFormat().format(
+                              lifeTimeCountDown.seconds.toFixed(0),
+                            ) + 'S'
+                          }}
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          class="my-0 py-0 text-overline font-weight-bold"
+                          >Wish Me Good Luck in {{ birthdayDays }} Days
+                          😁😎</v-col
+                        >
+                      </v-row>
+                    </template>
+                    <span> Counting from my Birthday</span>
+                  </v-tooltip>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-col>
         <v-col cols="12" id="languagesknown">
           <v-card :height="ismobile ? 300 : 450" flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
@@ -418,7 +502,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col id="projects" cols="12">
+        <v-col id="moreStats" cols="12">
           <v-container>
             <v-row>
               <v-col :cols="ismobile ? 12 : 8">
@@ -589,9 +673,18 @@ export default {
         rightbottom: '',
         rightKey: 0,
       },
+      lifeTimeCountDown: {
+        years: 0,
+        weeks: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      },
       dailyData: [],
       dailyLabels: [],
       dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
+      consolMinutes: 0,
       languageTrendData: [],
       languageTrendLabels: [],
       languageTrendGradients: [],
@@ -604,6 +697,7 @@ export default {
         threats: ['Java', 'Premiere', 'Photoshop'],
       },
       resumeDialog: false,
+      birthdayDays: (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7,
       authorData: {
         name: 'Sudharshan TK',
         nickName: 'Shan.tk',
@@ -612,12 +706,47 @@ export default {
         nationality: 'A Proud Indian',
         profComp: 'Chartered Accountant Student',
         techSkills: [
-          'Web Development',
-          'Python',
-          'Backend Development',
-          'MS Office Tools',
+          {
+            name: 'Web Development',
+            link: 'https://developer.mozilla.org/en-US/docs/Learn',
+          },
+          {
+            name: 'Python',
+            link: 'https://www.python.org/dev/',
+          },
+          {
+            name: 'Backend Development',
+            link:
+              'https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction',
+          },
+          {
+            name: 'MS Office Tools',
+            link: 'https://www.excel-easy.com/',
+          },
         ],
-        aOfInt: ['AI', 'ReactJs', 'VueJs', 'Gsap', 'NodeJs'],
+        aOfInt: [
+          {
+            name: 'AI',
+            link:
+              'https://www.udacity.com/course/intro-to-artificial-intelligence--cs271',
+          },
+          {
+            name: 'ReactJs',
+            link: 'https://reactjs.org/',
+          },
+          {
+            name: 'VueJs',
+            link: 'https://vuejs.org/',
+          },
+          {
+            name: 'Gsap',
+            link: 'https://greensock.com/gsap/',
+          },
+          {
+            name: 'NodeJs',
+            link: 'https://nodejs.dev/',
+          },
+        ],
       },
       workProfile: {
         img:
@@ -660,6 +789,38 @@ export default {
         html += lettersArray[Math.round(map) % lettersArray.length];
       });
       this.$set(this.animatedArray, stringText, html);
+    },
+    lifeTimeCounter(elem) {
+      let observer;
+      let target = document.querySelector(elem);
+      let options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6,
+      };
+      let handleIntersect = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let newVals = countUpFromTime('May 16, 2000 16:21:00');
+            let tl = this.$gsap.timeline();
+            for (const [key] of Object.entries(this.lifeTimeCountDown)) {
+              tl.to(this.$data.lifeTimeCountDown, {
+                [key]: newVals[key],
+                duration: 0.8,
+              });
+            }
+            setTimeout(() => {
+              setInterval(() => {
+                this.lifeTimeCountDown = countUpFromTime(
+                  'May 16, 2000 16:21:00',
+                );
+              }, 1000);
+            }, 3800);
+          }
+        });
+      };
+      observer = new IntersectionObserver(handleIntersect, options);
+      observer.observe(target);
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
@@ -713,6 +874,7 @@ export default {
             let hours = codeData.grand_total.hours,
               minutes = codeData.grand_total.minutes;
             let totalMinutes = hours * 60 + minutes;
+            this.consolMinutes += totalMinutes;
             this.dailyData.push(totalMinutes);
           });
         }
@@ -841,6 +1003,7 @@ export default {
       this.wordMaps.hash.initial,
       'hashTag',
     );
+    this.lifeTimeCounter('#lifetime');
     this.setCardBgs();
     this.getLabels();
     this.getCodingData();

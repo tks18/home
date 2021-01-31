@@ -50,10 +50,22 @@
             Portfolio Website
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
-          <div class="grey--text text-overline my-0 py-0">
-            Vuetify, Vuejs and More
-            <v-icon color="primary">mdi-heart</v-icon>
-          </div>
+          <v-tooltip top transition="slide-x-transition">
+            <template v-slot:activator="{ on, attrs }">
+              <div
+                v-on="on"
+                v-bind="attrs"
+                @click="$router.push('/about-this-project')"
+                class="grey--text text-overline my-0 py-0"
+              >
+                Vuetify, Vuejs and More
+                <v-icon color="primary">mdi-heart</v-icon>
+              </div>
+            </template>
+            <span>
+              Know More About this Project, its Code and its Working
+            </span>
+          </v-tooltip>
         </div>
       </v-col>
       <v-col :cols="ismobile ? 12 : 4" class="my-0 py-0">
