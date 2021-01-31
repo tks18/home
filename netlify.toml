@@ -1,0 +1,14 @@
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
+	[plugins.inputs]
+
+	baseUrl = "https://shaaan.tk"
+
+	sitemapPath = "/sitemap.xml"
+
+	providers = [
+		"google",
+		"bing",
+		"yandex"
+	]
