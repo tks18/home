@@ -32,6 +32,7 @@
   "chunk-vendors.css.map": "css/chunk-vendors.e2bab9a5.css.map",
   "chunk-vendors.js.map": "js/chunk-vendors.2fb5803f.js.map",
   "./stats/raw-stats.json": "./stats/raw-stats.json",
+  "_headers": "_headers",
   "_redirects": "_redirects",
   "assets/downloads/resume/Sudharshan-tk-full.pdf": "assets/downloads/resume/Sudharshan-tk-full.pdf",
   "assets/downloads/resume/Sudharshan-tk-short.pdf": "assets/downloads/resume/Sudharshan-tk-short.pdf",
