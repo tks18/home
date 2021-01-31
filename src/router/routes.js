@@ -26,6 +26,11 @@ const routes = [
     name: 'About',
     component: _import('about'),
   },
+  {
+    path: '/about-this-project',
+    name: 'This-project',
+    component: _import('this-project'),
+  },
 ];
 
 export default routes;
