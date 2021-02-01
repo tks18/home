@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.f664cc22d3f482b86bfe7151a94a9bc6.js"
+  "precache-manifest.cd3be624fecf4d84cb3ba8ea302fe292.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "portfolio-mat-dark"});
