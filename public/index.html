@@ -58,20 +58,52 @@
     <!-- Open Graph data - End -->
     <!-- Favicons -->
     <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/apple-touch-icon.png"
+    />
+    <link
       rel="icon"
-      href="/<%= htmlWebpackPlugin.options.BASE_URL %>favicon.ico"
+      type="image/png"
+      sizes="32x32"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon-16x16.png"
+    />
+    <link
+      rel="manifest"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/site.webmanifest"
     />
     <link
       rel="mask-icon"
       href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/safari-pinned-tab.svg"
       color="#121212"
     />
-    <meta name="application-name" content="Sudharshan TK" />
+    <link
+      rel="shortcut icon"
+      href="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/favicon.ico"
+    />
+    <meta name="apple-mobile-web-app-title" content="Shan.tk" />
+    <meta name="application-name" content="Shan.tk" />
+    <meta name="msapplication-TileColor" content="#121212" />
+    <meta
+      name="msapplication-TileImage"
+      content="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/mstile-144x144.png"
+    />
     <meta
       name="msapplication-config"
       content="/<%= htmlWebpackPlugin.options.BASE_URL %>icons/browserconfig.xml"
     />
-    <meta name="msapplication-TileColor" content="#121212" />
     <meta name="theme-color" content="#121212" />
     <!-- Favicons - End -->
     <link rel="canonical" href="<%= htmlWebpackPlugin.options.url %>" />
@@ -99,5 +131,6 @@
       >
     </noscript>
     <div id="app"></div>
+    <script src="install.js"></script>
   </body>
 </html>

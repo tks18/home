@@ -11,7 +11,6 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import vuetify from '@p/vuetify';
 import { gsap } from 'gsap';
 import '@styles/register.scss';
-import wb from './registerServiceWorker';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);
@@ -20,7 +19,6 @@ Vue.use(meta, {
   refreshOnceOnNavigation: true,
 });
 Vue.config.productionTip = false;
-Vue.prototype.$workbox = wb;
 Vue.prototype.$axios = axios;
 Vue.prototype.$gsap = gsap;
 Vue.prototype.$bus = EventBus;

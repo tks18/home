@@ -1,10 +1,8 @@
 const webpackConfig = require('./webpack.config');
 const metadata = require('./web-metadata');
-const pwa = require('./pwa');
 
 module.exports = {
   runtimeCompiler: true,
-  pwa,
   publicPath: '',
   css: {
     requireModuleExtension: true,
