@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.e96681d2ea6ade868b262f48eb9a9ce2.js"
+  "precache-manifest.50ae39f4a8fa0b7519d880cc19003253.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "portfolio-mat-dark"});
@@ -25,8 +25,6 @@ self.addEventListener('message', (event) => {
   }
 });
 
-workbox.core.clientsClaim();
-
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -34,6 +32,3 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
-
-workbox.precaching.cleanupOutdatedCaches();
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/"));
