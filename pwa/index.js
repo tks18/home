@@ -4,10 +4,8 @@ module.exports = {
   name: 'Shan.tk',
   themeColor: '#121212',
   msTileColor: '#121212',
-  workboxPluginMode: 'InjectManifest',
   appleMobileWebAppCache: 'yes',
   workboxOptions: {
-    swSrc: 'src/service-worker.js',
     exclude: [
       /\.(?:png|jpg|jpeg|svg|pdf)$/,
       /_headers/,
