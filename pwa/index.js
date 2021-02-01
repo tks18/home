@@ -6,7 +6,6 @@ module.exports = {
   msTileColor: '#121212',
   appleMobileWebAppCache: 'yes',
   workboxOptions: {
-    cleanupOutdatedCaches: true,
     exclude: [
       /\.(?:png|jpg|jpeg|svg|pdf)$/,
       /_headers/,
@@ -18,8 +17,6 @@ module.exports = {
       /service-worker\.js$/,
       /sw\.js$/,
     ],
-    clientsClaim: true,
-    navigateFallback: '/',
   },
   manifestOptions: {
     name: 'Sudharshan TK',
