@@ -4,9 +4,10 @@ module.exports = {
   name: 'Shan.tk',
   themeColor: '#121212',
   msTileColor: '#121212',
+  workboxPluginMode: 'InjectManifest',
   appleMobileWebAppCache: 'yes',
   workboxOptions: {
-    cleanupOutdatedCaches: true,
+    swSrc: 'src/service-worker.js',
     exclude: [
       /\.(?:png|jpg|jpeg|svg|pdf)$/,
       /_headers/,
@@ -18,8 +19,6 @@ module.exports = {
       /service-worker\.js$/,
       /sw\.js$/,
     ],
-    clientsClaim: true,
-    navigateFallback: '/',
   },
   manifestOptions: {
     name: 'Sudharshan TK',
