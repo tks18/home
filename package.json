@@ -1,10 +1,7 @@
 {
   "name": "portfolio-mat-dark",
   "version": "0.1.0",
-  "title": "Sudharshan TK",
-  "baseSite": "https://shaaan.tk/",
   "private": false,
-  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -17,6 +14,7 @@
     "core-js": "^3.6.5",
     "gsap": "^3.5.1",
     "lodash": "^4.17.20",
+    "register-service-worker": "^1.7.1",
     "swiper": "5.2.0",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
@@ -31,6 +29,7 @@
     "@statoscope/ui-webpack": "^3.3.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
@@ -60,5 +59,8 @@
     "webpack-nano": "^1.1.1",
     "webpack-stats-plugin": "^1.0.3",
     "webpackbar": "^5.0.0-3"
-  }
+  },
+  "baseSite": "https://shaaan.tk/",
+  "license": "MIT",
+  "title": "Sudharshan TK"
 }
