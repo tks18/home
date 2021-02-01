@@ -14,14 +14,6 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-snackbar v-model="showUpdateUI" multi-line :timeout="6000">
-      New Content Available. Update Now !
-      <template v-slot:action="{ attrs }">
-        <v-btn color="primary" v-bind="attrs" @click="acceptUpdate">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
     <v-icon> mdi-wifi-strength-4 </v-icon>
     <span class="non-touch point-cursor">
       {{ now | moment('h:mm:ss a') }}
@@ -35,7 +27,6 @@ export default {
     return {
       now: Date.now(),
       snackbar: true,
-      showUpdateUI: false,
     };
   },
   methods: {
@@ -43,17 +34,6 @@ export default {
       window.scrollTo(0, 0);
       return;
     },
-    async acceptUpdate() {
-      this.showUpdateUI = false;
-      await this.$workbox.messageSW({ type: 'SKIP_WAITING' });
-    },
-  },
-  created() {
-    if (this.$workbox) {
-      this.$workbox.addEventListener('waiting', () => {
-        this.showUpdateUI = true;
-      });
-    }
   },
   mounted() {
     setInterval(() => {
