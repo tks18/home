@@ -7,56 +7,89 @@ let cachedPages = [
   '/projects',
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(preload());
+self.addEventListener('install', function (event) {
+  console.log('WORKER: install event in progress.');
+  event.waitUntil(
+    caches
+      .open('offline')
+      .then(function (cache) {
+        return cache.addAll(cachedPages);
+      })
+      .then(function () {
+        console.log('WORKER: install completed');
+      }),
+  );
 });
-
-var preload = () => {
-  console.log('Installing the Web App');
-  return caches.open('offline').then((cache) => {
-    console.log('Caching Important Pages and Images');
-    return cache.addAll(cachedPages);
-  });
-};
-
 self.addEventListener('fetch', function (event) {
+  console.log('WORKER: fetch event in progress.');
+  if (event.request.method !== 'GET') {
+    console.log(
+      'WORKER: fetch event ignored.',
+      event.request.method,
+      event.request.url,
+    );
+    return;
+  }
   event.respondWith(
-    checkResponse(event.request).catch(function () {
-      return returnFromCache(event.request);
+    caches.match(event.request).then(function (cached) {
+      var networked = fetch(event.request)
+        .then(fetchedFromNetwork, unableToResolve)
+        .catch(unableToResolve);
+      console.log(
+        'WORKER: fetch event',
+        cached ? '(cached)' : '(network)',
+        event.request.url,
+      );
+      return cached || networked;
+      function fetchedFromNetwork(response) {
+        var cacheCopy = response.clone();
+        console.log('WORKER: fetch response from network.', event.request.url);
+        caches
+          .open('offline')
+          .then(function add(cache) {
+            return cache.put(event.request, cacheCopy);
+          })
+          .then(function () {
+            console.log(
+              'WORKER: fetch response stored in cache.',
+              event.request.url,
+            );
+          });
+        return response;
+      }
+      function unableToResolve() {
+        return caches.open('offline').then(function (cache) {
+          return cache.match(event.request).then(function (matching) {
+            if (!matching || matching.status == 404) {
+              return cache.match('offline.html');
+            } else {
+              return matching;
+            }
+          });
+        });
+      }
     }),
   );
-  event.waitUntil(addToCache(event.request));
 });
 
-var checkResponse = function (request) {
-  return new Promise(function (fulfill, reject) {
-    fetch(request).then(function (response) {
-      if (response.status !== 404) {
-        fulfill(response);
-      } else {
-        reject();
-      }
-    }, reject);
-  });
-};
-
-var addToCache = function (request) {
-  return caches.open('offline').then(function (cache) {
-    return fetch(request).then(function (response) {
-      console.log(response.url + ' was cached');
-      return cache.put(request, response);
-    });
-  });
-};
-
-var returnFromCache = function (request) {
-  return caches.open('offline').then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      if (!matching || matching.status == 404) {
-        return cache.match('offline.html');
-      } else {
-        return matching;
-      }
-    });
-  });
-};
+self.addEventListener('activate', function (event) {
+  console.log('WORKER: activate event in progress.');
+  event.waitUntil(
+    caches
+      .keys()
+      .then(function (keys) {
+        return Promise.all(
+          keys
+            .filter(function (key) {
+              return !key.startsWith('offline');
+            })
+            .map(function (key) {
+              return caches.delete(key);
+            }),
+        );
+      })
+      .then(function () {
+        console.log('WORKER: activate completed.');
+      }),
+  );
+});
