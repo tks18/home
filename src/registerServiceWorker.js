@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
     if (!event.isUpdate) {
       console.log(
         '%cDone:',
-        'background: #4BB543',
+        'background: #4BB543; font-weight: bold',
         ' Thanks for Trying Out My App\n' +
           'This app has been Successfully Installed.',
       );

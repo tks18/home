@@ -2,11 +2,15 @@
 
 console.log(
   '%cDone',
-  'background: #4BB543',
+  'background: #4BB543; font-weight: bold',
   ': App is being served from cache by a service worker.\n' +
     'For more details, visit https://goo.gl/AFskqB',
 );
-console.log('%cWORKER:', 'background: #FFC107; color: black', ' executing.');
+console.log(
+  '%cWORKER:',
+  'background: #FFC107; font-weight: bold; color: black',
+  ' executing.',
+);
 let cachedPages = [
   '/',
   '/offline.html',
@@ -19,7 +23,7 @@ let cachedPages = [
 self.addEventListener('install', function (event) {
   console.log(
     '%cWORKER:',
-    'background: #FFC107; color: black',
+    'background: #FFC107; font-weight: bold; color: black',
     ' install event in progress.',
   );
   event.waitUntil(
@@ -31,7 +35,7 @@ self.addEventListener('install', function (event) {
       .then(function () {
         console.log(
           '%cWORKER:',
-          'background: #4BB543; color: black',
+          'background: #4BB543; font-weight: bold; color: black',
           ' install completed',
         );
       }),
@@ -40,13 +44,13 @@ self.addEventListener('install', function (event) {
 self.addEventListener('fetch', function (event) {
   console.log(
     '%cWORKER:',
-    'background: #FFC107; color: black',
+    'background: #FFC107; font-weight: bold; color: black',
     ' fetch event in progress.',
   );
   if (event.request.method !== 'GET') {
     console.log(
       '%cWORKER:',
-      'background: #FFC107; color: black',
+      'background: #FFC107; font-weight: bold; color: black',
       ' fetch event ignored.',
       event.request.method,
       event.request.url,
@@ -60,7 +64,7 @@ self.addEventListener('fetch', function (event) {
         .catch(unableToResolve);
       console.log(
         '%cWORKER:',
-        'background: #4BB543; color: black',
+        'background: #4BB543; font-weight: bold; color: black',
         ' fetch event',
         cached ? '(cached)' : '(network)',
         event.request.url,
@@ -70,7 +74,7 @@ self.addEventListener('fetch', function (event) {
         var cacheCopy = response.clone();
         console.log(
           '%cWORKER:',
-          'background: #4BB543; color: black',
+          'background: #4BB543; font-weight: bold; color: black',
           ' fetch response from network.',
           event.request.url,
         );
@@ -82,7 +86,7 @@ self.addEventListener('fetch', function (event) {
           .then(function () {
             console.log(
               '%cWORKER:',
-              'background: #4BB543; color: black',
+              'background: #4BB543; font-weight: bold; color: black',
               ' fetch response stored in cache.',
               event.request.url,
             );
@@ -95,14 +99,14 @@ self.addEventListener('fetch', function (event) {
             if (!matching || matching.status == 404) {
               console.log(
                 '%cWORKER:',
-                'background: #4BB543; color: black',
+                'background: #4BB543; font-weight: bold; color: black',
                 ' Cache Not Found. Using Offline File',
               );
               return cache.match('offline.html');
             } else {
               console.log(
                 '%cWORKER:',
-                'background: #FFC107; color: black',
+                'background: #FFC107; font-weight: bold; color: black',
                 ' File Found From Cache.',
               );
               return matching;
@@ -117,7 +121,7 @@ self.addEventListener('fetch', function (event) {
 self.addEventListener('activate', function (event) {
   console.log(
     '%cWORKER:',
-    'background: #FFC107; color: black',
+    'background: #FFC107; font-weight: bold; color: black',
     ' activate event in progress.',
   );
   event.waitUntil(
@@ -137,7 +141,7 @@ self.addEventListener('activate', function (event) {
       .then(function () {
         console.log(
           '%cWORKER:',
-          'background: #4BB543; color: black',
+          'background: #4BB543; font-weight: bold; color: black',
           ' activate completed.',
         );
       }),
