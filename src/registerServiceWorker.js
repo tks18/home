@@ -11,9 +11,9 @@ if ('serviceWorker' in navigator) {
   wb.addEventListener('activated', (event) => {
     if (!event.isUpdate) {
       console.log(
-        '%c Done',
+        '%cDone:',
         'background: #4BB543',
-        ': Thanks for Trying Out Sudharshan TK PWA App\n' +
+        ' Thanks for Trying Out My App\n' +
           'This app has been Successfully Installed.',
       );
     }

@@ -1,12 +1,12 @@
 'use strict';
 
 console.log(
-  '%c Done',
+  '%cDone',
   'background: #4BB543',
   ': App is being served from cache by a service worker.\n' +
     'For more details, visit https://goo.gl/AFskqB',
 );
-console.log('%c WORKER:', 'background: #FFC107; color: black', ' executing.');
+console.log('%cWORKER:', 'background: #FFC107; color: black', ' executing.');
 let cachedPages = [
   '/',
   '/offline.html',
@@ -18,7 +18,7 @@ let cachedPages = [
 
 self.addEventListener('install', function (event) {
   console.log(
-    '%c WORKER:',
+    '%cWORKER:',
     'background: #FFC107; color: black',
     ' install event in progress.',
   );
@@ -30,7 +30,7 @@ self.addEventListener('install', function (event) {
       })
       .then(function () {
         console.log(
-          '%c WORKER:',
+          '%cWORKER:',
           'background: #4BB543; color: black',
           ' install completed',
         );
@@ -39,13 +39,13 @@ self.addEventListener('install', function (event) {
 });
 self.addEventListener('fetch', function (event) {
   console.log(
-    '%c WORKER:',
+    '%cWORKER:',
     'background: #FFC107; color: black',
     ' fetch event in progress.',
   );
   if (event.request.method !== 'GET') {
     console.log(
-      '%c WORKER:',
+      '%cWORKER:',
       'background: #FFC107; color: black',
       ' fetch event ignored.',
       event.request.method,
@@ -59,7 +59,7 @@ self.addEventListener('fetch', function (event) {
         .then(fetchedFromNetwork, unableToResolve)
         .catch(unableToResolve);
       console.log(
-        '%c WORKER:',
+        '%cWORKER:',
         'background: #4BB543; color: black',
         ' fetch event',
         cached ? '(cached)' : '(network)',
@@ -69,7 +69,7 @@ self.addEventListener('fetch', function (event) {
       function fetchedFromNetwork(response) {
         var cacheCopy = response.clone();
         console.log(
-          '%c WORKER:',
+          '%cWORKER:',
           'background: #4BB543; color: black',
           ' fetch response from network.',
           event.request.url,
@@ -81,7 +81,7 @@ self.addEventListener('fetch', function (event) {
           })
           .then(function () {
             console.log(
-              '%c WORKER:',
+              '%cWORKER:',
               'background: #4BB543; color: black',
               ' fetch response stored in cache.',
               event.request.url,
@@ -94,14 +94,14 @@ self.addEventListener('fetch', function (event) {
           return cache.match(event.request).then(function (matching) {
             if (!matching || matching.status == 404) {
               console.log(
-                '%c WORKER:',
+                '%cWORKER:',
                 'background: #4BB543; color: black',
                 ' Cache Not Found. Using Offline File',
               );
               return cache.match('offline.html');
             } else {
               console.log(
-                '%c WORKER:',
+                '%cWORKER:',
                 'background: #FFC107; color: black',
                 ' File Found From Cache.',
               );
@@ -116,7 +116,7 @@ self.addEventListener('fetch', function (event) {
 
 self.addEventListener('activate', function (event) {
   console.log(
-    '%c WORKER:',
+    '%cWORKER:',
     'background: #FFC107; color: black',
     ' activate event in progress.',
   );
@@ -136,7 +136,7 @@ self.addEventListener('activate', function (event) {
       })
       .then(function () {
         console.log(
-          '%c WORKER:',
+          '%cWORKER:',
           'background: #4BB543; color: black',
           ' activate completed.',
         );
