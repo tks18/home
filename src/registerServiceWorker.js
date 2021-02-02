@@ -8,11 +8,17 @@ if ('serviceWorker' in navigator) {
   wb.addEventListener('controlling', () => {
     window.location.reload();
   });
+  wb.addEventListener('activated', (event) => {
+    if (!event.isUpdate) {
+      console.log(
+        '%c Done',
+        'background: #4BB543',
+        ': Thanks for Trying Out Sudharshan TK PWA App\n' +
+          'This app has been Successfully Installed.',
+      );
+    }
+  });
   wb.register();
-  console.log(
-    'App is being served from cache by a service worker.\n' +
-      'For more details, visit https://goo.gl/AFskqB',
-  );
 } else {
   wb = null;
 }
