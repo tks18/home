@@ -16,6 +16,20 @@ module.exports = {
       args[0].desc = metadata.webSiteDesc;
       args[0].url = metadata.baseSite;
       args[0].BASE_URL = '';
+      args[0].minify = {
+        ...args[0].minify,
+        caseSensitive: true,
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        keepClosingSlash: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true,
+        removeAttributeQuotes: false,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: false,
+        removeStyleLinkTypeAttributes: false,
+      };
       return args;
     });
   },
