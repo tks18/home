@@ -8,11 +8,17 @@ if ('serviceWorker' in navigator) {
   wb.addEventListener('controlling', () => {
     window.location.reload();
   });
+  wb.addEventListener('activated', (event) => {
+    if (!event.isUpdate) {
+      console.log(
+        '%cDone:',
+        'background: #4BB543; font-weight: bold',
+        ' Thanks for Trying Out My App\n' +
+          'This app has been Successfully Installed.',
+      );
+    }
+  });
   wb.register();
-  console.log(
-    'App is being served from cache by a service worker.\n' +
-      'For more details, visit https://goo.gl/AFskqB',
-  );
 } else {
   wb = null;
 }
