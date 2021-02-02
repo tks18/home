@@ -3,7 +3,7 @@ let baseSite = require('./package.json').baseSite;
 let twitterData = {
   type: 'summary_large_image',
   username: '@shantk18',
-  pic: 'assets/photos/me.webp',
+  pic: 'assets/photos/me.jpg',
 };
 let keyWords =
   'Sudharshan TK, Portfolio, Shan.tk, https://shaaan.tk, shaaan.tk, sudharshan, Blog, Portfolio-blog';
