@@ -2,13 +2,13 @@
   "assetsByChunkName": {
     "app": [
       "css/app.28df1432.css",
-      "js/app.94a43287.js",
-      "js/app.94a43287.js.map"
+      "js/app.b721db49.js",
+      "js/app.b721db49.js.map"
     ],
     "chunk-vendors": [
       "css/chunk-vendors.e2bab9a5.css",
-      "js/chunk-vendors.2fb5803f.js",
-      "js/chunk-vendors.2fb5803f.js.map"
+      "js/chunk-vendors.89f26d2c.js",
+      "js/chunk-vendors.89f26d2c.js.map"
     ]
   }
 }
