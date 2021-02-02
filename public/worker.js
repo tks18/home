@@ -1,3 +1,6 @@
+'use strict';
+
+console.log('WORKER: executing.');
 let cachedPages = [
   '/',
   '/offline.html',
