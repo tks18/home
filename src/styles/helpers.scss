@@ -20,6 +20,10 @@
   height: inherit;
 }
 
+.back-blur-no-inherit {
+  backdrop-filter: blur(3px) grayscale(1);
+}
+
 .width-min {
   min-width: 40%;
 }
@@ -62,4 +66,8 @@
 
 .inherit-height {
   height: inherit;
+}
+
+.inherit-height-responsive {
+  height: 95%;
 }
