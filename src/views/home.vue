@@ -216,6 +216,89 @@
       <v-row>
         <v-col align="start" justify="start">
           <div
+            id="storytitle"
+            :class="
+              'clip-text-back text-h5 non-touch ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.stories }} <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col align="end" justify="start" class="mr-4">
+          <v-btn icon color="primary"><v-icon>mdi-arrow-left</v-icon></v-btn>
+          <v-btn icon color="primary"><v-icon>mdi-arrow-right</v-icon></v-btn>
+        </v-col>
+      </v-row>
+      <div
+        v-if="stories.loading"
+        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+      >
+        <div
+          v-for="n in ismobile ? 2 : 5"
+          v-bind:key="n"
+          class="scrollable-x-child column ma-0 pa-0 non-touch"
+        >
+          <v-skeleton-loader
+            class="mx-auto"
+            :width="ismobile ? 225 : 250"
+            :height="ismobile ? 300 : 325"
+            type="card"
+          >
+          </v-skeleton-loader>
+        </div>
+      </div>
+      <div
+        v-if="!stories.loading"
+        class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+      >
+        <div
+          v-for="(story, index) in stories.data"
+          v-bind:key="index"
+          class="scrollable-x-child column ma-0 pa-0 non-touch"
+        >
+          <v-card
+            elevation="6"
+            v-ripple
+            @click="gotoUrl(stories.site + story.link, true)"
+            class="mx-2"
+            :style="{
+              background: 'center',
+              backgroundImage: 'url(' + stories.site + story.asset + ')',
+              backgroundSize: 'cover',
+            }"
+            :width="ismobile ? 225 : 250"
+            :height="ismobile ? 300 : 325"
+          >
+            <v-card-text class="inherit-height-responsive">
+              <v-row align="start" justify="start" class="back-blur-no-inherit">
+                <v-col cols="2" class="mx-1 pa-0">
+                  <v-avatar size="30">
+                    <v-img
+                      src="https://i.ibb.co/X4BknVG/DJI-0793-1.webp"
+                    ></v-img>
+                  </v-avatar>
+                </v-col>
+                <v-col cols="8" class="text-subtitle-1 white--text mx-1 pa-0">
+                  Shan.tk
+                </v-col>
+              </v-row>
+              <v-row
+                align="end"
+                justify="end"
+                class="inherit-height text-right white--text text-overline mx-1 font-weight-bold"
+              >
+                <div class="back-blur-no-inherit">{{ story.title }}</div>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </div>
+      </div>
+    </div>
+    <div class="column is-full ma-2">
+      <v-row>
+        <v-col align="start" justify="start">
+          <div
             @click="$router.push('/blog')"
             id="blogtitle"
             :class="
@@ -746,6 +829,7 @@
 </template>
 
 <script>
+import { stories } from '@p/backend';
 import { lettersArray, safeEmojis } from '@t/emoji-array';
 import { scrollTo, getOs, getViewport } from '@p/helpers';
 export default {
@@ -763,6 +847,11 @@ export default {
         rounded: true,
         buttonUrl: '/about',
         buttontext: 'Contact Me !',
+      },
+      stories: {
+        loading: true,
+        site: '',
+        data: [],
       },
       heroButtons: [
         {
@@ -809,6 +898,7 @@ export default {
       copiedEmail: false,
       animatedArray: {
         blog: '',
+        stories: '',
         about: '',
         whatiDo: '',
         stat: '',
@@ -823,9 +913,14 @@ export default {
     };
   },
   methods: {
-    gotoUrl(url) {
-      window.open(url);
-      return;
+    gotoUrl(url, self) {
+      if (self) {
+        window.open(url, '_self');
+        return;
+      } else {
+        window.open(url);
+        return;
+      }
     },
     swipeLeft(func) {
       const content = 'this.$refs.' + func;
@@ -942,6 +1037,14 @@ export default {
         );
       });
     },
+    async getStories() {
+      let storydata = await stories.get();
+      if (storydata.data.success) {
+        this.stories.site = storydata.data.website;
+        this.stories.data = storydata.data.stories;
+        this.$set(this.stories, 'loading', false);
+      }
+    },
     getProjects() {
       this.$set(this.projects, 'loading', true);
       let url =
@@ -995,6 +1098,13 @@ export default {
         'whatiDo',
       );
       this.createObserver(
+        '#storytitle',
+        'transitWord',
+        this.wordMaps.stories.map,
+        this.wordMaps.stories.initial,
+        'stories',
+      );
+      this.createObserver(
         '#abouttitle',
         'transitWord',
         this.wordMaps.about.map,
@@ -1023,6 +1133,7 @@ export default {
         'feedBack',
       );
       this.getProjects();
+      this.getStories();
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
@@ -1107,6 +1218,18 @@ export default {
             lettersArray.indexOf('g'),
           ],
           initial: [46, 1, 3, 2, 40, 43, 10],
+        },
+        stories: {
+          map: [
+            lettersArray.indexOf('s'),
+            lettersArray.indexOf('t'),
+            lettersArray.indexOf('o'),
+            lettersArray.indexOf('r'),
+            lettersArray.indexOf('i'),
+            lettersArray.indexOf('e'),
+            lettersArray.indexOf('s'),
+          ],
+          initial: [40, 44, 42, 39, 41, 44, 2],
         },
         about: {
           map: [
