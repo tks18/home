@@ -1,19 +1,6 @@
 <template>
   <v-system-bar @click="$vuetify.goTo(0)" fixed window lights-out>
     <v-spacer></v-spacer>
-    <v-snackbar
-      v-if="!$vuetify.theme.dark"
-      v-model="snackbar"
-      multi-line
-      :timeout="6000"
-    >
-      Dark Mode Available Now ! Turn on Using Settings in the Nav-bar.
-      <template v-slot:action="{ attrs }">
-        <v-btn color="primary" v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
     <v-icon> mdi-wifi-strength-4 </v-icon>
     <span class="non-touch point-cursor">
       {{ now | moment('h:mm:ss a') }}
@@ -26,7 +13,6 @@ export default {
   data: function () {
     return {
       now: Date.now(),
-      snackbar: true,
     };
   },
   methods: {

@@ -645,6 +645,7 @@
 
 <script>
 import { lettersArray } from '@t/emoji-array';
+import axios from 'axios';
 import jsonadapter from 'axios-jsonp';
 import { countUpFromTime } from '@p/helpers';
 export default {
@@ -863,7 +864,7 @@ export default {
       this.dailyLabels = this.$_.reverse(currLabels);
     },
     getCodingData() {
-      this.$axios({
+      axios({
         url: this.codingStats.dailyStats,
         method: 'get',
         adapter: jsonadapter,
@@ -881,7 +882,7 @@ export default {
       });
     },
     getLanguageTrend() {
-      this.$axios({
+      axios({
         url: this.codingStats.languageTrend,
         method: 'get',
         adapter: jsonadapter,
@@ -899,7 +900,7 @@ export default {
       });
     },
     getEditorsTrend() {
-      this.$axios({
+      axios({
         url: this.codingStats.editors,
         method: 'get',
         adapter: jsonadapter,
