@@ -20,7 +20,7 @@ export const pingit = async () => {
   return await axios
     .post(backend)
     .then((response) => {
-      console.log(response);
+      return response;
     })
     .catch((error) => {
       console.log(error);

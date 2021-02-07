@@ -99,16 +99,65 @@
           </v-col>
         </v-row>
       </v-col>
+      <v-col cols="12" align="center" class="ma-0 pa-0">
+        <v-row align="center" class="ma-0 pa-0">
+          <v-col cols="12" class="ma-0 pa-0">
+            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
+              <v-avatar
+                :color="success ? 'green' : 'yellow'"
+                size="14"
+                class="mr-2"
+              ></v-avatar>
+              Backend
+            </v-chip>
+            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
+              <v-avatar
+                :color="success ? 'green' : 'yellow'"
+                size="14"
+                class="mr-2"
+              ></v-avatar>
+              Database
+            </v-chip>
+            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
+              <v-icon
+                left
+                class="mr-2 ml-1"
+                :color="success ? 'green' : 'yellow'"
+              >
+                mdi-lan-pending
+              </v-icon>
+              Latency - {{ pingstats }} ms
+            </v-chip>
+          </v-col>
+        </v-row>
+        <v-row class="ma-0 pa-0">
+          <v-col
+            cols="12"
+            align="center"
+            :class="
+              'ma-0 pa-0 text-overline' +
+              (success ? ' green--text' : ' yellow--text')
+            "
+          >
+            {{
+              success ? 'All Systems Operational' : 'Connecting to Server...'
+            }}
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
   </v-footer>
 </template>
 <script>
+import { pingit } from '@p/backend';
 import { lettersArray } from '@t/emoji-array';
 export default {
   data: function () {
     return {
       now: new Date().toLocaleTimeString(),
       clockDiag: false,
+      success: false,
+      pingstats: 0,
       animatedArray: {
         name: '',
       },
@@ -192,6 +241,16 @@ export default {
         );
       });
     },
+    async getBackendStatus() {
+      let backendStatus = await pingit();
+      if (backendStatus.status == 200) {
+        this.success = true;
+        this.pingstats = backendStatus.responsetime;
+      } else {
+        this.success = false;
+        this.pingstats = 0;
+      }
+    },
   },
   computed: {
     ismobile() {
@@ -233,6 +292,7 @@ export default {
   },
   mounted() {
     this.transitWord(this.nameMap.map, this.nameMap.initial, 'name');
+    this.getBackendStatus();
   },
 };
 </script>
