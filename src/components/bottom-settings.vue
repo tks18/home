@@ -207,9 +207,6 @@ export default {
     if (themecache && themecache != null) {
       this.$state.store.botSettings.darkmode = themecache.dark;
       this.$state.store.botSettings.navBlur = themecache.blur;
-      this.$vuetify.theme.dark = themecache.dark;
-      this.$vuetify.theme.themes.light.primary = themecache.theme.accent;
-      this.$vuetify.theme.themes.dark.primary = themecache.theme.accent;
     }
   },
 };

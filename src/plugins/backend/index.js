@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from '@p/axios';
 
 let isProd = !(process.env.NODE_ENV == 'development');
 
@@ -15,6 +15,17 @@ let api = {
 };
 
 export const routes = api;
+
+export const pingit = async () => {
+  return await axios
+    .post(backend)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const blog = {
   get: async () => {

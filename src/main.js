@@ -6,7 +6,8 @@ import EventBus from '@eventbus';
 import router from './router';
 import moment from 'vue-moment';
 import lodash from 'lodash';
-import axios from 'axios';
+import Notifications from 'vue-notification';
+import axios from '@p/axios';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import vuetify from '@p/vuetify';
 import { gsap } from 'gsap';
@@ -15,6 +16,7 @@ import wb from './registerServiceWorker';
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(moment);
+Vue.use(Notifications);
 Vue.use(meta, {
   tagIDKeyName: 'sh-tk-id',
   refreshOnceOnNavigation: true,
