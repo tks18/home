@@ -6,7 +6,7 @@ import EventBus from '@eventbus';
 import router from './router';
 import moment from 'vue-moment';
 import lodash from 'lodash';
-import axios from 'axios';
+import axios from '@p/axios';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import vuetify from '@p/vuetify';
 import { gsap } from 'gsap';

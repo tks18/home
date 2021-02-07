@@ -13,7 +13,7 @@ let views = './src/views';
 
 // Files
 let eventBus = './src/EventBus.js';
-let state = './src/plugins/state.js';
+let state = './src/plugins/state/index.js';
 
 module.exports = (dir) => {
   return {
