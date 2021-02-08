@@ -697,7 +697,9 @@ export default {
         threats: ['Java', 'Premiere', 'Photoshop'],
       },
       resumeDialog: false,
-      birthdayDays: (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7,
+      birthdayDays:
+        (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7 +
+        countUpFromTime('May 16, 2000 16:21:00').days,
       authorData: {
         name: 'Sudharshan TK',
         nickName: 'Shan.tk',

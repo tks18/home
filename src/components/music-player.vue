@@ -19,7 +19,7 @@
     </template>
     <v-card tile>
       <v-progress-linear
-        :value="50"
+        :value="moveSeek"
         class="my-0"
         height="3"
       ></v-progress-linear>
@@ -27,8 +27,8 @@
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>The Walker</v-list-item-title>
-            <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
+            <v-list-item-title>{{ metadata.name }}</v-list-item-title>
+            <v-list-item-subtitle>{{ metadata.artist }}</v-list-item-subtitle>
           </v-list-item-content>
 
           <v-spacer></v-spacer>
@@ -40,8 +40,8 @@
           </v-list-item-icon>
 
           <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
-            <v-btn icon>
-              <v-icon>mdi-pause</v-icon>
+            <v-btn @click="handlePlayPause()" icon>
+              <v-icon>{{ play ? 'mdi-pause' : 'mdi-play' }}</v-icon>
             </v-btn>
           </v-list-item-icon>
 
@@ -69,7 +69,43 @@ export default {
   data: function () {
     return {
       activated: false,
+      play: false,
+      audio: null,
+      moveSeek: 0,
+      clip:
+        'https://cdn-125.anonfiles.com/3dd4O6G4pe/cbf8c1b5-1612803791/avicii-nights.mp3',
+      metadata: {
+        name: 'The Nights',
+        artist: 'by Avicii',
+      },
     };
+  },
+  methods: {
+    createElement() {
+      if (this.audio == null) {
+        this.audio = new Audio(this.clip);
+        this.audio.addEventListener('loadeddata', () => {
+          this.duration = this.audio.duration;
+          this.handlePlayPause();
+          this.calculateSeeker();
+        });
+      }
+    },
+    calculateSeeker() {
+      this.audio.ontimeupdate = () => {
+        let currentFloat = this.audio.currentTime;
+        let totDuration = this.audio.duration;
+        this.moveSeek = (currentFloat / totDuration) * 100;
+      };
+    },
+    handlePlayPause() {
+      if (this.audio == null) {
+        this.createElement();
+      } else {
+        this.play = !this.play;
+        this.play ? this.audio.play() : this.audio.pause();
+      }
+    },
   },
 };
 </script>
