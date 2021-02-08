@@ -149,7 +149,7 @@
   </v-footer>
 </template>
 <script>
-import { pingit } from '@p/backend';
+import { ping } from '@p/backend';
 import { lettersArray } from '@t/emoji-array';
 export default {
   data: function () {
@@ -242,11 +242,24 @@ export default {
       });
     },
     async getBackendStatus() {
-      let backendStatus = await pingit();
-      if (backendStatus.status == 200) {
+      let backendStatus = await ping();
+      if (backendStatus.success) {
         this.success = true;
-        this.pingstats = backendStatus.responsetime;
+        this.pingstats = backendStatus.timing;
       } else {
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: -100,
+          title: 'Backend Error',
+          text:
+            'Error While Connecting to Backend Server. Click the button to check my backup Servers',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+          },
+        });
         this.success = false;
         this.pingstats = 0;
       }
