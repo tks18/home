@@ -73,7 +73,7 @@ export default {
       audio: null,
       moveSeek: 0,
       clip:
-        'https://cdn-125.anonfiles.com/3dd4O6G4pe/cbf8c1b5-1612803791/avicii-nights.mp3',
+        'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
       metadata: {
         name: 'The Nights',
         artist: 'by Avicii',
