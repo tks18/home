@@ -645,8 +645,7 @@
 
 <script>
 import { lettersArray } from '@t/emoji-array';
-import axios from 'axios';
-import jsonadapter from 'axios-jsonp';
+import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
 import { countUpFromTime } from '@p/helpers';
 export default {
   metaInfo: function () {
@@ -698,7 +697,9 @@ export default {
         threats: ['Java', 'Premiere', 'Photoshop'],
       },
       resumeDialog: false,
-      birthdayDays: (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7,
+      birthdayDays:
+        (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7 +
+        countUpFromTime('May 16, 2000 16:21:00').days,
       authorData: {
         name: 'Sudharshan TK',
         nickName: 'Shan.tk',
@@ -863,56 +864,37 @@ export default {
       }
       this.dailyLabels = this.$_.reverse(currLabels);
     },
-    getCodingData() {
-      axios({
-        url: this.codingStats.dailyStats,
-        method: 'get',
-        adapter: jsonadapter,
-      }).then((resp) => {
-        let data = resp.data;
-        if (data) {
-          data.data.forEach((codeData) => {
-            let hours = codeData.grand_total.hours,
-              minutes = codeData.grand_total.minutes;
-            let totalMinutes = hours * 60 + minutes;
-            this.consolMinutes += totalMinutes;
-            this.dailyData.push(totalMinutes);
-          });
-        }
-      });
+    async getCodingData() {
+      let codeData = await codingData();
+      if (codeData.success && codeData.data != null) {
+        this.dailyData = codeData.data.dailyData;
+        this.consolMinutes = codeData.data.consolMinutes;
+      } else {
+        this.dailyData = [];
+        this.consolMinutes = [];
+      }
     },
-    getLanguageTrend() {
-      axios({
-        url: this.codingStats.languageTrend,
-        method: 'get',
-        adapter: jsonadapter,
-      }).then((resp) => {
-        let data = resp.data;
-        if (data) {
-          for (let i = 0; i < 5; i++) {
-            this.languageTrendData.push(data.data[i].percent);
-            data.data[i].name == 'JavaScript'
-              ? this.languageTrendLabels.push('JS')
-              : this.languageTrendLabels.push(data.data[i].name);
-            this.languageTrendGradients.push(data.data[i].color);
-          }
-        }
-      });
+    async getLanguageTrend() {
+      let trendData = await languageTrend();
+      if (trendData.success && trendData.data != null) {
+        this.languageTrendData = trendData.data.languageTrendData;
+        this.languageTrendLabels = trendData.data.languageTrendLabels;
+        this.languageTrendGradients = trendData.data.languageTrendGradients;
+      } else {
+        this.languageTrendData = [];
+        this.languageTrendLabels = [];
+        this.languageTrendGradients = [];
+      }
     },
-    getEditorsTrend() {
-      axios({
-        url: this.codingStats.editors,
-        method: 'get',
-        adapter: jsonadapter,
-      }).then((resp) => {
-        let data = resp.data;
-        if (data) {
-          for (let i = 0; i < 5; i++) {
-            this.editorsTrendData.push(Math.round(data.data[i].percent));
-            this.editorsTrendLabels.push(data.data[i].name);
-          }
-        }
-      });
+    async getEditorsTrend() {
+      let editorData = await editorsData();
+      if (editorData.success && editorData.data != null) {
+        this.editorsTrendData = editorData.data.editorsTrendData;
+        this.editorsTrendLabels = editorData.data.editorsTrendLabels;
+      } else {
+        this.editorsTrendData = [];
+        this.editorsTrendLabels = [];
+      }
     },
   },
   computed: {

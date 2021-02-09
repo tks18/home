@@ -260,7 +260,7 @@
           <v-card
             elevation="6"
             v-ripple
-            @click="gotoUrl(stories.site + story.link, true)"
+            @click="gotoUrl(stories.site + story.link)"
             class="mx-2"
             :style="{
               background: 'center',
@@ -714,34 +714,6 @@
             <span class="font-weight-black"> me@shaaan.tk</span>
           </div>
         </v-alert>
-        <v-snackbar v-model="copiedEmail" multi-line :timeout="4000">
-          Email ID has Been Copied to Your Clipboard. Do You Want to Open the
-          Email to Send Mail ?
-          <v-col align="center">
-            <v-spacer></v-spacer>
-            <v-btn
-              text
-              class="mx-1"
-              color="primary"
-              outlined
-              @click="
-                gotoUrl(mailtoLink);
-                copiedEmail = false;
-              "
-            >
-              Open
-            </v-btn>
-            <v-btn
-              class="mx-1"
-              text
-              outlined
-              color="primary"
-              @click="copiedEmail = false"
-            >
-              Close
-            </v-btn>
-          </v-col>
-        </v-snackbar>
       </v-container>
     </div>
     <div class="column is-full">
@@ -895,7 +867,6 @@ export default {
       githubPhoto:
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       emailType: 'info',
-      copiedEmail: false,
       animatedArray: {
         blog: '',
         stories: '',
@@ -1039,10 +1010,33 @@ export default {
     },
     async getStories() {
       let storydata = await stories.get();
-      if (storydata.data.success) {
+      if (storydata && storydata.data && storydata.data.success) {
         this.stories.site = storydata.data.website;
         this.stories.data = storydata.data.stories;
         this.$set(this.stories, 'loading', false);
+      } else {
+        this.$set(this.stories, 'loading', false);
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: 5000,
+          title: 'Stories Error',
+          text:
+            'Error While Getting Stories from the Server. Please Reload the Website to Get the Data',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+            buttons: [
+              {
+                text: 'Reload Now',
+                onClick: () => {
+                  this.$router.go();
+                },
+              },
+            ],
+          },
+        });
       }
     },
     getProjects() {
@@ -1060,6 +1054,27 @@ export default {
               : repos.slice(0, 5);
             this.$set(this.projects, 'projects', slicedRepos);
           } else {
+            this.$notify({
+              group: 'main',
+              type: 'error',
+              duration: 5000,
+              title: 'Projects Error',
+              text:
+                'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
+              data: {
+                loading: false,
+                dark: true,
+                type: 'Error Notification',
+                buttons: [
+                  {
+                    text: 'Reload Now',
+                    onClick: () => {
+                      this.$router.go();
+                    },
+                  },
+                ],
+              },
+            });
             this.$set(this.projects, 'loading', false);
             this.$set(this.projects, 'projects', {});
           }
@@ -1073,15 +1088,53 @@ export default {
     handleEmailClick(email) {
       navigator.clipboard.writeText(email).then(
         () => {
-          this.emailType = 'success';
-          this.copiedEmail = true;
+          this.$notify({
+            group: 'main',
+            type: 'yellow',
+            duration: 5000,
+            title: 'Email Address Copied !',
+            text:
+              'My Email Address has been Copied to Clipboard. You can Click the below button to Directly open your Mail Client to Send my Mail. Thank You',
+            data: {
+              loading: false,
+              dark: false,
+              type: 'Normal Notification',
+              buttons: [
+                {
+                  text: 'Open Email',
+                  onClick: () => {
+                    this.gotoUrl(this.mailtoLink);
+                  },
+                },
+              ],
+            },
+          });
           setTimeout(() => {
             this.emailType = 'info';
           }, 3003);
         },
         () => {
-          this.emailType = 'error';
-          this.copiedEmail = false;
+          this.$notify({
+            group: 'main',
+            type: 'error',
+            duration: 5000,
+            title: 'Error in the Process',
+            text:
+              'Error While Copying the Email Address. No Worries you can Directly Send me a Mail with the Below Button.',
+            data: {
+              loading: false,
+              dark: true,
+              type: 'Error Notification',
+              buttons: [
+                {
+                  text: 'Open Email',
+                  onClick: () => {
+                    this.gotoUrl(this.mailtoLink);
+                  },
+                },
+              ],
+            },
+          });
           setTimeout(() => {
             this.emailType = 'info';
           }, 3003);

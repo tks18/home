@@ -3,17 +3,18 @@
     :group="group"
     classes="notification"
     :duration="4000"
-    :max="5"
+    :max="2"
     :position="position"
   >
     <template slot="body" slot-scope="props">
       <v-card
         :loading="props.item.data.loading"
-        class="mt-2 pt-2"
-        hover
+        class="mt-2 pt-2 non-touch"
         shaped
         :ripple="props.item.data.onClick != undefined"
         outlined
+        :light="!props.item.data.dark"
+        :dark="props.item.data.dark"
         elevation="22"
         @click="handleClick(props)"
         :color="props.item.type"
