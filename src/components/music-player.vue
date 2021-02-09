@@ -18,12 +18,21 @@
       </v-card>
     </template>
     <v-card tile>
-      <v-progress-linear
-        :value="moveSeek"
-        class="my-0"
-        height="3"
-      ></v-progress-linear>
-
+      <v-slider
+        :max="duration == 0 ? 100 : duration"
+        v-model="moveSeek"
+        thumb-label="always"
+        :thumb-size="40"
+        :loading="loading"
+        @click.stop="handleChange()"
+        color="primary"
+        class="mx-0 my-0"
+        dense
+      >
+        <template v-slot:thumb-label>
+          {{ currentText }}
+        </template>
+      </v-slider>
       <v-list>
         <v-list-item>
           <v-list-item-content>
@@ -33,6 +42,11 @@
 
           <v-spacer></v-spacer>
 
+          <v-list-item-content class="text-center">
+            <v-list-item-subtitle>
+              {{ currentText }} / {{ durationText }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
           <v-list-item-icon>
             <v-btn icon>
               <v-icon>mdi-rewind</v-icon>
@@ -72,30 +86,60 @@ export default {
       play: false,
       audio: null,
       moveSeek: 0,
+      changeSeek: 0,
+      duration: 0,
+      loading: false,
       clip:
         'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
       metadata: {
         name: 'The Nights',
         artist: 'by Avicii',
       },
+      durationText: '00:00',
+      currentText: '00:00',
     };
   },
   methods: {
     createElement() {
+      this.loading = true;
       if (this.audio == null) {
         this.audio = new Audio(this.clip);
         this.audio.addEventListener('loadeddata', () => {
           this.duration = this.audio.duration;
+          let minutes = Math.floor(this.duration / 60);
+          let remainingSecs = Math.round(this.duration % 60);
+          minutes = minutes.toString().length > 1 ? minutes : `0${minutes}`;
+          remainingSecs =
+            remainingSecs.toString().length > 1
+              ? remainingSecs
+              : `0${remainingSecs}`;
+          this.durationText = `${minutes}:${remainingSecs}`;
+          this.loading = false;
           this.handlePlayPause();
           this.calculateSeeker();
         });
       }
     },
+    handleChange() {
+      if (this.audio != null) {
+        let changeVals = this.moveSeek;
+        let duration = this.audio.duration;
+        let changedTime = (changeVals / 100) * duration;
+        this.audio.currentTime = changedTime;
+      }
+    },
     calculateSeeker() {
       this.audio.ontimeupdate = () => {
         let currentFloat = this.audio.currentTime;
-        let totDuration = this.audio.duration;
-        this.moveSeek = (currentFloat / totDuration) * 100;
+        let minutes = Math.floor(currentFloat / 60);
+        let remainingSecs = Math.round(currentFloat % 60);
+        minutes = minutes.toString().length > 1 ? minutes : `0${minutes}`;
+        remainingSecs =
+          remainingSecs.toString().length > 1
+            ? remainingSecs
+            : `0${remainingSecs}`;
+        this.currentText = `${minutes}:${remainingSecs}`;
+        this.moveSeek = currentFloat;
       };
     },
     handlePlayPause() {
