@@ -802,6 +802,7 @@
 
 <script>
 import { stories } from '@p/backend';
+import { projects } from '@p/resources/github';
 import { lettersArray, safeEmojis } from '@t/emoji-array';
 import { scrollTo, getOs, getViewport } from '@p/helpers';
 export default {
@@ -1039,51 +1040,36 @@ export default {
         });
       }
     },
-    getProjects() {
-      this.$set(this.projects, 'loading', true);
-      let url =
-        'https://api.github.com/users/tks18/repos?sort=updated&per_page=20';
-      this.$axios
-        .get(url)
-        .then((resp) => {
-          if (resp.data.length > 0) {
-            this.$set(this.projects, 'loading', false);
-            let repos = resp.data;
-            let slicedRepos = this.ismobile
-              ? repos.slice(0, 2)
-              : repos.slice(0, 5);
-            this.$set(this.projects, 'projects', slicedRepos);
-          } else {
-            this.$notify({
-              group: 'main',
-              type: 'error',
-              duration: 5000,
-              title: 'Projects Error',
-              text:
-                'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
-              data: {
-                loading: false,
-                dark: true,
-                type: 'Error Notification',
-                buttons: [
-                  {
-                    text: 'Reload Now',
-                    onClick: () => {
-                      this.$router.go();
-                    },
-                  },
-                ],
+    async getProjects() {
+      let projectsData = await projects();
+      if (projectsData.success && projectsData.data != null) {
+        this.$set(this.projects, 'loading', true);
+        this.$set(this.projects, 'projects', projectsData.data);
+      } else {
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: 5000,
+          title: 'Projects Error',
+          text:
+            'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+            buttons: [
+              {
+                text: 'Reload Now',
+                onClick: () => {
+                  this.$router.go();
+                },
               },
-            });
-            this.$set(this.projects, 'loading', false);
-            this.$set(this.projects, 'projects', {});
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-          this.$set(this.projects, 'loading', false);
-          this.$set(this.projects, 'projects', {});
+            ],
+          },
         });
+        this.$set(this.projects, 'loading', false);
+        this.$set(this.projects, 'projects', {});
+      }
     },
     handleEmailClick(email) {
       navigator.clipboard.writeText(email).then(
