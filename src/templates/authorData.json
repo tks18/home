@@ -1,0 +1,69 @@
+{
+  "main": {
+    "name": "Sudharshan TK",
+    "intro": "I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession",
+    "nickName": "Shan.tk",
+    "status": "Currently Automating Workflows",
+    "nationality": "A Proud Indian",
+    "profComp": "Chartered Accountant Student",
+    "techSkills": [
+      {
+        "name": "Web Development",
+        "link": "https://developer.mozilla.org/en-US/docs/Learn"
+      },
+      {
+        "name": "Python",
+        "link": "https://www.python.org/dev/"
+      },
+      {
+        "name": "Backend Development",
+        "link": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction"
+      },
+      {
+        "name": "MS Office Tools",
+        "link": "https://www.excel-easy.com/"
+      }
+    ],
+    "aOfInt": [
+      {
+        "name": "AI",
+        "link": "https://www.udacity.com/course/intro-to-artificial-intelligence--cs271"
+      },
+      {
+        "name": "ReactJs",
+        "link": "https://reactjs.org/"
+      },
+      {
+        "name": "VueJs",
+        "link": "https://vuejs.org/"
+      },
+      {
+        "name": "Gsap",
+        "link": "https://greensock.com/gsap/"
+      },
+      {
+        "name": "NodeJs",
+        "link": "https://nodejs.dev/"
+      }
+    ]
+  },
+  "workProfile": {
+    "position": "Audit Assistant",
+    "place": "Ford Rhodes Parks LLP"
+  },
+  "swot": {
+    "strengths": ["Vuejs", "NodeJs", "Gsap"],
+    "weakness": ["Java", "Flutter", "Ruby"],
+    "opportunities": ["ReactJs", "React-Native", "Vue-Native"],
+    "threats": ["Java", "Premiere", "Photoshop"]
+  },
+  "bgs": [
+    "https://i.ibb.co/GRFHNM2/IMG-20200130-134312.webp",
+    "https://i.ibb.co/mc49Ygn/20191229-170937.webp",
+    "https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp",
+    "https://i.ibb.co/0jksbWY/IMG-20200118-172203-1.webp",
+    "https://i.ibb.co/NKpNqbt/IMG-20191028-170205.webp",
+    "https://i.ibb.co/FxT2W24/DJI-0566-1.webp",
+    "https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp"
+  ]
+}

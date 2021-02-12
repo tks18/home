@@ -22,86 +22,118 @@
       </v-btn>
     </div>
     <div class="column is-full">
-      <v-card
+      <div
         :style="{
           background: 'center',
           backgroundImage: mainBg,
           backgroundSize: 'cover',
+          height: ismobile ? '400px' : '450px',
           minWidth: '100%',
         }"
-        flat
+        class="hero non-touch"
       >
-        <div class="hero non-touch">
-          <div id="initscroll" class="hero-body">
-            <v-row v-if="!ismobile">
-              <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
-                <div class="back-blur white--text pa-2 fit-text">
-                  <div
-                    :class="
-                      (ismobile ? 'text-h4 text-center' : 'text-h2') +
-                      ' font-weight-black'
-                    "
-                  >
-                    Come face to face Huh?
-                  </div>
-                </div>
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col
-                :cols="ismobile ? 12 : 5"
-                :align="ismobile ? 'center' : 'right'"
-                justify="center"
-              >
-                <div class="back-blur white--text pa-2 fit-text">
-                  <div
-                    :class="
-                      (ismobile ? 'text-center' : '') +
-                      'text-overline font-weight-bold'
-                    "
-                  >
-                    "Before picking fights, learn to assess your opponents."
-                  </div>
-                  <div class="text-body-2 text-right font-weight-light">
-                    - Tamuna Tsertsvadze, Galaxy Pirates
-                  </div>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-          <div class="hero-footer">
-            <v-row align="end" class="py-1 px-1">
-              <v-col
-                cols="12"
-                :align="ismobile ? 'center' : 'right'"
-                :justify="ismobile ? 'center' : 'end'"
-                class="py-0"
-              >
+        <div id="initscroll" class="hero-body">
+          <v-row v-if="!ismobile">
+            <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
+              <div class="back-blur white--text pa-2 fit-text">
                 <div
-                  class="back-blur fit-text px-2 text-overline font-weight-bold"
+                  :class="
+                    (ismobile ? 'text-h4 text-center' : 'text-h2') +
+                    ' font-weight-black'
+                  "
                 >
-                  <span
-                    :class="
-                      ($vuetify.theme.dark
-                        ? 'grad-back-dark'
-                        : 'grad-back-light') + ' pa-2'
-                    "
-                  >
-                    {{ animatedArray.hashTag }}
-                  </span>
-                  <span class="white--text"> {{ ' Squad' }} </span>
+                  Come face to face Huh?
                 </div>
-              </v-col>
-            </v-row>
-          </div>
+              </div>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col
+              :cols="ismobile ? 12 : 5"
+              :align="ismobile ? 'center' : 'right'"
+              justify="center"
+            >
+              <div class="back-blur white--text pa-2 fit-text">
+                <div
+                  :class="
+                    (ismobile ? 'text-center' : '') +
+                    'text-overline font-weight-bold'
+                  "
+                >
+                  "Before picking fights, learn to assess your opponents."
+                </div>
+                <div class="text-body-2 text-right font-weight-light">
+                  - Tamuna Tsertsvadze, Galaxy Pirates
+                </div>
+              </div>
+            </v-col>
+          </v-row>
         </div>
-      </v-card>
+        <div class="hero-footer">
+          <v-row align="end" class="py-1 px-1">
+            <v-col cols="12" align="center" justify="center" class="py-0">
+              <div
+                class="back-blur fit-text px-2 text-overline font-weight-bold"
+              >
+                <span
+                  :class="
+                    ($vuetify.theme.dark
+                      ? 'grad-back-dark'
+                      : 'grad-back-light') + ' pa-2'
+                  "
+                >
+                  {{ animatedArray.hashTag }}
+                </span>
+                <span class="white--text"> {{ ' Squad' }} </span>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </div>
     </div>
-    <div class="column is-full py-2">
+    <div class="column is-full py-1">
+      <v-container>
+        <v-row>
+          <v-col align="start" justify="start">
+            <div
+              id="someWordsTitle"
+              :class="
+                'clip-text-back text-h5 non-touch text-capitalize' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              Some Words From me <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col
+            cols="12"
+            :class="(ismobile ? 'mx-1' : 'mx-2') + ' text-body-1'"
+          >
+            {{ authorData.intro }}
+          </v-col>
+          <v-col cols="12" align="center">
+            <v-chip
+              v-for="(chip, index) in aboutChips"
+              v-bind:key="index"
+              color="primary"
+              @click="$vuetify.goTo(chip.id)"
+              outlined
+              class="my-1 mx-1"
+            >
+              <v-icon left color="primary">
+                {{ chip.icon }}
+              </v-icon>
+              {{ chip.name }}
+            </v-chip>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <div class="column is-full py-1">
       <v-row>
-        <v-col cols="12">
-          <v-container>
-            <v-row align="center">
-              <v-col id="aboutme" :cols="ismobile ? 12 : 4">
+        <v-col cols="12" class="my-0 py-0">
+          <v-container class="my-0 py-0">
+            <v-row align="center" class="my-0 py-0">
+              <v-col id="aboutme" :cols="ismobile ? 12 : 4" class="my-0 py-0">
                 <v-card height="450" outlined elevation="6">
                   <v-card-title class="text-h5 text-center">
                     About Me
@@ -118,36 +150,40 @@
                         ><span class="text-body-2">{{ authorData.name }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Nickname: </span
-                        ><span class="text-body-2">{{
-                          authorData.nickName
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Nickname:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.nickName }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Status: </span
-                        ><span class="text-body-2">{{
-                          authorData.status
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Status:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.status }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Age: </span
-                        ><span class="text-body-2">{{ authorData.age }}</span>
+                        <span class="text-body-1 font-weight-bold"> Age: </span>
+                        <span class="text-body-2">{{ authorData.age }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Nationality: </span
-                        ><span class="text-body-2">{{
-                          authorData.nationality
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Nationality:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.nationality }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Professional Education: </span
-                        ><span class="text-body-2">{{
-                          authorData.profComp
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Professional Education:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.profComp }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
                         <span class="text-body-1 font-weight-bold">
@@ -203,12 +239,12 @@
                           v-bind:key="cardbgs.leftKey"
                           :cols="ismobile ? 12 : 4"
                         >
-                          <v-card height="150" outlined elevation="6">
-                            <v-img
-                              cover
-                              height="150"
-                              :src="cardbgs.lefttop"
-                            ></v-img>
+                          <v-card
+                            :img="cardbgs.lefttop"
+                            :height="ismobile ? 250 : 150"
+                            outlined
+                            elevation="6"
+                          >
                           </v-card>
                         </v-col>
                       </v-scroll-y-transition>
@@ -222,34 +258,22 @@
                       elevation="6"
                       @click="gotoUrl('http://fordrhodesparks.com')"
                     >
-                      <v-row justify="space-between" class="mx-0">
-                        <v-col cols="6" class="mx-0 my-0 px-0 py-0">
-                          <v-card-title>Work Profile</v-card-title>
-                          <v-card-text class="font-weight-light">
-                            Working in
-                            <span class="font-weight-bold"
-                              >Ford Rhodes Parks</span
-                            ><br />
-                            as
-                            <span class="font-weight-bold"
-                              >Audit Assistant</span
-                            >
-                          </v-card-text>
-                        </v-col>
-                        <v-divider vertical class="opaque"></v-divider>
-                        <v-col
-                          align="right"
-                          justify="end"
-                          cols="5"
-                          class="mx-0 my-0 py-0 px-0"
-                        >
-                          <v-img
-                            contain
-                            height="150"
-                            :src="workProfile.img"
-                          ></v-img>
-                        </v-col>
-                      </v-row>
+                      <v-card-title class="back-blur-no-inherit"
+                        >Work Profile</v-card-title
+                      >
+                      <v-card-subtitle class="back-blur-no-inherit"
+                        >About my Position</v-card-subtitle
+                      >
+                      <v-card-text class="back-blur-no-inherit text-overline">
+                        Working in
+                        <span class="font-weight-black primary--text">
+                          {{ workProfile.place }}
+                        </span>
+                        as
+                        <span class="font-weight-black primary--text">
+                          {{ workProfile.position }}
+                        </span>
+                      </v-card-text>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -312,7 +336,7 @@
                           >
                             <v-card-text>
                               <v-icon> mdi-download </v-icon>
-                              Short Version
+                              Mini Version
                             </v-card-text>
                           </v-card>
                         </v-col>
@@ -383,12 +407,12 @@
                           v-bind="attrs"
                           :cols="ismobile ? 12 : 4"
                         >
-                          <v-card height="150" outlined elevation="6">
-                            <v-img
-                              cover
-                              height="150"
-                              :src="cardbgs.rightbottom"
-                            ></v-img>
+                          <v-card
+                            :img="cardbgs.rightbottom"
+                            :height="ismobile ? 250 : 150"
+                            outlined
+                            elevation="6"
+                          >
                           </v-card>
                         </v-col>
                       </v-scroll-y-transition>
@@ -645,6 +669,7 @@
 
 <script>
 import { lettersArray } from '@t/emoji-array';
+import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
 import { countUpFromTime } from '@p/helpers';
 export default {
@@ -656,15 +681,7 @@ export default {
   data: function () {
     return {
       mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
-      bgs: [
-        'https://i.ibb.co/GRFHNM2/IMG-20200130-134312.webp',
-        'https://i.ibb.co/mc49Ygn/20191229-170937.webp',
-        'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
-        'https://i.ibb.co/0jksbWY/IMG-20200118-172203-1.webp',
-        'https://i.ibb.co/NKpNqbt/IMG-20191028-170205.webp',
-        'https://i.ibb.co/FxT2W24/DJI-0566-1.webp',
-        'https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp',
-      ],
+      bgs: authorData.bgs,
       bgPlay: true,
       cardbgs: {
         play: false,
@@ -690,70 +707,16 @@ export default {
       languageTrendGradients: [],
       editorsTrendData: [],
       editorsTrendLabels: [],
-      swot: {
-        strengths: ['Vuejs', 'NodeJs', 'Gsap'],
-        weakness: ['Java', 'Flutter', 'Ruby'],
-        opportunities: ['ReactJs', 'React-Native', 'Vue-Native'],
-        threats: ['Java', 'Premiere', 'Photoshop'],
-      },
+      swot: authorData.swot,
       resumeDialog: false,
       birthdayDays:
         (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7 +
         countUpFromTime('May 16, 2000 16:21:00').days,
       authorData: {
-        name: 'Sudharshan TK',
-        nickName: 'Shan.tk',
-        status: 'Currently Automating Workflows',
+        ...authorData.main,
         age: countUpFromTime('May 16, 2000 16:21:00').years,
-        nationality: 'A Proud Indian',
-        profComp: 'Chartered Accountant Student',
-        techSkills: [
-          {
-            name: 'Web Development',
-            link: 'https://developer.mozilla.org/en-US/docs/Learn',
-          },
-          {
-            name: 'Python',
-            link: 'https://www.python.org/dev/',
-          },
-          {
-            name: 'Backend Development',
-            link:
-              'https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction',
-          },
-          {
-            name: 'MS Office Tools',
-            link: 'https://www.excel-easy.com/',
-          },
-        ],
-        aOfInt: [
-          {
-            name: 'AI',
-            link:
-              'https://www.udacity.com/course/intro-to-artificial-intelligence--cs271',
-          },
-          {
-            name: 'ReactJs',
-            link: 'https://reactjs.org/',
-          },
-          {
-            name: 'VueJs',
-            link: 'https://vuejs.org/',
-          },
-          {
-            name: 'Gsap',
-            link: 'https://greensock.com/gsap/',
-          },
-          {
-            name: 'NodeJs',
-            link: 'https://nodejs.dev/',
-          },
-        ],
       },
-      workProfile: {
-        img:
-          'https://i.ibb.co/y0qfZD5/fabian-irsara-67l-Quj-B14w-unsplash.webp',
-      },
+      workProfile: authorData.workProfile,
       animatedArray: {
         hashTag: '',
       },
@@ -896,6 +859,19 @@ export default {
         this.editorsTrendLabels = [];
       }
     },
+    render() {
+      this.transitWord(
+        this.wordMaps.hash.map,
+        this.wordMaps.hash.initial,
+        'hashTag',
+      );
+      this.lifeTimeCounter('#lifetime');
+      this.setCardBgs();
+      this.getLabels();
+      this.getCodingData();
+      this.getLanguageTrend();
+      this.getEditorsTrend();
+    },
   },
   computed: {
     ismobile() {
@@ -905,6 +881,25 @@ export default {
       } else {
         return true;
       }
+    },
+    aboutChips() {
+      return [
+        {
+          name: 'Profile Card',
+          icon: 'mdi-account-box-outline',
+          id: '#aboutme',
+        },
+        {
+          name: 'Languages Known',
+          icon: 'mdi-language-csharp',
+          id: '#languagesknown',
+        },
+        {
+          name: 'More Stats',
+          icon: 'mdi-sign-real-estate',
+          id: '#moreStats',
+        },
+      ];
     },
     languagesKnown() {
       if (this.ismobile) {
@@ -981,17 +976,7 @@ export default {
     },
   },
   mounted() {
-    this.transitWord(
-      this.wordMaps.hash.map,
-      this.wordMaps.hash.initial,
-      'hashTag',
-    );
-    this.lifeTimeCounter('#lifetime');
-    this.setCardBgs();
-    this.getLabels();
-    this.getCodingData();
-    this.getLanguageTrend();
-    this.getEditorsTrend();
+    this.render();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
