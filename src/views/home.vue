@@ -803,7 +803,8 @@
 <script>
 import { stories } from '@p/backend';
 import { projects } from '@p/resources/github';
-import { lettersArray, safeEmojis } from '@t/emoji-array';
+import gsap from '@p/gsap';
+import { generateRandomEmojis, homemaps } from '@t/wordmap';
 import { scrollTo, getOs, getViewport } from '@p/helpers';
 export default {
   metaInfo: function () {
@@ -853,7 +854,6 @@ export default {
           id: 'feedbacktitile',
         },
       ],
-      letters: lettersArray,
       projects: {
         loading: false,
         projects: {},
@@ -902,112 +902,19 @@ export default {
       const content = 'this.$refs.' + func;
       scrollTo(eval(content), 400, 300);
     },
-    createObserver(elem, callback, wordMap, word, stringText) {
-      let observer;
-      let target = document.querySelector(elem);
-      let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-      let handleIntersect = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this[callback](wordMap, word, stringText);
-          }
-        });
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(target);
-    },
-    update(word, stringText) {
-      var html = '';
-      word.forEach((map) => {
-        html += this.letters[Math.round(map) % lettersArray.length];
-      });
-      this.$set(this.animatedArray, stringText, html);
-    },
-    transitRandEmoji(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        onUpdate: () => {
-          var html = '';
-          word.forEach((map) => {
-            html += safeEmojis[Math.round(map) % safeEmojis.length];
-          });
-          this.$set(this.animatedArray, stringText, html);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: safeEmojis.length * 2 + range,
-            ease: 'ease-out',
-            duration: index + 2.5,
-          },
-          0,
-        );
-      });
-    },
     loopRandEmoji() {
-      let randEmoji = {
-        map: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-        initial: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-      };
-      this.transitRandEmoji(randEmoji.map, randEmoji.initial, 'randEmoji');
+      let randEmoji = generateRandomEmojis(3);
+      gsap.tweenTo({
+        vm: this,
+        emoji: true,
+        arrayName: 'animatedArray',
+        finalArray: randEmoji.map,
+        startArray: randEmoji.initial,
+        arrayProperty: 'randEmoji',
+      });
       setTimeout(() => {
         this.toggleTooltip = false;
       }, 5000);
-    },
-    transitWord(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        onUpdate: () => {
-          this.update(word, stringText);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: lettersArray.length * 2 + range,
-            ease: 'power4',
-            duration: index / 4 + 1,
-          },
-          0,
-        );
-      });
     },
     async getStories() {
       let storydata = await stories.get();
@@ -1043,7 +950,7 @@ export default {
     async getProjects() {
       let projectsData = await projects();
       if (projectsData.success && projectsData.data != null) {
-        this.$set(this.projects, 'loading', true);
+        this.$set(this.projects, 'loading', false);
         this.$set(this.projects, 'projects', projectsData.data);
       } else {
         this.$notify({
@@ -1129,48 +1036,60 @@ export default {
     },
     render() {
       this.loopRandEmoji();
-      this.createObserver(
-        '#whatiDo',
-        'transitWord',
-        this.wordMaps.whatiDo.map,
-        this.wordMaps.whatiDo.initial,
-        'whatiDo',
-      );
-      this.createObserver(
-        '#storytitle',
-        'transitWord',
-        this.wordMaps.stories.map,
-        this.wordMaps.stories.initial,
-        'stories',
-      );
-      this.createObserver(
-        '#abouttitle',
-        'transitWord',
-        this.wordMaps.about.map,
-        this.wordMaps.about.initial,
-        'about',
-      );
-      this.createObserver(
-        '#projtitle',
-        'transitWord',
-        this.wordMaps.projtitle.map,
-        this.wordMaps.projtitle.initial,
-        'projtitle',
-      );
-      this.createObserver(
-        '#blogtitle',
-        'transitWord',
-        this.wordMaps.blog.map,
-        this.wordMaps.blog.initial,
-        'blog',
-      );
-      this.createObserver(
-        '#feedbacktitile',
-        'transitWord',
-        this.wordMaps.feedBackTitle.map,
-        this.wordMaps.feedBackTitle.initial,
-        'feedBack',
-      );
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#whatiDo',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.whatiDo.map,
+        startArray: this.wordMaps.whatiDo.initial,
+        arrayProperty: 'whatiDo',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#storytitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.stories.map,
+        startArray: this.wordMaps.stories.initial,
+        arrayProperty: 'stories',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#abouttitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.about.map,
+        startArray: this.wordMaps.about.initial,
+        arrayProperty: 'about',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#projtitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.projtitle.map,
+        startArray: this.wordMaps.projtitle.initial,
+        arrayProperty: 'projtitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#blogtitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.blog.map,
+        startArray: this.wordMaps.blog.initial,
+        arrayProperty: 'blog',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#feedbacktitile',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.feedBackTitle.map,
+        startArray: this.wordMaps.feedBackTitle.initial,
+        arrayProperty: 'feedBack',
+      });
       this.getProjects();
       this.getStories();
       setTimeout(() => {
@@ -1245,130 +1164,7 @@ export default {
       ];
     },
     wordMaps() {
-      return {
-        blog: {
-          map: [
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('g'),
-          ],
-          initial: [46, 1, 3, 2, 40, 43, 10],
-        },
-        stories: {
-          map: [
-            lettersArray.indexOf('s'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('s'),
-          ],
-          initial: [40, 44, 42, 39, 41, 44, 2],
-        },
-        about: {
-          map: [
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('e'),
-          ],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        projtitle: {
-          map: [
-            lettersArray.indexOf('p'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('j'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('s'),
-          ],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        contactTitle: {
-          map: [
-            lettersArray.indexOf('g'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('y'),
-          ],
-          initial: [42, 46, 40, 1, 32, 45, 14],
-        },
-        feedBackTitle: {
-          map: [
-            lettersArray.indexOf('s'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('f'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('d'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('k'),
-          ],
-          initial: [
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-            14,
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-            14,
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-          ],
-        },
-        whatiDo: {
-          map: [
-            lettersArray.indexOf('w'),
-            lettersArray.indexOf('h'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('d'),
-            lettersArray.indexOf('o'),
-          ],
-          initial: [2, 20, 46, 40, 39, 27, 6, 42, 9],
-        },
-      };
+      return homemaps;
     },
   },
   mounted() {

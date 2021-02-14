@@ -1,19 +1,20 @@
 <template>
   <div class="columns is-multiline non-touch">
     <div
+      id="aboutMeTitle"
       :class="
-        'column is-full text-center text font-weight-bold mt-3 mb-0 pb-0 ' +
+        'column is-full text-center text-capitalize text font-weight-bold mt-3 mb-0 pb-0 ' +
         (ismobile ? 'text-h5' : 'text-h4')
       "
     >
-      About Me
+      {{ animatedArray.title }}
     </div>
     <div
       class="column is-full text-center text text-overline font-weight-bold mt-0 pt-0 pb-1"
     >
       <v-btn
         class="ma-0 pa-0"
-        @click="$vuetify.goTo('#aboutme')"
+        @click="$vuetify.goTo('#aboutmecard')"
         text
         plain
         color="primary"
@@ -101,7 +102,8 @@
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
               "
             >
-              Some Words From me <v-icon>mdi-arrow-right-circle</v-icon>
+              {{ animatedArray.someWords }}
+              <v-icon>mdi-arrow-right-circle</v-icon>
             </div>
           </v-col>
           <v-col
@@ -133,7 +135,11 @@
         <v-col cols="12" class="my-0 py-0">
           <v-container class="my-0 py-0">
             <v-row align="center" class="my-0 py-0">
-              <v-col id="aboutme" :cols="ismobile ? 12 : 4" class="my-0 py-0">
+              <v-col
+                id="aboutmecard"
+                :cols="ismobile ? 12 : 4"
+                class="my-0 py-0"
+              >
                 <v-card height="450" outlined elevation="6">
                   <v-card-title class="text-h5 text-center">
                     About Me
@@ -668,10 +674,11 @@
 </template>
 
 <script>
-import { lettersArray } from '@t/emoji-array';
+import { aboutpageMaps } from '@t/wordmap';
 import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
 import { countUpFromTime } from '@p/helpers';
+import gsap from '@p/gsap';
 export default {
   metaInfo: function () {
     return {
@@ -709,16 +716,15 @@ export default {
       editorsTrendLabels: [],
       swot: authorData.swot,
       resumeDialog: false,
-      birthdayDays:
-        (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7 +
-        countUpFromTime('May 16, 2000 16:21:00').days,
       authorData: {
         ...authorData.main,
         age: countUpFromTime('May 16, 2000 16:21:00').years,
       },
       workProfile: authorData.workProfile,
       animatedArray: {
-        hashTag: '',
+        hashTag: ' ',
+        title: ' ',
+        someWords: ' ',
       },
     };
   },
@@ -727,65 +733,22 @@ export default {
       window.open(url);
       return;
     },
-    transitWord(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        repeat: -1,
-        yoyo: true,
-        repeatDelay: 2,
-        onUpdate: () => {
-          this.update(word, stringText);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: lettersArray.length * 2 + range,
-            ease: 'power4',
-            duration: index / 4 + 1,
-          },
-          0,
-        );
-      });
-    },
-    update(word, stringText) {
-      var html = '';
-      word.forEach((map) => {
-        html += lettersArray[Math.round(map) % lettersArray.length];
-      });
-      this.$set(this.animatedArray, stringText, html);
-    },
     lifeTimeCounter(elem) {
-      let observer;
-      let target = document.querySelector(elem);
-      let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-      let handleIntersect = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            let newVals = countUpFromTime('May 16, 2000 16:21:00');
-            let tl = this.$gsap.timeline();
-            for (const [key] of Object.entries(this.lifeTimeCountDown)) {
-              tl.to(this.$data.lifeTimeCountDown, {
-                [key]: newVals[key],
-                duration: 0.8,
-              });
-            }
-            setTimeout(() => {
-              setInterval(() => {
-                this.lifeTimeCountDown = countUpFromTime(
-                  'May 16, 2000 16:21:00',
-                );
-              }, 1000);
-            }, 3800);
-          }
-        });
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(target);
+      gsap.observeNexecute(elem, () => {
+        let newVals = countUpFromTime('May 16, 2000 16:21:00');
+        let tl = this.$gsap.timeline();
+        for (const [key] of Object.entries(this.lifeTimeCountDown)) {
+          tl.to(this.$data.lifeTimeCountDown, {
+            [key]: newVals[key],
+            duration: 0.8,
+          });
+        }
+        setTimeout(() => {
+          setInterval(() => {
+            this.lifeTimeCountDown = countUpFromTime('May 16, 2000 16:21:00');
+          }, 1000);
+        }, 3800);
+      });
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
@@ -860,11 +823,32 @@ export default {
       }
     },
     render() {
-      this.transitWord(
-        this.wordMaps.hash.map,
-        this.wordMaps.hash.initial,
-        'hashTag',
-      );
+      gsap.tweenToRev({
+        vm: this,
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.hash.map,
+        startArray: this.wordMaps.hash.initial,
+        arrayProperty: 'hashTag',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#aboutMeTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.title.map,
+        startArray: this.wordMaps.title.initial,
+        arrayProperty: 'title',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#someWordsTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.someWords.map,
+        startArray: this.wordMaps.someWords.initial,
+        arrayProperty: 'someWords',
+      });
       this.lifeTimeCounter('#lifetime');
       this.setCardBgs();
       this.getLabels();
@@ -882,12 +866,28 @@ export default {
         return true;
       }
     },
+    birthdayDays() {
+      let countDown = countUpFromTime('May 16, 2000 16:21:00');
+      let offset = countDown.hours > 23 ? 0 : -1;
+      let currentYear = new Date().getFullYear();
+      let daysInYear =
+        currentYear % 4
+          ? currentYear % 100
+            ? currentYear % 400
+              ? 366
+              : 365
+            : 366
+          : 365;
+      let remainingDays =
+        daysInYear - (countDown.weeks * 7 + (7 - countDown.days + offset));
+      return remainingDays;
+    },
     aboutChips() {
       return [
         {
           name: 'Profile Card',
           icon: 'mdi-account-box-outline',
-          id: '#aboutme',
+          id: '#aboutmecard',
         },
         {
           name: 'Languages Known',
@@ -941,38 +941,7 @@ export default {
       };
     },
     wordMaps() {
-      return {
-        hash: {
-          initial: [
-            lettersArray.indexOf('#'),
-            lettersArray.indexOf('k'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('n'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('v'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('s'),
-          ],
-          map: [
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('#'),
-            lettersArray.indexOf('j'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('h'),
-            lettersArray.indexOf('n'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('w'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('k'),
-            lettersArray.indexOf(' '),
-          ],
-        },
-      };
+      return aboutpageMaps;
     },
   },
   mounted() {

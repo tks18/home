@@ -23,6 +23,7 @@ export async function projects(ismobile) {
       }
     })
     .catch((e) => {
+      console.log(e);
       return {
         success: true,
         data: null,
