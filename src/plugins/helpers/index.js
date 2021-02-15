@@ -29,11 +29,19 @@ export function countUpFromTime(countFrom) {
   var now = new Date(),
     countTo = new Date(countFrom),
     timeDifference = now - countTo;
-
   var secondsInAHour = 60 * 60 * 1000;
   var secondsInADay = secondsInAHour * 24;
   var secondsInAWeek = secondsInADay * 7;
   var secondsInAYear = secondsInADay * 365;
+
+  // console.log(
+  //   timeDifference / secondsInAYear,
+  //   (timeDifference % secondsInAYear) / secondsInAWeek,
+  //   (timeDifference % secondsInAWeek) / secondsInADay,
+  //   (timeDifference % secondsInADay) / secondsInAHour,
+  //   (timeDifference % secondsInADay) % secondsInAHour,
+  //   (((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) / 1000,
+  // );
 
   let years = Math.floor((timeDifference / secondsInAYear) * 1);
   let weeks = Math.floor(

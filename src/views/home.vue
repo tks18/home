@@ -696,6 +696,23 @@
       </v-row>
     </div>
     <div class="column is-full">
+      <v-row>
+        <v-col cols="12">
+          <div
+            @click="$router.push('/gallery')"
+            id="gallerytitle"
+            :class="
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.gallerytitle }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+      </v-row>
+    </div>
+    <div class="column is-full">
       <v-container id="emailme">
         <v-alert
           dense
@@ -869,15 +886,16 @@ export default {
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       emailType: 'info',
       animatedArray: {
-        blog: '',
-        stories: '',
-        about: '',
-        whatiDo: '',
-        stat: '',
-        projtitle: '',
-        randEmoji: '',
-        contactTitle: '',
-        feedBack: '',
+        blog: ' ',
+        stories: ' ',
+        about: ' ',
+        whatiDo: ' ',
+        stat: ' ',
+        projtitle: ' ',
+        gallerytitle: ' ',
+        randEmoji: ' ',
+        contactTitle: ' ',
+        feedBack: ' ',
       },
       aboutData: {
         image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
@@ -1071,6 +1089,15 @@ export default {
         finalArray: this.wordMaps.projtitle.map,
         startArray: this.wordMaps.projtitle.initial,
         arrayProperty: 'projtitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#gallerytitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.gallerytitle.map,
+        startArray: this.wordMaps.gallerytitle.initial,
+        arrayProperty: 'gallerytitle',
       });
       gsap.tweenToObserver({
         vm: this,

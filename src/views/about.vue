@@ -140,7 +140,7 @@
                 :cols="ismobile ? 12 : 4"
                 class="my-0 py-0"
               >
-                <v-card height="450" outlined elevation="6">
+                <v-card outlined elevation="6">
                   <v-card-title class="text-h5 text-center">
                     About Me
                   </v-card-title>
@@ -259,7 +259,6 @@
                   </v-tooltip>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-card
-                      height="150"
                       outlined
                       elevation="6"
                       @click="gotoUrl('http://fordrhodesparks.com')"
@@ -287,7 +286,7 @@
                   <v-col align="center" cols="12">
                     <v-card
                       @click="resumeDialog = true"
-                      height="100"
+                      :height="ismobile ? null : null"
                       :class="
                         $vuetify.theme.dark
                           ? 'grad-back-dark'
@@ -364,7 +363,6 @@
                     <v-tooltip top transition="slide-y-transition">
                       <template v-slot:activator="{ on, attrs }">
                         <v-card
-                          height="150"
                           v-on="on"
                           v-bind="attrs"
                           outlined
@@ -508,7 +506,7 @@
           </v-container>
         </v-col>
         <v-col cols="12" id="languagesknown">
-          <v-card :height="ismobile ? 300 : 450" flat elevation="12">
+          <v-card flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
               Top Languages, Frameworks, Softwares that i Know
             </v-card-title>
@@ -536,7 +534,7 @@
           <v-container>
             <v-row>
               <v-col :cols="ismobile ? 12 : 8">
-                <v-card height="450" outlined elevation="6">
+                <v-card outlined elevation="6">
                   <v-card-title>SWOT Analysis - Programmers Way </v-card-title>
                   <v-card-subtitle>
                     (Strength-Weakness-Opportunity-Threats)
@@ -615,7 +613,7 @@
               <v-col :cols="ismobile ? 12 : 4">
                 <v-row>
                   <v-col cols="12">
-                    <v-card height="200" outlined elevation="6">
+                    <v-card outlined elevation="6">
                       <v-card-title
                         class="text-caption my-2 py-1 font-weight-bold"
                       >
@@ -641,7 +639,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12">
-                    <v-card height="200" outlined elevation="6">
+                    <v-card outlined elevation="6">
                       <v-card-title class="font-weight-bold">
                         Top Editors I Use
                       </v-card-title>
@@ -868,18 +866,7 @@ export default {
     },
     birthdayDays() {
       let countDown = countUpFromTime('May 16, 2000 16:21:00');
-      let offset = countDown.hours > 23 ? 0 : -1;
-      let currentYear = new Date().getFullYear();
-      let daysInYear =
-        currentYear % 4
-          ? currentYear % 100
-            ? currentYear % 400
-              ? 366
-              : 365
-            : 366
-          : 365;
-      let remainingDays =
-        daysInYear - (countDown.weeks * 7 + (7 - countDown.days + offset));
+      let remainingDays = 365 - countDown.weeks * 7;
       return remainingDays;
     },
     aboutChips() {
@@ -929,16 +916,6 @@ export default {
           gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
       }
-    },
-    codingStats() {
-      return {
-        dailyStats:
-          'https://wakatime.com/share/@tks18/64f77194-b682-4115-a9e9-8c43be07d016.json',
-        languageTrend:
-          'https://wakatime.com/share/@tks18/0c4d783e-ccd7-421b-9330-5ae5cbd30847.json',
-        editors:
-          'https://wakatime.com/share/@tks18/51fe7a20-7425-4fd6-888b-cfbc69a22c1b.json',
-      };
     },
     wordMaps() {
       return aboutpageMaps;
