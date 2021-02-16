@@ -34,15 +34,6 @@ export function countUpFromTime(countFrom) {
   var secondsInAWeek = secondsInADay * 7;
   var secondsInAYear = secondsInADay * 365;
 
-  // console.log(
-  //   timeDifference / secondsInAYear,
-  //   (timeDifference % secondsInAYear) / secondsInAWeek,
-  //   (timeDifference % secondsInAWeek) / secondsInADay,
-  //   (timeDifference % secondsInADay) / secondsInAHour,
-  //   (timeDifference % secondsInADay) % secondsInAHour,
-  //   (((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) / 1000,
-  // );
-
   let years = Math.floor((timeDifference / secondsInAYear) * 1);
   let weeks = Math.floor(
     ((timeDifference % secondsInAYear) / secondsInAWeek) * 1,

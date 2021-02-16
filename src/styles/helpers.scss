@@ -71,3 +71,12 @@
 .inherit-height-responsive {
   height: 95%;
 }
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 1 !important;
+  position: absolute;
+  width: 100%;
+}

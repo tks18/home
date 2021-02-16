@@ -123,4 +123,16 @@ export default {
     ],
     initial: [2, 20, 46, 40, 39, 27, 6, 42, 9],
   },
+  gallerytitle: {
+    map: [
+      lettersArray.indexOf('g'),
+      lettersArray.indexOf('a'),
+      lettersArray.indexOf('l'),
+      lettersArray.indexOf('l'),
+      lettersArray.indexOf('e'),
+      lettersArray.indexOf('r'),
+      lettersArray.indexOf('y'),
+    ],
+    initial: [20, 1, 6, 7, 37, 33, 5],
+  },
 };

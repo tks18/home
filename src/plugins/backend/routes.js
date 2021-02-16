@@ -12,4 +12,7 @@ export const api = {
     get: backend + 'stories/get',
     set: backend + 'stories/set',
   },
+  gallery: {
+    get: backend + 'gallery/get',
+  },
 };

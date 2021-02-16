@@ -696,7 +696,7 @@
       </v-row>
     </div>
     <div class="column is-full">
-      <v-row>
+      <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
         <v-col cols="12">
           <div
             @click="$router.push('/gallery')"
@@ -709,6 +709,150 @@
             {{ animatedArray.gallerytitle }}
             <v-icon>mdi-arrow-right-circle</v-icon>
           </div>
+        </v-col>
+        <v-col :cols="ismobile ? 12 : 6">
+          <v-hover v-slot="{ hover }">
+            <v-card
+              class="mx-1 px-0 my-1 py-0"
+              :img="galleryLoading ? null : galleryData[0].links.regular"
+              outlined
+              :loading="galleryLoading"
+              :max-width="
+                ismobile
+                  ? contextInfo.viewport.width -
+                    contextInfo.viewport.width * 0.1
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.1) /
+                    2
+              "
+              :height="
+                ismobile
+                  ? contextInfo.viewport.height -
+                    contextInfo.viewport.height * 0.3
+                  : (contextInfo.viewport.height -
+                      contextInfo.viewport.height * 0.1) /
+                    1.3
+              "
+            >
+              <v-expand-transition>
+                <v-card
+                  v-if="hover"
+                  outlined
+                  :loading="galleryLoading"
+                  :max-width="
+                    ismobile
+                      ? contextInfo.viewport.width -
+                        contextInfo.viewport.width * 0.1
+                      : (contextInfo.viewport.width -
+                          contextInfo.viewport.width * 0.1) /
+                        2
+                  "
+                  :height="
+                    ismobile
+                      ? contextInfo.viewport.height -
+                        contextInfo.viewport.height * 0.3
+                      : (contextInfo.viewport.height -
+                          contextInfo.viewport.height * 0.1) /
+                        2.6
+                  "
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <v-card-title>
+                    {{ galleryLoading ? ' ' : galleryData[0].description }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{ galleryLoading ? ' ' : 'by ' + galleryData[0].by.user }}
+                    <v-avatar v-if="!galleryLoading" size="25">
+                      <v-img :src="galleryData[0].by.profilePic"> </v-img>
+                    </v-avatar>
+                  </v-card-subtitle>
+                </v-card>
+              </v-expand-transition>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <v-col
+          v-for="m in ismobile ? 1 : 2"
+          v-bind:key="m"
+          :cols="ismobile ? 12 : 3"
+        >
+          <v-hover v-for="n in 2" v-bind:key="n" v-slot="{ hover }">
+            <v-card
+              :img="
+                galleryLoading
+                  ? null
+                  : galleryData[m == 2 ? m + n : m + n - 1].links.regular
+              "
+              class="mx-1 px-0 my-1 py-0"
+              outlined
+              :loading="galleryLoading"
+              :max-width="
+                ismobile
+                  ? contextInfo.viewport.width -
+                    contextInfo.viewport.width * 0.1
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.1) /
+                    4
+              "
+              :height="
+                ismobile
+                  ? contextInfo.viewport.height -
+                    contextInfo.viewport.height * 0.3
+                  : (contextInfo.viewport.height -
+                      contextInfo.viewport.height * 0.1) /
+                    (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
+              "
+            >
+              <v-expand-transition>
+                <v-card
+                  v-if="hover"
+                  outlined
+                  :loading="galleryLoading"
+                  :max-width="
+                    ismobile
+                      ? contextInfo.viewport.width -
+                        contextInfo.viewport.width * 0.1
+                      : (contextInfo.viewport.width -
+                          contextInfo.viewport.width * 0.1) /
+                        4
+                  "
+                  :height="
+                    ismobile
+                      ? contextInfo.viewport.height -
+                        contextInfo.viewport.height * 0.3
+                      : (contextInfo.viewport.height -
+                          contextInfo.viewport.height * 0.1) /
+                        (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
+                  "
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <v-card-title>
+                    {{
+                      galleryLoading
+                        ? ' '
+                        : galleryData[m == 2 ? m + n : m + n - 1].description
+                    }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{
+                      galleryLoading
+                        ? ' '
+                        : 'by ' +
+                          galleryData[m == 2 ? m + n : m + n - 1].by.user
+                    }}
+                    <v-avatar v-if="!galleryLoading" size="25">
+                      <v-img
+                        :src="
+                          galleryData[m == 2 ? m + n : m + n - 1].by.profilePic
+                        "
+                      >
+                      </v-img>
+                    </v-avatar>
+                  </v-card-subtitle>
+                </v-card>
+              </v-expand-transition>
+            </v-card>
+          </v-hover>
         </v-col>
       </v-row>
     </div>
@@ -818,7 +962,7 @@
 </template>
 
 <script>
-import { stories } from '@p/backend';
+import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, homemaps } from '@t/wordmap';
@@ -880,6 +1024,10 @@ export default {
         viewport: getViewport(),
       },
       toggleTooltip: false,
+      galleryMaxWidth: 0,
+      galleryLoading: true,
+      galleryData: [],
+      showw: false,
       mailtoLink:
         'mailto:me@shaaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
       githubPhoto:
@@ -969,7 +1117,11 @@ export default {
       let projectsData = await projects();
       if (projectsData.success && projectsData.data != null) {
         this.$set(this.projects, 'loading', false);
-        this.$set(this.projects, 'projects', projectsData.data);
+        this.$set(
+          this.projects,
+          'projects',
+          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data,
+        );
       } else {
         this.$notify({
           group: 'main',
@@ -994,6 +1146,34 @@ export default {
         });
         this.$set(this.projects, 'loading', false);
         this.$set(this.projects, 'projects', {});
+      }
+    },
+    async getGalleryPics() {
+      const galleryData = await gallery.get();
+      if (galleryData.success) {
+        let shuffledPics = galleryData.data.slice(0, 5);
+        shuffledPics.forEach((pic) => {
+          this.galleryData.push({
+            description: pic.description,
+            createdAt: pic.created_at,
+            color: pic.color,
+            links: {
+              thumb: pic.urls.thumb,
+              regular: pic.urls.regular,
+              full: pic.urls.full,
+            },
+            originalUrl: pic.links.html,
+            downloadLink: pic.links.download,
+            by: {
+              user: pic.user.username,
+              name: pic.user.first_name,
+              profilePic: pic.user.profile_image.medium,
+            },
+          });
+          this.galleryLoading = false;
+        });
+      } else {
+        this.galleryLoading = true;
       }
     },
     handleEmailClick(email) {
@@ -1119,6 +1299,7 @@ export default {
       });
       this.getProjects();
       this.getStories();
+      this.getGalleryPics();
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
