@@ -135,4 +135,20 @@ export default {
     ],
     initial: [20, 1, 6, 7, 37, 33, 5],
   },
+  spacextitle: {
+    map: [
+      lettersArray.indexOf('s'),
+      lettersArray.indexOf('p'),
+      lettersArray.indexOf('a'),
+      lettersArray.indexOf('c'),
+      lettersArray.indexOf('e'),
+      lettersArray.indexOf('x'),
+      lettersArray.indexOf(' '),
+      lettersArray.indexOf('n'),
+      lettersArray.indexOf('e'),
+      lettersArray.indexOf('w'),
+      lettersArray.indexOf('s'),
+    ],
+    initial: [1, 23, 39, 12, 11, 10, 23, 33, 35, 2, 20],
+  },
 };

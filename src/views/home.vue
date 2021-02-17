@@ -436,34 +436,48 @@
     </div>
     <div class="column is-full">
       <v-container>
-        <v-card
-          :loading="quotesLoading"
-          img="https://i.ibb.co/0nf9FwS/bb-3.webp"
-        >
-          <v-card-text class="inherit-height-responsive" v-if="!quotesLoading">
-            <v-row class="inherit-height" align="end" justify="end">
-              <v-col
-                class="inherit-height"
-                align="center"
-                justify="end"
-                cols="12"
+        <v-tooltip top transition="slide-y-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-card
+              :loading="quotesLoading"
+              img="https://i.ibb.co/0nf9FwS/bb-3.webp"
+              class="mx-auto non-touch"
+              light
+              v-on="on"
+              v-bind="attrs"
+              @click="gotoUrl('https://www.imdb.com/title/tt0903747/')"
+              max-width="600"
+            >
+              <v-card-text
+                class="inherit-height-responsive"
+                v-if="!quotesLoading"
               >
-                <v-row>
-                  <v-col cols="12" align="center" justify="center">
-                    <div class="text white--text text-h6 font-weight-bold">
-                      "{{ quotesData.quote }}"
-                    </div>
-                  </v-col>
-                  <v-col cols="12" align="right" justify="center">
-                    <div class="white--text text-overline">
-                      by {{ quotesData.author }}
-                    </div>
+                <v-row class="inherit-height" align="end" justify="end">
+                  <v-col
+                    class="inherit-height"
+                    align="center"
+                    justify="end"
+                    cols="12"
+                  >
+                    <v-row>
+                      <v-col cols="12" align="center" justify="center">
+                        <div class="text white--text text-h6 font-weight-bold">
+                          "{{ quotesData.quote }}"
+                        </div>
+                      </v-col>
+                      <v-col cols="12" align="right" justify="center">
+                        <div class="white--text text-overline">
+                          by {{ quotesData.author }}
+                        </div>
+                      </v-col>
+                    </v-row>
                   </v-col>
                 </v-row>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
+              </v-card-text>
+            </v-card>
+          </template>
+          <span>This is Breaking Bad 🦹‍♂️</span>
+        </v-tooltip>
       </v-container>
     </div>
     <div class="column is-full">
@@ -724,6 +738,187 @@
               </v-hover>
             </v-col>
           </v-row>
+        </v-col>
+      </v-row>
+    </div>
+    <div class="column is-full">
+      <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+        <v-col cols="12">
+          <div
+            @click="$router.push('/spacex')"
+            id="spacextitle"
+            :class="
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.spacextitle }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col cols="12">
+          <div class="text-body-1 ml-4">
+            You Know Something ! I am Really Obsessed with Spacex and
+            Particularly
+            <span class="primary--text font-weight-bold">Elon Musk</span>.Do you
+            know Why ?<br />SpaceX is the innovative and ambitious private
+            aerospace manufacturer founded in 2002 by Elon Musk. In 2017, the
+            company boldly went where no aerospace startup has gone before,
+            posting
+            <span class="primary--text font-weight-bold">
+              18 successful launches </span
+            >—twice as many as in the previous year—on behalf of companies in
+            five countries, as well as the Air Force, NASA, and the top-secret
+            U.S. National Reconnaissance Office. SpaceX delivered
+            <span class="primary--text font-weight-bold">48 satellites</span>
+            into orbit and
+            <span class="primary--text font-weight-bold">22,700 pounds</span> of
+            supplies to the International Space Station, and now holds
+            <span class="primary--text font-weight-bold">more than 60%</span> of
+            the global share of commercial launch contracts. But SpaceX truly
+            earned its place among the aeronautical elite—and changed the
+            economics of space flight­—by making its reusable rocket system
+            seemingly as reliable as the sunrise. We will Soon have a Dedicated
+            Page for Spacex and Elon Musk (Really Sooon).
+            <span class="primary--text font-weight-bold">
+              So here is the Latest Launch News below:
+            </span>
+          </div>
+        </v-col>
+        <v-col cols="12">
+          <v-container>
+            <v-card elevation="15" :loading="launchloading">
+              <v-card-title v-if="!launchloading">
+                {{ launchData.name }}
+              </v-card-title>
+              <v-card-subtitle v-if="!launchloading">
+                Launch Date -
+                {{ launchData.date_utc | moment('DD-MM-YYYY hh:mm a') }} (UTC)
+              </v-card-subtitle>
+              <v-card-text v-if="!launchloading">
+                <v-row>
+                  <v-col :cols="ismobile ? 12 : 6" justify="center">
+                    <div class="text text-body-1">
+                      {{ launchData.details }}
+                    </div>
+                    <v-card-title
+                      class="my-1 text-h6 py-0 mx-0 px-0 font-weight-bold"
+                    >
+                      More Details:
+                    </v-card-title>
+                    <div class="text-overline my-1 mx-1">
+                      <div>
+                        <span class="font-weight-bold">Flight Number</span> -
+                        {{ launchData.flight_number }}
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Crew Members</span> -
+                        {{ launchData.crew.length }}
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"> Launch Status </span> -
+                        <v-icon
+                          :color="launchData.success ? 'success' : 'error'"
+                        >
+                          {{
+                            launchData.success
+                              ? 'mdi-rocket-launch'
+                              : 'mdi-rocket'
+                          }}
+                        </v-icon>
+                      </div>
+                      <div>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.campaign)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left>mdi-reddit</v-icon>
+                          Campaign
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.launch)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Launch
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.media)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Media
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.recovery)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Recovery
+                        </v-chip>
+                      </div>
+                      <div>
+                        <v-chip
+                          @click="gotoUrl(launchData.webcast)"
+                          ripple
+                          small
+                          color="red"
+                          outlined
+                          class="mx-1"
+                        >
+                          <v-icon small left> mdi-youtube </v-icon>
+                          Watch Webcast
+                        </v-chip>
+                      </div>
+                    </div>
+                  </v-col>
+                  <v-col :cols="ismobile ? 12 : 6">
+                    <v-img :src="launchData.links.flickr.original[0]"></v-img>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-card-actions v-if="!launchloading">
+                <v-spacer></v-spacer>
+                <v-btn
+                  @click="gotoUrl(launchData.links.article)"
+                  rounded
+                  outlined
+                  color="primary"
+                  ><v-icon> mdi-text-box-search</v-icon> Article
+                </v-btn>
+                <v-btn
+                  @click="gotoUrl(launchData.links.wikipedia)"
+                  rounded
+                  outlined
+                  color="primary"
+                  ><v-icon> mdi-wikipedia</v-icon> iki
+                </v-btn>
+                <v-btn
+                  @click="$router.push('/spacex/' + launchData.id)"
+                  rounded
+                  outlined
+                  color="primary"
+                  ><v-icon> mdi-file-document-outline</v-icon> More Info
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-container>
         </v-col>
       </v-row>
     </div>
@@ -1044,6 +1239,7 @@
 import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
 import { breakingBad } from '@p/resources/quotes';
+import { latestLaunches } from '@p/resources/spacex';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, homemaps } from '@t/wordmap';
 import { scrollTo, getOs, getViewport } from '@p/helpers';
@@ -1108,6 +1304,8 @@ export default {
       toggleTooltip: false,
       galleryMaxWidth: 0,
       galleryLoading: true,
+      launchloading: true,
+      launchData: {},
       galleryData: [],
       showw: false,
       mailtoLink:
@@ -1126,6 +1324,7 @@ export default {
         randEmoji: ' ',
         contactTitle: ' ',
         feedBack: ' ',
+        spacextitle: ' ',
       },
       aboutData: {
         image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
@@ -1202,6 +1401,16 @@ export default {
         this.quotesLoading = false;
       } else {
         this.quotesLoading = true;
+      }
+    },
+    async getLaunchNews() {
+      const launchdata = await latestLaunches();
+      if (launchdata.success && launchdata.data != null) {
+        this.launchData = launchdata.data;
+        this.launchloading = false;
+      } else {
+        this.launchdata = {};
+        this.launchloading = true;
       }
     },
     async getProjects() {
@@ -1363,6 +1572,15 @@ export default {
       });
       gsap.tweenToObserver({
         vm: this,
+        elem: '#spacextitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        finalArray: this.wordMaps.spacextitle.map,
+        startArray: this.wordMaps.spacextitle.initial,
+        arrayProperty: 'spacextitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
         elem: '#gallerytitle',
         emoji: false,
         arrayName: 'animatedArray',
@@ -1389,6 +1607,7 @@ export default {
         arrayProperty: 'feedBack',
       });
       this.getQuotes();
+      this.getLaunchNews();
       this.getProjects();
       this.getStories();
       this.getGalleryPics();
