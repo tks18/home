@@ -435,6 +435,38 @@
       </v-container>
     </div>
     <div class="column is-full">
+      <v-container>
+        <v-card
+          :loading="quotesLoading"
+          img="https://i.ibb.co/0nf9FwS/bb-3.webp"
+        >
+          <v-card-text class="inherit-height-responsive" v-if="!quotesLoading">
+            <v-row class="inherit-height" align="end" justify="end">
+              <v-col
+                class="inherit-height"
+                align="center"
+                justify="end"
+                cols="12"
+              >
+                <v-row>
+                  <v-col cols="12" align="center" justify="center">
+                    <div class="text white--text text-h6 font-weight-bold">
+                      "{{ quotesData.quote }}"
+                    </div>
+                  </v-col>
+                  <v-col cols="12" align="right" justify="center">
+                    <div class="white--text text-overline">
+                      by {{ quotesData.author }}
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </div>
+    <div class="column is-full">
       <v-row :class="ismobile ? 'ma-0' : 'ma-2'">
         <v-col cols="12" align="start" justify="start">
           <div
@@ -728,7 +760,7 @@
               :height="
                 ismobile
                   ? contextInfo.viewport.height -
-                    contextInfo.viewport.height * 0.3
+                    contextInfo.viewport.height * 0.5
                   : (contextInfo.viewport.height -
                       contextInfo.viewport.height * 0.1) /
                     1.3
@@ -747,25 +779,41 @@
                           contextInfo.viewport.width * 0.1) /
                         2
                   "
-                  :height="
+                  :max-height="
                     ismobile
                       ? contextInfo.viewport.height -
-                        contextInfo.viewport.height * 0.3
+                        contextInfo.viewport.height * 0.5
                       : (contextInfo.viewport.height -
                           contextInfo.viewport.height * 0.1) /
-                        2.6
+                        1.3
                   "
                   class="transition-fast-in-fast-out v-card--reveal"
                 >
-                  <v-card-title>
+                  <v-card-subtitle class="my-1 py-0 text-h6 font-weight-bold">
                     {{ galleryLoading ? ' ' : galleryData[0].description }}
-                  </v-card-title>
-                  <v-card-subtitle>
+                  </v-card-subtitle>
+                  <v-card-subtitle class="my-1 py-0">
                     {{ galleryLoading ? ' ' : 'by ' + galleryData[0].by.user }}
                     <v-avatar v-if="!galleryLoading" size="25">
                       <v-img :src="galleryData[0].by.profilePic"> </v-img>
                     </v-avatar>
                   </v-card-subtitle>
+                  <v-card-text v-if="!galleryLoading">
+                    <div class="text text-overline font-weight-bold">
+                      Posted on:
+                      {{ galleryData[0].createdAt | moment('DD of MMM, YY') }}
+                    </div>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="gotoUrl(galleryData[0].originalUrl)"
+                    >
+                      See Post
+                    </v-btn>
+                    <v-btn icon @click="gotoUrl(galleryData[0].downloadLink)">
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </v-card-text>
                 </v-card>
               </v-expand-transition>
             </v-card>
@@ -797,7 +845,7 @@
               :height="
                 ismobile
                   ? contextInfo.viewport.height -
-                    contextInfo.viewport.height * 0.3
+                    contextInfo.viewport.height * 0.5
                   : (contextInfo.viewport.height -
                       contextInfo.viewport.height * 0.1) /
                     (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
@@ -816,24 +864,24 @@
                           contextInfo.viewport.width * 0.1) /
                         4
                   "
-                  :height="
+                  :max-height="
                     ismobile
                       ? contextInfo.viewport.height -
-                        contextInfo.viewport.height * 0.3
+                        contextInfo.viewport.height * 0.5
                       : (contextInfo.viewport.height -
                           contextInfo.viewport.height * 0.1) /
                         (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
                   "
                   class="transition-fast-in-fast-out v-card--reveal"
                 >
-                  <v-card-title>
+                  <v-card-subtitle class="my-1 py-0 text-h6 font-weight-bold">
                     {{
                       galleryLoading
                         ? ' '
                         : galleryData[m == 2 ? m + n : m + n - 1].description
                     }}
-                  </v-card-title>
-                  <v-card-subtitle>
+                  </v-card-subtitle>
+                  <v-card-subtitle class="my-1 py-0">
                     {{
                       galleryLoading
                         ? ' '
@@ -849,6 +897,37 @@
                       </v-img>
                     </v-avatar>
                   </v-card-subtitle>
+                  <v-card-text v-if="!galleryLoading">
+                    <div class="text text-overline font-weight-bold">
+                      Posted on:
+                      {{
+                        galleryData[m == 2 ? m + n : m + n - 1].createdAt
+                          | moment('DD of MMM, YY')
+                      }}
+                    </div>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="
+                        gotoUrl(
+                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl,
+                        )
+                      "
+                    >
+                      See Post
+                    </v-btn>
+                    <v-btn
+                      icon
+                      color="primary"
+                      @click="
+                        gotoUrl(
+                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink,
+                        )
+                      "
+                    >
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </v-card-text>
                 </v-card>
               </v-expand-transition>
             </v-card>
@@ -964,6 +1043,7 @@
 <script>
 import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
+import { breakingBad } from '@p/resources/quotes';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, homemaps } from '@t/wordmap';
 import { scrollTo, getOs, getViewport } from '@p/helpers';
@@ -988,6 +1068,8 @@ export default {
         site: '',
         data: [],
       },
+      quotesLoading: false,
+      quotesData: {},
       heroButtons: [
         {
           name: 'About Me',
@@ -1111,6 +1193,15 @@ export default {
             ],
           },
         });
+      }
+    },
+    async getQuotes() {
+      const quotes = await breakingBad();
+      if (quotes.success && quotes.data != null) {
+        this.quotesData = quotes.data[0];
+        this.quotesLoading = false;
+      } else {
+        this.quotesLoading = true;
       }
     },
     async getProjects() {
@@ -1297,6 +1388,7 @@ export default {
         startArray: this.wordMaps.feedBackTitle.initial,
         arrayProperty: 'feedBack',
       });
+      this.getQuotes();
       this.getProjects();
       this.getStories();
       this.getGalleryPics();

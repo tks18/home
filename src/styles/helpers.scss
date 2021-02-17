@@ -20,6 +20,10 @@
   height: inherit;
 }
 
+.back-blur-hard-no-inherit {
+  backdrop-filter: blur(10px);
+}
+
 .back-blur-no-inherit {
   backdrop-filter: blur(3px) grayscale(1);
 }
