@@ -15,4 +15,9 @@ export const api = {
   gallery: {
     get: backend + 'gallery/get',
   },
+  externals: {
+    nasa: {
+      apod: backend + 'externals/nasa/apod',
+    },
+  },
 };

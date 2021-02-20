@@ -87,7 +87,7 @@
                       index == heroButtons.length - 1
                         ? index % 2 == 0
                           ? 'center'
-                          : 'right'
+                          : 'left'
                         : index % 2 == 0
                         ? 'right'
                         : 'left'
@@ -111,7 +111,7 @@
                     <v-btn
                       elevation="24"
                       text
-                      @click="$vuetify.goTo('#feedbacktitile')"
+                      @click="$vuetify.goTo('#home-feedbacktitile')"
                       raised
                       outlined
                     >
@@ -123,7 +123,7 @@
                     <v-btn
                       elevation="24"
                       text
-                      @click="$vuetify.goTo('#emailme')"
+                      @click="$vuetify.goTo('#home-emailme')"
                       raised
                       outlined
                     >
@@ -754,6 +754,49 @@
       </v-row>
     </div>
     <div class="column is-full">
+      <v-container>
+        <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+          <v-col cols="12">
+            <div
+              id="home-astroPicTitle"
+              :class="
+                'clip-text-back text-h5 non-touch ml-2 text-capitalize' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              {{ animatedArray.astroPicTitle }}
+              <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col :cols="12">
+            <v-card :loading="apodLoading" elevation="15" class="mx-auto">
+              <v-card-text v-if="!apodLoading">
+                <v-row align="center">
+                  <v-col
+                    :cols="ismobile ? 12 : 7"
+                    :class="ismobile ? 'ma-0 mb-1' : 'ml-0 my-0'"
+                  >
+                    <v-img :src="!apodLoading ? apodData.hdurl : null"></v-img>
+                  </v-col>
+                  <v-col :cols="ismobile ? 12 : 5">
+                    <v-card-title v-if="!apodLoading">
+                      {{ apodData.title }}
+                    </v-card-title>
+                    <v-card-subtitle v-if="!apodLoading">
+                      Dated: {{ apodData.date }}
+                    </v-card-subtitle>
+                    <v-card-text>
+                      {{ apodData.explanation }}
+                    </v-card-text>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <div class="column is-full">
       <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
         <v-col cols="12">
           <div
@@ -774,20 +817,7 @@
             Particularly
             <span class="primary--text font-weight-bold">Elon Musk</span>.Do you
             know Why ?<br />SpaceX is the innovative and ambitious private
-            aerospace manufacturer founded in 2002 by Elon Musk. In 2017, the
-            company boldly went where no aerospace startup has gone before,
-            posting
-            <span class="primary--text font-weight-bold">
-              18 successful launches </span
-            >—twice as many as in the previous year—on behalf of companies in
-            five countries, as well as the Air Force, NASA, and the top-secret
-            U.S. National Reconnaissance Office. SpaceX delivered
-            <span class="primary--text font-weight-bold">48 satellites</span>
-            into orbit and
-            <span class="primary--text font-weight-bold">22,700 pounds</span> of
-            supplies to the International Space Station, and now holds
-            <span class="primary--text font-weight-bold">more than 60%</span> of
-            the global share of commercial launch contracts. But SpaceX truly
+            aerospace manufacturer founded in 2002 by Elon Musk. SpaceX truly
             earned its place among the aeronautical elite—and changed the
             economics of space flight­—by making its reusable rocket system
             seemingly as reliable as the sunrise. We will Soon have a Dedicated
@@ -1308,6 +1338,7 @@ import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
 import { breakingBad } from '@p/resources/quotes';
 import { latestLaunches } from '@p/resources/spacex';
+import { apod } from '@p/resources/nasa';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
 import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
@@ -1351,6 +1382,11 @@ export default {
           id: 'home-blogtitle',
         },
         {
+          name: 'Some Extras',
+          icon: 'mdi-one-up',
+          id: 'home-astroPicTitle',
+        },
+        {
           name: 'Projects',
           icon: 'mdi-projector-screen',
           id: 'home-projtitle',
@@ -1372,6 +1408,8 @@ export default {
       toggleTooltip: false,
       galleryMaxWidth: 0,
       galleryLoading: true,
+      apodData: {},
+      apodLoading: true,
       launchloading: true,
       launchData: {},
       galleryData: [],
@@ -1393,6 +1431,7 @@ export default {
         contactTitle: ' ',
         feedBack: ' ',
         spacextitle: ' ',
+        astroPicTitle: ' ',
       },
       aboutData: {
         image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
@@ -1467,6 +1506,16 @@ export default {
         this.quotesLoading = false;
       } else {
         this.quotesLoading = true;
+      }
+    },
+    async getNasaApod() {
+      const apodData = await apod();
+      if (apodData.success) {
+        this.apodData = apodData.data.data;
+        this.apodLoading = false;
+      } else {
+        this.apodLoading = true;
+        this.apodData = {};
       }
     },
     async getLaunchNews() {
@@ -1634,6 +1683,14 @@ export default {
       });
       gsap.tweenToObserver({
         vm: this,
+        elem: '#home-astroPicTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Astronomy Pic of the Day'),
+        arrayProperty: 'astroPicTitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
         elem: '#home-spacextitle',
         emoji: false,
         arrayName: 'animatedArray',
@@ -1665,6 +1722,7 @@ export default {
         arrayProperty: 'feedBack',
       });
       this.getQuotes();
+      this.getNasaApod();
       this.getLaunchNews();
       this.getProjects();
       this.getStories();
