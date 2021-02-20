@@ -106,3 +106,12 @@ export function getViewport() {
   }
   return { width: viewPortWidth, height: viewPortHeight };
 }
+
+export function ismobile() {
+  var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  if (width > 966) {
+    return false;
+  } else {
+    return true;
+  }
+}

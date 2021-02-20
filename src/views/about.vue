@@ -1,7 +1,7 @@
 <template>
   <div class="columns is-multiline non-touch">
     <div
-      id="aboutMeTitle"
+      id="about-aboutMeTitle"
       :class="
         'column is-full text-center text-capitalize text font-weight-bold mt-3 mb-0 pb-0 ' +
         (ismobile ? 'text-h5' : 'text-h4')
@@ -14,7 +14,7 @@
     >
       <v-btn
         class="ma-0 pa-0"
-        @click="$vuetify.goTo('#aboutmecard')"
+        @click="$vuetify.goTo('#about-aboutmecard')"
         text
         plain
         color="primary"
@@ -33,7 +33,7 @@
         }"
         class="hero non-touch"
       >
-        <div id="initscroll" class="hero-body">
+        <div id="about-initscroll" class="hero-body">
           <v-row v-if="!ismobile">
             <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
               <div class="back-blur white--text pa-2 fit-text">
@@ -96,7 +96,7 @@
         <v-row>
           <v-col align="start" justify="start">
             <div
-              id="someWordsTitle"
+              id="about-someWordsTitle"
               :class="
                 'clip-text-back text-h5 non-touch text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -136,7 +136,7 @@
           <v-container class="my-0 py-0">
             <v-row align="center" class="my-0 py-0">
               <v-col
-                id="aboutmecard"
+                id="about-aboutmecard"
                 :cols="ismobile ? 12 : 4"
                 class="my-0 py-0"
               >
@@ -367,7 +367,7 @@
                           v-bind="attrs"
                           outlined
                           elevation="6"
-                          @click="$vuetify.goTo('#moreStats')"
+                          @click="$vuetify.goTo('#about-moreStats')"
                         >
                           <div
                             class="font-weight-bold text-center my-1 pa-0 text-caption"
@@ -483,7 +483,7 @@
                 justify="center"
                 class="mx-2 my-0 py-0 non-touch"
               >
-                <v-row id="lifetime">
+                <v-row id="about-lifetime">
                   <v-tooltip top transition="slide-y-transition">
                     <template v-slot:activator="{ on, attrs }">
                       <v-row v-ripple v-bind="attrs" v-on="on">
@@ -551,7 +551,7 @@
             </v-row>
           </v-container>
         </v-col>
-        <v-col cols="12" id="languagesknown">
+        <v-col cols="12" id="about-languagesknown">
           <v-card flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
               Top Languages, Frameworks, Softwares that i Know
@@ -576,7 +576,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col id="moreStats" cols="12">
+        <v-col id="about-moreStats" cols="12">
           <v-container>
             <v-row>
               <v-col :cols="ismobile ? 12 : 8">
@@ -718,10 +718,10 @@
 </template>
 
 <script>
-import { aboutpageMaps } from '@t/wordmap';
+import { generateWordMaps, generateWordMapsReverse } from '@p/wordmap';
 import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
-import { countUpFromTime } from '@p/helpers';
+import { countUpFromTime, ismobile } from '@p/helpers';
 import gsap from '@p/gsap';
 export default {
   metaInfo: function () {
@@ -873,29 +873,26 @@ export default {
         vm: this,
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.hash.map,
-        startArray: this.wordMaps.hash.initial,
+        map: generateWordMapsReverse('#keanureeves', ' #john wick '),
         arrayProperty: 'hashTag',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#aboutMeTitle',
+        elem: '#about-aboutMeTitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.title.map,
-        startArray: this.wordMaps.title.initial,
+        map: generateWordMaps('About me'),
         arrayProperty: 'title',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#someWordsTitle',
+        elem: '#about-someWordsTitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.someWords.map,
-        startArray: this.wordMaps.someWords.initial,
+        map: generateWordMaps('Some Words'),
         arrayProperty: 'someWords',
       });
-      this.lifeTimeCounter('#lifetime');
+      this.lifeTimeCounter('#about-lifetime');
       this.setCardBgs();
       this.getLabels();
       this.getCodingData();
@@ -905,12 +902,7 @@ export default {
   },
   computed: {
     ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
     },
     birthdayDays() {
       let countDown = countUpFromTime('May 16, 2000 16:21:00');
@@ -922,17 +914,17 @@ export default {
         {
           name: 'Profile Card',
           icon: 'mdi-account-box-outline',
-          id: '#aboutmecard',
+          id: '#about-aboutmecard',
         },
         {
           name: 'Languages Known',
           icon: 'mdi-language-csharp',
-          id: '#languagesknown',
+          id: '#about-languagesknown',
         },
         {
           name: 'More Stats',
           icon: 'mdi-sign-real-estate',
-          id: '#moreStats',
+          id: '#about-moreStats',
         },
       ];
     },
@@ -964,9 +956,6 @@ export default {
           gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
       }
-    },
-    wordMaps() {
-      return aboutpageMaps;
     },
   },
   mounted() {

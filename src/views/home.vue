@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-multiline">
-    <div id="mainhero" class="column is-full non-touch">
+    <div id="home-mainhero" class="column is-full non-touch">
       <div
         :class="
           'hero is-fullheight' +
@@ -143,11 +143,11 @@
         <v-row align="center" justify="center" class="ma-0 pa-0">
           <v-col cols="12" align="center">
             <div
-              id="whatiDo"
+              id="home-whatiDo"
               @click="
                 $router.push({
                   name: 'About',
-                  params: { scroll: true, scrollid: '#languagesknown' },
+                  params: { scroll: true, scrollid: '#about-languagesknown' },
                 })
               "
               :class="
@@ -216,9 +216,10 @@
       <v-row>
         <v-col align="start" justify="start">
           <div
-            id="storytitle"
+            id="home-storytitle"
+            @click="gotoUrl('https://webstories.shaaan.tk')"
             :class="
-              'clip-text-back text-h5 non-touch ml-6 text-capitalize' +
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
             "
           >
@@ -300,7 +301,7 @@
         <v-col align="start" justify="start">
           <div
             @click="$router.push('/blog')"
-            id="blogtitle"
+            id="home-blogtitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -389,7 +390,7 @@
           <v-col cols="12" class="my-0 mx-2 px-2 py-0">
             <div
               @click="$router.push('/about')"
-              id="abouttitle"
+              id="home-abouttitle"
               :class="
                 'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -408,8 +409,19 @@
                   ></div>
                 </v-row>
                 <v-row align="end" justify="end" class="my-1 mx-2 px-2 py-1">
-                  <v-btn @click="$router.push('about')" color="primary">
-                    <v-icon>mdi-text-box-multiple</v-icon>{{ ' Read More' }}
+                  <v-btn
+                    @click="
+                      $router.push({
+                        name: 'About',
+                        params: {
+                          scroll: true,
+                          scrollid: '#about-aboutmecard',
+                        },
+                      })
+                    "
+                    color="primary"
+                  >
+                    <v-icon left>mdi-text-box-multiple</v-icon>Read More
                   </v-btn>
                 </v-row>
               </v-col>
@@ -485,7 +497,7 @@
         <v-col cols="12" align="start" justify="start">
           <div
             @click="$router.push('/projects')"
-            id="projtitle"
+            id="home-projtitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -589,7 +601,7 @@
                             small
                             pill
                           >
-                            <v-avatar size="10" left>
+                            <v-avatar size="6" left>
                               <v-img :src="project.owner.avatar_url"></v-img>
                             </v-avatar>
                             {{ project.owner.login }}
@@ -746,7 +758,7 @@
         <v-col cols="12">
           <div
             @click="$router.push('/spacex')"
-            id="spacextitle"
+            id="home-spacextitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -792,8 +804,8 @@
                 {{ launchData.name }}
               </v-card-title>
               <v-card-subtitle v-if="!launchloading">
-                Launch Date -
-                {{ launchData.date_utc | moment('DD-MM-YYYY hh:mm a') }} (UTC)
+                {{ launchData.date_utc | moment('DD-MM-YYYY [at] hh:mm a') }}
+                (UTC)
               </v-card-subtitle>
               <v-card-text v-if="!launchloading">
                 <v-row>
@@ -801,11 +813,6 @@
                     <div class="text text-body-1">
                       {{ launchData.details }}
                     </div>
-                    <v-card-title
-                      class="my-1 text-h6 py-0 mx-0 px-0 font-weight-bold"
-                    >
-                      More Details:
-                    </v-card-title>
                     <div class="text-overline my-1 mx-1">
                       <div>
                         <span class="font-weight-bold">Flight Number</span> -
@@ -816,18 +823,51 @@
                         {{ launchData.crew.length }}
                       </div>
                       <div>
-                        <span class="font-weight-bold"> Launch Status </span> -
-                        <v-icon
-                          :color="launchData.success ? 'success' : 'error'"
-                        >
-                          {{
-                            launchData.success
-                              ? 'mdi-rocket-launch'
-                              : 'mdi-rocket'
-                          }}
-                        </v-icon>
+                        <span class="font-weight-bold">Static Fire Date</span> -
+                        {{
+                          launchData.static_fire_date_utc
+                            | moment('DD-MM-YYYY [at] hh:mm a')
+                        }}
+                        (UTC)
                       </div>
                       <div>
+                        <span class="font-weight-bold">Launch Date</span> -
+                        {{
+                          launchData.date_utc
+                            | moment('DD-MM-YYYY [at] hh:mm a')
+                        }}
+                        (UTC)
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"> Launch Status </span> -
+                        <v-tooltip top transition="slide-y-transition">
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-icon
+                              v-on="on"
+                              v-bind="attrs"
+                              :color="launchData.success ? 'success' : 'error'"
+                            >
+                              {{
+                                launchData.success
+                                  ? 'mdi-rocket-launch'
+                                  : 'mdi-rocket'
+                              }}
+                            </v-icon>
+                          </template>
+                          <span>{{
+                            launchData.success ? 'Success' : 'Failed'
+                          }}</span>
+                        </v-tooltip>
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Ship Recovered</span> -
+                        {{
+                          launchData.fairings.recovered
+                            ? 'Recovered'
+                            : 'Lost it !'
+                        }}
+                      </div>
+                      <div class="my-1">
                         <v-chip
                           @click="gotoUrl(launchData.links.reddit.campaign)"
                           outlined
@@ -875,7 +915,7 @@
                       </div>
                       <div>
                         <v-chip
-                          @click="gotoUrl(launchData.webcast)"
+                          @click="gotoUrl(launchData.links.webcast)"
                           ripple
                           small
                           color="red"
@@ -885,37 +925,65 @@
                           <v-icon small left> mdi-youtube </v-icon>
                           Watch Webcast
                         </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.article)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left> mdi-text-box-search</v-icon>
+                          Article
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.wikipedia)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left> mdi-wikipedia</v-icon> wiki
+                        </v-chip>
+                        <v-chip
+                          @click="$router.push('/spacex/' + launchData.id)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left>
+                            mdi-file-document-outline</v-icon
+                          >
+                          More Info
+                        </v-chip>
                       </div>
                     </div>
                   </v-col>
-                  <v-col :cols="ismobile ? 12 : 6">
+                  <v-col
+                    :cols="ismobile ? 12 : 6"
+                    align="center"
+                    justify="center"
+                  >
                     <v-img :src="launchData.links.flickr.original[0]"></v-img>
                   </v-col>
                 </v-row>
               </v-card-text>
-              <v-card-actions v-if="!launchloading">
+              <v-card-actions class="mx-2" v-if="!launchloading">
                 <v-spacer></v-spacer>
-                <v-btn
-                  @click="gotoUrl(launchData.links.article)"
-                  rounded
-                  outlined
-                  color="primary"
-                  ><v-icon> mdi-text-box-search</v-icon> Article
-                </v-btn>
-                <v-btn
-                  @click="gotoUrl(launchData.links.wikipedia)"
-                  rounded
-                  outlined
-                  color="primary"
-                  ><v-icon> mdi-wikipedia</v-icon> iki
-                </v-btn>
-                <v-btn
-                  @click="$router.push('/spacex/' + launchData.id)"
-                  rounded
-                  outlined
-                  color="primary"
-                  ><v-icon> mdi-file-document-outline</v-icon> More Info
-                </v-btn>
+                <v-tooltip top transition="slide-x-transition">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      @click="gotoUrl(launchData.links.flickr.original[0])"
+                      v-on="on"
+                      v-bind="attrs"
+                      color="primary"
+                      icon
+                    >
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Download this Image</span>
+                </v-tooltip>
               </v-card-actions>
             </v-card>
           </v-container>
@@ -927,7 +995,7 @@
         <v-col cols="12">
           <div
             @click="$router.push('/gallery')"
-            id="gallerytitle"
+            id="home-gallerytitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -1131,7 +1199,7 @@
       </v-row>
     </div>
     <div class="column is-full">
-      <v-container id="emailme">
+      <v-container id="home-emailme">
         <v-alert
           dense
           text
@@ -1153,7 +1221,7 @@
     </div>
     <div class="column is-full">
       <div
-        id="feedbacktitile"
+        id="home-feedbacktitile"
         :class="
           'non-touch text-center font-weight-black my-2 text-capitalize' +
           (ismobile ? ' text-h6 ' : ' text-h4 ')
@@ -1241,8 +1309,8 @@ import { projects } from '@p/resources/github';
 import { breakingBad } from '@p/resources/quotes';
 import { latestLaunches } from '@p/resources/spacex';
 import gsap from '@p/gsap';
-import { generateRandomEmojis, homemaps } from '@t/wordmap';
-import { scrollTo, getOs, getViewport } from '@p/helpers';
+import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
+import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
 export default {
   metaInfo: function () {
     return {
@@ -1270,27 +1338,27 @@ export default {
         {
           name: 'About Me',
           icon: 'mdi-information-variant',
-          id: 'abouttitle',
+          id: 'home-abouttitle',
         },
         {
           name: 'What i Do',
           icon: 'mdi-console-network',
-          id: 'whatiDo',
+          id: 'home-whatiDo',
         },
         {
           name: 'My Blog',
           icon: 'mdi-post-outline',
-          id: 'blogtitle',
+          id: 'home-blogtitle',
         },
         {
           name: 'Projects',
           icon: 'mdi-projector-screen',
-          id: 'projtitle',
+          id: 'home-projtitle',
         },
         {
           name: 'Contact Me',
           icon: 'mdi-contactless-payment',
-          id: 'feedbacktitile',
+          id: 'home-feedbacktitile',
         },
       ],
       projects: {
@@ -1350,13 +1418,11 @@ export default {
       scrollTo(eval(content), 400, 300);
     },
     loopRandEmoji() {
-      let randEmoji = generateRandomEmojis(3);
       gsap.tweenTo({
         vm: this,
         emoji: true,
         arrayName: 'animatedArray',
-        finalArray: randEmoji.map,
-        startArray: randEmoji.initial,
+        map: generateRandomEmojis(3),
         arrayProperty: 'randEmoji',
       });
       setTimeout(() => {
@@ -1536,74 +1602,66 @@ export default {
       this.loopRandEmoji();
       gsap.tweenToObserver({
         vm: this,
-        elem: '#whatiDo',
+        elem: '#home-whatiDo',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.whatiDo.map,
-        startArray: this.wordMaps.whatiDo.initial,
+        map: generateWordMaps('what i do'),
         arrayProperty: 'whatiDo',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#storytitle',
+        elem: '#home-storytitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.stories.map,
-        startArray: this.wordMaps.stories.initial,
+        map: generateWordMaps('Stories'),
         arrayProperty: 'stories',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#abouttitle',
+        elem: '#home-abouttitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.about.map,
-        startArray: this.wordMaps.about.initial,
+        map: generateWordMaps('About me'),
         arrayProperty: 'about',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#projtitle',
+        elem: '#home-projtitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.projtitle.map,
-        startArray: this.wordMaps.projtitle.initial,
+        map: generateWordMaps('Projects'),
         arrayProperty: 'projtitle',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#spacextitle',
+        elem: '#home-spacextitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.spacextitle.map,
-        startArray: this.wordMaps.spacextitle.initial,
+        map: generateWordMaps('Spacex News'),
         arrayProperty: 'spacextitle',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#gallerytitle',
+        elem: '#home-gallerytitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.gallerytitle.map,
-        startArray: this.wordMaps.gallerytitle.initial,
+        map: generateWordMaps('Galleria'),
         arrayProperty: 'gallerytitle',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#blogtitle',
+        elem: '#home-blogtitle',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.blog.map,
-        startArray: this.wordMaps.blog.initial,
+        map: generateWordMaps('My Blog'),
         arrayProperty: 'blog',
       });
       gsap.tweenToObserver({
         vm: this,
-        elem: '#feedbacktitile',
+        elem: '#home-feedbacktitile',
         emoji: false,
         arrayName: 'animatedArray',
-        finalArray: this.wordMaps.feedBackTitle.map,
-        startArray: this.wordMaps.feedBackTitle.initial,
+        map: generateWordMaps('Submit Your Feedback'),
         arrayProperty: 'feedBack',
       });
       this.getQuotes();
@@ -1618,12 +1676,7 @@ export default {
   },
   computed: {
     ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
     },
     activities() {
       return [
@@ -1681,9 +1734,6 @@ export default {
             'Get to Know What Languages and Softwares with Which i Analyze Data',
         },
       ];
-    },
-    wordMaps() {
-      return homemaps;
     },
   },
   mounted() {

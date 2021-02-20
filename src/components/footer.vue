@@ -152,6 +152,7 @@
 import { ping } from '@p/backend';
 import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
+import { generateWordMapsReverse } from '@p/wordmap';
 export default {
   data: function () {
     return {
@@ -281,8 +282,7 @@ export default {
       vm: this,
       emoji: false,
       arrayName: 'animatedArray',
-      finalArray: this.nameMap.map,
-      startArray: this.nameMap.initial,
+      map: generateWordMapsReverse('Sudharshan', 'shan      '),
       arrayProperty: 'name',
     });
     this.getBackendStatus();

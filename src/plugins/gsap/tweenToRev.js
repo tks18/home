@@ -5,7 +5,7 @@ import { lettersArray, safeEmojis } from '@t/emoji-array';
 let update = (options) => {
   var html = '';
   let wordsarray = options.emoji ? safeEmojis : lettersArray;
-  options.startArray.forEach((map) => {
+  options.map.startArray.forEach((map) => {
     html += wordsarray[Math.round(map) % wordsarray.length];
   });
   options.vm.$set(options.vm[options.arrayName], options.arrayProperty, html);
@@ -22,9 +22,9 @@ export function tweenToRevObserver(options) {
       },
     });
     let wordsarray = options.emoji ? safeEmojis : lettersArray;
-    options.finalArray.forEach((range, index) => {
+    options.map.finalArray.forEach((range, index) => {
       tl.to(
-        options.startArray,
+        options.map.startArray,
         {
           [index]: wordsarray.length * 2 + range,
           ease: 'power4',
@@ -46,9 +46,9 @@ export default (options) => {
     },
   });
   let wordsarray = options.emoji ? safeEmojis : lettersArray;
-  options.finalArray.forEach((range, index) => {
+  options.map.finalArray.forEach((range, index) => {
     tl.to(
-      options.startArray,
+      options.map.startArray,
       {
         [index]: wordsarray.length * 2 + range,
         ease: 'power4',
