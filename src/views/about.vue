@@ -1,19 +1,20 @@
 <template>
   <div class="columns is-multiline non-touch">
     <div
+      id="about-aboutMeTitle"
       :class="
-        'column is-full text-center text font-weight-bold mt-3 mb-0 pb-0 ' +
+        'column is-full text-center text-capitalize text font-weight-bold mt-3 mb-0 pb-0 ' +
         (ismobile ? 'text-h5' : 'text-h4')
       "
     >
-      About Me
+      {{ animatedArray.title }}
     </div>
     <div
       class="column is-full text-center text text-overline font-weight-bold mt-0 pt-0 pb-1"
     >
       <v-btn
         class="ma-0 pa-0"
-        @click="$vuetify.goTo('#aboutme')"
+        @click="$vuetify.goTo('#about-aboutmecard')"
         text
         plain
         color="primary"
@@ -22,87 +23,124 @@
       </v-btn>
     </div>
     <div class="column is-full">
-      <v-card
+      <div
         :style="{
           background: 'center',
           backgroundImage: mainBg,
           backgroundSize: 'cover',
+          height: ismobile ? '400px' : '450px',
           minWidth: '100%',
         }"
-        flat
+        class="hero non-touch"
       >
-        <div class="hero non-touch">
-          <div id="initscroll" class="hero-body">
-            <v-row v-if="!ismobile">
-              <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
-                <div class="back-blur white--text pa-2 fit-text">
-                  <div
-                    :class="
-                      (ismobile ? 'text-h4 text-center' : 'text-h2') +
-                      ' font-weight-black'
-                    "
-                  >
-                    Come face to face Huh?
-                  </div>
-                </div>
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col
-                :cols="ismobile ? 12 : 5"
-                :align="ismobile ? 'center' : 'right'"
-                justify="center"
-              >
-                <div class="back-blur white--text pa-2 fit-text">
-                  <div
-                    :class="
-                      (ismobile ? 'text-center' : '') +
-                      'text-overline font-weight-bold'
-                    "
-                  >
-                    "Before picking fights, learn to assess your opponents."
-                  </div>
-                  <div class="text-body-2 text-right font-weight-light">
-                    - Tamuna Tsertsvadze, Galaxy Pirates
-                  </div>
-                </div>
-              </v-col>
-            </v-row>
-          </div>
-          <div class="hero-footer">
-            <v-row align="end" class="py-1 px-1">
-              <v-col
-                cols="12"
-                :align="ismobile ? 'center' : 'right'"
-                :justify="ismobile ? 'center' : 'end'"
-                class="py-0"
-              >
+        <div id="about-initscroll" class="hero-body">
+          <v-row v-if="!ismobile">
+            <v-col :cols="ismobile ? 12 : 5" align="left" justify="center">
+              <div class="back-blur white--text pa-2 fit-text">
                 <div
-                  class="back-blur fit-text px-2 text-overline font-weight-bold"
+                  :class="
+                    (ismobile ? 'text-h4 text-center' : 'text-h2') +
+                    ' font-weight-black'
+                  "
                 >
-                  <span
-                    :class="
-                      ($vuetify.theme.dark
-                        ? 'grad-back-dark'
-                        : 'grad-back-light') + ' pa-2'
-                    "
-                  >
-                    {{ animatedArray.hashTag }}
-                  </span>
-                  <span class="white--text"> {{ ' Squad' }} </span>
+                  Come face to face Huh?
                 </div>
-              </v-col>
-            </v-row>
-          </div>
+              </div>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col
+              :cols="ismobile ? 12 : 5"
+              :align="ismobile ? 'center' : 'right'"
+              justify="center"
+            >
+              <div class="back-blur white--text pa-2 fit-text">
+                <div
+                  :class="
+                    (ismobile ? 'text-center' : '') +
+                    'text-overline font-weight-bold'
+                  "
+                >
+                  "Before picking fights, learn to assess your opponents."
+                </div>
+                <div class="text-body-2 text-right font-weight-light">
+                  - Tamuna Tsertsvadze, Galaxy Pirates
+                </div>
+              </div>
+            </v-col>
+          </v-row>
         </div>
-      </v-card>
+        <div class="hero-footer">
+          <v-row align="end" class="py-1 px-1">
+            <v-col cols="12" align="center" justify="center" class="py-0">
+              <div
+                class="back-blur fit-text px-2 text-overline font-weight-bold"
+              >
+                <span
+                  :class="
+                    ($vuetify.theme.dark
+                      ? 'grad-back-dark'
+                      : 'grad-back-light') + ' pa-2'
+                  "
+                >
+                  {{ animatedArray.hashTag }}
+                </span>
+                <span class="white--text"> {{ ' Squad' }} </span>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </div>
     </div>
-    <div class="column is-full py-2">
+    <div class="column is-full py-1">
+      <v-container>
+        <v-row>
+          <v-col align="start" justify="start">
+            <div
+              id="about-someWordsTitle"
+              :class="
+                'clip-text-back text-h5 non-touch text-capitalize' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              {{ animatedArray.someWords }}
+              <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col
+            cols="12"
+            :class="(ismobile ? 'mx-1' : 'mx-2') + ' text-body-1'"
+          >
+            {{ authorData.intro }}
+          </v-col>
+          <v-col cols="12" align="center">
+            <v-chip
+              v-for="(chip, index) in aboutChips"
+              v-bind:key="index"
+              color="primary"
+              @click="$vuetify.goTo(chip.id)"
+              outlined
+              class="my-1 mx-1"
+            >
+              <v-icon left color="primary">
+                {{ chip.icon }}
+              </v-icon>
+              {{ chip.name }}
+            </v-chip>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <div class="column is-full py-1">
       <v-row>
-        <v-col cols="12">
-          <v-container>
-            <v-row align="center">
-              <v-col id="aboutme" :cols="ismobile ? 12 : 4">
-                <v-card height="450" outlined elevation="6">
+        <v-col cols="12" class="my-0 py-0">
+          <v-container class="my-0 py-0">
+            <v-row align="center" class="my-0 py-0">
+              <v-col
+                id="about-aboutmecard"
+                :cols="ismobile ? 12 : 4"
+                class="my-0 py-0"
+              >
+                <v-card outlined elevation="6">
                   <v-card-title class="text-h5 text-center">
                     About Me
                   </v-card-title>
@@ -118,36 +156,40 @@
                         ><span class="text-body-2">{{ authorData.name }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Nickname: </span
-                        ><span class="text-body-2">{{
-                          authorData.nickName
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Nickname:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.nickName }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Status: </span
-                        ><span class="text-body-2">{{
-                          authorData.status
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Status:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.status }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Age: </span
-                        ><span class="text-body-2">{{ authorData.age }}</span>
+                        <span class="text-body-1 font-weight-bold"> Age: </span>
+                        <span class="text-body-2">{{ authorData.age }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Nationality: </span
-                        ><span class="text-body-2">{{
-                          authorData.nationality
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Nationality:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.nationality }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Professional Education: </span
-                        ><span class="text-body-2">{{
-                          authorData.profComp
-                        }}</span>
+                        <span class="text-body-1 font-weight-bold">
+                          Professional Education:
+                        </span>
+                        <span class="text-body-2">
+                          {{ authorData.profComp }}
+                        </span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
                         <span class="text-body-1 font-weight-bold">
@@ -203,12 +245,12 @@
                           v-bind:key="cardbgs.leftKey"
                           :cols="ismobile ? 12 : 4"
                         >
-                          <v-card height="150" outlined elevation="6">
-                            <v-img
-                              cover
-                              height="150"
-                              :src="cardbgs.lefttop"
-                            ></v-img>
+                          <v-card
+                            :img="cardbgs.lefttop"
+                            :height="ismobile ? 250 : 150"
+                            outlined
+                            elevation="6"
+                          >
                           </v-card>
                         </v-col>
                       </v-scroll-y-transition>
@@ -217,39 +259,26 @@
                   </v-tooltip>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-card
-                      height="150"
                       outlined
                       elevation="6"
                       @click="gotoUrl('http://fordrhodesparks.com')"
                     >
-                      <v-row justify="space-between" class="mx-0">
-                        <v-col cols="6" class="mx-0 my-0 px-0 py-0">
-                          <v-card-title>Work Profile</v-card-title>
-                          <v-card-text class="font-weight-light">
-                            Working in
-                            <span class="font-weight-bold"
-                              >Ford Rhodes Parks</span
-                            ><br />
-                            as
-                            <span class="font-weight-bold"
-                              >Audit Assistant</span
-                            >
-                          </v-card-text>
-                        </v-col>
-                        <v-divider vertical class="opaque"></v-divider>
-                        <v-col
-                          align="right"
-                          justify="end"
-                          cols="5"
-                          class="mx-0 my-0 py-0 px-0"
-                        >
-                          <v-img
-                            contain
-                            height="150"
-                            :src="workProfile.img"
-                          ></v-img>
-                        </v-col>
-                      </v-row>
+                      <v-card-title class="back-blur-no-inherit"
+                        >Work Profile</v-card-title
+                      >
+                      <v-card-subtitle class="back-blur-no-inherit"
+                        >About my Position</v-card-subtitle
+                      >
+                      <v-card-text class="back-blur-no-inherit text-overline">
+                        Working in
+                        <span class="font-weight-black primary--text">
+                          {{ workProfile.place }}
+                        </span>
+                        as
+                        <span class="font-weight-black primary--text">
+                          {{ workProfile.position }}
+                        </span>
+                      </v-card-text>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -257,7 +286,7 @@
                   <v-col align="center" cols="12">
                     <v-card
                       @click="resumeDialog = true"
-                      height="100"
+                      :height="ismobile ? null : null"
                       :class="
                         $vuetify.theme.dark
                           ? 'grad-back-dark'
@@ -312,7 +341,7 @@
                           >
                             <v-card-text>
                               <v-icon> mdi-download </v-icon>
-                              Short Version
+                              Mini Version
                             </v-card-text>
                           </v-card>
                         </v-col>
@@ -334,12 +363,11 @@
                     <v-tooltip top transition="slide-y-transition">
                       <template v-slot:activator="{ on, attrs }">
                         <v-card
-                          height="150"
                           v-on="on"
                           v-bind="attrs"
                           outlined
                           elevation="6"
-                          @click="$vuetify.goTo('#moreStats')"
+                          @click="$vuetify.goTo('#about-moreStats')"
                         >
                           <div
                             class="font-weight-bold text-center my-1 pa-0 text-caption"
@@ -383,12 +411,12 @@
                           v-bind="attrs"
                           :cols="ismobile ? 12 : 4"
                         >
-                          <v-card height="150" outlined elevation="6">
-                            <v-img
-                              cover
-                              height="150"
-                              :src="cardbgs.rightbottom"
-                            ></v-img>
+                          <v-card
+                            :img="cardbgs.rightbottom"
+                            :height="ismobile ? 250 : 150"
+                            outlined
+                            elevation="6"
+                          >
                           </v-card>
                         </v-col>
                       </v-scroll-y-transition>
@@ -402,6 +430,52 @@
         </v-col>
         <v-col cols="12">
           <v-container>
+            <v-card class="mx-auto" color="#26c6da" light max-width="500">
+              <v-card-title>
+                <v-icon large left> mdi-twitter </v-icon>
+                <span class="title font-weight-bold">Twitter</span>
+              </v-card-title>
+
+              <v-card-text class="headline font-weight-bold">
+                <v-row>
+                  <v-col cols="12" align="center">
+                    <v-img :src="tweetQr" height="180" width="180"></v-img>
+                  </v-col>
+                  <v-col cols="12">
+                    "Its Better when You Share to Other People. Scan the Qr to
+                    Share my Website"
+                  </v-col>
+                </v-row>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-list-item class="grow">
+                  <v-list-item-avatar color="grey darken-3">
+                    <v-img
+                      class="elevation-6"
+                      alt="Author's Photo"
+                      :src="authorPhoto"
+                    ></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>Shan.tk</v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-row align="center" justify="end">
+                    <v-icon class="mr-1"> mdi-heart </v-icon>
+                    <span class="subheading mr-2">10</span>
+                    <span class="mr-1">·</span>
+                    <v-icon class="mr-1"> mdi-share-variant </v-icon>
+                    <span class="subheading">22</span>
+                  </v-row>
+                </v-list-item>
+              </v-card-actions>
+            </v-card>
+          </v-container>
+        </v-col>
+        <v-col cols="12">
+          <v-container>
             <v-row justify="center">
               <v-col
                 cols="12"
@@ -409,7 +483,7 @@
                 justify="center"
                 class="mx-2 my-0 py-0 non-touch"
               >
-                <v-row id="lifetime">
+                <v-row id="about-lifetime">
                   <v-tooltip top transition="slide-y-transition">
                     <template v-slot:activator="{ on, attrs }">
                       <v-row v-ripple v-bind="attrs" v-on="on">
@@ -477,8 +551,8 @@
             </v-row>
           </v-container>
         </v-col>
-        <v-col cols="12" id="languagesknown">
-          <v-card :height="ismobile ? 300 : 450" flat elevation="12">
+        <v-col cols="12" id="about-languagesknown">
+          <v-card flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
               Top Languages, Frameworks, Softwares that i Know
             </v-card-title>
@@ -502,11 +576,11 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col id="moreStats" cols="12">
+        <v-col id="about-moreStats" cols="12">
           <v-container>
             <v-row>
               <v-col :cols="ismobile ? 12 : 8">
-                <v-card height="450" outlined elevation="6">
+                <v-card outlined elevation="6">
                   <v-card-title>SWOT Analysis - Programmers Way </v-card-title>
                   <v-card-subtitle>
                     (Strength-Weakness-Opportunity-Threats)
@@ -585,7 +659,7 @@
               <v-col :cols="ismobile ? 12 : 4">
                 <v-row>
                   <v-col cols="12">
-                    <v-card height="200" outlined elevation="6">
+                    <v-card outlined elevation="6">
                       <v-card-title
                         class="text-caption my-2 py-1 font-weight-bold"
                       >
@@ -611,7 +685,7 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12">
-                    <v-card height="200" outlined elevation="6">
+                    <v-card outlined elevation="6">
                       <v-card-title class="font-weight-bold">
                         Top Editors I Use
                       </v-card-title>
@@ -644,9 +718,11 @@
 </template>
 
 <script>
-import { lettersArray } from '@t/emoji-array';
+import { generateWordMaps, generateWordMapsReverse } from '@p/wordmap';
+import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
-import { countUpFromTime } from '@p/helpers';
+import { countUpFromTime, ismobile } from '@p/helpers';
+import gsap from '@p/gsap';
 export default {
   metaInfo: function () {
     return {
@@ -656,15 +732,9 @@ export default {
   data: function () {
     return {
       mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
-      bgs: [
-        'https://i.ibb.co/GRFHNM2/IMG-20200130-134312.webp',
-        'https://i.ibb.co/mc49Ygn/20191229-170937.webp',
-        'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
-        'https://i.ibb.co/0jksbWY/IMG-20200118-172203-1.webp',
-        'https://i.ibb.co/NKpNqbt/IMG-20191028-170205.webp',
-        'https://i.ibb.co/FxT2W24/DJI-0566-1.webp',
-        'https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp',
-      ],
+      bgs: authorData.bgs,
+      tweetQr: 'https://i.ibb.co/4tZFDrh/qr-code-2.png',
+      authorPhoto: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
       bgPlay: true,
       cardbgs: {
         play: false,
@@ -690,72 +760,17 @@ export default {
       languageTrendGradients: [],
       editorsTrendData: [],
       editorsTrendLabels: [],
-      swot: {
-        strengths: ['Vuejs', 'NodeJs', 'Gsap'],
-        weakness: ['Java', 'Flutter', 'Ruby'],
-        opportunities: ['ReactJs', 'React-Native', 'Vue-Native'],
-        threats: ['Java', 'Premiere', 'Photoshop'],
-      },
+      swot: authorData.swot,
       resumeDialog: false,
-      birthdayDays:
-        (52 - countUpFromTime('May 16, 2000 16:21:00').weeks) * 7 +
-        countUpFromTime('May 16, 2000 16:21:00').days,
       authorData: {
-        name: 'Sudharshan TK',
-        nickName: 'Shan.tk',
-        status: 'Currently Automating Workflows',
+        ...authorData.main,
         age: countUpFromTime('May 16, 2000 16:21:00').years,
-        nationality: 'A Proud Indian',
-        profComp: 'Chartered Accountant Student',
-        techSkills: [
-          {
-            name: 'Web Development',
-            link: 'https://developer.mozilla.org/en-US/docs/Learn',
-          },
-          {
-            name: 'Python',
-            link: 'https://www.python.org/dev/',
-          },
-          {
-            name: 'Backend Development',
-            link:
-              'https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction',
-          },
-          {
-            name: 'MS Office Tools',
-            link: 'https://www.excel-easy.com/',
-          },
-        ],
-        aOfInt: [
-          {
-            name: 'AI',
-            link:
-              'https://www.udacity.com/course/intro-to-artificial-intelligence--cs271',
-          },
-          {
-            name: 'ReactJs',
-            link: 'https://reactjs.org/',
-          },
-          {
-            name: 'VueJs',
-            link: 'https://vuejs.org/',
-          },
-          {
-            name: 'Gsap',
-            link: 'https://greensock.com/gsap/',
-          },
-          {
-            name: 'NodeJs',
-            link: 'https://nodejs.dev/',
-          },
-        ],
       },
-      workProfile: {
-        img:
-          'https://i.ibb.co/y0qfZD5/fabian-irsara-67l-Quj-B14w-unsplash.webp',
-      },
+      workProfile: authorData.workProfile,
       animatedArray: {
-        hashTag: '',
+        hashTag: ' ',
+        title: ' ',
+        someWords: ' ',
       },
     };
   },
@@ -764,65 +779,22 @@ export default {
       window.open(url);
       return;
     },
-    transitWord(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        repeat: -1,
-        yoyo: true,
-        repeatDelay: 2,
-        onUpdate: () => {
-          this.update(word, stringText);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: lettersArray.length * 2 + range,
-            ease: 'power4',
-            duration: index / 4 + 1,
-          },
-          0,
-        );
-      });
-    },
-    update(word, stringText) {
-      var html = '';
-      word.forEach((map) => {
-        html += lettersArray[Math.round(map) % lettersArray.length];
-      });
-      this.$set(this.animatedArray, stringText, html);
-    },
     lifeTimeCounter(elem) {
-      let observer;
-      let target = document.querySelector(elem);
-      let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-      let handleIntersect = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            let newVals = countUpFromTime('May 16, 2000 16:21:00');
-            let tl = this.$gsap.timeline();
-            for (const [key] of Object.entries(this.lifeTimeCountDown)) {
-              tl.to(this.$data.lifeTimeCountDown, {
-                [key]: newVals[key],
-                duration: 0.8,
-              });
-            }
-            setTimeout(() => {
-              setInterval(() => {
-                this.lifeTimeCountDown = countUpFromTime(
-                  'May 16, 2000 16:21:00',
-                );
-              }, 1000);
-            }, 3800);
-          }
-        });
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(target);
+      gsap.observeNexecute(elem, () => {
+        let newVals = countUpFromTime('May 16, 2000 16:21:00');
+        let tl = this.$gsap.timeline();
+        for (const [key] of Object.entries(this.lifeTimeCountDown)) {
+          tl.to(this.$data.lifeTimeCountDown, {
+            [key]: newVals[key],
+            duration: 0.8,
+          });
+        }
+        setTimeout(() => {
+          setInterval(() => {
+            this.lifeTimeCountDown = countUpFromTime('May 16, 2000 16:21:00');
+          }, 1000);
+        }, 3800);
+      });
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
@@ -896,15 +868,65 @@ export default {
         this.editorsTrendLabels = [];
       }
     },
+    render() {
+      gsap.tweenToRev({
+        vm: this,
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMapsReverse('#keanureeves', ' #john wick '),
+        arrayProperty: 'hashTag',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#about-aboutMeTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('About me'),
+        arrayProperty: 'title',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#about-someWordsTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Some Words'),
+        arrayProperty: 'someWords',
+      });
+      this.lifeTimeCounter('#about-lifetime');
+      this.setCardBgs();
+      this.getLabels();
+      this.getCodingData();
+      this.getLanguageTrend();
+      this.getEditorsTrend();
+    },
   },
   computed: {
     ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
+    },
+    birthdayDays() {
+      let countDown = countUpFromTime('May 16, 2000 16:21:00');
+      let remainingDays = 365 - countDown.weeks * 7;
+      return remainingDays;
+    },
+    aboutChips() {
+      return [
+        {
+          name: 'Profile Card',
+          icon: 'mdi-account-box-outline',
+          id: '#about-aboutmecard',
+        },
+        {
+          name: 'Languages Known',
+          icon: 'mdi-language-csharp',
+          id: '#about-languagesknown',
+        },
+        {
+          name: 'More Stats',
+          icon: 'mdi-sign-real-estate',
+          id: '#about-moreStats',
+        },
+      ];
     },
     languagesKnown() {
       if (this.ismobile) {
@@ -935,63 +957,9 @@ export default {
         };
       }
     },
-    codingStats() {
-      return {
-        dailyStats:
-          'https://wakatime.com/share/@tks18/64f77194-b682-4115-a9e9-8c43be07d016.json',
-        languageTrend:
-          'https://wakatime.com/share/@tks18/0c4d783e-ccd7-421b-9330-5ae5cbd30847.json',
-        editors:
-          'https://wakatime.com/share/@tks18/51fe7a20-7425-4fd6-888b-cfbc69a22c1b.json',
-      };
-    },
-    wordMaps() {
-      return {
-        hash: {
-          initial: [
-            lettersArray.indexOf('#'),
-            lettersArray.indexOf('k'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('n'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('v'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('s'),
-          ],
-          map: [
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('#'),
-            lettersArray.indexOf('j'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('h'),
-            lettersArray.indexOf('n'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('w'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('k'),
-            lettersArray.indexOf(' '),
-          ],
-        },
-      };
-    },
   },
   mounted() {
-    this.transitWord(
-      this.wordMaps.hash.map,
-      this.wordMaps.hash.initial,
-      'hashTag',
-    );
-    this.lifeTimeCounter('#lifetime');
-    this.setCardBgs();
-    this.getLabels();
-    this.getCodingData();
-    this.getLanguageTrend();
-    this.getEditorsTrend();
+    this.render();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {

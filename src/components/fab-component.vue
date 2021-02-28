@@ -50,15 +50,14 @@ export default {
   methods: {
     scroll() {
       window.onscroll = () => {
-        let bottomOfWindow =
-          Math.max(
-            window.pageYOffset,
-            document.documentElement.scrollTop,
-            document.body.scrollTop,
-          ) +
-            window.innerHeight ===
-          document.documentElement.offsetHeight;
-        this.endofPage = bottomOfWindow;
+        if (
+          window.innerHeight + window.pageYOffset >=
+          document.body.offsetHeight
+        ) {
+          this.endofPage = true;
+        } else {
+          this.endofPage = false;
+        }
       };
     },
   },

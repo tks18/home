@@ -12,7 +12,6 @@ let templates = './src/templates';
 let views = './src/views';
 
 // Files
-let eventBus = './src/EventBus.js';
 let state = './src/plugins/state/index.js';
 
 module.exports = (dir) => {
@@ -27,7 +26,6 @@ module.exports = (dir) => {
       '@styles': path.resolve(dir, styles),
       '@t': path.resolve(dir, templates),
       '@v': path.resolve(dir, views),
-      '@eventbus': path.resolve(dir, eventBus),
       '@state': path.resolve(dir, state),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.scss'],

@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-multiline">
-    <div id="mainhero" class="column is-full non-touch">
+    <div id="home-mainhero" class="column is-full non-touch">
       <div
         :class="
           'hero is-fullheight' +
@@ -87,7 +87,7 @@
                       index == heroButtons.length - 1
                         ? index % 2 == 0
                           ? 'center'
-                          : 'right'
+                          : 'left'
                         : index % 2 == 0
                         ? 'right'
                         : 'left'
@@ -111,7 +111,7 @@
                     <v-btn
                       elevation="24"
                       text
-                      @click="$vuetify.goTo('#feedbacktitile')"
+                      @click="$vuetify.goTo('#home-feedbacktitile')"
                       raised
                       outlined
                     >
@@ -123,7 +123,7 @@
                     <v-btn
                       elevation="24"
                       text
-                      @click="$vuetify.goTo('#emailme')"
+                      @click="$vuetify.goTo('#home-emailme')"
                       raised
                       outlined
                     >
@@ -143,11 +143,11 @@
         <v-row align="center" justify="center" class="ma-0 pa-0">
           <v-col cols="12" align="center">
             <div
-              id="whatiDo"
+              id="home-whatiDo"
               @click="
                 $router.push({
                   name: 'About',
-                  params: { scroll: true, scrollid: '#languagesknown' },
+                  params: { scroll: true, scrollid: '#about-languagesknown' },
                 })
               "
               :class="
@@ -216,9 +216,10 @@
       <v-row>
         <v-col align="start" justify="start">
           <div
-            id="storytitle"
+            id="home-storytitle"
+            @click="gotoUrl('https://webstories.shaaan.tk')"
             :class="
-              'clip-text-back text-h5 non-touch ml-6 text-capitalize' +
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
             "
           >
@@ -300,7 +301,7 @@
         <v-col align="start" justify="start">
           <div
             @click="$router.push('/blog')"
-            id="blogtitle"
+            id="home-blogtitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -389,7 +390,7 @@
           <v-col cols="12" class="my-0 mx-2 px-2 py-0">
             <div
               @click="$router.push('/about')"
-              id="abouttitle"
+              id="home-abouttitle"
               :class="
                 'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
                 ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -408,8 +409,19 @@
                   ></div>
                 </v-row>
                 <v-row align="end" justify="end" class="my-1 mx-2 px-2 py-1">
-                  <v-btn @click="$router.push('about')" color="primary">
-                    <v-icon>mdi-text-box-multiple</v-icon>{{ ' Read More' }}
+                  <v-btn
+                    @click="
+                      $router.push({
+                        name: 'About',
+                        params: {
+                          scroll: true,
+                          scrollid: '#about-aboutmecard',
+                        },
+                      })
+                    "
+                    color="primary"
+                  >
+                    <v-icon left>mdi-text-box-multiple</v-icon>Read More
                   </v-btn>
                 </v-row>
               </v-col>
@@ -435,11 +447,57 @@
       </v-container>
     </div>
     <div class="column is-full">
+      <v-container>
+        <v-tooltip top transition="slide-y-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-card
+              :loading="quotesLoading"
+              img="https://i.ibb.co/0nf9FwS/bb-3.webp"
+              class="mx-auto non-touch"
+              light
+              v-on="on"
+              v-bind="attrs"
+              @click="gotoUrl('https://www.imdb.com/title/tt0903747/')"
+              max-width="600"
+            >
+              <v-card-text
+                class="inherit-height-responsive"
+                v-if="!quotesLoading"
+              >
+                <v-row class="inherit-height" align="end" justify="end">
+                  <v-col
+                    class="inherit-height"
+                    align="center"
+                    justify="end"
+                    cols="12"
+                  >
+                    <v-row>
+                      <v-col cols="12" align="center" justify="center">
+                        <div class="text white--text text-h6 font-weight-bold">
+                          "{{ quotesData.quote }}"
+                        </div>
+                      </v-col>
+                      <v-col cols="12" align="right" justify="center">
+                        <div class="white--text text-overline">
+                          by {{ quotesData.author }}
+                        </div>
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </template>
+          <span>This is Breaking Bad 🦹‍♂️</span>
+        </v-tooltip>
+      </v-container>
+    </div>
+    <div class="column is-full">
       <v-row :class="ismobile ? 'ma-0' : 'ma-2'">
         <v-col cols="12" align="start" justify="start">
           <div
             @click="$router.push('/projects')"
-            id="projtitle"
+            id="home-projtitle"
             :class="
               'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
               ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
@@ -543,7 +601,7 @@
                             small
                             pill
                           >
-                            <v-avatar size="10" left>
+                            <v-avatar size="6" left>
                               <v-img :src="project.owner.avatar_url"></v-img>
                             </v-avatar>
                             {{ project.owner.login }}
@@ -696,7 +754,482 @@
       </v-row>
     </div>
     <div class="column is-full">
-      <v-container id="emailme">
+      <v-container>
+        <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+          <v-col cols="12">
+            <div
+              id="home-astroPicTitle"
+              :class="
+                'clip-text-back text-h5 non-touch ml-2 text-capitalize' +
+                ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+              "
+            >
+              {{ animatedArray.astroPicTitle }}
+              <v-icon>mdi-arrow-right-circle</v-icon>
+            </div>
+          </v-col>
+          <v-col :cols="12">
+            <v-card :loading="apodLoading" elevation="15" class="mx-auto">
+              <v-card-text v-if="!apodLoading">
+                <v-row align="center">
+                  <v-col
+                    :cols="ismobile ? 12 : 7"
+                    :class="ismobile ? 'ma-0 mb-1' : 'ml-0 my-0'"
+                  >
+                    <v-img :src="!apodLoading ? apodData.hdurl : null"></v-img>
+                  </v-col>
+                  <v-col :cols="ismobile ? 12 : 5">
+                    <v-card-title v-if="!apodLoading">
+                      {{ apodData.title }}
+                    </v-card-title>
+                    <v-card-subtitle v-if="!apodLoading">
+                      Dated: {{ apodData.date }}
+                    </v-card-subtitle>
+                    <v-card-text>
+                      {{ apodData.explanation }}
+                    </v-card-text>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
+    <div class="column is-full">
+      <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+        <v-col cols="12">
+          <div
+            @click="$router.push('/spacex')"
+            id="home-spacextitle"
+            :class="
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.spacextitle }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col cols="12">
+          <div class="text-body-1 ml-4">
+            You Know Something ! I am Really Obsessed with Spacex and
+            Particularly
+            <span class="primary--text font-weight-bold">Elon Musk</span>.Do you
+            know Why ?<br />SpaceX is the innovative and ambitious private
+            aerospace manufacturer founded in 2002 by Elon Musk. SpaceX truly
+            earned its place among the aeronautical elite—and changed the
+            economics of space flight­—by making its reusable rocket system
+            seemingly as reliable as the sunrise. We will Soon have a Dedicated
+            Page for Spacex and Elon Musk (Really Sooon).
+            <span class="primary--text font-weight-bold">
+              So here is the Latest Launch News below:
+            </span>
+          </div>
+        </v-col>
+        <v-col cols="12">
+          <v-container>
+            <v-card elevation="15" :loading="launchloading">
+              <v-card-title v-if="!launchloading">
+                {{ launchData.name }}
+              </v-card-title>
+              <v-card-subtitle v-if="!launchloading">
+                {{ launchData.date_utc | moment('DD-MM-YYYY [at] hh:mm a') }}
+                (UTC)
+              </v-card-subtitle>
+              <v-card-text v-if="!launchloading">
+                <v-row>
+                  <v-col :cols="ismobile ? 12 : 6" justify="center">
+                    <div class="text text-body-1">
+                      {{ launchData.details }}
+                    </div>
+                    <div class="text-overline my-1 mx-1">
+                      <div>
+                        <span class="font-weight-bold">Flight Number</span> -
+                        {{ launchData.flight_number }}
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Crew Members</span> -
+                        {{ launchData.crew.length }}
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Static Fire Date</span> -
+                        {{
+                          launchData.static_fire_date_utc
+                            | moment('DD-MM-YYYY [at] hh:mm a')
+                        }}
+                        (UTC)
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Launch Date</span> -
+                        {{
+                          launchData.date_utc
+                            | moment('DD-MM-YYYY [at] hh:mm a')
+                        }}
+                        (UTC)
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"> Launch Status </span> -
+                        <v-tooltip top transition="slide-y-transition">
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-icon
+                              v-on="on"
+                              v-bind="attrs"
+                              :color="launchData.success ? 'success' : 'error'"
+                            >
+                              {{
+                                launchData.success
+                                  ? 'mdi-rocket-launch'
+                                  : 'mdi-rocket'
+                              }}
+                            </v-icon>
+                          </template>
+                          <span>{{
+                            launchData.success ? 'Success' : 'Failed'
+                          }}</span>
+                        </v-tooltip>
+                      </div>
+                      <div>
+                        <span class="font-weight-bold">Ship Recovered</span> -
+                        {{
+                          launchData.fairings.recovered
+                            ? 'Recovered'
+                            : 'Lost it !'
+                        }}
+                      </div>
+                      <div class="my-1">
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.campaign)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left>mdi-reddit</v-icon>
+                          Campaign
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.launch)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Launch
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.media)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Media
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.reddit.recovery)"
+                          outlined
+                          ripple
+                          class="mx-1"
+                          small
+                          color="orange"
+                        >
+                          <v-icon small left> mdi-reddit </v-icon>
+                          Recovery
+                        </v-chip>
+                      </div>
+                      <div>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.webcast)"
+                          ripple
+                          small
+                          color="red"
+                          outlined
+                          class="mx-1"
+                        >
+                          <v-icon small left> mdi-youtube </v-icon>
+                          Watch Webcast
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.article)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left> mdi-text-box-search</v-icon>
+                          Article
+                        </v-chip>
+                        <v-chip
+                          @click="gotoUrl(launchData.links.wikipedia)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left> mdi-wikipedia</v-icon> wiki
+                        </v-chip>
+                        <v-chip
+                          @click="$router.push('/spacex/' + launchData.id)"
+                          rounded
+                          small
+                          outlined
+                          class="mx-1"
+                          color="primary"
+                          ><v-icon small left>
+                            mdi-file-document-outline</v-icon
+                          >
+                          More Info
+                        </v-chip>
+                      </div>
+                    </div>
+                  </v-col>
+                  <v-col
+                    :cols="ismobile ? 12 : 6"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-img :src="launchData.links.flickr.original[0]"></v-img>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-card-actions class="mx-2" v-if="!launchloading">
+                <v-spacer></v-spacer>
+                <v-tooltip top transition="slide-x-transition">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      @click="gotoUrl(launchData.links.flickr.original[0])"
+                      v-on="on"
+                      v-bind="attrs"
+                      color="primary"
+                      icon
+                    >
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Download this Image</span>
+                </v-tooltip>
+              </v-card-actions>
+            </v-card>
+          </v-container>
+        </v-col>
+      </v-row>
+    </div>
+    <div class="column is-full">
+      <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+        <v-col cols="12">
+          <div
+            @click="$router.push('/gallery')"
+            id="home-gallerytitle"
+            :class="
+              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.gallerytitle }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col :cols="ismobile ? 12 : 6">
+          <v-hover v-slot="{ hover }">
+            <v-card
+              class="mx-1 px-0 my-1 py-0"
+              :img="galleryLoading ? null : galleryData[0].links.regular"
+              outlined
+              :loading="galleryLoading"
+              :max-width="
+                ismobile
+                  ? contextInfo.viewport.width -
+                    contextInfo.viewport.width * 0.1
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.1) /
+                    2
+              "
+              :height="
+                ismobile
+                  ? contextInfo.viewport.height -
+                    contextInfo.viewport.height * 0.5
+                  : (contextInfo.viewport.height -
+                      contextInfo.viewport.height * 0.1) /
+                    1.3
+              "
+            >
+              <v-expand-transition>
+                <v-card
+                  v-if="hover"
+                  outlined
+                  :loading="galleryLoading"
+                  :max-width="
+                    ismobile
+                      ? contextInfo.viewport.width -
+                        contextInfo.viewport.width * 0.1
+                      : (contextInfo.viewport.width -
+                          contextInfo.viewport.width * 0.1) /
+                        2
+                  "
+                  :max-height="
+                    ismobile
+                      ? contextInfo.viewport.height -
+                        contextInfo.viewport.height * 0.5
+                      : (contextInfo.viewport.height -
+                          contextInfo.viewport.height * 0.1) /
+                        1.3
+                  "
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <v-card-subtitle class="my-1 py-0 text-h6 font-weight-bold">
+                    {{ galleryLoading ? ' ' : galleryData[0].description }}
+                  </v-card-subtitle>
+                  <v-card-subtitle class="my-1 py-0">
+                    {{ galleryLoading ? ' ' : 'by ' + galleryData[0].by.user }}
+                    <v-avatar v-if="!galleryLoading" size="25">
+                      <v-img :src="galleryData[0].by.profilePic"> </v-img>
+                    </v-avatar>
+                  </v-card-subtitle>
+                  <v-card-text v-if="!galleryLoading">
+                    <div class="text text-overline font-weight-bold">
+                      Posted on:
+                      {{ galleryData[0].createdAt | moment('DD of MMM, YY') }}
+                    </div>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="gotoUrl(galleryData[0].originalUrl)"
+                    >
+                      See Post
+                    </v-btn>
+                    <v-btn icon @click="gotoUrl(galleryData[0].downloadLink)">
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-expand-transition>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <v-col
+          v-for="m in ismobile ? 1 : 2"
+          v-bind:key="m"
+          :cols="ismobile ? 12 : 3"
+        >
+          <v-hover v-for="n in 2" v-bind:key="n" v-slot="{ hover }">
+            <v-card
+              :img="
+                galleryLoading
+                  ? null
+                  : galleryData[m == 2 ? m + n : m + n - 1].links.regular
+              "
+              class="mx-1 px-0 my-1 py-0"
+              outlined
+              :loading="galleryLoading"
+              :max-width="
+                ismobile
+                  ? contextInfo.viewport.width -
+                    contextInfo.viewport.width * 0.1
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.1) /
+                    4
+              "
+              :height="
+                ismobile
+                  ? contextInfo.viewport.height -
+                    contextInfo.viewport.height * 0.5
+                  : (contextInfo.viewport.height -
+                      contextInfo.viewport.height * 0.1) /
+                    (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
+              "
+            >
+              <v-expand-transition>
+                <v-card
+                  v-if="hover"
+                  outlined
+                  :loading="galleryLoading"
+                  :max-width="
+                    ismobile
+                      ? contextInfo.viewport.width -
+                        contextInfo.viewport.width * 0.1
+                      : (contextInfo.viewport.width -
+                          contextInfo.viewport.width * 0.1) /
+                        4
+                  "
+                  :max-height="
+                    ismobile
+                      ? contextInfo.viewport.height -
+                        contextInfo.viewport.height * 0.5
+                      : (contextInfo.viewport.height -
+                          contextInfo.viewport.height * 0.1) /
+                        (m == 1 ? (n == 1 ? 2.1 : 3.6) : n == 1 ? 3.6 : 2.1)
+                  "
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <v-card-subtitle class="my-1 py-0 text-h6 font-weight-bold">
+                    {{
+                      galleryLoading
+                        ? ' '
+                        : galleryData[m == 2 ? m + n : m + n - 1].description
+                    }}
+                  </v-card-subtitle>
+                  <v-card-subtitle class="my-1 py-0">
+                    {{
+                      galleryLoading
+                        ? ' '
+                        : 'by ' +
+                          galleryData[m == 2 ? m + n : m + n - 1].by.user
+                    }}
+                    <v-avatar v-if="!galleryLoading" size="25">
+                      <v-img
+                        :src="
+                          galleryData[m == 2 ? m + n : m + n - 1].by.profilePic
+                        "
+                      >
+                      </v-img>
+                    </v-avatar>
+                  </v-card-subtitle>
+                  <v-card-text v-if="!galleryLoading">
+                    <div class="text text-overline font-weight-bold">
+                      Posted on:
+                      {{
+                        galleryData[m == 2 ? m + n : m + n - 1].createdAt
+                          | moment('DD of MMM, YY')
+                      }}
+                    </div>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="
+                        gotoUrl(
+                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl,
+                        )
+                      "
+                    >
+                      See Post
+                    </v-btn>
+                    <v-btn
+                      icon
+                      color="primary"
+                      @click="
+                        gotoUrl(
+                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink,
+                        )
+                      "
+                    >
+                      <v-icon>mdi-download</v-icon>
+                    </v-btn>
+                  </v-card-text>
+                </v-card>
+              </v-expand-transition>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </v-row>
+    </div>
+    <div class="column is-full">
+      <v-container id="home-emailme">
         <v-alert
           dense
           text
@@ -718,7 +1251,7 @@
     </div>
     <div class="column is-full">
       <div
-        id="feedbacktitile"
+        id="home-feedbacktitile"
         :class="
           'non-touch text-center font-weight-black my-2 text-capitalize' +
           (ismobile ? ' text-h6 ' : ' text-h4 ')
@@ -801,9 +1334,14 @@
 </template>
 
 <script>
-import { stories } from '@p/backend';
-import { lettersArray, safeEmojis } from '@t/emoji-array';
-import { scrollTo, getOs, getViewport } from '@p/helpers';
+import { stories, gallery } from '@p/backend';
+import { projects } from '@p/resources/github';
+import { breakingBad } from '@p/resources/quotes';
+import { latestLaunches } from '@p/resources/spacex';
+import { apod } from '@p/resources/nasa';
+import gsap from '@p/gsap';
+import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
+import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
 export default {
   metaInfo: function () {
     return {
@@ -825,34 +1363,40 @@ export default {
         site: '',
         data: [],
       },
+      quotesLoading: false,
+      quotesData: {},
       heroButtons: [
         {
           name: 'About Me',
           icon: 'mdi-information-variant',
-          id: 'abouttitle',
+          id: 'home-abouttitle',
         },
         {
           name: 'What i Do',
           icon: 'mdi-console-network',
-          id: 'whatiDo',
+          id: 'home-whatiDo',
         },
         {
           name: 'My Blog',
           icon: 'mdi-post-outline',
-          id: 'blogtitle',
+          id: 'home-blogtitle',
+        },
+        {
+          name: 'Some Extras',
+          icon: 'mdi-one-up',
+          id: 'home-astroPicTitle',
         },
         {
           name: 'Projects',
           icon: 'mdi-projector-screen',
-          id: 'projtitle',
+          id: 'home-projtitle',
         },
         {
           name: 'Contact Me',
           icon: 'mdi-contactless-payment',
-          id: 'feedbacktitile',
+          id: 'home-feedbacktitile',
         },
       ],
-      letters: lettersArray,
       projects: {
         loading: false,
         projects: {},
@@ -862,21 +1406,32 @@ export default {
         viewport: getViewport(),
       },
       toggleTooltip: false,
+      galleryMaxWidth: 0,
+      galleryLoading: true,
+      apodData: {},
+      apodLoading: true,
+      launchloading: true,
+      launchData: {},
+      galleryData: [],
+      showw: false,
       mailtoLink:
         'mailto:me@shaaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
       githubPhoto:
         'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
       emailType: 'info',
       animatedArray: {
-        blog: '',
-        stories: '',
-        about: '',
-        whatiDo: '',
-        stat: '',
-        projtitle: '',
-        randEmoji: '',
-        contactTitle: '',
-        feedBack: '',
+        blog: ' ',
+        stories: ' ',
+        about: ' ',
+        whatiDo: ' ',
+        stat: ' ',
+        projtitle: ' ',
+        gallerytitle: ' ',
+        randEmoji: ' ',
+        contactTitle: ' ',
+        feedBack: ' ',
+        spacextitle: ' ',
+        astroPicTitle: ' ',
       },
       aboutData: {
         image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
@@ -901,112 +1456,17 @@ export default {
       const content = 'this.$refs.' + func;
       scrollTo(eval(content), 400, 300);
     },
-    createObserver(elem, callback, wordMap, word, stringText) {
-      let observer;
-      let target = document.querySelector(elem);
-      let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-      let handleIntersect = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this[callback](wordMap, word, stringText);
-          }
-        });
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(target);
-    },
-    update(word, stringText) {
-      var html = '';
-      word.forEach((map) => {
-        html += this.letters[Math.round(map) % lettersArray.length];
-      });
-      this.$set(this.animatedArray, stringText, html);
-    },
-    transitRandEmoji(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        onUpdate: () => {
-          var html = '';
-          word.forEach((map) => {
-            html += safeEmojis[Math.round(map) % safeEmojis.length];
-          });
-          this.$set(this.animatedArray, stringText, html);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: safeEmojis.length * 2 + range,
-            ease: 'ease-out',
-            duration: index + 2.5,
-          },
-          0,
-        );
-      });
-    },
     loopRandEmoji() {
-      let randEmoji = {
-        map: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-        initial: [
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-          safeEmojis.indexOf(
-            this.$_.shuffle(safeEmojis)[
-              Math.floor(Math.random() * safeEmojis.length)
-            ],
-          ),
-        ],
-      };
-      this.transitRandEmoji(randEmoji.map, randEmoji.initial, 'randEmoji');
+      gsap.tweenTo({
+        vm: this,
+        emoji: true,
+        arrayName: 'animatedArray',
+        map: generateRandomEmojis(3),
+        arrayProperty: 'randEmoji',
+      });
       setTimeout(() => {
         this.toggleTooltip = false;
       }, 5000);
-    },
-    transitWord(wordMap, word, stringText) {
-      var tl = this.$gsap.timeline({
-        onUpdate: () => {
-          this.update(word, stringText);
-        },
-      });
-      wordMap.forEach((range, index) => {
-        tl.to(
-          word,
-          {
-            [index]: lettersArray.length * 2 + range,
-            ease: 'power4',
-            duration: index / 4 + 1,
-          },
-          0,
-        );
-      });
     },
     async getStories() {
       let storydata = await stories.get();
@@ -1039,51 +1499,97 @@ export default {
         });
       }
     },
-    getProjects() {
-      this.$set(this.projects, 'loading', true);
-      let url =
-        'https://api.github.com/users/tks18/repos?sort=updated&per_page=20';
-      this.$axios
-        .get(url)
-        .then((resp) => {
-          if (resp.data.length > 0) {
-            this.$set(this.projects, 'loading', false);
-            let repos = resp.data;
-            let slicedRepos = this.ismobile
-              ? repos.slice(0, 2)
-              : repos.slice(0, 5);
-            this.$set(this.projects, 'projects', slicedRepos);
-          } else {
-            this.$notify({
-              group: 'main',
-              type: 'error',
-              duration: 5000,
-              title: 'Projects Error',
-              text:
-                'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
-              data: {
-                loading: false,
-                dark: true,
-                type: 'Error Notification',
-                buttons: [
-                  {
-                    text: 'Reload Now',
-                    onClick: () => {
-                      this.$router.go();
-                    },
-                  },
-                ],
+    async getQuotes() {
+      const quotes = await breakingBad();
+      if (quotes.success && quotes.data != null) {
+        this.quotesData = quotes.data[0];
+        this.quotesLoading = false;
+      } else {
+        this.quotesLoading = true;
+      }
+    },
+    async getNasaApod() {
+      const apodData = await apod();
+      if (apodData.success) {
+        this.apodData = apodData.data.data;
+        this.apodLoading = false;
+      } else {
+        this.apodLoading = true;
+        this.apodData = {};
+      }
+    },
+    async getLaunchNews() {
+      const launchdata = await latestLaunches();
+      if (launchdata.success && launchdata.data != null) {
+        this.launchData = launchdata.data;
+        this.launchloading = false;
+      } else {
+        this.launchdata = {};
+        this.launchloading = true;
+      }
+    },
+    async getProjects() {
+      let projectsData = await projects();
+      if (projectsData.success && projectsData.data != null) {
+        this.$set(this.projects, 'loading', false);
+        this.$set(
+          this.projects,
+          'projects',
+          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data,
+        );
+      } else {
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: 5000,
+          title: 'Projects Error',
+          text:
+            'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+            buttons: [
+              {
+                text: 'Reload Now',
+                onClick: () => {
+                  this.$router.go();
+                },
               },
-            });
-            this.$set(this.projects, 'loading', false);
-            this.$set(this.projects, 'projects', {});
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-          this.$set(this.projects, 'loading', false);
-          this.$set(this.projects, 'projects', {});
+            ],
+          },
         });
+        this.$set(this.projects, 'loading', false);
+        this.$set(this.projects, 'projects', {});
+      }
+    },
+    async getGalleryPics() {
+      const galleryData = await gallery.get();
+      if (galleryData.success) {
+        let shuffledPics = galleryData.data.slice(0, 5);
+        shuffledPics.forEach((pic) => {
+          this.galleryData.push({
+            description: pic.description,
+            createdAt: pic.created_at,
+            color: pic.color,
+            links: {
+              thumb: pic.urls.thumb,
+              regular: pic.urls.regular,
+              full: pic.urls.full,
+            },
+            originalUrl: pic.links.html,
+            downloadLink: pic.links.download,
+            by: {
+              user: pic.user.username,
+              name: pic.user.first_name,
+              profilePic: pic.user.profile_image.medium,
+            },
+          });
+          this.galleryLoading = false;
+        });
+      } else {
+        this.galleryLoading = true;
+      }
     },
     handleEmailClick(email) {
       navigator.clipboard.writeText(email).then(
@@ -1143,50 +1649,84 @@ export default {
     },
     render() {
       this.loopRandEmoji();
-      this.createObserver(
-        '#whatiDo',
-        'transitWord',
-        this.wordMaps.whatiDo.map,
-        this.wordMaps.whatiDo.initial,
-        'whatiDo',
-      );
-      this.createObserver(
-        '#storytitle',
-        'transitWord',
-        this.wordMaps.stories.map,
-        this.wordMaps.stories.initial,
-        'stories',
-      );
-      this.createObserver(
-        '#abouttitle',
-        'transitWord',
-        this.wordMaps.about.map,
-        this.wordMaps.about.initial,
-        'about',
-      );
-      this.createObserver(
-        '#projtitle',
-        'transitWord',
-        this.wordMaps.projtitle.map,
-        this.wordMaps.projtitle.initial,
-        'projtitle',
-      );
-      this.createObserver(
-        '#blogtitle',
-        'transitWord',
-        this.wordMaps.blog.map,
-        this.wordMaps.blog.initial,
-        'blog',
-      );
-      this.createObserver(
-        '#feedbacktitile',
-        'transitWord',
-        this.wordMaps.feedBackTitle.map,
-        this.wordMaps.feedBackTitle.initial,
-        'feedBack',
-      );
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-whatiDo',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('what i do'),
+        arrayProperty: 'whatiDo',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-storytitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Stories'),
+        arrayProperty: 'stories',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-abouttitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('About me'),
+        arrayProperty: 'about',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-projtitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Projects'),
+        arrayProperty: 'projtitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-astroPicTitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Astronomy Pic of the Day'),
+        arrayProperty: 'astroPicTitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-spacextitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Spacex News'),
+        arrayProperty: 'spacextitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-gallerytitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Galleria'),
+        arrayProperty: 'gallerytitle',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-blogtitle',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('My Blog'),
+        arrayProperty: 'blog',
+      });
+      gsap.tweenToObserver({
+        vm: this,
+        elem: '#home-feedbacktitile',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Submit Your Feedback'),
+        arrayProperty: 'feedBack',
+      });
+      this.getQuotes();
+      this.getNasaApod();
+      this.getLaunchNews();
       this.getProjects();
       this.getStories();
+      this.getGalleryPics();
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
@@ -1194,12 +1734,7 @@ export default {
   },
   computed: {
     ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
     },
     activities() {
       return [
@@ -1257,132 +1792,6 @@ export default {
             'Get to Know What Languages and Softwares with Which i Analyze Data',
         },
       ];
-    },
-    wordMaps() {
-      return {
-        blog: {
-          map: [
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('g'),
-          ],
-          initial: [46, 1, 3, 2, 40, 43, 10],
-        },
-        stories: {
-          map: [
-            lettersArray.indexOf('s'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('s'),
-          ],
-          initial: [40, 44, 42, 39, 41, 44, 2],
-        },
-        about: {
-          map: [
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('e'),
-          ],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        projtitle: {
-          map: [
-            lettersArray.indexOf('p'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('j'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf('s'),
-          ],
-          initial: [39, 41, 45, 43, 42, 44, 46, 38],
-        },
-        contactTitle: {
-          map: [
-            lettersArray.indexOf('g'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('l'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf('y'),
-          ],
-          initial: [42, 46, 40, 1, 32, 45, 14],
-        },
-        feedBackTitle: {
-          map: [
-            lettersArray.indexOf('s'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('m'),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('y'),
-            lettersArray.indexOf('o'),
-            lettersArray.indexOf('u'),
-            lettersArray.indexOf('r'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('f'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('e'),
-            lettersArray.indexOf('d'),
-            lettersArray.indexOf('b'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('c'),
-            lettersArray.indexOf('k'),
-          ],
-          initial: [
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-            14,
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-            14,
-            42,
-            46,
-            40,
-            1,
-            32,
-            45,
-          ],
-        },
-        whatiDo: {
-          map: [
-            lettersArray.indexOf('w'),
-            lettersArray.indexOf('h'),
-            lettersArray.indexOf('a'),
-            lettersArray.indexOf('t'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('i'),
-            lettersArray.indexOf(' '),
-            lettersArray.indexOf('d'),
-            lettersArray.indexOf('o'),
-          ],
-          initial: [2, 20, 46, 40, 39, 27, 6, 42, 9],
-        },
-      };
     },
   },
   mounted() {

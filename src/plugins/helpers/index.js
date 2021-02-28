@@ -29,7 +29,6 @@ export function countUpFromTime(countFrom) {
   var now = new Date(),
     countTo = new Date(countFrom),
     timeDifference = now - countTo;
-
   var secondsInAHour = 60 * 60 * 1000;
   var secondsInADay = secondsInAHour * 24;
   var secondsInAWeek = secondsInADay * 7;
@@ -106,4 +105,13 @@ export function getViewport() {
       (viewPortHeight = document.getElementsByTagName('body')[0].clientHeight);
   }
   return { width: viewPortWidth, height: viewPortHeight };
+}
+
+export function ismobile() {
+  var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  if (width > 966) {
+    return false;
+  } else {
+    return true;
+  }
 }

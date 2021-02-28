@@ -7,9 +7,22 @@ export const api = {
   blog: {
     get: backend + 'blog/get',
     set: backend + 'blog/set',
+    delete: backend + 'blog/delete',
+  },
+  notification: {
+    get: backend + 'notification/get',
+    set: backend + 'notification/set',
   },
   stories: {
     get: backend + 'stories/get',
     set: backend + 'stories/set',
+  },
+  gallery: {
+    get: backend + 'gallery/get',
+  },
+  externals: {
+    nasa: {
+      apod: backend + 'externals/nasa/apod',
+    },
   },
 };

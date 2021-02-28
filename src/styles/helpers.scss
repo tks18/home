@@ -20,6 +20,10 @@
   height: inherit;
 }
 
+.back-blur-hard-no-inherit {
+  backdrop-filter: blur(10px);
+}
+
 .back-blur-no-inherit {
   backdrop-filter: blur(3px) grayscale(1);
 }
@@ -70,4 +74,13 @@
 
 .inherit-height-responsive {
   height: 95%;
+}
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 1 !important;
+  position: absolute;
+  width: 100%;
 }

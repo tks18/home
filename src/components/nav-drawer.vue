@@ -109,6 +109,12 @@ export default {
           link: '/about',
         },
         {
+          icon: 'mdi-folder-information',
+          title: 'About this Project',
+          subtitle: 'Know the Code, workings of this Website',
+          link: '/about-this-project',
+        },
+        {
           icon: 'mdi-blogger',
           title: 'Blog',
           subtitle: 'My Personal Blog',
@@ -131,12 +137,6 @@ export default {
           title: 'Gallery',
           subtitle: 'My Photography Skills',
           link: '/gallery',
-        },
-        {
-          icon: 'mdi-folder-information',
-          title: 'About this Project',
-          subtitle: 'Know the Code, workings of this Website',
-          link: '/about-this-project',
         },
       ],
       siteStats: [
