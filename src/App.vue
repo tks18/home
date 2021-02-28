@@ -4,7 +4,10 @@
     <navbar />
     <sysBar />
     <Notification group="main" position="top right" />
-    <Notification group="server" position="botton right" />
+    <Notification
+      group="server"
+      :position="ismobile ? 'bottom left' : 'top left'"
+    />
     <v-main>
       <div class="content">
         <router-view></router-view>
@@ -22,6 +25,7 @@ import foot from '@c/footer';
 import fabComponent from '@c/fab-component';
 import sysBar from '@c/system-bar';
 import { notifications } from '@p/backend';
+import { ismobile } from '@p/helpers';
 export default {
   name: 'App',
   metaInfo: {
@@ -43,6 +47,11 @@ export default {
     foot,
     fabComponent,
     sysBar,
+  },
+  computed: {
+    ismobile() {
+      return ismobile();
+    },
   },
   methods: {
     async getServerNotifications() {
