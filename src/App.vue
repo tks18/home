@@ -3,7 +3,8 @@
     <navDrawer />
     <navbar />
     <sysBar />
-    <mainNotification group="main" position="top right" />
+    <Notification group="main" position="top right" />
+    <Notification group="server" position="botton right" />
     <v-main>
       <div class="content">
         <router-view></router-view>
@@ -16,10 +17,11 @@
 <script>
 import navbar from '@c/nav-bar';
 import navDrawer from '@c/nav-drawer';
-import mainNotification from '@c/notification';
+import Notification from '@c/notification';
 import foot from '@c/footer';
 import fabComponent from '@c/fab-component';
 import sysBar from '@c/system-bar';
+import { notifications } from '@p/backend';
 export default {
   name: 'App',
   metaInfo: {
@@ -37,12 +39,20 @@ export default {
   components: {
     navbar,
     navDrawer,
-    mainNotification,
+    Notification,
     foot,
     fabComponent,
     sysBar,
   },
   methods: {
+    async getServerNotifications() {
+      let currentNotifications = await notifications.get.current();
+      if (currentNotifications.success) {
+        currentNotifications.data.notifications.forEach((notification) => {
+          this.$notify(notification.properties);
+        });
+      }
+    },
     notifyDarkTheme() {
       let notifications = JSON.parse(localStorage.getItem('notification'));
       let dark = this.$vuetify.theme.dark;
@@ -80,6 +90,7 @@ export default {
   },
   mounted() {
     this.notifyDarkTheme();
+    this.getServerNotifications();
   },
 };
 </script>

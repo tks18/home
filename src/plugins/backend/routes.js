@@ -7,6 +7,11 @@ export const api = {
   blog: {
     get: backend + 'blog/get',
     set: backend + 'blog/set',
+    delete: backend + 'blog/delete',
+  },
+  notification: {
+    get: backend + 'notification/get',
+    set: backend + 'notification/set',
   },
   stories: {
     get: backend + 'stories/get',
