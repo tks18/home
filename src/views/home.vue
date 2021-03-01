@@ -1647,8 +1647,7 @@ export default {
         },
       );
     },
-    render() {
-      this.loopRandEmoji();
+    inititateObservers() {
       gsap.tweenToObserver({
         vm: this,
         elem: '#home-whatiDo',
@@ -1721,12 +1720,19 @@ export default {
         map: generateWordMaps('Submit Your Feedback'),
         arrayProperty: 'feedBack',
       });
+    },
+    fetchApiS() {
       this.getQuotes();
       this.getNasaApod();
       this.getLaunchNews();
       this.getProjects();
       this.getStories();
       this.getGalleryPics();
+    },
+    render() {
+      this.loopRandEmoji();
+      this.inititateObservers();
+      this.fetchApiS();
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);

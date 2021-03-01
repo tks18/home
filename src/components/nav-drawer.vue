@@ -51,7 +51,6 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-      <v-spacer></v-spacer>
       <v-expansion-panels>
         <v-expansion-panel>
           <v-expansion-panel-header> Website Stats </v-expansion-panel-header>
