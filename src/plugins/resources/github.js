@@ -1,12 +1,16 @@
 import axios from '@p/axios';
 
 let api = {
-  projects: 'https://api.github.com/users/tks18/repos?sort=updated&per_page=20',
+  repo: {
+    list: 'https://api.github.com/users/tks18/repos?sort=updated&per_page=20',
+    data: (repo) => `https://api.github.com/repos/tks18/${repo}`,
+    topics: (repo) => `https://api.github.com/repos/tks18/${repo}/topics`,
+  },
 };
 
 export async function projects(ismobile) {
   return await axios
-    .get(api.projects)
+    .get(api.repo.list)
     .then((resp) => {
       if (resp.status == 200 && resp.data && resp.data.length > 0) {
         let repos = resp.data;
@@ -28,6 +32,64 @@ export async function projects(ismobile) {
         success: true,
         data: null,
         error: e,
+      };
+    });
+}
+
+export async function repoData(repo) {
+  return await axios
+    .get(api.repo.data(repo))
+    .then((resp) => {
+      if (resp.status == 200 && resp.data) {
+        return {
+          success: true,
+          data: resp.data,
+          error: null,
+        };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: 'Not Able to Continue',
+        };
+      }
+    })
+    .catch((error) => {
+      return {
+        success: false,
+        data: null,
+        error,
+      };
+    });
+}
+
+export async function repoTopics(repo) {
+  return await axios
+    .get(api.repo.topics(repo), {
+      headers: {
+        Accept: 'application/vnd.github.mercy-preview+json',
+      },
+    })
+    .then((resp) => {
+      if (resp.status == 200 && resp.data) {
+        return {
+          success: true,
+          topics: resp.data,
+          error: null,
+        };
+      } else {
+        return {
+          success: false,
+          topics: null,
+          error: 'Not Able to Continue',
+        };
+      }
+    })
+    .catch((error) => {
+      return {
+        success: false,
+        topics: null,
+        error,
       };
     });
 }
