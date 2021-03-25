@@ -9,7 +9,7 @@
       :position="ismobile ? 'bottom left' : 'top left'"
     />
     <v-main>
-      <div class="content my-2">
+      <div class="content">
         <router-view></router-view>
       </div>
     </v-main>
