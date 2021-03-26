@@ -132,7 +132,7 @@
                   <span class="primary--text">
                     {{
                       repo.details.data.updated_at
-                        | moment('D,dddd of MMM, YYYY @ hh:mm a')
+                        | moment('D,dddd of MMM, YYYY @ HH:MM')
                     }}
                   </span>
                 </div>
@@ -141,7 +141,7 @@
                   <span class="primary--text">
                     {{
                       repo.details.data.pushed_at
-                        | moment('D,dddd of MMM, YYYY @ hh:mm a')
+                        | moment('D,dddd of MMM, YYYY @ HH:MM')
                     }}
                   </span>
                 </div>
@@ -219,7 +219,7 @@
                     class="lighten-1"
                   >
                     <v-card-text
-                      v-if="!repo.contents.loading"
+                      v-if="!repo.contents.loading && !file_view"
                       class="text-caption"
                     >
                       <v-row>
@@ -238,13 +238,13 @@
                                 currentPath != '/' ? (ismobile ? 10 : 11) : 12
                               "
                             >
-                              <div
-                                class="text-body-1 font-weight-light darken-1 breadcrumb"
-                              >
-                                <slide-y-transition>
+                              <v-slide-y-transition>
+                                <div
+                                  class="text-body-1 font-weight-light darken-1 breadcrumb"
+                                >
                                   {{ currentPath }}
-                                </slide-y-transition>
-                              </div>
+                                </div>
+                              </v-slide-y-transition>
                             </v-col>
                           </v-row>
                         </v-col>
@@ -267,6 +267,46 @@
                               </v-list-item-title>
                             </v-list-item>
                           </v-list>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                    <v-card-text
+                      v-if="!repo.contents.loading && file_view"
+                      class="text-caption"
+                    >
+                      <v-row>
+                        <v-col cols="12">
+                          <v-row class="my-0 py-0" align="center">
+                            <v-col
+                              v-if="currentPath != '/'"
+                              :cols="ismobile ? 2 : 1"
+                            >
+                              <v-btn @click="handleNavigation(true)" icon>
+                                <v-icon>mdi-arrow-left</v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col
+                              :cols="
+                                currentPath != '/' ? (ismobile ? 10 : 11) : 12
+                              "
+                            >
+                              <v-slide-y-transition>
+                                <div
+                                  class="text-body-1 font-weight-light darken-1 breadcrumb"
+                                >
+                                  {{ currentPath }}
+                                </div>
+                              </v-slide-y-transition>
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                        <v-col cols="12">
+                          <div class="code-viewer mx-5">
+                            <code
+                              class="language-js px-6 py-6 text-h6 code-viewer"
+                              v-html="current_file.decoded_content"
+                            ></code>
+                          </div>
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -326,6 +366,8 @@ export default {
           data: [],
         },
       },
+      file_view: false,
+      current_file: {},
       startPath: '/',
       currentPath: '/',
       historyState: [],
@@ -369,19 +411,44 @@ export default {
         this.$set(this.repo.contents, 'loading', false);
       }
     },
+    async getFileContents(file) {
+      if (file.type == 'file') {
+        this.$set(this.repo.contents, 'loading', true);
+        let path = this.startPath + file.path;
+        const file_contents = await repoContents(this.repo.name, path);
+        if (file_contents.success && file_contents.error == null) {
+          this.current_file = file_contents.contents;
+          this.current_file['decoded_content'] = atob(
+            this.current_file.content,
+          );
+          this.current_file['decoded_content'] = this.current_file[
+            'decoded_content'
+          ]
+            .replace(/\n/g, '&#10;')
+            .replace(/</g, '&#60;')
+            .replace(/>/, '&#62;');
+          this.historyState.push(this.currentPath);
+          this.currentPath = file.path;
+          this.$set(this.repo.contents, 'loading', false);
+          this.file_view = true;
+        }
+      }
+    },
     async handleNavigation(backtrigger, file) {
       if (backtrigger) {
         if (this.currentPath != '/') {
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.historyState.pop();
-          console.log(this.historyState);
           this.getRepoContent(backtrigger, newPath);
+          this.file_view = false;
         }
       } else if (file) {
         if (file.type == 'dir') {
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.startPath + file.path;
           this.getRepoContent(backtrigger, newPath);
+        } else if (file.type == 'file') {
+          this.getFileContents(file);
         }
       } else {
         if (this.currentPath == '/') {
