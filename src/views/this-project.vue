@@ -301,25 +301,23 @@
                           </v-row>
                         </v-col>
                         <v-col cols="12">
-                          <div class="code-viewer mx-5">
+                          <div :class="ismobile ? 'px-1 py-1' : 'px-3 py-3'">
                             <v-sheet
                               outlined
-                              class="px-6 py-6 text-h6 code-viewer"
+                              :class="
+                                'code-viewer text-subtitle-1 ' +
+                                (ismobile ? 'px-1 py-1' : 'px-3 py-3')
+                              "
+                              max-height="500"
+                              rounded
+                              elevation="13"
+                              :color="
+                                $vuetify.theme.dark
+                                  ? '#141414'
+                                  : 'grey lighten-3'
+                              "
+                              v-html="current_file.decoded_content"
                             >
-                              <v-textarea
-                                auto-grow
-                                prepend-icon="mdi-code"
-                                :background-color="
-                                  $vuetify.theme.dark ? '#141414' : 'white'
-                                "
-                                outlined
-                                hint="Source Code"
-                                no-resize
-                                readonly
-                                filled
-                                :value="current_file.decoded_content"
-                              >
-                              </v-textarea>
                             </v-sheet>
                           </div>
                         </v-col>
@@ -433,9 +431,10 @@ export default {
         const file_contents = await repoContents(this.repo.name, path);
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
-          this.current_file['decoded_content'] = atob(
-            this.current_file.content,
-          );
+          this.current_file['decoded_content'] = atob(this.current_file.content)
+            .replace(/\n/g, '&#10;')
+            .replace(/</g, '&#60;')
+            .replace(/>/g, '&#62;');
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
