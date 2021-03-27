@@ -214,6 +214,7 @@
                 </v-col>
                 <v-col cols="12" class="mx-1">
                   <v-card
+                    id="this-project-source-code-content"
                     transition="slide-x-transition"
                     :loading="repo.contents.loading"
                     class="lighten-1"
@@ -274,8 +275,8 @@
                       v-if="!repo.contents.loading && file_view"
                       class="text-caption"
                     >
-                      <v-row>
-                        <v-col cols="12">
+                      <v-row class="my-0 py-0">
+                        <v-col cols="12" class="my-0 py-0">
                           <v-row class="my-0 py-0" align="center">
                             <v-col
                               v-if="currentPath != '/'"
@@ -300,26 +301,51 @@
                             </v-col>
                           </v-row>
                         </v-col>
-                        <v-col cols="12">
-                          <div :class="ismobile ? 'px-1 py-1' : 'px-3 py-3'">
-                            <v-sheet
-                              outlined
-                              :class="
-                                'code-viewer text-subtitle-1 ' +
-                                (ismobile ? 'px-1 py-1' : 'px-3 py-3')
-                              "
-                              max-height="500"
-                              rounded
-                              elevation="13"
-                              :color="
-                                $vuetify.theme.dark
-                                  ? '#141414'
-                                  : 'grey lighten-3'
-                              "
-                              v-html="current_file.decoded_content"
-                            >
-                            </v-sheet>
-                          </div>
+                        <v-col cols="12" class="my-0 py-0">
+                          <v-row class="my-0 py-0">
+                            <v-col cols="12" class="my-0 py-0">
+                              <v-row class="my-0 py-0" align="center">
+                                <v-col cols="8">
+                                  <div
+                                    class="text-subtitle-1 mx-2 font-weight-bold"
+                                  >
+                                    {{
+                                      this.repo.name + '/' + current_file.path
+                                    }}
+                                  </div>
+                                </v-col>
+                                <v-col cols="4" align="right">
+                                  <v-btn icon class="mx-1"
+                                    ><v-icon>mdi-download</v-icon></v-btn
+                                  >
+                                  <v-btn icon class="mx-1"
+                                    ><v-icon>mdi-content-copy</v-icon></v-btn
+                                  >
+                                  <v-btn icon class="mx-1"
+                                    ><v-icon>mdi-xml</v-icon></v-btn
+                                  >
+                                </v-col>
+                              </v-row>
+                            </v-col>
+                            <v-col cols="12" class="my-0 py-0">
+                              <v-sheet
+                                outlined
+                                :class="
+                                  'code-viewer text-subtitle-1 my-0 ' +
+                                  (ismobile ? 'px-1 py-1' : 'px-3 py-3')
+                                "
+                                :max-height="ismobile ? 550 : 650"
+                                rounded
+                                elevation="13"
+                                :color="
+                                  $vuetify.theme.dark
+                                    ? '#141414'
+                                    : 'grey lighten-3'
+                                "
+                                v-html="current_file.decoded_content"
+                              ></v-sheet>
+                            </v-col>
+                          </v-row>
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -422,6 +448,7 @@ export default {
         );
         this.$set(this.repo.contents, 'data', sortedContents);
         this.$set(this.repo.contents, 'loading', false);
+        this.$vuetify.goTo('#this-project-source-code-content');
       }
     },
     async getFileContents(file) {
@@ -439,6 +466,7 @@ export default {
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
           this.file_view = true;
+          this.$vuetify.goTo('#this-project-source-code-content');
         }
       }
     },

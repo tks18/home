@@ -24,27 +24,6 @@
   backdrop-filter: blur(10px);
 }
 
-.code-viewer {
-  display: block;
-  white-space: pre;
-  overflow-x: auto;
-
-  &::-webkit-scrollbar {
-    height: 4px;
-    background-color: white;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: hsl(0%, 0%, 15%);
-    border-radius: 10px;
-  }
-}
-
 .back-blur-no-inherit {
   backdrop-filter: blur(3px) grayscale(1);
 }
