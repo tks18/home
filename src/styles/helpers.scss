@@ -24,6 +24,11 @@
   backdrop-filter: blur(10px);
 }
 
+.code-viewer {
+  display: block;
+  white-space: pre;
+}
+
 .back-blur-no-inherit {
   backdrop-filter: blur(3px) grayscale(1);
 }

@@ -29,5 +29,6 @@ module.exports = (dir) => {
       '@state': path.resolve(dir, state),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.scss'],
+    modules: ['node_modules'],
   };
 };
