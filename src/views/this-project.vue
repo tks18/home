@@ -378,11 +378,6 @@
                                 :max-height="ismobile ? 550 : 650"
                                 rounded
                                 elevation="13"
-                                :color="
-                                  $vuetify.theme.dark
-                                    ? '#141414'
-                                    : 'grey lighten-3'
-                                "
                                 v-html="current_file.decoded_content_display"
                               ></v-sheet>
                             </v-col>
