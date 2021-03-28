@@ -6,6 +6,14 @@
   user-select: none;
 }
 
+.touchable {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: -moz-all;
+  -o-user-select: text;
+  user-select: text;
+}
+
 .point-cursor {
   cursor: pointer;
 }

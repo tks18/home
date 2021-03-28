@@ -196,8 +196,8 @@
         <v-col cols="12">
           <v-row>
             <v-col cols="12">
-              <v-row class="non-touch">
-                <v-col cols="12">
+              <v-row class="non-touch" align="center">
+                <v-col :cols="ismobile ? 12 : 8" align="left">
                   <div
                     id="this-project-source-code"
                     :class="
@@ -211,6 +211,24 @@
                     {{ animatedText.sourceCode }}
                     <v-icon>mdi-arrow-right-circle</v-icon>
                   </div>
+                </v-col>
+                <v-col
+                  :cols="ismobile ? 12 : 4"
+                  :align="ismobile ? 'center' : 'right'"
+                  v-if="!repo.branches.loading"
+                >
+                  <div v-if="ismobile" class="text-caption">Branches</div>
+                  <v-btn-toggle v-model="branch_toggle" mandatory>
+                    <v-btn
+                      color="primary"
+                      v-for="(branch, index) in repo.branches.data"
+                      v-bind:key="index"
+                      @click="branch_change(branch)"
+                      small
+                    >
+                      {{ branch.name }}
+                    </v-btn>
+                  </v-btn-toggle>
                 </v-col>
                 <v-col cols="12" class="mx-1">
                   <v-card
@@ -241,7 +259,7 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="text-body-1 font-weight-light darken-1 breadcrumb"
+                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -293,7 +311,7 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="text-body-1 font-weight-light darken-1 breadcrumb"
+                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -305,7 +323,11 @@
                           <v-row class="my-0 py-0">
                             <v-col cols="12" class="my-0 py-0">
                               <v-row class="my-0 py-0" align="center">
-                                <v-col cols="8">
+                                <v-col
+                                  :cols="ismobile ? 12 : 8"
+                                  align="left"
+                                  class="d-inline-block text-truncate"
+                                >
                                   <div
                                     class="text-subtitle-1 mx-2 font-weight-bold"
                                   >
@@ -314,15 +336,18 @@
                                     }}
                                   </div>
                                 </v-col>
-                                <v-col cols="4" align="right">
-                                  <v-btn icon class="mx-1"
-                                    ><v-icon>mdi-download</v-icon></v-btn
-                                  >
-                                  <v-btn icon class="mx-1"
-                                    ><v-icon>mdi-content-copy</v-icon></v-btn
-                                  >
-                                  <v-btn icon class="mx-1"
-                                    ><v-icon>mdi-xml</v-icon></v-btn
+                                <v-col
+                                  :cols="ismobile ? 12 : 4"
+                                  :align="ismobile ? 'center' : 'right'"
+                                >
+                                  <v-btn
+                                    v-for="(button,
+                                    index) in code_viewer_buttons"
+                                    v-bind:key="index"
+                                    icon
+                                    color="primary"
+                                    class="mx-1"
+                                    ><v-icon>{{ button.icon }}</v-icon></v-btn
                                   >
                                 </v-col>
                               </v-row>
@@ -331,8 +356,8 @@
                               <v-sheet
                                 outlined
                                 :class="
-                                  'code-viewer text-subtitle-1 my-0 ' +
-                                  (ismobile ? 'px-1 py-1' : 'px-3 py-3')
+                                  'code-viewer touchable text-subtitle-1 my-0 px-3 py-3' +
+                                  (ismobile ? ' mx-1' : ' mx-2')
                                 "
                                 :max-height="ismobile ? 550 : 650"
                                 rounded
@@ -342,7 +367,7 @@
                                     ? '#141414'
                                     : 'grey lighten-3'
                                 "
-                                v-html="current_file.decoded_content"
+                                v-html="current_file.decoded_content_display"
                               ></v-sheet>
                             </v-col>
                           </v-row>
@@ -381,7 +406,12 @@
 import { generateWordMaps } from '@p/wordmap';
 import { tweenToObserver } from '@p/gsap';
 import { ismobile } from '@p/helpers';
-import { repoData, repoTopics, repoContents } from '@p/resources/github';
+import {
+  repoData,
+  repoTopics,
+  repoContents,
+  repoBranches,
+} from '@p/resources/github';
 export default {
   metaInfo: function () {
     return {
@@ -396,6 +426,10 @@ export default {
           loading: true,
           data: {},
         },
+        branches: {
+          loading: true,
+          data: {},
+        },
         topics: {
           loading: true,
           data: [],
@@ -405,6 +439,8 @@ export default {
           data: [],
         },
       },
+      branch_toggle: 0,
+      current_branch: {},
       file_view: false,
       current_file: {},
       startPath: '/',
@@ -434,8 +470,27 @@ export default {
         this.$set(this.repo.topics, 'loading', false);
       }
     },
-    async getRepoContent(backtrigger, path) {
-      const repo_contents_resp = await repoContents(this.repo.name, path);
+    async getRepoBranches() {
+      const repo_branches_resp = await repoBranches(this.repo.name);
+      if (repo_branches_resp.success && repo_branches_resp.error == null) {
+        let branches = repo_branches_resp.branches;
+        this.current_branch = branches.filter((branch) => {
+          return branch.name == 'master';
+        });
+        this.branch_toggle = branches.findIndex(
+          (branch) => branch.name == 'master',
+        );
+        this.$set(this.repo.branches, 'data', repo_branches_resp.branches);
+
+        this.$set(this.repo.branches, 'loading', false);
+      }
+    },
+    async getRepoContent(backtrigger, path, branch) {
+      const repo_contents_resp = await repoContents(
+        this.repo.name,
+        path,
+        branch,
+      );
       if (repo_contents_resp.success && repo_contents_resp.error == null) {
         if (!backtrigger) {
           this.historyState.push(this.currentPath);
@@ -448,17 +503,21 @@ export default {
         );
         this.$set(this.repo.contents, 'data', sortedContents);
         this.$set(this.repo.contents, 'loading', false);
-        this.$vuetify.goTo('#this-project-source-code-content');
       }
     },
-    async getFileContents(file) {
+    async getFileContents(file, branch) {
       if (file.type == 'file') {
         this.$set(this.repo.contents, 'loading', true);
         let path = this.startPath + file.path;
-        const file_contents = await repoContents(this.repo.name, path);
+        const file_contents = await repoContents(this.repo.name, path, branch);
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
-          this.current_file['decoded_content'] = atob(this.current_file.content)
+          this.current_file['decoded_content_original'] = atob(
+            this.current_file.content,
+          );
+          this.current_file['decoded_content_display'] = this.current_file[
+            'decoded_content_original'
+          ]
             .replace(/\n/g, '&#10;')
             .replace(/</g, '&#60;')
             .replace(/>/g, '&#62;');
@@ -475,24 +534,35 @@ export default {
         if (this.currentPath != '/') {
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.historyState.pop();
-          this.getRepoContent(backtrigger, newPath);
+          this.getRepoContent(backtrigger, newPath, this.current_branch.name);
           this.file_view = false;
+          this.$vuetify.goTo('#this-project-source-code-content');
         }
       } else if (file) {
         if (file.type == 'dir') {
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.startPath + file.path;
-          this.getRepoContent(backtrigger, newPath);
+          this.getRepoContent(backtrigger, newPath, this.current_branch.name);
+          this.$vuetify.goTo('#this-project-source-code-content');
         } else if (file.type == 'file') {
-          this.getFileContents(file);
+          this.getFileContents(file, this.current_branch.name);
         }
       } else {
         if (this.currentPath == '/') {
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.currentPath;
-          this.getRepoContent(backtrigger, newPath);
+          this.getRepoContent(backtrigger, newPath, this.current_branch.name);
         }
       }
+    },
+    branch_change(branch) {
+      this.$set(this.repo.contents, 'loading', true);
+      this.current_branch = branch;
+      this.currentPath = '/';
+      this.current_file = {};
+      this.file_view = false;
+      this.handleNavigation(false);
+      this.$vuetify.goTo('#this-project-source-code-content');
     },
     gotourl(url) {
       window.open(url);
@@ -503,10 +573,29 @@ export default {
       window.open(url);
       return;
     },
+    async do_repo_stuffs() {
+      await this.getRepoBranches();
+      this.getRepoData();
+      this.getRepoTopics();
+      this.handleNavigation(false);
+    },
   },
   computed: {
     ismobile() {
       return ismobile();
+    },
+    code_viewer_buttons() {
+      return [
+        {
+          icon: 'mdi-download',
+        },
+        {
+          icon: 'mdi-content-copy',
+        },
+        {
+          icon: 'mdi-xml',
+        },
+      ];
     },
   },
   mounted() {
@@ -534,9 +623,7 @@ export default {
       map: generateWordMaps('Source Code'),
       arrayProperty: 'sourceCode',
     });
-    this.getRepoData();
-    this.getRepoTopics();
-    this.handleNavigation(false);
+    this.do_repo_stuffs();
   },
 };
 </script>

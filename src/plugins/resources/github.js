@@ -7,6 +7,7 @@ let api = {
     topics: (repo) => `https://api.github.com/repos/tks18/${repo}/topics`,
     contents: (repo, path) =>
       `https://api.github.com/repos/tks18/${repo}/contents${path}`,
+    branches: (repo) => `https://api.github.com/repos/tks18/${repo}/branches`,
   },
 };
 
@@ -96,9 +97,13 @@ export async function repoTopics(repo) {
     });
 }
 
-export async function repoContents(repo, path) {
+export async function repoContents(repo, path, branch) {
   return await axios
-    .get(api.repo.contents(repo, path))
+    .get(api.repo.contents(repo, path), {
+      params: {
+        ref: branch,
+      },
+    })
     .then((resp) => {
       if (resp.status == 200 && resp.data) {
         return {
@@ -118,6 +123,33 @@ export async function repoContents(repo, path) {
       return {
         success: false,
         contents: null,
+        error,
+      };
+    });
+}
+
+export async function repoBranches(repo) {
+  return await axios
+    .get(api.repo.branches(repo))
+    .then((resp) => {
+      if (resp.status == 200 && resp.data) {
+        return {
+          success: true,
+          branches: resp.data,
+          error: null,
+        };
+      } else {
+        return {
+          success: false,
+          branches: null,
+          error: 'Not Able to Continue',
+        };
+      }
+    })
+    .catch((error) => {
+      return {
+        success: false,
+        branches: null,
         error,
       };
     });
