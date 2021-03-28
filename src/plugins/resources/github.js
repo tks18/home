@@ -8,6 +8,7 @@ let api = {
     contents: (repo, path) =>
       `https://api.github.com/repos/tks18/${repo}/contents${path}`,
     branches: (repo) => `https://api.github.com/repos/tks18/${repo}/branches`,
+    commits: (repo) => `https://api.github.com/repos/tks18/${repo}/commits`,
   },
 };
 
@@ -62,6 +63,37 @@ export async function repoData(repo) {
         success: false,
         data: null,
         error,
+      };
+    });
+}
+
+export async function repoCommits(repo, branch) {
+  return await axios
+    .get(api.repo.commits(repo), {
+      params: {
+        sha: branch,
+      },
+    })
+    .then((resp) => {
+      if (resp.status == 200 && resp.data) {
+        return {
+          success: true,
+          commits: resp.data,
+          error: null,
+        };
+      } else {
+        return {
+          success: false,
+          commits: null,
+          error: 'Error Fetching the api',
+        };
+      }
+    })
+    .catch((error) => {
+      return {
+        success: false,
+        commits: null,
+        error: error,
       };
     });
 }

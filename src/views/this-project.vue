@@ -341,13 +341,29 @@
                                   :align="ismobile ? 'center' : 'right'"
                                 >
                                   <v-btn
-                                    v-for="(button,
-                                    index) in code_viewer_buttons"
-                                    v-bind:key="index"
+                                    @click="open_raw_code(current_file.path)"
                                     icon
                                     color="primary"
                                     class="mx-1"
-                                    ><v-icon>{{ button.icon }}</v-icon></v-btn
+                                    ><v-icon>mdi-download</v-icon></v-btn
+                                  >
+                                  <v-btn
+                                    @click="
+                                      copy_content_code(
+                                        current_file.decoded_content_original,
+                                      )
+                                    "
+                                    icon
+                                    color="primary"
+                                    class="mx-1"
+                                    ><v-icon>mdi-content-copy</v-icon></v-btn
+                                  >
+                                  <v-btn
+                                    icon
+                                    @click="open_gh_path(current_file.path)"
+                                    color="primary"
+                                    class="mx-1"
+                                    ><v-icon>mdi-xml</v-icon></v-btn
                                   >
                                 </v-col>
                               </v-row>
@@ -409,6 +425,7 @@ import { ismobile } from '@p/helpers';
 import {
   repoData,
   repoTopics,
+  repoCommits,
   repoContents,
   repoBranches,
 } from '@p/resources/github';
@@ -427,6 +444,10 @@ export default {
           data: {},
         },
         branches: {
+          loading: true,
+          data: {},
+        },
+        commits: {
           loading: true,
           data: {},
         },
@@ -470,13 +491,23 @@ export default {
         this.$set(this.repo.topics, 'loading', false);
       }
     },
+    async getRepoCommits() {
+      const repo_commits_resp = await repoCommits(
+        this.repo.name,
+        this.current_branch.name,
+      );
+      if (repo_commits_resp.success && repo_commits_resp.commits != null) {
+        this.$set(this.repo.commits, 'data', repo_commits_resp.commits);
+        this.$set(this.repo.commits, 'loading', false);
+      }
+    },
     async getRepoBranches() {
       const repo_branches_resp = await repoBranches(this.repo.name);
       if (repo_branches_resp.success && repo_branches_resp.error == null) {
         let branches = repo_branches_resp.branches;
         this.current_branch = branches.filter((branch) => {
           return branch.name == 'master';
-        });
+        })[0];
         this.branch_toggle = branches.findIndex(
           (branch) => branch.name == 'master',
         );
@@ -555,6 +586,38 @@ export default {
         }
       }
     },
+    copy_content_code(content) {
+      navigator.clipboard
+        .writeText(content)
+        .then(() => {
+          this.$notify({
+            group: 'main',
+            type: 'success',
+            duration: 5000,
+            title: 'Code Copied',
+            text: this.current_file.path + ' Has been Copied to Clipboard.',
+            data: {
+              loading: false,
+              dark: true,
+              type: 'Normal Notification',
+            },
+          });
+        })
+        .catch((e) => {
+          this.$notify({
+            group: 'main',
+            type: 'success',
+            duration: 5000,
+            title: 'Code Copied',
+            text: 'Error Copying the code: ' + e,
+            data: {
+              loading: false,
+              dark: false,
+              type: 'Error Notification',
+            },
+          });
+        });
+    },
     branch_change(branch) {
       this.$set(this.repo.contents, 'loading', true);
       this.current_branch = branch;
@@ -563,6 +626,19 @@ export default {
       this.file_view = false;
       this.handleNavigation(false);
       this.$vuetify.goTo('#this-project-source-code-content');
+    },
+    open_raw_code(file_path) {
+      let base_url =
+        'https://raw.githubusercontent.com/tks18/' + this.repo.name + '/';
+      let branch = this.current_branch.name;
+      let open_url = base_url + branch + '/' + file_path;
+      this.gotourl(open_url);
+    },
+    open_gh_path(file_path) {
+      let base_url = 'https://github.com/tks18/' + this.repo.name + '/blob/';
+      let branch = this.current_branch.name;
+      let open_url = base_url + branch + '/' + file_path;
+      this.gotourl(open_url);
     },
     gotourl(url) {
       window.open(url);
@@ -583,19 +659,6 @@ export default {
   computed: {
     ismobile() {
       return ismobile();
-    },
-    code_viewer_buttons() {
-      return [
-        {
-          icon: 'mdi-download',
-        },
-        {
-          icon: 'mdi-content-copy',
-        },
-        {
-          icon: 'mdi-xml',
-        },
-      ];
     },
   },
   mounted() {
