@@ -45,7 +45,8 @@
   font-family: Hack, monospace;
 
   &::-webkit-scrollbar {
-    height: 4px;
+    height: 1px;
+    width: 1px;
     background-color: white;
   }
 

@@ -321,7 +321,7 @@
                         </v-col>
                         <v-col cols="12" class="my-0 py-0">
                           <v-row class="my-0 py-0">
-                            <v-col cols="12" class="my-0 py-0">
+                            <v-col cols="12" class="my-0 mx-1 py-0">
                               <v-row class="my-0 py-0" align="center">
                                 <v-col
                                   :cols="ismobile ? 12 : 8"
@@ -341,6 +341,7 @@
                                   :align="ismobile ? 'center' : 'right'"
                                 >
                                   <v-btn
+                                    small
                                     @click="open_raw_code(current_file.path)"
                                     icon
                                     color="primary"
@@ -348,6 +349,7 @@
                                     ><v-icon>mdi-download</v-icon></v-btn
                                   >
                                   <v-btn
+                                    small
                                     @click="
                                       copy_content_code(
                                         current_file.decoded_content_original,
@@ -363,18 +365,16 @@
                                     @click="open_gh_path(current_file.path)"
                                     color="primary"
                                     class="mx-1"
+                                    small
                                     ><v-icon>mdi-xml</v-icon></v-btn
                                   >
                                 </v-col>
                               </v-row>
                             </v-col>
-                            <v-col cols="12" class="my-0 py-0">
+                            <v-col cols="12" class="my-0 mx-1 py-0">
                               <v-sheet
                                 outlined
-                                :class="
-                                  'code-viewer touchable text-subtitle-1 my-0 px-3 py-3' +
-                                  (ismobile ? ' mx-1' : ' mx-2')
-                                "
+                                :class="'code-viewer touchable my-0 px-3 py-3 mx-0'"
                                 :max-height="ismobile ? 550 : 650"
                                 rounded
                                 elevation="13"
@@ -541,12 +541,54 @@ export default {
           this.current_file['decoded_content_original'] = atob(
             this.current_file.content,
           );
-          this.current_file['decoded_content_display'] = this.current_file[
-            'decoded_content_original'
-          ]
+          let modified_content = this.current_file['decoded_content_original']
             .replace(/\n/g, '&#10;')
             .replace(/</g, '&#60;')
             .replace(/>/g, '&#62;');
+          let lines = modified_content.split('&#10;');
+          let newLines = '';
+          for (let i = 0; i < lines.length; i++) {
+            if (i == 0) {
+              newLines +=
+                `<span class="grey--text text-right non-touch">${
+                  i + 1
+                }     </span>` + lines[i];
+            } else {
+              if (`${i + 1}`.length < 2) {
+                newLines +=
+                  `<br />` +
+                  `<span class="grey--text text-right non-touch">${
+                    i + 1
+                  }     </span>` +
+                  lines[i];
+              } else if (`${i + 1}`.length > 1) {
+                newLines +=
+                  `<br />` +
+                  `<span class="grey--text text-right non-touch">${
+                    i + 1
+                  }    </span>` +
+                  lines[i];
+              } else if (`${i + 1}`.length > 2) {
+                newLines +=
+                  `<br />` +
+                  `<span class="grey--text text-right non-touch">${
+                    i + 1
+                  }   </span>` +
+                  lines[i];
+              } else if (`${i + 1}`.length > 3) {
+                newLines +=
+                  `<br />` +
+                  `<span class="grey--text text-right non-touch">${
+                    i + 1
+                  }  </span>` +
+                  lines[i];
+              }
+            }
+            if (i == lines.length - 1) {
+              this.current_file['total_lines'] = i + 1;
+            }
+          }
+          this.current_file['decoded_content_display'] = newLines;
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
