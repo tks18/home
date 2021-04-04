@@ -13,6 +13,21 @@
       "Carve your name on hearts, not tombstones." Let you Know my Legacy. Lol
       xD 😜
     </div>
+    <v-row align="center">
+      <v-col cols="12" align="center" justify="center">
+        <div class="text-overline">Select Code Base</div>
+        <v-btn-toggle mandatory>
+          <v-btn
+            color="primary"
+            v-for="(repo, index) in repos"
+            v-bind:key="index"
+            @click="code_base_change(repo.repo)"
+          >
+            {{ repo.title }}
+          </v-btn>
+        </v-btn-toggle>
+      </v-col>
+    </v-row>
     <div class="mx-2 my-2">
       <v-row>
         <v-col class="non-touch" cols="12">
@@ -471,6 +486,7 @@ export default {
   },
   methods: {
     async getRepoData() {
+      this.$set(this.repo.details, 'loading', true);
       const repo_data_resp = await repoData(this.repo.name);
       if (repo_data_resp.success && repo_data_resp.error == null) {
         let repoData = repo_data_resp.data;
@@ -480,6 +496,7 @@ export default {
       }
     },
     async getRepoTopics() {
+      this.$set(this.repo.topics, 'loading', true);
       const repo_topics_resp = await repoTopics(this.repo.name);
       if (repo_topics_resp.success && repo_topics_resp.error == null) {
         this.$set(this.repo.topics, 'data', repo_topics_resp.topics.names);
@@ -487,6 +504,7 @@ export default {
       }
     },
     async getRepoCommits() {
+      this.$set(this.repo.commits, 'loading', true);
       const repo_commits_resp = await repoCommits(
         this.repo.name,
         this.current_branch.name,
@@ -497,6 +515,7 @@ export default {
       }
     },
     async getRepoBranches() {
+      this.$set(this.repo.branches, 'loading', true);
       const repo_branches_resp = await repoBranches(this.repo.name);
       if (repo_branches_resp.success && repo_branches_resp.error == null) {
         let branches = repo_branches_resp.branches;
@@ -507,11 +526,11 @@ export default {
           (branch) => branch.name == 'master',
         );
         this.$set(this.repo.branches, 'data', repo_branches_resp.branches);
-
         this.$set(this.repo.branches, 'loading', false);
       }
     },
     async getRepoContent(backtrigger, path, branch) {
+      this.$set(this.repo.contents, 'loading', true);
       const repo_contents_resp = await repoContents(
         this.repo.name,
         path,
@@ -550,35 +569,35 @@ export default {
           for (let i = 0; i < lines.length; i++) {
             if (i == 0) {
               newLines +=
-                `<span class="grey--text text-right non-touch">${
+                `<span class="grey--text text-right non-touch">     ${
                   i + 1
-                }     </span>` + lines[i];
+                }  </span>` + lines[i];
             } else {
               if (`${i + 1}`.length < 2) {
                 newLines +=
                   `<br />` +
-                  `<span class="grey--text text-right non-touch">${
+                  `<span class="grey--text text-right non-touch">     ${
                     i + 1
-                  }     </span>` +
+                  }  </span>` +
                   lines[i];
               } else if (`${i + 1}`.length > 1) {
                 newLines +=
                   `<br />` +
-                  `<span class="grey--text text-right non-touch">${
+                  `<span class="grey--text text-right non-touch">    ${
                     i + 1
-                  }    </span>` +
+                  }  </span>` +
                   lines[i];
               } else if (`${i + 1}`.length > 2) {
                 newLines +=
                   `<br />` +
-                  `<span class="grey--text text-right non-touch">${
+                  `<span class="grey--text text-right non-touch">   ${
                     i + 1
-                  }   </span>` +
+                  }  </span>` +
                   lines[i];
               } else if (`${i + 1}`.length > 3) {
                 newLines +=
                   `<br />` +
-                  `<span class="grey--text text-right non-touch">${
+                  `<span class="grey--text text-right non-touch">  ${
                     i + 1
                   }  </span>` +
                   lines[i];
@@ -664,6 +683,10 @@ export default {
       this.handleNavigation(false);
       this.$vuetify.goTo('#this-project-source-code-content');
     },
+    code_base_change(name) {
+      this.repo.name = name;
+      this.do_repo_stuffs();
+    },
     open_raw_code(file_path) {
       let base_url =
         'https://raw.githubusercontent.com/tks18/' + this.repo.name + '/';
@@ -696,6 +719,18 @@ export default {
   computed: {
     ismobile() {
       return ismobile();
+    },
+    repos() {
+      return [
+        {
+          title: 'Frontend',
+          repo: 'matte-portfolio',
+        },
+        {
+          title: 'Backend',
+          repo: 'portfolio-backend',
+        },
+      ];
     },
   },
   mounted() {
