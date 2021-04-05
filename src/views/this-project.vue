@@ -112,7 +112,7 @@
                   }}</span>
                 </div>
                 <div class="heading font-weight-bold my-1">
-                  <div>Description</div>
+                  <div>Description:</div>
                   <div class="primary--text">
                     {{ repo.details.data.description }}
                   </div>
@@ -164,7 +164,7 @@
                   Repo Size:
                   <v-chip outlined small color="primary">
                     <v-icon left small> mdi-arrow-split-vertical </v-icon>
-                    {{ Math.round(repo.details.data.size / 8192, 1) + ' mb' }}
+                    {{ $_.round(repo.details.data.size / 8192, 2) + ' mb' }}
                   </v-chip>
                 </div>
               </div>
@@ -246,31 +246,74 @@
                   </v-btn-toggle>
                 </v-col>
                 <v-col v-if="repo.commits.data.length > 0" cols="12">
-                  <v-alert border="left" color="primary" class="mx-10">
-                    <v-row align="center" class="my-0 py-0">
-                      <v-col cols="1" v-if="!ismobile" align="center">
+                  <v-alert
+                    transition="slide-y-transition"
+                    border="left"
+                    dense
+                    color="primary"
+                    :class="ismobile ? 'mx-2' : 'mx-10'"
+                  >
+                    <v-progress-linear
+                      v-if="repo.commits.loading"
+                      :color="$vuetify.theme.dark ? 'white' : 'black'"
+                      indeterminate
+                    ></v-progress-linear>
+                    <v-row
+                      v-if="!repo.commits.loading"
+                      align="center"
+                      class="my-0 py-0"
+                    >
+                      <v-col class="shrink" v-if="!ismobile" align="center">
                         <v-icon class="mx-1">
                           mdi-code-less-than-or-equal
                         </v-icon>
                       </v-col>
                       <v-col class="my-0 py-0" :cols="ismobile ? 12 : 11">
-                        <v-row align="center">
-                          <v-col cols="12">
+                        <v-row align="center" class="my-0 py-0">
+                          <v-col
+                            :cols="ismobile ? 12 : 10"
+                            class="point-cursor"
+                            @click="gotourl(repo.commits.data[0].html_url)"
+                          >
                             <span class="font-weight-bold">
                               Latest Commit:
                             </span>
                             {{ '  ' + repo.commits.data[0].commit.message }}
+                            <span>
+                              {{
+                                repo.commits.data[0].commit.committer.date
+                                  | moment('...on DD, MMM of YYYY')
+                              }}
+                            </span>
                           </v-col>
-                          <v-col cols="12">
-                            <v-btn icon>
-                              <v-icon>mdi-download</v-icon>
-                            </v-btn>
-                            <v-btn icon>
-                              <v-icon>mdi-download</v-icon>
-                            </v-btn>
-                            <v-btn icon>
-                              <v-icon>mdi-download</v-icon>
-                            </v-btn>
+                          <v-col
+                            :cols="ismobile ? 12 : 2"
+                            :align="ismobile ? 'center' : 'right'"
+                          >
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                  icon
+                                  v-on="on"
+                                  v-bind="attrs"
+                                  outlined
+                                  @click="
+                                    gotourl(repo.commits.data[0].comments_url)
+                                  "
+                                >
+                                  <v-icon>mdi-api</v-icon>
+                                </v-btn>
+                              </template>
+                              <span> Go to Comments API </span>
+                            </v-tooltip>
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn v-on="on" v-bind="attrs" icon outlined>
+                                  <v-icon>mdi-plus</v-icon>
+                                </v-btn>
+                              </template>
+                              <span>More Commits</span>
+                            </v-tooltip>
                           </v-col>
                         </v-row>
                       </v-col>
@@ -455,6 +498,58 @@
             </v-col>
           </v-row>
         </v-col>
+        <v-col cols="12">
+          <v-row class="non-touch" align="center">
+            <v-col cols="12" align="left">
+              <div
+                id="this-project-timeline"
+                :class="
+                  (ismobile ? ' text-h6 ' : ' text-h5 ') +
+                  'font-weight-bold mx-3 text-capitalize' +
+                  ($vuetify.theme.dark
+                    ? ' underhover-light '
+                    : ' underhover-dark ')
+                "
+              >
+                {{ animatedText.timeline }}
+                <v-icon>mdi-arrow-right-circle</v-icon>
+              </div>
+            </v-col>
+            <v-col cols="12" :align="!repo.commits.loading ? 'left' : 'center'">
+              <v-progress-circular
+                v-if="repo.commits.loading"
+                indeterminate
+                color="primary"
+              ></v-progress-circular>
+              <v-timeline
+                v-if="!repo.commits.loading"
+                align-top
+                :dense="$vuetify.breakpoint.smAndDown"
+              >
+                <v-timeline-item
+                  v-for="(commit, index) in repo.commits.data.slice(0, 6)"
+                  v-bind:key="index"
+                >
+                  <v-card>
+                    <v-card-subtitle>
+                      {{
+                        commit.commit.committer.date
+                          | moment('DD, MMMM of YY @ HH:MM')
+                      }}
+                    </v-card-subtitle>
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="12">
+                          {{ commit.commit.message }}
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                </v-timeline-item>
+              </v-timeline>
+            </v-col>
+          </v-row>
+        </v-col>
       </v-row>
     </div>
   </div>
@@ -463,7 +558,7 @@
 <script>
 import { generateWordMaps } from '@p/wordmap';
 import { tweenToObserver } from '@p/gsap';
-import { ismobile } from '@p/helpers';
+import { ismobile, generate_code_editor, pre_format_text } from '@p/helpers';
 import {
   repoData,
   repoTopics,
@@ -504,6 +599,7 @@ export default {
       },
       branch_toggle: 0,
       current_branch: {},
+      pre_format_text: pre_format_text,
       file_view: false,
       current_file: {},
       startPath: '/',
@@ -513,6 +609,7 @@ export default {
         mainTitle: '',
         detailsTitle: '',
         sourceCode: '',
+        timeline: '',
       },
     };
   },
@@ -593,57 +690,11 @@ export default {
         const file_contents = await repoContents(this.repo.name, path, branch);
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
-          this.current_file['decoded_content_original'] = atob(
-            this.current_file.content,
-          );
-          let modified_content = this.current_file['decoded_content_original']
-            .replace(/\n/g, '&#10;')
-            .replace(/</g, '&#60;')
-            .replace(/>/g, '&#62;');
-          let lines = modified_content.split('&#10;');
-          let newLines = '';
-          for (let i = 0; i < lines.length; i++) {
-            if (i == 0) {
-              newLines +=
-                `<span class="grey--text text-right non-touch">     ${
-                  i + 1
-                }  </span>` + lines[i];
-            } else {
-              if (`${i + 1}`.length < 2) {
-                newLines +=
-                  `<br />` +
-                  `<span class="grey--text text-right non-touch">     ${
-                    i + 1
-                  }  </span>` +
-                  lines[i];
-              } else if (`${i + 1}`.length > 1) {
-                newLines +=
-                  `<br />` +
-                  `<span class="grey--text text-right non-touch">    ${
-                    i + 1
-                  }  </span>` +
-                  lines[i];
-              } else if (`${i + 1}`.length > 2) {
-                newLines +=
-                  `<br />` +
-                  `<span class="grey--text text-right non-touch">   ${
-                    i + 1
-                  }  </span>` +
-                  lines[i];
-              } else if (`${i + 1}`.length > 3) {
-                newLines +=
-                  `<br />` +
-                  `<span class="grey--text text-right non-touch">  ${
-                    i + 1
-                  }  </span>` +
-                  lines[i];
-              }
-            }
-            if (i == lines.length - 1) {
-              this.current_file['total_lines'] = i + 1;
-            }
-          }
-          this.current_file['decoded_content_display'] = newLines;
+          let decoded_text = atob(this.current_file.content);
+          let formatted_content = generate_code_editor(decoded_text);
+          this.current_file['decoded_content_display'] =
+            formatted_content.content;
+          this.current_file['total_lines'] = formatted_content.total_lines;
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
@@ -795,6 +846,14 @@ export default {
       arrayName: 'animatedText',
       map: generateWordMaps('Source Code'),
       arrayProperty: 'sourceCode',
+    });
+    tweenToObserver({
+      vm: this,
+      elem: '#this-project-timeline',
+      emoji: false,
+      arrayName: 'animatedText',
+      map: generateWordMaps('Commit Timeline'),
+      arrayProperty: 'timeline',
     });
     this.do_repo_stuffs();
   },
