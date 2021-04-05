@@ -164,7 +164,7 @@
                   Repo Size:
                   <v-chip outlined small color="primary">
                     <v-icon left small> mdi-arrow-split-vertical </v-icon>
-                    {{ Math.floor(repo.details.data.size / 8192) + ' mb' }}
+                    {{ Math.round(repo.details.data.size / 8192, 1) + ' mb' }}
                   </v-chip>
                 </div>
               </div>
@@ -175,7 +175,7 @@
               v-if="repo.details.loading"
               class="mx-4"
             >
-              <v-skeleton-loader type="card" width="400" height="300">
+              <v-skeleton-loader type="card" class="mx-auto" width="auto">
               </v-skeleton-loader>
             </v-col>
             <v-col cols="12" v-if="!repo.topics.loading" class="mx-4">
@@ -203,7 +203,7 @@
               v-if="repo.topics.loading"
               class="mx-4"
             >
-              <v-skeleton-loader type="card" width="400" height="300">
+              <v-skeleton-loader type="card" class="mx-auto" width="auto">
               </v-skeleton-loader>
             </v-col>
           </v-row>
@@ -244,6 +244,38 @@
                       {{ branch.name }}
                     </v-btn>
                   </v-btn-toggle>
+                </v-col>
+                <v-col v-if="repo.commits.data.length > 0" cols="12">
+                  <v-alert border="left" color="primary" class="mx-10">
+                    <v-row align="center" class="my-0 py-0">
+                      <v-col cols="1" v-if="!ismobile" align="center">
+                        <v-icon class="mx-1">
+                          mdi-code-less-than-or-equal
+                        </v-icon>
+                      </v-col>
+                      <v-col class="my-0 py-0" :cols="ismobile ? 12 : 11">
+                        <v-row align="center">
+                          <v-col cols="12">
+                            <span class="font-weight-bold">
+                              Latest Commit:
+                            </span>
+                            {{ '  ' + repo.commits.data[0].commit.message }}
+                          </v-col>
+                          <v-col cols="12">
+                            <v-btn icon>
+                              <v-icon>mdi-download</v-icon>
+                            </v-btn>
+                            <v-btn icon>
+                              <v-icon>mdi-download</v-icon>
+                            </v-btn>
+                            <v-btn icon>
+                              <v-icon>mdi-download</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-alert>
                 </v-col>
                 <v-col cols="12" class="mx-1">
                   <v-card
@@ -459,7 +491,7 @@ export default {
         },
         commits: {
           loading: true,
-          data: {},
+          data: [],
         },
         topics: {
           loading: true,
@@ -490,7 +522,11 @@ export default {
       const repo_data_resp = await repoData(this.repo.name);
       if (repo_data_resp.success && repo_data_resp.error == null) {
         let repoData = repo_data_resp.data;
-        repoData['img'] = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
+        if (this.repo.name == 'matte-portfolio') {
+          repoData['img'] = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
+        } else {
+          repoData['img'] = 'https://i.ibb.co/w7jfhfy/image.webp';
+        }
         this.$set(this.repo.details, 'data', repoData);
         this.$set(this.repo.details, 'loading', false);
       }
@@ -681,6 +717,7 @@ export default {
       this.current_file = {};
       this.file_view = false;
       this.handleNavigation(false);
+      this.getRepoCommits();
       this.$vuetify.goTo('#this-project-source-code-content');
     },
     code_base_change(name) {
@@ -712,6 +749,7 @@ export default {
     async do_repo_stuffs() {
       await this.getRepoBranches();
       this.getRepoData();
+      this.getRepoCommits();
       this.getRepoTopics();
       this.handleNavigation(false);
     },
