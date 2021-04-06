@@ -1470,9 +1470,9 @@ export default {
     },
     async getStories() {
       let storydata = await stories.get();
-      if (storydata && storydata.data && storydata.data.success) {
-        this.stories.site = storydata.data.website;
-        this.stories.data = storydata.data.stories;
+      if (storydata.success && storydata.data && storydata.data.data.success) {
+        this.stories.site = storydata.data.data.website;
+        this.stories.data = storydata.data.data.stories;
         this.$set(this.stories, 'loading', false);
       } else {
         this.$set(this.stories, 'loading', false);

@@ -465,7 +465,7 @@
                               <v-sheet
                                 outlined
                                 :class="'code-viewer touchable my-0 px-3 py-3 mx-0'"
-                                :max-height="ismobile ? 550 : 650"
+                                :max-height="ismobile ? 700 : 650"
                                 rounded
                                 elevation="13"
                                 v-html="current_file.decoded_content_display"
@@ -520,6 +520,7 @@
                 v-if="repo.commits.loading"
                 indeterminate
                 color="primary"
+                size="50"
               ></v-progress-circular>
               <v-timeline
                 v-if="!repo.commits.loading"
@@ -527,14 +528,38 @@
                 :dense="$vuetify.breakpoint.smAndDown"
               >
                 <v-timeline-item
-                  v-for="(commit, index) in repo.commits.data.slice(0, 6)"
+                  v-for="(commit, index) in repo.commits.data.slice(
+                    0,
+                    repo.commits.slicer,
+                  )"
+                  fill-dot
+                  :class="
+                    ismobile
+                      ? 'text-left'
+                      : index % 2 == 0
+                      ? 'text-left'
+                      : 'text-right'
+                  "
                   v-bind:key="index"
                 >
+                  <template v-slot:icon>
+                    <v-avatar size="50">
+                      <v-icon> mdi-calendar </v-icon>
+                    </v-avatar>
+                  </template>
+                  <template v-if="!ismobile" v-slot:opposite>
+                    <span class="text-overline">
+                      by {{ commit.author.login }}
+                      <v-avatar size="20">
+                        <v-img :src="commit.author.avatar_url"></v-img>
+                      </v-avatar>
+                    </span>
+                  </template>
                   <v-card>
                     <v-card-subtitle>
                       {{
                         commit.commit.committer.date
-                          | moment('DD, MMMM of YY @ HH:MM')
+                          | moment('DD, MMMM of YY @ hh:mm a')
                       }}
                     </v-card-subtitle>
                     <v-card-text>
@@ -544,7 +569,52 @@
                         </v-col>
                       </v-row>
                     </v-card-text>
+                    <v-card-actions>
+                      <v-spacer
+                        v-if="ismobile ? false : index % 2 == 0 ? false : true"
+                      ></v-spacer>
+                      <v-btn color="primary" outlined> Github </v-btn>
+                    </v-card-actions>
                   </v-card>
+                </v-timeline-item>
+                <v-timeline-item v-if="repo.commits.slicer > 5" large>
+                  <template v-slot:icon>
+                    <v-tooltip left transition="slide-x-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          @click="load_more_commits(true)"
+                          fab
+                          v-on="on"
+                          color="primary"
+                          v-bind="attrs"
+                        >
+                          <v-icon large>mdi-minus</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Minimize</span>
+                    </v-tooltip>
+                  </template>
+                </v-timeline-item>
+                <v-timeline-item
+                  v-if="repo.commits.slicer != repo.commits.slicer_length"
+                  large
+                >
+                  <template v-slot:icon>
+                    <v-tooltip right transition="slide-x-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          @click="load_more_commits()"
+                          fab
+                          v-on="on"
+                          color="primary"
+                          v-bind="attrs"
+                        >
+                          <v-icon large>mdi-plus</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Load More</span>
+                    </v-tooltip>
+                  </template>
                 </v-timeline-item>
               </v-timeline>
             </v-col>
@@ -586,6 +656,10 @@ export default {
         },
         commits: {
           loading: true,
+          page: 1,
+          nos: 30,
+          slicer: 5,
+          slicer_length: 0,
           data: [],
         },
         topics: {
@@ -636,14 +710,22 @@ export default {
         this.$set(this.repo.topics, 'loading', false);
       }
     },
-    async getRepoCommits() {
+    async getRepoCommits(reset) {
       this.$set(this.repo.commits, 'loading', true);
       const repo_commits_resp = await repoCommits(
         this.repo.name,
         this.current_branch.name,
+        this.repo.commits.nos,
+        this.repo.commits.page,
       );
+      let new_commit_array = [];
       if (repo_commits_resp.success && repo_commits_resp.commits != null) {
-        this.$set(this.repo.commits, 'data', repo_commits_resp.commits);
+        new_commit_array = reset
+          ? [].concat(repo_commits_resp.commits)
+          : this.repo.commits.data.concat(repo_commits_resp.commits);
+        this.$set(this.repo.commits, 'slicer_length', new_commit_array.length);
+        this.$set(this.repo.commits, 'data', new_commit_array);
+        !reset && this.load_more_commits(false);
         this.$set(this.repo.commits, 'loading', false);
       }
     },
@@ -761,6 +843,28 @@ export default {
           });
         });
     },
+    load_more_commits(revert) {
+      if (revert) {
+        this.$set(this.repo.commits, 'slicer', 5);
+      } else {
+        let length = this.repo.commits.slicer_length;
+        let current_length = this.repo.commits.slicer;
+        let existing_page = this.repo.commits.page;
+        if (length - current_length < 5) {
+          let extended_length = current_length + (length - current_length);
+          this.$set(this.repo.commits, 'slicer', extended_length);
+          this.$set(this.repo.commits, 'page', existing_page + 1);
+        } else {
+          this.$set(this.repo.commits, 'slicer', current_length + 5);
+          let new_length = this.repo.commits.slicer_length;
+          let new_slicer = this.repo.commits.slicer;
+          if (new_length - new_slicer < 5) {
+            this.$set(this.repo.commits, 'page', existing_page + 1);
+            this.getRepoCommits(false);
+          }
+        }
+      }
+    },
     branch_change(branch) {
       this.$set(this.repo.contents, 'loading', true);
       this.current_branch = branch;
@@ -768,11 +872,16 @@ export default {
       this.current_file = {};
       this.file_view = false;
       this.handleNavigation(false);
-      this.getRepoCommits();
+      this.$set(this.repo.commits, 'slicer', 5);
+      this.getRepoCommits(true);
       this.$vuetify.goTo('#this-project-source-code-content');
     },
     code_base_change(name) {
       this.repo.name = name;
+      this.currentPath = '/';
+      this.current_file = {};
+      this.file_view = false;
+      this.$set(this.repo.commits, 'slicer', 5);
       this.do_repo_stuffs();
     },
     open_raw_code(file_path) {
@@ -800,7 +909,7 @@ export default {
     async do_repo_stuffs() {
       await this.getRepoBranches();
       this.getRepoData();
-      this.getRepoCommits();
+      this.getRepoCommits(true);
       this.getRepoTopics();
       this.handleNavigation(false);
     },

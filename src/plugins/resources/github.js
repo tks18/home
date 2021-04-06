@@ -67,11 +67,13 @@ export async function repoData(repo) {
     });
 }
 
-export async function repoCommits(repo, branch) {
+export async function repoCommits(repo, branch, nos, page) {
   return await axios
-    .get(api.repo.commits(repo), {
+    .get(api.repo.commits(repo, nos, page), {
       params: {
         sha: branch,
+        per_page: nos,
+        page: page,
       },
     })
     .then((resp) => {
