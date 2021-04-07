@@ -263,12 +263,12 @@
                       align="center"
                       class="my-0 py-0"
                     >
-                      <v-col class="shrink" v-if="!ismobile" align="center">
+                      <v-col v-if="!ismobile" align="center">
                         <v-icon class="mx-1">
                           mdi-code-less-than-or-equal
                         </v-icon>
                       </v-col>
-                      <v-col class="my-0 py-0" :cols="ismobile ? 12 : 11">
+                      <v-col class="my-0 py-0 grow" :cols="ismobile ? 12 : 11">
                         <v-row align="center" class="my-0 py-0">
                           <v-col
                             :cols="ismobile ? 12 : 10"
@@ -287,6 +287,7 @@
                             </span>
                           </v-col>
                           <v-col
+                            class="shrink"
                             :cols="ismobile ? 12 : 2"
                             :align="ismobile ? 'center' : 'right'"
                           >
@@ -296,7 +297,6 @@
                                   icon
                                   v-on="on"
                                   v-bind="attrs"
-                                  outlined
                                   @click="
                                     gotourl(repo.commits.data[0].comments_url)
                                   "
@@ -308,11 +308,33 @@
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
                               <template v-slot:activator="{ on, attrs }">
-                                <v-btn v-on="on" v-bind="attrs" icon outlined>
+                                <v-btn
+                                  @click="
+                                    $vuetify.goTo('#this-project-timeline')
+                                  "
+                                  v-on="on"
+                                  v-bind="attrs"
+                                  icon
+                                >
                                   <v-icon>mdi-plus</v-icon>
                                 </v-btn>
                               </template>
                               <span>More Commits</span>
+                            </v-tooltip>
+                            <v-tooltip top transition="slide-y-transition">
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                  v-on="on"
+                                  @click="
+                                    gotourl(repo.commits.data[0].html_url)
+                                  "
+                                  v-bind="attrs"
+                                  icon
+                                >
+                                  <v-icon>mdi-xml</v-icon>
+                                </v-btn>
+                              </template>
+                              <span>Changelog</span>
                             </v-tooltip>
                           </v-col>
                         </v-row>
@@ -548,12 +570,23 @@
                     </v-avatar>
                   </template>
                   <template v-if="!ismobile" v-slot:opposite>
-                    <span class="text-overline">
-                      by {{ commit.author.login }}
-                      <v-avatar size="20">
-                        <v-img :src="commit.author.avatar_url"></v-img>
-                      </v-avatar>
-                    </span>
+                    <div class="text-overline">
+                      <div>
+                        {{ repo.name }}
+                      </div>
+                      <div v-if="index % 2 == 0">
+                        by {{ commit.author.login }}
+                        <v-avatar size="20">
+                          <v-img :src="commit.author.avatar_url"></v-img>
+                        </v-avatar>
+                      </div>
+                      <div v-else>
+                        <v-avatar size="20">
+                          <v-img :src="commit.author.avatar_url"></v-img>
+                        </v-avatar>
+                        {{ commit.author.login }} by
+                      </div>
+                    </div>
                   </template>
                   <v-card>
                     <v-card-subtitle>
@@ -562,10 +595,17 @@
                           | moment('DD, MMMM of YY @ hh:mm a')
                       }}
                     </v-card-subtitle>
-                    <v-card-text>
+                    <v-card-text class="code-viewer">
                       <v-row>
                         <v-col cols="12">
-                          {{ commit.commit.message }}
+                          <v-sheet
+                            outlined
+                            class="code-viewer touchable py-2 px-2"
+                            max-height="300"
+                            rounded
+                            elevation="13"
+                            v-html="pre_format_text(commit.commit.message)"
+                          ></v-sheet>
                         </v-col>
                       </v-row>
                     </v-card-text>
@@ -573,7 +613,15 @@
                       <v-spacer
                         v-if="ismobile ? false : index % 2 == 0 ? false : true"
                       ></v-spacer>
-                      <v-btn color="primary" outlined> Github </v-btn>
+                      <v-btn icon color="primary">
+                        <v-icon>mdi-github</v-icon>
+                      </v-btn>
+                      <v-btn icon color="primary">
+                        <v-icon>mdi-xml</v-icon>
+                      </v-btn>
+                      <v-btn icon color="primary">
+                        <v-icon>mdi-microsoft-visual-studio-code</v-icon>
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-timeline-item>
@@ -845,6 +893,7 @@ export default {
     },
     load_more_commits(revert) {
       if (revert) {
+        this.$vuetify.goTo('#this-project-timeline');
         this.$set(this.repo.commits, 'slicer', 5);
       } else {
         let length = this.repo.commits.slicer_length;
@@ -927,6 +976,10 @@ export default {
         {
           title: 'Backend',
           repo: 'portfolio-backend',
+        },
+        {
+          title: 'Backend UI',
+          repo: 'portfolio-backend-ui',
         },
       ];
     },
