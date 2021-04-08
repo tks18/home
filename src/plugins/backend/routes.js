@@ -25,4 +25,14 @@ export const api = {
       apod: backend + 'externals/nasa/apod',
     },
   },
+  github: {
+    repo: {
+      list: backend + 'github/repo/list',
+      data: backend + 'github/repo/data',
+      topics: backend + 'github/repo/topics',
+      contents: backend + 'github/repo/contents',
+      branches: backend + 'github/repo/branches',
+      commits: backend + 'github/repo/commits',
+    },
+  },
 };

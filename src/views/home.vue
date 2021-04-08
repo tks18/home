@@ -1350,6 +1350,7 @@ export default {
   },
   data: function () {
     return {
+      user: 'tks18',
       heroData: {
         title: 'Hello There !',
         image: 'https://i.ibb.co/CQqRR3b/profile.png',
@@ -1529,7 +1530,7 @@ export default {
       }
     },
     async getProjects() {
-      let projectsData = await projects();
+      let projectsData = await projects(this.ismobile, this.user);
       if (projectsData.success && projectsData.data != null) {
         this.$set(this.projects, 'loading', false);
         this.$set(

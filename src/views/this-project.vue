@@ -692,6 +692,7 @@ export default {
   },
   data: function () {
     return {
+      user: 'tks18',
       repo: {
         name: 'matte-portfolio',
         details: {
@@ -738,7 +739,7 @@ export default {
   methods: {
     async getRepoData() {
       this.$set(this.repo.details, 'loading', true);
-      const repo_data_resp = await repoData(this.repo.name);
+      const repo_data_resp = await repoData(this.user, this.repo.name);
       if (repo_data_resp.success && repo_data_resp.error == null) {
         let repoData = repo_data_resp.data;
         if (this.repo.name == 'matte-portfolio') {
@@ -752,7 +753,7 @@ export default {
     },
     async getRepoTopics() {
       this.$set(this.repo.topics, 'loading', true);
-      const repo_topics_resp = await repoTopics(this.repo.name);
+      const repo_topics_resp = await repoTopics(this.user, this.repo.name);
       if (repo_topics_resp.success && repo_topics_resp.error == null) {
         this.$set(this.repo.topics, 'data', repo_topics_resp.topics.names);
         this.$set(this.repo.topics, 'loading', false);
@@ -761,6 +762,7 @@ export default {
     async getRepoCommits(reset) {
       this.$set(this.repo.commits, 'loading', true);
       const repo_commits_resp = await repoCommits(
+        this.user,
         this.repo.name,
         this.current_branch.name,
         this.repo.commits.nos,
@@ -779,7 +781,7 @@ export default {
     },
     async getRepoBranches() {
       this.$set(this.repo.branches, 'loading', true);
-      const repo_branches_resp = await repoBranches(this.repo.name);
+      const repo_branches_resp = await repoBranches(this.user, this.repo.name);
       if (repo_branches_resp.success && repo_branches_resp.error == null) {
         let branches = repo_branches_resp.branches;
         this.current_branch = branches.filter((branch) => {
@@ -795,6 +797,7 @@ export default {
     async getRepoContent(backtrigger, path, branch) {
       this.$set(this.repo.contents, 'loading', true);
       const repo_contents_resp = await repoContents(
+        this.user,
         this.repo.name,
         path,
         branch,
@@ -817,7 +820,12 @@ export default {
       if (file.type == 'file') {
         this.$set(this.repo.contents, 'loading', true);
         let path = this.startPath + file.path;
-        const file_contents = await repoContents(this.repo.name, path, branch);
+        const file_contents = await repoContents(
+          this.user,
+          this.repo.name,
+          path,
+          branch,
+        );
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
           let decoded_text = atob(this.current_file.content);

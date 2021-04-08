@@ -1,23 +1,16 @@
 import axios from '@p/axios';
+import { api as backend } from '@p/backend/routes';
 
-let api = {
-  repo: {
-    list: 'https://api.github.com/users/tks18/repos?sort=updated&per_page=20',
-    data: (repo) => `https://api.github.com/repos/tks18/${repo}`,
-    topics: (repo) => `https://api.github.com/repos/tks18/${repo}/topics`,
-    contents: (repo, path) =>
-      `https://api.github.com/repos/tks18/${repo}/contents${path}`,
-    branches: (repo) => `https://api.github.com/repos/tks18/${repo}/branches`,
-    commits: (repo) => `https://api.github.com/repos/tks18/${repo}/commits`,
-  },
-};
+let api = backend.github;
 
-export async function projects(ismobile) {
+export async function projects(ismobile, user) {
   return await axios
-    .get(api.repo.list)
+    .post(api.repo.list, {
+      user,
+    })
     .then((resp) => {
-      if (resp.status == 200 && resp.data && resp.data.length > 0) {
-        let repos = resp.data;
+      if (resp.status == 200 && resp.data && resp.data.success) {
+        let repos = resp.data.repos;
         let slicedRepos = ismobile ? repos.slice(0, 2) : repos.slice(0, 5);
         return {
           success: true,
@@ -40,11 +33,14 @@ export async function projects(ismobile) {
     });
 }
 
-export async function repoData(repo) {
+export async function repoData(user, repo) {
   return await axios
-    .get(api.repo.data(repo))
+    .post(api.repo.data, {
+      user,
+      repo,
+    })
     .then((resp) => {
-      if (resp.status == 200 && resp.data) {
+      if (resp.status == 200 && resp.data && resp.data.success) {
         return {
           success: true,
           data: resp.data,
@@ -67,20 +63,20 @@ export async function repoData(repo) {
     });
 }
 
-export async function repoCommits(repo, branch, nos, page) {
+export async function repoCommits(user, repo, branch, nos, page) {
   return await axios
-    .get(api.repo.commits(repo, nos, page), {
-      params: {
-        sha: branch,
-        per_page: nos,
-        page: page,
-      },
+    .post(api.repo.commits, {
+      user,
+      repo,
+      branch,
+      nos,
+      page,
     })
     .then((resp) => {
-      if (resp.status == 200 && resp.data) {
+      if (resp.status == 200 && resp.data && resp.data.success) {
         return {
           success: true,
-          commits: resp.data,
+          commits: resp.data.commits,
           error: null,
         };
       } else {
@@ -100,15 +96,14 @@ export async function repoCommits(repo, branch, nos, page) {
     });
 }
 
-export async function repoTopics(repo) {
+export async function repoTopics(user, repo) {
   return await axios
-    .get(api.repo.topics(repo), {
-      headers: {
-        Accept: 'application/vnd.github.mercy-preview+json',
-      },
+    .post(api.repo.topics, {
+      user,
+      repo,
     })
     .then((resp) => {
-      if (resp.status == 200 && resp.data) {
+      if (resp.status == 200 && resp.data && resp.data.success) {
         return {
           success: true,
           topics: resp.data,
@@ -131,18 +126,19 @@ export async function repoTopics(repo) {
     });
 }
 
-export async function repoContents(repo, path, branch) {
+export async function repoContents(user, repo, path, branch) {
   return await axios
-    .get(api.repo.contents(repo, path), {
-      params: {
-        ref: branch,
-      },
+    .post(api.repo.contents, {
+      user,
+      repo,
+      path,
+      branch,
     })
     .then((resp) => {
-      if (resp.status == 200 && resp.data) {
+      if (resp.status == 200 && resp.data && resp.data.success) {
         return {
           success: true,
-          contents: resp.data,
+          contents: resp.data.contents,
           error: null,
         };
       } else {
@@ -162,14 +158,17 @@ export async function repoContents(repo, path, branch) {
     });
 }
 
-export async function repoBranches(repo) {
+export async function repoBranches(user, repo) {
   return await axios
-    .get(api.repo.branches(repo))
+    .post(api.repo.branches, {
+      user,
+      repo,
+    })
     .then((resp) => {
-      if (resp.status == 200 && resp.data) {
+      if (resp.status == 200 && resp.data && resp.data.success) {
         return {
           success: true,
-          branches: resp.data,
+          branches: resp.data.branches,
           error: null,
         };
       } else {

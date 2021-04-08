@@ -9,7 +9,7 @@ export default {
         if (response.status == 200 && response.data) {
           return {
             success: true,
-            data: response.data,
+            data: response.data.data,
             error: null,
           };
         } else {
