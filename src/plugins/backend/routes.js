@@ -1,7 +1,7 @@
 let isProd = !(process.env.NODE_ENV == 'development');
 export const backend = isProd
   ? 'https://api.shaaan.tk/'
-  : 'http://localhost:3000/';
+  : 'https://development.api.shaaan.tk/';
 
 export const api = {
   blog: {

@@ -175,7 +175,11 @@
               v-if="repo.details.loading"
               class="mx-4"
             >
-              <v-skeleton-loader type="card" class="mx-auto" width="auto">
+              <v-skeleton-loader
+                type="card"
+                class="mx-auto"
+                :width="ismobile ? 'auto' : 400"
+              >
               </v-skeleton-loader>
             </v-col>
             <v-col cols="12" v-if="!repo.topics.loading" class="mx-4">
@@ -203,7 +207,11 @@
               v-if="repo.topics.loading"
               class="mx-4"
             >
-              <v-skeleton-loader type="card" class="mx-auto" width="auto">
+              <v-skeleton-loader
+                type="card"
+                class="mx-auto"
+                :width="ismobile ? 'auto' : 400"
+              >
               </v-skeleton-loader>
             </v-col>
           </v-row>

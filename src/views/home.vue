@@ -1471,9 +1471,9 @@ export default {
     },
     async getStories() {
       let storydata = await stories.get();
-      if (storydata.success && storydata.data && storydata.data.data.success) {
-        this.stories.site = storydata.data.data.website;
-        this.stories.data = storydata.data.data.stories;
+      if (storydata.success && storydata.stories) {
+        this.stories.site = storydata.website;
+        this.stories.data = storydata.stories;
         this.$set(this.stories, 'loading', false);
       } else {
         this.$set(this.stories, 'loading', false);
@@ -1686,7 +1686,7 @@ export default {
         elem: '#home-astroPicTitle',
         emoji: false,
         arrayName: 'animatedArray',
-        map: generateWordMaps('Astronomy Pic of the Day'),
+        map: generateWordMaps('Astro Pic of the Day'),
         arrayProperty: 'astroPicTitle',
       });
       gsap.tweenToObserver({
