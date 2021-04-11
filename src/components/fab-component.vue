@@ -15,7 +15,7 @@
     >
       <v-icon>mdi-tune</v-icon>
     </v-btn>
-    <v-dialog v-model="fab" max-width="400">
+    <v-dialog transition="slide-y-transition" v-model="fab" max-width="400">
       <v-card>
         <v-card-title>Quick Actions</v-card-title>
         <v-card-text class="text-center">

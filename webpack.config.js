@@ -8,5 +8,8 @@ module.exports = {
   optimization: optimizations,
   plugins: [...plugins, new WebpackBar()],
   resolve: resolvers(__dirname),
+  resolveLoader: {
+    modules: ['node_modules'],
+  },
   stats: 'normal',
 };

@@ -115,3 +115,58 @@ export function ismobile() {
     return true;
   }
 }
+
+export function pre_format_text(text) {
+  let modified_content = text
+    .replace(/\n/g, '&#10;')
+    .replace(/</g, '&#60;')
+    .replace(/>/g, '&#62;');
+  return modified_content;
+}
+
+export function generate_code_editor(text) {
+  let modified_content = pre_format_text(text);
+  let lines = modified_content.split('&#10;');
+  let total_lines = 0;
+  let newLines = '';
+  for (let i = 0; i < lines.length; i++) {
+    if (i == 0) {
+      newLines +=
+        `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
+        lines[i];
+    } else {
+      if (`${i + 1}`.length < 2) {
+        newLines +=
+          `<br />` +
+          `<span class="grey--text text-right non-touch">     ${
+            i + 1
+          }  </span>` +
+          lines[i];
+      } else if (`${i + 1}`.length > 1) {
+        newLines +=
+          `<br />` +
+          `<span class="grey--text text-right non-touch">    ${
+            i + 1
+          }  </span>` +
+          lines[i];
+      } else if (`${i + 1}`.length > 2) {
+        newLines +=
+          `<br />` +
+          `<span class="grey--text text-right non-touch">   ${i + 1}  </span>` +
+          lines[i];
+      } else if (`${i + 1}`.length > 3) {
+        newLines +=
+          `<br />` +
+          `<span class="grey--text text-right non-touch">  ${i + 1}  </span>` +
+          lines[i];
+      }
+    }
+    if (i == lines.length - 1) {
+      total_lines = i + 1;
+    }
+  }
+  return {
+    content: newLines,
+    total_lines: total_lines,
+  };
+}

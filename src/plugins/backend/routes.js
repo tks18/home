@@ -1,7 +1,7 @@
 let isProd = !(process.env.NODE_ENV == 'development');
 export const backend = isProd
   ? 'https://api.shaaan.tk/'
-  : 'http://localhost:3000/';
+  : 'https://development.api.shaaan.tk/';
 
 export const api = {
   blog: {
@@ -23,6 +23,16 @@ export const api = {
   externals: {
     nasa: {
       apod: backend + 'externals/nasa/apod',
+    },
+  },
+  github: {
+    repo: {
+      list: backend + 'github/repo/list',
+      data: backend + 'github/repo/data',
+      topics: backend + 'github/repo/topics',
+      contents: backend + 'github/repo/contents',
+      branches: backend + 'github/repo/branches',
+      commits: backend + 'github/repo/commits',
     },
   },
 };

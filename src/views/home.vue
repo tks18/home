@@ -1350,6 +1350,7 @@ export default {
   },
   data: function () {
     return {
+      user: 'tks18',
       heroData: {
         title: 'Hello There !',
         image: 'https://i.ibb.co/CQqRR3b/profile.png',
@@ -1470,9 +1471,9 @@ export default {
     },
     async getStories() {
       let storydata = await stories.get();
-      if (storydata && storydata.data && storydata.data.success) {
-        this.stories.site = storydata.data.website;
-        this.stories.data = storydata.data.stories;
+      if (storydata.success && storydata.stories) {
+        this.stories.site = storydata.website;
+        this.stories.data = storydata.stories;
         this.$set(this.stories, 'loading', false);
       } else {
         this.$set(this.stories, 'loading', false);
@@ -1529,7 +1530,7 @@ export default {
       }
     },
     async getProjects() {
-      let projectsData = await projects();
+      let projectsData = await projects(this.ismobile, this.user);
       if (projectsData.success && projectsData.data != null) {
         this.$set(this.projects, 'loading', false);
         this.$set(
@@ -1647,8 +1648,7 @@ export default {
         },
       );
     },
-    render() {
-      this.loopRandEmoji();
+    inititateObservers() {
       gsap.tweenToObserver({
         vm: this,
         elem: '#home-whatiDo',
@@ -1686,7 +1686,7 @@ export default {
         elem: '#home-astroPicTitle',
         emoji: false,
         arrayName: 'animatedArray',
-        map: generateWordMaps('Astronomy Pic of the Day'),
+        map: generateWordMaps('Astro Pic of the Day'),
         arrayProperty: 'astroPicTitle',
       });
       gsap.tweenToObserver({
@@ -1721,12 +1721,19 @@ export default {
         map: generateWordMaps('Submit Your Feedback'),
         arrayProperty: 'feedBack',
       });
+    },
+    fetchApiS() {
       this.getQuotes();
       this.getNasaApod();
       this.getLaunchNews();
       this.getProjects();
       this.getStories();
       this.getGalleryPics();
+    },
+    render() {
+      this.loopRandEmoji();
+      this.inititateObservers();
+      this.fetchApiS();
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);

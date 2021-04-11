@@ -26,7 +26,7 @@ let productionPlugins = [
     filename: 'offline.html',
     minify: {
       caseSensitive: true,
-      collapseWhitespace: true,
+      collapseWhitespace: false,
       conservativeCollapse: true,
       keepClosingSlash: true,
       minifyCSS: true,

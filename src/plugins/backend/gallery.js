@@ -6,10 +6,26 @@ export default {
     return await axios
       .post(api.gallery.get)
       .then((response) => {
-        return response.data;
+        if (response.status == 200 && response.data) {
+          return {
+            success: true,
+            data: response.data.data,
+            error: null,
+          };
+        } else {
+          return {
+            success: false,
+            data: null,
+            error: 'Response Failed',
+          };
+        }
       })
       .catch((err) => {
-        console.log(err);
+        return {
+          success: false,
+          error: err,
+          data: null,
+        };
       });
   },
 };

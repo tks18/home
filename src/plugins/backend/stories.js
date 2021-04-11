@@ -6,7 +6,7 @@ export default {
     return await axios
       .post(api.stories.get)
       .then((response) => {
-        return response;
+        return response.data;
       })
       .catch((err) => {
         console.log(err);
