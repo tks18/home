@@ -16,7 +16,12 @@
     <v-row align="center">
       <v-col cols="12" align="center" justify="center">
         <div class="text-overline">Select Code Base</div>
-        <v-btn-toggle mandatory>
+        <v-btn v-if="repo.details.loading" color="primary" loading> </v-btn>
+        <v-btn-toggle
+          v-if="!repo.details.loading"
+          mandatory
+          v-model="code_base_toggle"
+        >
           <v-btn
             color="primary"
             v-for="(repo, index) in repos"
@@ -676,6 +681,12 @@
             </v-col>
           </v-row>
         </v-col>
+        <v-col cols="12" class="text-overline white--text">
+          <render-markdown
+            v-if="!repo.readme.loading"
+            :content="repo.readme.data"
+          ></render-markdown>
+        </v-col>
       </v-row>
     </div>
   </div>
@@ -692,11 +703,15 @@ import {
   repoContents,
   repoBranches,
 } from '@p/resources/github';
+import renderMd from '@c/render-markdown';
 export default {
   metaInfo: function () {
     return {
       title: 'About This Project',
     };
+  },
+  components: {
+    'render-markdown': renderMd,
   },
   data: function () {
     return {
@@ -727,8 +742,13 @@ export default {
           loading: true,
           data: [],
         },
+        readme: {
+          loading: true,
+          data: '',
+        },
       },
       branch_toggle: 0,
+      code_base_toggle: 0,
       current_branch: {},
       pre_format_text: pre_format_text,
       file_view: false,
@@ -821,12 +841,33 @@ export default {
           ['asc'],
         );
         this.$set(this.repo.contents, 'data', sortedContents);
+        this.render_markdown(branch);
         this.$set(this.repo.contents, 'loading', false);
+      }
+    },
+    async render_markdown(branch) {
+      for (let file of this.repo.contents.data) {
+        if (file.name.toLowerCase() == 'readme.md') {
+          this.$set(this.repo.readme, 'loading', true);
+          let path = this.startPath + file.path;
+          const file_contents = await repoContents(
+            this.user,
+            this.repo.name,
+            path,
+            branch,
+          );
+          if (file_contents.success && file_contents.error == null) {
+            let decoded_text = atob(file_contents.contents.content);
+            this.$set(this.repo.readme, 'data', decoded_text);
+            this.$set(this.repo.readme, 'loading', false);
+          }
+        }
       }
     },
     async getFileContents(file, branch) {
       if (file.type == 'file') {
         this.$set(this.repo.contents, 'loading', true);
+        this.$vuetify.goTo('#this-project-source-code-content');
         let path = this.startPath + file.path;
         const file_contents = await repoContents(
           this.user,
@@ -845,25 +886,24 @@ export default {
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
           this.file_view = true;
-          this.$vuetify.goTo('#this-project-source-code-content');
         }
       }
     },
     async handleNavigation(backtrigger, file) {
       if (backtrigger) {
         if (this.currentPath != '/') {
+          this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.historyState.pop();
           this.getRepoContent(backtrigger, newPath, this.current_branch.name);
           this.file_view = false;
-          this.$vuetify.goTo('#this-project-source-code-content');
         }
       } else if (file) {
         if (file.type == 'dir') {
+          this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
           let newPath = this.startPath + file.path;
           this.getRepoContent(backtrigger, newPath, this.current_branch.name);
-          this.$vuetify.goTo('#this-project-source-code-content');
         } else if (file.type == 'file') {
           this.getFileContents(file, this.current_branch.name);
         }
