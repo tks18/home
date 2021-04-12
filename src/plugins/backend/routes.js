@@ -25,6 +25,12 @@ export const api = {
       apod: backend + 'externals/nasa/apod',
     },
   },
+  google: {
+    youtube: {
+      videos: backend + 'google/youtube/videos',
+      channel_data: backend + 'google/youtube/channel-data',
+    },
+  },
   github: {
     repo: {
       list: backend + 'github/repo/list',

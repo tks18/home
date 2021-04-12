@@ -1020,6 +1020,84 @@
         </v-col>
       </v-row>
     </div>
+    <div class="column is-full non-touch">
+      <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
+        <v-col cols="12">
+          <div
+            @click="$router.push('/gallery')"
+            id="home-channel-title"
+            :class="
+              'clip-text-back text-h5 point-cursor ml-6 text-capitalize' +
+              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
+            "
+          >
+            {{ animatedArray.channel_title }}
+            <v-icon>mdi-arrow-right-circle</v-icon>
+          </div>
+        </v-col>
+        <v-col cols="12" v-if="!channel.loading">
+          <v-row>
+            <v-col :cols="ismobile ? 12 : 2">
+              <v-card
+                :elevation="channel_elevation"
+                @mouseover="channel_elevation = 18"
+                @mouseout="channel_elevation = 3"
+                outlined
+                ripple
+                class="point-cursor"
+                align="center"
+                justify="center"
+              >
+                <v-card-text>
+                  <v-row align="center">
+                    <v-col cols="12" align="center">
+                      <v-avatar
+                        v-if="channel.data.snippet.thumbnails.high.url"
+                        size="150"
+                        color="primary"
+                      >
+                        <v-img
+                          :src="channel.data.snippet.thumbnails.high.url"
+                        ></v-img>
+                      </v-avatar>
+                    </v-col>
+                    <v-col cols="12" align="center">
+                      <div class="text-h5 font-weight-black">
+                        {{ channel.data.snippet.title }}
+                      </div>
+                      <div class="text-caption">Subscribe to my Channel</div>
+                    </v-col>
+                    <v-col cols="12" align="center">
+                      <v-btn
+                        text
+                        small
+                        @click="
+                          gotoUrl(
+                            'https://youtube.com/channel/' + channel.data.id,
+                          )
+                        "
+                        color="#C4302B"
+                        dark
+                      >
+                        Subscribe <v-icon right>mdi-youtube</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" align="center" v-if="channel.loading">
+          <v-skeleton-loader
+            type="card"
+            class="mx-auto"
+            :width="ismobile ? 'auto' : 400"
+          >
+          </v-skeleton-loader>
+        </v-col>
+      </v-row>
+    </div>
     <div class="column is-full">
       <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
         <v-col cols="12">
@@ -1336,6 +1414,7 @@
 <script>
 import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
+import { channel_data, videos } from '@p/resources/youtube';
 import { breakingBad } from '@p/resources/quotes';
 import { latestLaunches } from '@p/resources/spacex';
 import { apod } from '@p/resources/nasa';
@@ -1402,6 +1481,12 @@ export default {
         loading: false,
         projects: {},
       },
+      channel: {
+        loading: true,
+        data: {},
+        videos: [],
+      },
+      channel_elevation: 2,
       contextInfo: {
         os: getOs(),
         viewport: getViewport(),
@@ -1427,6 +1512,7 @@ export default {
         whatiDo: ' ',
         stat: ' ',
         projtitle: ' ',
+        channel_title: ' ',
         gallerytitle: ' ',
         randEmoji: ' ',
         contactTitle: ' ',
@@ -1498,6 +1584,26 @@ export default {
             ],
           },
         });
+      }
+    },
+    async getChannelData() {
+      this.$set(this.channel, 'loading', true);
+      let channel_data_response = await channel_data(
+        'UCD0rffboMQCgIggZJWDivjg',
+      );
+      if (channel_data_response.success && !channel_data_response.error) {
+        let data = channel_data_response.data.items[0];
+        this.$set(this.channel, 'data', data);
+        this.$set(this.channel, 'loading', false);
+      }
+    },
+    async getChannelVideos() {
+      this.$set(this.channel, 'loading', true);
+      let video_response = await videos();
+      if (video_response.success && !video_response.error) {
+        let videos = video_response.data.items;
+        this.$set(this.channel, 'videos', videos);
+        this.$set(this.channel, 'loading', false);
       }
     },
     async getQuotes() {
@@ -1590,6 +1696,27 @@ export default {
         });
       } else {
         this.galleryLoading = true;
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: 5000,
+          title: 'Gallery Error',
+          text:
+            'Error While Getting Gallery Photos from the Server. Please Reload the Website to Get the Data',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+            buttons: [
+              {
+                text: 'Reload Now',
+                onClick: () => {
+                  this.$router.go();
+                },
+              },
+            ],
+          },
+        });
       }
     },
     handleEmailClick(email) {
@@ -1648,7 +1775,7 @@ export default {
         },
       );
     },
-    inititateObservers() {
+    initiateObservers() {
       gsap.tweenToObserver({
         vm: this,
         elem: '#home-whatiDo',
@@ -1699,6 +1826,14 @@ export default {
       });
       gsap.tweenToObserver({
         vm: this,
+        elem: '#home-channel-title',
+        emoji: false,
+        arrayName: 'animatedArray',
+        map: generateWordMaps('Youtube'),
+        arrayProperty: 'channel_title',
+      });
+      gsap.tweenToObserver({
+        vm: this,
         elem: '#home-gallerytitle',
         emoji: false,
         arrayName: 'animatedArray',
@@ -1727,12 +1862,14 @@ export default {
       this.getNasaApod();
       this.getLaunchNews();
       this.getProjects();
+      this.getChannelData();
+      this.getChannelVideos();
       this.getStories();
       this.getGalleryPics();
     },
     render() {
       this.loopRandEmoji();
-      this.inititateObservers();
+      this.initiateObservers();
       this.fetchApiS();
       setTimeout(() => {
         this.toggleTooltip = true;
