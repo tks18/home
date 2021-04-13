@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.20.0",
     "axios-jsonp": "^1.0.4",
+    "browserslist": "^4.16.4",
     "bulma": "^0.9.0",
+    "caniuse-lite": "^1.0.30001208",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "gsap": "^3.5.1",
