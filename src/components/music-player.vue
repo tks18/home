@@ -1,6 +1,6 @@
-<template>
+<template lang="html">
   <v-bottom-sheet v-model="activated" inset>
-    <template v-slot:activator="{ on, attrs }">
+    <template lang="html" v-slot:activator="{ on, attrs }">
       <v-card
         elevation="0"
         v-bind="attrs"
@@ -29,7 +29,7 @@
         class="mx-0 my-0"
         dense
       >
-        <template v-slot:thumb-label>
+        <template lang="html" v-slot:thumb-label>
           {{ currentText }}
         </template>
       </v-slider>

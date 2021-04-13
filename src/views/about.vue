@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="columns is-multiline non-touch">
     <div
       id="about-aboutMeTitle"
@@ -232,7 +232,7 @@
               <v-col :cols="ismobile ? 12 : 8">
                 <v-row>
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template lang="html" v-slot:activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
                           <v-skeleton-loader type="card-avatar" height="150">
@@ -361,7 +361,7 @@
                 <v-row>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-tooltip top transition="slide-y-transition">
-                      <template v-slot:activator="{ on, attrs }">
+                      <template lang="html" v-slot:activator="{ on, attrs }">
                         <v-card
                           v-on="on"
                           v-bind="attrs"
@@ -398,7 +398,7 @@
                     </v-tooltip>
                   </v-col>
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template lang="html" v-slot:activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
                           <v-skeleton-loader type="card-avatar" height="150">
@@ -485,7 +485,7 @@
               >
                 <v-row id="about-lifetime">
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template lang="html" v-slot:activator="{ on, attrs }">
                       <v-row v-ripple v-bind="attrs" v-on="on">
                         <v-col
                           :cols="ismobile ? 12 : 6"

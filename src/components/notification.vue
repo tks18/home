@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <notifications
     :group="group"
     classes="notification"
@@ -6,7 +6,7 @@
     :max="2"
     :position="position"
   >
-    <template slot="body" slot-scope="props">
+    <template lang="html" slot="body" slot-scope="props">
       <v-card
         :loading="props.item.data.loading"
         class="mt-2 pt-2 non-touch"
@@ -19,7 +19,7 @@
         @click="handleClick(props)"
         :color="props.item.type"
       >
-        <template v-if="props.item.data.loading" v-slot:progress>
+        <template lang="html" v-if="props.item.data.loading" v-slot:progress>
           <v-progress-linear
             indeterminate
             color="white"

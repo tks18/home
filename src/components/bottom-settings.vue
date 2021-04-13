@@ -1,6 +1,6 @@
-<template>
+<template lang="html">
   <v-bottom-sheet inset v-model="activated" persistent>
-    <template v-slot:activator="{ on, attrs }">
+    <template lang="html" v-slot:activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
           <v-icon>mdi-cog-refresh</v-icon>

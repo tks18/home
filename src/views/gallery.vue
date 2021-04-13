@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div>
     <p class="text">Welcome to Gallery Vue Page</p>
     <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
