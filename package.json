@@ -1,7 +1,6 @@
 {
   "name": "portfolio-mat-dark",
   "version": "0.1.0",
-  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -18,6 +17,7 @@
     "gsap": "^3.5.1",
     "lodash": "^4.17.20",
     "marked": "^2.0.1",
+    "mini-css-extract-plugin": "^1.4.1",
     "vue": "^2.6.11",
     "vue-meta": "^2.4.0",
     "vue-moment": "^4.1.0",
