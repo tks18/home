@@ -871,7 +871,10 @@
                       <div>
                         <span class="font-weight-bold"> Launch Status </span> -
                         <v-tooltip top transition="slide-y-transition">
-                          <template lang="html" v-slot:activator="{ on, attrs }">
+                          <template
+                            lang="html"
+                            v-slot:activator="{ on, attrs }"
+                          >
                             <v-icon
                               v-on="on"
                               v-bind="attrs"
@@ -1036,12 +1039,13 @@
           </div>
         </v-col>
         <v-col cols="12" v-if="!channel.loading">
-          <v-row>
-            <v-col :cols="ismobile ? 12 : 2">
+          <v-row align="center" :justify="ismobile ? 'center' : null">
+            <v-col :cols="ismobile ? 8 : 2" align="center">
               <v-card
                 :elevation="channel_elevation"
                 @mouseover="channel_elevation = 18"
                 @mouseout="channel_elevation = 3"
+                :height="ismobile ? '' : contextInfo.viewport.height * 0.47"
                 outlined
                 ripple
                 class="point-cursor"
@@ -1053,7 +1057,9 @@
                     <v-col cols="12" align="center">
                       <v-avatar
                         v-if="channel.data.snippet.thumbnails.high.url"
-                        size="150"
+                        :size="
+                          ismobile ? 150 : contextInfo.viewport.width * 0.09
+                        "
                         color="primary"
                       >
                         <v-img
@@ -1085,6 +1091,158 @@
                   </v-row>
                 </v-card-text>
               </v-card>
+            </v-col>
+            <v-col :cols="ismobile ? 12 : 10" v-if="channel.videos.length > 0">
+              <v-row align="center">
+                <v-slide-group :show-arrows="!ismobile">
+                  <v-slide-item
+                    v-for="(video, index) in channel.videos"
+                    v-bind:key="index"
+                    class="mx-2"
+                  >
+                    <v-hover>
+                      <template lang="html" v-slot:default="{ hover }">
+                        <v-card
+                          :height="
+                            ismobile
+                              ? contextInfo.viewport.height * 0.5
+                              : contextInfo.viewport.height * 0.47
+                          "
+                          :width="
+                            ismobile
+                              ? contextInfo.viewport.width * 0.75
+                              : contextInfo.viewport.width * 0.3
+                          "
+                          :img="video.snippet.thumbnails.standard.url"
+                        >
+                          <v-card-text class="inherit-height">
+                            <v-row class="inherit-height" align="end">
+                              <v-col cols="12">
+                                <div
+                                  class="text-center text-h6 back-blur-light font-weight-bold"
+                                >
+                                  {{ video.snippet.title }}
+                                </div>
+                              </v-col>
+                            </v-row>
+                            <v-dialog
+                              fullscreen
+                              v-model="video.model"
+                              hide-overlay
+                              transition="dialog-bottom-transition"
+                            >
+                              <v-card>
+                                <v-card-title>
+                                  <v-row align="center">
+                                    <v-col
+                                      :cols="ismobile ? 10 : 8"
+                                      align="left"
+                                    >
+                                      <v-icon color="#C4302B" class="mx-1"
+                                        >mdi-youtube</v-icon
+                                      >
+                                      Youtube Player
+                                    </v-col>
+                                    <v-col
+                                      :cols="ismobile ? 2 : 4"
+                                      align="right"
+                                    >
+                                      <v-btn
+                                        @click="yt_video_model(video)"
+                                        icon
+                                      >
+                                        <v-icon>mdi-close</v-icon>
+                                      </v-btn>
+                                    </v-col>
+                                  </v-row>
+                                </v-card-title>
+                                <v-card-text
+                                  :class="ismobile ? 'mx-0 px-0' : ' '"
+                                >
+                                  <v-row :class="ismobile ? 'mx-0 px-0' : ' '">
+                                    <v-col
+                                      :cols="ismobile ? 12 : 6"
+                                      align="center"
+                                      :class="ismobile ? 'mx-0 px-0' : ' '"
+                                    >
+                                      <iframe
+                                        :width="
+                                          ismobile
+                                            ? contextInfo.viewport.width * 0.8
+                                            : contextInfo.viewport.width * 0.5
+                                        "
+                                        :height="
+                                          ismobile
+                                            ? contextInfo.viewport.height * 0.5
+                                            : contextInfo.viewport.height * 0.6
+                                        "
+                                        :src="
+                                          'https://www.youtube.com/embed/' +
+                                          video.id.videoId
+                                        "
+                                        :title="video.snippet.title"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                      ></iframe>
+                                    </v-col>
+                                  </v-row>
+                                </v-card-text>
+                              </v-card>
+                            </v-dialog>
+                          </v-card-text>
+                          <transition name="fade" mode="out-in">
+                            <v-overlay
+                              v-if="hover"
+                              absolute
+                              z-index="2"
+                              opacity="0.4"
+                              color="primary"
+                              class="back-blur"
+                            >
+                              <v-row class="inherit-height" align="center">
+                                <v-col
+                                  cols="12"
+                                  align="center"
+                                  justify="space-around"
+                                >
+                                  <v-row align="center">
+                                    <v-col cols="12" align="center">
+                                      <div
+                                        class="text-center text-subtitle-1 font-weight-bold"
+                                      >
+                                        {{ video.snippet.title }}
+                                      </div>
+                                    </v-col>
+                                    <v-col cols="12" align="center">
+                                      <v-btn
+                                        color="primary"
+                                        @click="yt_video_model(video)"
+                                        fab
+                                        x-large
+                                      >
+                                        <v-icon x-large> mdi-youtube </v-icon>
+                                      </v-btn>
+                                    </v-col>
+                                    <v-col cols="12" align="center">
+                                      <v-btn color="primary">
+                                        Visit my Channel
+                                        <v-icon right
+                                          >mdi-television-classic</v-icon
+                                        >
+                                      </v-btn>
+                                    </v-col>
+                                  </v-row>
+                                </v-col>
+                              </v-row>
+                            </v-overlay>
+                          </transition>
+                        </v-card>
+                      </template>
+                    </v-hover>
+                  </v-slide-item>
+                </v-slide-group>
+              </v-row>
             </v-col>
           </v-row>
         </v-col>
@@ -1486,6 +1644,7 @@ export default {
         data: {},
         videos: [],
       },
+      ytdialog: false,
       channel_elevation: 2,
       contextInfo: {
         os: getOs(),
@@ -1602,7 +1761,14 @@ export default {
       let video_response = await videos();
       if (video_response.success && !video_response.error) {
         let videos = video_response.data.items;
-        this.$set(this.channel, 'videos', videos);
+        let new_video_array = [];
+        videos.forEach((video, index) => {
+          let new_video = video;
+          new_video['model'] = false;
+          new_video['index'] = index;
+          new_video_array.push(new_video);
+        });
+        this.$set(this.channel, 'videos', new_video_array);
         this.$set(this.channel, 'loading', false);
       }
     },
@@ -1717,6 +1883,13 @@ export default {
             ],
           },
         });
+      }
+    },
+    yt_video_model(video) {
+      if (this.channel.videos[video.index].model) {
+        this.$set(this.channel.videos[video.index], 'model', false);
+      } else {
+        this.$set(this.channel.videos[video.index], 'model', true);
       }
     },
     handleEmailClick(email) {
@@ -1871,6 +2044,10 @@ export default {
       this.loopRandEmoji();
       this.initiateObservers();
       this.fetchApiS();
+      console.log(
+        this.contextInfo.viewport.width,
+        this.contextInfo.viewport.height,
+      );
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
