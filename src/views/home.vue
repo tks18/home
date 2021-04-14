@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="columns is-multiline">
     <div id="home-mainhero" class="column is-full non-touch">
       <div
@@ -32,7 +32,7 @@
                     top
                     transition="slide-y-transition"
                   >
-                    <template lang="html" v-slot:activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }">
                       <span
                         v-bind="attrs"
                         v-on="on"
@@ -167,7 +167,7 @@
                 top
                 transition="slide-y-transition"
               >
-                <template lang="html" v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-col
                     v-on="on"
                     v-bind="attrs"
@@ -329,7 +329,7 @@
           v-bind:key="n"
         >
           <v-hover>
-            <template lang="html" v-slot:default="{ hover }">
+            <template v-slot:default="{ hover }">
               <v-card
                 elevation="3"
                 v-ripple
@@ -449,7 +449,7 @@
     <div class="column is-full">
       <v-container>
         <v-tooltip top transition="slide-y-transition">
-          <template lang="html" v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs }">
             <v-card
               :loading="quotesLoading"
               img="https://i.ibb.co/0nf9FwS/bb-3.webp"
@@ -526,7 +526,7 @@
               v-bind:key="index"
             >
               <v-hover>
-                <template lang="html" v-slot:default="{ hover }">
+                <template v-slot:default="{ hover }">
                   <v-card
                     :max-width="
                       ismobile
@@ -621,7 +621,7 @@
                         <v-row class="ma-1">
                           <v-col align="center" cols="12">
                             <v-tooltip top transition="slide-y-transition">
-                              <template lang="html" v-slot:activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.stargazers_url)"
@@ -636,7 +636,7 @@
                               <span>Watchers</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template lang="html" v-slot:activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.forks_url)"
@@ -651,7 +651,7 @@
                               <span>Forks</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template lang="html" v-slot:activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.stargazers_url)"
@@ -871,10 +871,7 @@
                       <div>
                         <span class="font-weight-bold"> Launch Status </span> -
                         <v-tooltip top transition="slide-y-transition">
-                          <template
-                            lang="html"
-                            v-slot:activator="{ on, attrs }"
-                          >
+                          <template v-slot:activator="{ on, attrs }">
                             <v-icon
                               v-on="on"
                               v-bind="attrs"
@@ -1004,7 +1001,7 @@
               <v-card-actions class="mx-2" v-if="!launchloading">
                 <v-spacer></v-spacer>
                 <v-tooltip top transition="slide-x-transition">
-                  <template lang="html" v-slot:activator="{ on, attrs }">
+                  <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       @click="gotoUrl(launchData.links.flickr.original[0])"
                       v-on="on"
@@ -1101,7 +1098,7 @@
                     class="mx-2"
                   >
                     <v-hover>
-                      <template lang="html" v-slot:default="{ hover }">
+                      <template v-slot:default="{ hover }">
                         <v-card
                           :height="
                             ismobile

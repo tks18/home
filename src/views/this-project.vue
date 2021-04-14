@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="my-2 mx-2 mr-3">
     <div
       id="this-project-main-title"
@@ -305,10 +305,7 @@
                             :align="ismobile ? 'center' : 'right'"
                           >
                             <v-tooltip top transition="slide-y-transition">
-                              <template
-                                lang="html"
-                                v-slot:activator="{ on, attrs }"
-                              >
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   icon
                                   v-on="on"
@@ -323,10 +320,7 @@
                               <span> Go to Comments API </span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template
-                                lang="html"
-                                v-slot:activator="{ on, attrs }"
-                              >
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   @click="
                                     $vuetify.goTo('#this-project-timeline')
@@ -341,10 +335,7 @@
                               <span>More Commits</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template
-                                lang="html"
-                                v-slot:activator="{ on, attrs }"
-                              >
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   v-on="on"
                                   @click="
@@ -586,12 +577,12 @@
                   "
                   v-bind:key="index"
                 >
-                  <template lang="html" v-slot:icon>
+                  <template v-slot:icon>
                     <v-avatar size="50">
                       <v-icon> mdi-calendar </v-icon>
                     </v-avatar>
                   </template>
-                  <template lang="html" v-if="!ismobile" v-slot:opposite>
+                  <template v-if="!ismobile" v-slot:opposite>
                     <div class="text-overline">
                       <div>
                         {{ repo.name }}
@@ -648,9 +639,9 @@
                   </v-card>
                 </v-timeline-item>
                 <v-timeline-item v-if="repo.commits.slicer > 5" large>
-                  <template lang="html" v-slot:icon>
+                  <template v-slot:icon>
                     <v-tooltip left transition="slide-x-transition">
-                      <template lang="html" v-slot:activator="{ on, attrs }">
+                      <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           @click="load_more_commits(true)"
                           fab
@@ -669,9 +660,9 @@
                   v-if="repo.commits.slicer != repo.commits.slicer_length"
                   large
                 >
-                  <template lang="html" v-slot:icon>
+                  <template v-slot:icon>
                     <v-tooltip right transition="slide-x-transition">
-                      <template lang="html" v-slot:activator="{ on, attrs }">
+                      <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           @click="load_more_commits()"
                           fab

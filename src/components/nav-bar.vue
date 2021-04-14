@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-app-bar app dense flat collapse-on-scroll>
     <v-app-bar-nav-icon @click="navclick()"></v-app-bar-nav-icon>
     <v-avatar
@@ -10,7 +10,7 @@
       <v-img :src="avatar"></v-img>
     </v-avatar>
     <v-tooltip bottom transition="slide-y-transition">
-      <template lang="html" v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ on, attrs }">
         <v-toolbar-title
           v-bind="attrs"
           v-on="on"
@@ -25,7 +25,7 @@
     </v-tooltip>
     <v-spacer></v-spacer>
     <v-tooltip bottom transition="slide-y-transition">
-      <template lang="html" v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" v-on="on" icon @click="windowClick(github.link)">
           <v-icon color="primary">{{ github.icon }}</v-icon>
         </v-btn>

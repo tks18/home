@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-footer class="non-touch" elevation="22" inset dense small rounded>
     <v-row align="center" justify="center" class="my-1 py-0">
       <v-col :cols="ismobile ? 12 : 4" class="my-1 py-0">
@@ -27,7 +27,7 @@
                 v-for="(social, index) in socials"
                 v-bind:key="index"
               >
-                <template lang="html" v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     icon
                     v-bind="attrs"
@@ -51,7 +51,7 @@
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
           <v-tooltip top transition="slide-x-transition">
-            <template lang="html" v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ on, attrs }">
               <div
                 v-on="on"
                 v-bind="attrs"

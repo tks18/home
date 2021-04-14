@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-system-bar @click="$vuetify.goTo(0)" fixed window lights-out>
     <v-spacer></v-spacer>
     <v-icon> mdi-wifi-strength-4 </v-icon>

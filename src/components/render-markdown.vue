@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-sheet
     outlined
     class="px-5 py-5 text-capitalize non-touch"

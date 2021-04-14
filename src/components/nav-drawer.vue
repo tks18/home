@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <v-navigation-drawer
     app
     temporary
@@ -62,7 +62,7 @@
                 top
                 transition="scroll-y-transition"
               >
-                <template lang="html" v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-list-item
                     @click="windowClick(stats.link)"
                     v-on="on"
