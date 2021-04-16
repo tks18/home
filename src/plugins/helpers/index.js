@@ -16,8 +16,6 @@ export function scrollTo(element, scrollPixels, duration) {
       element.scrollLeft = scrollPos + scrollPixels * progress;
       if (timeElapsed < duration) {
         window.requestAnimationFrame(scroll);
-      } else {
-        return;
       }
     };
     window.requestAnimationFrame(scroll);
@@ -25,53 +23,53 @@ export function scrollTo(element, scrollPixels, duration) {
 }
 
 export function countUpFromTime(countFrom) {
-  countFrom = new Date(countFrom).getTime();
-  var now = new Date(),
-    countTo = new Date(countFrom),
-    timeDifference = now - countTo;
-  var secondsInAHour = 60 * 60 * 1000;
-  var secondsInADay = secondsInAHour * 24;
-  var secondsInAWeek = secondsInADay * 7;
-  var secondsInAYear = secondsInADay * 365;
+  const count = new Date(countFrom).getTime();
+  const now = new Date();
+  const countTo = new Date(count);
+  const timeDifference = now - countTo;
+  const secondsInAHour = 60 * 60 * 1000;
+  const secondsInADay = secondsInAHour * 24;
+  const secondsInAWeek = secondsInADay * 7;
+  const secondsInAYear = secondsInADay * 365;
 
-  let years = Math.floor((timeDifference / secondsInAYear) * 1);
-  let weeks = Math.floor(
-    ((timeDifference % secondsInAYear) / secondsInAWeek) * 1,
+  const years = Math.floor((timeDifference / secondsInAYear) * 1);
+  const weeks = Math.floor(
+    ((timeDifference % secondsInAYear) / secondsInAWeek) * 1
   );
-  let days = Math.floor(
-    ((timeDifference % secondsInAWeek) / secondsInADay) * 1,
+  const days = Math.floor(
+    ((timeDifference % secondsInAWeek) / secondsInADay) * 1
   );
-  let hours = Math.floor(
-    ((timeDifference % secondsInADay) / secondsInAHour) * 1,
+  const hours = Math.floor(
+    ((timeDifference % secondsInADay) / secondsInAHour) * 1
   );
-  let mins = Math.floor(
-    (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1,
+  const mins = Math.floor(
+    (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1
   );
-  let secs = Math.floor(
+  const secs = Math.floor(
     ((((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) /
       1000) *
-      1,
+      1
   );
 
-  let returnVals = {
-    years: years,
-    weeks: weeks,
-    days: days,
-    hours: hours,
+  const returnVals = {
+    years,
+    weeks,
+    days,
+    hours,
     minutes: mins,
-    seconds: secs,
+    seconds: secs
   };
 
   return returnVals;
 }
 
 export function getOs() {
-  var userAgent = window.navigator.userAgent,
-    platform = window.navigator.platform,
-    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-    os = null;
+  const { userAgent } = window.navigator;
+  const { platform } = window.navigator;
+  const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+  const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+  const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+  let os = null;
 
   if (macosPlatforms.indexOf(platform) !== -1) {
     os = 'Mac OS';
@@ -89,35 +87,35 @@ export function getOs() {
 }
 
 export function getViewport() {
-  var viewPortWidth;
-  var viewPortHeight;
-  if (typeof window.innerWidth != 'undefined') {
-    (viewPortWidth = window.innerWidth), (viewPortHeight = window.innerHeight);
+  let viewPortWidth;
+  let viewPortHeight;
+  if (typeof window.innerWidth !== 'undefined') {
+    viewPortWidth = window.innerWidth;
+    viewPortHeight = window.innerHeight;
   } else if (
-    typeof document.documentElement != 'undefined' &&
-    typeof document.documentElement.clientWidth != 'undefined' &&
-    document.documentElement.clientWidth != 0
+    typeof document.documentElement !== 'undefined' &&
+    typeof document.documentElement.clientWidth !== 'undefined' &&
+    document.documentElement.clientWidth !== 0
   ) {
-    (viewPortWidth = document.documentElement.clientWidth),
-      (viewPortHeight = document.documentElement.clientHeight);
+    viewPortWidth = document.documentElement.clientWidth;
+    viewPortHeight = document.documentElement.clientHeight;
   } else {
-    (viewPortWidth = document.getElementsByTagName('body')[0].clientWidth),
-      (viewPortHeight = document.getElementsByTagName('body')[0].clientHeight);
+    viewPortWidth = document.getElementsByTagName('body')[0].clientWidth;
+    viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
   }
   return { width: viewPortWidth, height: viewPortHeight };
 }
 
 export function ismobile() {
-  var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
   if (width > 966) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
 export function pre_format_text(text) {
-  let modified_content = text
+  const modified_content = text
     .replace(/\n/g, '&#10;')
     .replace(/</g, '&#60;')
     .replace(/>/g, '&#62;');
@@ -125,48 +123,38 @@ export function pre_format_text(text) {
 }
 
 export function generate_code_editor(text) {
-  let modified_content = pre_format_text(text);
-  let lines = modified_content.split('&#10;');
+  const modified_content = pre_format_text(text);
+  const lines = modified_content.split('&#10;');
   let total_lines = 0;
   let newLines = '';
-  for (let i = 0; i < lines.length; i++) {
-    if (i == 0) {
-      newLines +=
-        `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
-        lines[i];
-    } else {
-      if (`${i + 1}`.length < 2) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">     ${
-            i + 1
-          }  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 1) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">    ${
-            i + 1
-          }  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 2) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">   ${i + 1}  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 3) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">  ${i + 1}  </span>` +
-          lines[i];
-      }
+  for (let i = 0; i < lines.length; i + 1) {
+    if (i === 0) {
+      newLines += `<span class="grey--text text-right non-touch">     ${
+        i + 1
+      }  </span>${lines[i]}`;
+    } else if (`${i + 1}`.length < 2) {
+      newLines += `<span class="grey--text text-right non-touch">     ${
+        i + 1
+      }  </span>${lines[i]}`;
+    } else if (`${i + 1}`.length > 1) {
+      newLines += `<span class="grey--text text-right non-touch">     ${
+        i + 1
+      }  </span>${lines[i]}`;
+    } else if (`${i + 1}`.length > 2) {
+      newLines += `<span class="grey--text text-right non-touch">     ${
+        i + 1
+      }  </span>${lines[i]}`;
+    } else if (`${i + 1}`.length > 3) {
+      newLines += `<span class="grey--text text-right non-touch">     ${
+        i + 1
+      }  </span>${lines[i]}`;
     }
-    if (i == lines.length - 1) {
+    if (i === lines.length - 1) {
       total_lines = i + 1;
     }
   }
   return {
     content: newLines,
-    total_lines: total_lines,
+    total_lines
   };
 }

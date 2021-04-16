@@ -7,7 +7,7 @@ import { default as Notification } from './notifications';
 
 export const api = {
   url,
-  routes,
+  routes
 };
 export const ping = pingit;
 export const blog = Blog;

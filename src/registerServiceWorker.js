@@ -2,8 +2,8 @@
 
 import { Workbox } from 'workbox-window';
 
-let isProd = !(process.env.NODE_ENV == 'development');
-let wb;
+const isProd = !(process.env.NODE_ENV === 'development');
+let wb = null;
 
 if (isProd) {
   if ('serviceWorker' in navigator) {
@@ -17,7 +17,7 @@ if (isProd) {
           '%cDone:',
           'background: #4BB543; font-weight: bold',
           ' Thanks for Trying Out My App\n' +
-            'This app has been Successfully Installed.',
+            'This app has been Successfully Installed.'
         );
       }
     });
@@ -28,5 +28,6 @@ if (isProd) {
 } else {
   wb = null;
 }
+const worker = wb;
 
-export default wb;
+export default worker;

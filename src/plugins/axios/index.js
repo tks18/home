@@ -3,9 +3,10 @@ import axios from 'axios';
 const instance = axios.create();
 
 instance.interceptors.request.use((config) => {
-  config.meta = config.meta || {};
-  config.meta.requestStartedAt = new Date().getTime();
-  return config;
+  const conf = config;
+  conf.meta = config.meta || {};
+  conf.meta.requestStartedAt = new Date().getTime();
+  return conf;
 });
 
 instance.interceptors.response.use(
@@ -24,7 +25,7 @@ instance.interceptors.response.use(
     const milliseconds = end - start;
     response.responsetime = milliseconds;
     return response;
-  },
+  }
 );
 
 export default instance;

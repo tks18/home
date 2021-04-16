@@ -1,20 +1,22 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const sass = require('sass');
+const fibers = require('fibers');
 
-let loaders = [
+const loaders = [
   {
     test: /\.(png|svg|jpg|gif|pdf)$/,
     use: [
       {
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
-        },
-      },
-    ],
+          name: '[name].[ext]'
+        }
+      }
+    ]
   },
   {
     test: /\.css$/,
-    use: [MiniCssExtractPlugin.loader, 'css-loader'],
+    use: [MiniCssExtractPlugin.loader, 'css-loader']
   },
   {
     test: /\.scss$/,
@@ -22,14 +24,14 @@ let loaders = [
       {
         loader: 'sass-loader',
         options: {
-          implementation: require('sass'),
+          implementation: sass,
           sassOptions: {
-            fiber: require('fibers'),
-          },
-        },
-      },
-    ],
-  },
+            fiber: fibers
+          }
+        }
+      }
+    ]
+  }
 ];
 
 module.exports = loaders;

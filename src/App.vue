@@ -10,7 +10,7 @@
     />
     <v-main>
       <div class="content">
-        <router-view></router-view>
+        <router-view />
       </div>
     </v-main>
     <fabComponent />
@@ -26,19 +26,20 @@ import fabComponent from '@c/fab-component';
 import sysBar from '@c/system-bar';
 import { notifications } from '@p/backend';
 import { ismobile } from '@p/helpers';
+
 export default {
   name: 'App',
   metaInfo: {
     title: 'Sudharshan TK',
     titleTemplate: (insertedTitle) => {
-      if (insertedTitle == 'Sudharshan TK') {
+      if (insertedTitle === 'Sudharshan TK') {
         return insertedTitle;
-      } else if (insertedTitle == 'Careers') {
-        return `${insertedTitle} @ Sudharshan TK`;
-      } else {
-        return `${insertedTitle} | Sudharshan TK`;
       }
-    },
+      if (insertedTitle === 'Careers') {
+        return `${insertedTitle} @ Sudharshan TK`;
+      }
+      return `${insertedTitle} | Sudharshan TK`;
+    }
   },
   components: {
     navbar,
@@ -46,16 +47,16 @@ export default {
     Notification,
     foot,
     fabComponent,
-    sysBar,
+    sysBar
   },
   computed: {
     ismobile() {
       return ismobile();
-    },
+    }
   },
   methods: {
     async getServerNotifications() {
-      let currentNotifications = await notifications.get.current();
+      const currentNotifications = await notifications.get.current();
       if (currentNotifications.success) {
         currentNotifications.data.notifications.forEach((notification) => {
           this.$notify(notification.properties);
@@ -63,9 +64,9 @@ export default {
       }
     },
     notifyDarkTheme() {
-      let notifications = JSON.parse(localStorage.getItem('notification'));
-      let dark = this.$vuetify.theme.dark;
-      if ((!dark && notifications == null) || (!dark && !notifications.dark)) {
+      const notification = JSON.parse(localStorage.getItem('notification'));
+      const { dark } = this.$vuetify.theme;
+      if ((!dark && notification == null) || (!dark && !notification.dark)) {
         this.$notify({
           group: 'main',
           type: 'info',
@@ -80,26 +81,26 @@ export default {
               localStorage.setItem(
                 'notification',
                 JSON.stringify({
-                  dark: true,
-                }),
+                  dark: true
+                })
               );
             },
             onClose: () => {
               localStorage.setItem(
                 'notification',
                 JSON.stringify({
-                  dark: true,
-                }),
+                  dark: true
+                })
               );
-            },
-          },
+            }
+          }
         });
       }
-    },
+    }
   },
   mounted() {
     this.notifyDarkTheme();
     this.getServerNotifications();
-  },
+  }
 };
 </script>

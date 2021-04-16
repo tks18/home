@@ -1,44 +1,44 @@
-let isProd = !(process.env.NODE_ENV == 'development');
+const isProd = !(process.env.NODE_ENV === 'development');
 export const backend = isProd
   ? 'https://api.shaaan.tk/'
   : 'https://development.api.shaaan.tk/';
 
 export const api = {
   blog: {
-    get: backend + 'blog/get',
-    set: backend + 'blog/set',
-    delete: backend + 'blog/delete',
+    get: `${backend}blog/get`,
+    set: `${backend}blog/set`,
+    delete: `${backend}blog/delete`
   },
   notification: {
-    get: backend + 'notification/get',
-    set: backend + 'notification/set',
+    get: `${backend}notification/get`,
+    set: `${backend}notification/set`
   },
   stories: {
-    get: backend + 'stories/get',
-    set: backend + 'stories/set',
+    get: `${backend}stories/get`,
+    set: `${backend}stories/set`
   },
   gallery: {
-    get: backend + 'gallery/get',
+    get: `${backend}gallery/get`
   },
   externals: {
     nasa: {
-      apod: backend + 'externals/nasa/apod',
-    },
+      apod: `${backend}externals/nasa/apod`
+    }
   },
   google: {
     youtube: {
-      videos: backend + 'google/youtube/videos',
-      channel_data: backend + 'google/youtube/channel-data',
-    },
+      videos: `${backend}google/youtube/videos`,
+      channel_data: `${backend}google/youtube/channel-data`
+    }
   },
   github: {
     repo: {
-      list: backend + 'github/repo/list',
-      data: backend + 'github/repo/data',
-      topics: backend + 'github/repo/topics',
-      contents: backend + 'github/repo/contents',
-      branches: backend + 'github/repo/branches',
-      commits: backend + 'github/repo/commits',
-    },
-  },
+      list: `${backend}github/repo/list`,
+      data: `${backend}github/repo/data`,
+      topics: `${backend}github/repo/topics`,
+      contents: `${backend}github/repo/contents`,
+      branches: `${backend}github/repo/branches`,
+      commits: `${backend}github/repo/commits`
+    }
+  }
 };

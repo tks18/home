@@ -3,23 +3,17 @@ import { api } from './routes';
 
 export default {
   get: async () => {
-    return await axios
+    const resp = await axios
       .post(api.blog.get)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((response) => response)
+      .catch((err) => err);
+    return resp;
   },
   set: async (postData) => {
-    return await axios
+    const resp = await axios
       .post(api.blog.set, postData)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
+      .then((response) => response)
+      .catch((err) => err);
+    return resp;
+  }
 };

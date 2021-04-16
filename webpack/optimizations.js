@@ -1,8 +1,8 @@
 const Minimizers = require('./minimizers');
 
-let isProd = process.env.NODE_ENV != 'development';
+const isProd = process.env.NODE_ENV !== 'development';
 
-let productionConfig = {
+const productionConfig = {
   splitChunks: {
     chunks: 'async',
     minSize: 20000,
@@ -15,22 +15,22 @@ let productionConfig = {
       defaultVendors: {
         test: /[\\/]node_modules[\\/]/,
         priority: -10,
-        reuseExistingChunk: true,
+        reuseExistingChunk: true
       },
       default: {
         minChunks: 2,
         priority: -20,
-        reuseExistingChunk: true,
-      },
-    },
+        reuseExistingChunk: true
+      }
+    }
   },
   minimize: true,
-  minimizer: [...Minimizers],
+  minimizer: [...Minimizers]
 };
 
-let devConfig = {
+const devConfig = {
   minimize: false,
-  minimizer: [...Minimizers],
+  minimizer: [...Minimizers]
 };
 
 module.exports = isProd ? productionConfig : devConfig;

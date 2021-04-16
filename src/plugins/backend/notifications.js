@@ -4,68 +4,64 @@ import { api } from './routes';
 export default {
   get: {
     current: async () => {
-      return await axios
+      const resp = await axios
         .post(api.notification.get, {
-          type: 'current',
+          type: 'current'
         })
         .then((response) => {
           if (
-            response.status == 200 &&
+            response.status === 200 &&
             response.data &&
             response.data.success
           ) {
             return {
               success: true,
               data: response.data,
-              error: null,
-            };
-          } else {
-            return {
-              success: false,
-              data: null,
-              error: null,
+              error: null
             };
           }
-        })
-        .catch((error) => {
           return {
             success: false,
             data: null,
-            error,
+            error: null
           };
-        });
+        })
+        .catch((error) => ({
+          success: false,
+          data: null,
+          error
+        }));
+      return resp;
     },
     all: async () => {
-      return await axios
+      const resp = await axios
         .post(api.notification.get, {
-          type: 'all',
+          type: 'all'
         })
         .then((response) => {
           if (
-            response.status == 200 &&
+            response.status === 200 &&
             response.data &&
             response.data.success
           ) {
             return {
               success: true,
               data: response.data,
-              error: null,
-            };
-          } else {
-            return {
-              success: false,
-              data: null,
-              error: null,
+              error: null
             };
           }
-        })
-        .catch((error) => {
           return {
             success: false,
             data: null,
-            error,
+            error: null
           };
-        });
-    },
-  },
+        })
+        .catch((error) => ({
+          success: false,
+          data: null,
+          error
+        }));
+      return resp;
+    }
+  }
 };
