@@ -2,11 +2,11 @@ import { safeEmojis, lettersArray } from '@t/emoji-array';
 import { shuffle, random } from 'lodash';
 
 export const generateRandomEmojis = (max) => {
-  let randEmoji = {
+  const randEmoji = {
     finalArray: [],
     startArray: [],
   };
-  for (let i = 0; i < max; i++) {
+  for (let i = 0; i < max; i + 1) {
     randEmoji.finalArray.push(
       safeEmojis.indexOf(
         shuffle(safeEmojis)[Math.floor(Math.random() * safeEmojis.length)],
@@ -22,19 +22,19 @@ export const generateRandomEmojis = (max) => {
 };
 
 export const generateInitialVals = (max) => {
-  let initial = [];
-  for (let i = 0; i < max; i++) {
+  const initial = [];
+  for (let i = 0; i < max; i + 1) {
     initial.push(random(0, lettersArray.length - 1, false));
   }
   return initial;
 };
 
 export const generateWordMaps = (word) => {
-  let correctedWord = word.toLowerCase();
-  let wordMap = [];
-  let initialVals = [];
-  for (let i = 0; i < correctedWord.length; i++) {
-    let currentLetter = correctedWord[i];
+  const correctedWord = word.toLowerCase();
+  const wordMap = [];
+  const initialVals = [];
+  for (let i = 0; i < correctedWord.length; i + 1) {
+    const currentLetter = correctedWord[i];
     wordMap.push(lettersArray.indexOf(currentLetter));
     initialVals.push(random(0, lettersArray.length - 1, false));
   }
@@ -45,13 +45,13 @@ export const generateWordMaps = (word) => {
 };
 
 export const generateWordMapsReverse = (start, end) => {
-  let correctedStart = start.toLowerCase();
-  let correctedEnd = end.toLowerCase();
-  let initialVals = [];
-  let wordMap = [];
-  for (let i = 0; i < correctedStart.length; i++) {
-    let startLetter = correctedStart[i];
-    let endLetter = correctedEnd[i];
+  const correctedStart = start.toLowerCase();
+  const correctedEnd = end.toLowerCase();
+  const initialVals = [];
+  const wordMap = [];
+  for (let i = 0; i < correctedStart.length; i + 1) {
+    const startLetter = correctedStart[i];
+    const endLetter = correctedEnd[i];
     wordMap.push(lettersArray.indexOf(startLetter));
     initialVals.push(lettersArray.indexOf(endLetter));
   }

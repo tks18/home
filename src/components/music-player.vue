@@ -1,6 +1,6 @@
 <template>
   <v-bottom-sheet v-model="activated" inset>
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-card
         elevation="0"
         v-bind="attrs"
@@ -29,7 +29,7 @@
         class="mx-0 my-0"
         dense
       >
-        <template v-slot:thumb-label>
+        <template #thumb-label>
           {{ currentText }}
         </template>
       </v-slider>
@@ -39,9 +39,7 @@
             <v-list-item-title>{{ metadata.name }}</v-list-item-title>
             <v-list-item-subtitle>{{ metadata.artist }}</v-list-item-subtitle>
           </v-list-item-content>
-
-          <v-spacer></v-spacer>
-
+          <v-spacer />
           <v-list-item-content class="text-center">
             <v-list-item-subtitle>
               {{ currentText }} / {{ durationText }}
@@ -80,7 +78,7 @@ export default {
       type: Boolean,
     },
   },
-  data: function () {
+  data() {
     return {
       activated: false,
       play: false,
@@ -122,15 +120,15 @@ export default {
     },
     handleChange() {
       if (this.audio != null) {
-        let changeVals = this.moveSeek;
-        let duration = this.audio.duration;
-        let changedTime = (changeVals / 100) * duration;
+        const changeVals = this.moveSeek;
+        const { duration } = this.audio;
+        const changedTime = (changeVals / 100) * duration;
         this.audio.currentTime = changedTime;
       }
     },
     calculateSeeker() {
       this.audio.ontimeupdate = () => {
-        let currentFloat = this.audio.currentTime;
+        const currentFloat = this.audio.currentTime;
         let minutes = Math.floor(currentFloat / 60);
         let remainingSecs = Math.round(currentFloat % 60);
         minutes = minutes.toString().length > 1 ? minutes : `0${minutes}`;

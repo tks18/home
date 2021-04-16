@@ -1,35 +1,33 @@
 import axios from '@p/axios';
 
-let base = 'https://api.spacexdata.com/v4/';
+const base = 'https://api.spacexdata.com/v4/';
 
-let api = {
+const api = {
   launches: {
-    latest: base + 'launches/latest/',
+    latest: `${base}launches/latest/`,
   },
 };
 
-export async function latestLaunches() {
-  return await axios
+export default async () => {
+  const resp = await axios
     .get(api.launches.latest)
     .then((response) => {
-      if (response.status == 200 && response.data) {
+      if (response.status === 200 && response.data) {
         return {
           success: true,
           data: response.data,
         };
-      } else {
-        return {
-          success: false,
-          error: 'Something happened',
-          data: null,
-        };
       }
-    })
-    .catch((error) => {
       return {
         success: false,
-        error,
+        error: 'Something happened',
         data: null,
       };
-    });
-}
+    })
+    .catch((error) => ({
+      success: false,
+      error,
+      data: null,
+    }));
+  return resp;
+};

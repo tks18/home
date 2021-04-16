@@ -12,7 +12,7 @@
           class="point-cursor non-touch border-light"
           size="125"
         >
-          <v-img :src="avatar"></v-img>
+          <v-img :src="avatar" />
         </v-avatar>
       </v-row>
       <v-list-item three-line class="px-2">
@@ -33,12 +33,12 @@
       </v-list-item>
       <v-list class="text-left">
         <v-list-item-group>
-          <v-divider class="ma-1"> </v-divider>
+          <v-divider class="ma-1" />
           <bottomSettings model="list" />
-          <v-divider class="ma-1"> </v-divider>
+          <v-divider class="ma-1" />
           <v-list-item
             v-for="(nav, index) in navPaths"
-            v-bind:key="index"
+            :key="index"
             @click="routerPush(nav.link)"
           >
             <v-list-item-icon>
@@ -58,11 +58,11 @@
             <v-list-item-group>
               <v-tooltip
                 v-for="(stats, index) in siteStats"
-                v-bind:key="index"
+                :key="index"
                 top
                 transition="scroll-y-transition"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template #activator="{ on, attrs }">
                   <v-list-item
                     @click="windowClick(stats.link)"
                     v-on="on"
@@ -86,12 +86,13 @@
   </v-navigation-drawer>
 </template>
 <script>
-import bottomSettings from './bottom-settings';
+import bottomSettings from './bottom-settings.vue';
+
 export default {
   components: {
     bottomSettings,
   },
-  data: function () {
+  data() {
     return {
       avatar: 'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
       navPaths: [
@@ -181,7 +182,6 @@ export default {
   methods: {
     windowClick(url) {
       window.open(url);
-      return;
     },
     routerPush(link) {
       this.$router.push(link);
@@ -191,9 +191,8 @@ export default {
     drawerBackImg() {
       if (!this.$vuetify.theme.dark) {
         return 'https://i.ibb.co/bKsBjMj/download-force-true-w-2400.jpg';
-      } else {
-        return 'https://i.ibb.co/p3Tgrt6/download-force-true-w-1920.jpg';
       }
+      return 'https://i.ibb.co/p3Tgrt6/download-force-true-w-1920.jpg';
     },
   },
 };

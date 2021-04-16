@@ -19,12 +19,8 @@
         @click="handleClick(props)"
         :color="props.item.type"
       >
-        <template v-if="props.item.data.loading" v-slot:progress>
-          <v-progress-linear
-            indeterminate
-            color="white"
-            rounded
-          ></v-progress-linear>
+        <template v-if="props.item.data.loading" #progress>
+          <v-progress-linear indeterminate color="white" rounded />
         </template>
         <v-card-subtitle class="text-caption my-0 py-0">
           <v-row class="my-0 py-0">
@@ -51,11 +47,11 @@
         <v-card-actions
           v-if="props.item.data.buttons && props.item.data.buttons.length > 0"
         >
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             v-for="(button, index) in props.item.data.buttons"
             @click="button.onClick()"
-            v-bind:key="index"
+            :key="index"
             small
             text
             outlined
@@ -72,21 +68,23 @@ export default {
   title: 'MainNotification',
   props: {
     group: {
+      default: 'main',
       type: String,
     },
     position: {
+      default: 'top right',
       type: String,
     },
   },
   methods: {
     handleClick(props) {
-      if (props.item.data.onClick != undefined) {
+      if (props.item.data.onClick !== undefined) {
         props.item.data.onClick();
         props.close();
       }
     },
     handleClose(props) {
-      if (props.item.data.onClose != undefined) {
+      if (props.item.data.onClose !== undefined) {
         props.item.data.onClose();
         props.close();
       } else {

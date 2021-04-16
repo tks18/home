@@ -308,6 +308,7 @@
     "vue/singleline-html-element-content-newline": ["off"],
     "max-len": "off",
     "no-await-in-loop": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }

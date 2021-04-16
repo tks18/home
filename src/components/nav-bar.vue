@@ -1,16 +1,16 @@
 <template>
   <v-app-bar app dense flat collapse-on-scroll>
-    <v-app-bar-nav-icon @click="navclick()"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="navclick()" />
     <v-avatar
       @click="$router.push('/')"
       size="38"
       class="mx-2 non-touch point-cursor"
       color="primary"
     >
-      <v-img :src="avatar"></v-img>
+      <v-img :src="avatar" />
     </v-avatar>
     <v-tooltip bottom transition="slide-y-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-toolbar-title
           v-bind="attrs"
           v-on="on"
@@ -23,9 +23,9 @@
       </template>
       <span>Sudharshan TK</span>
     </v-tooltip>
-    <v-spacer></v-spacer>
+    <v-spacer />
     <v-tooltip bottom transition="slide-y-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-btn v-bind="attrs" v-on="on" icon @click="windowClick(github.link)">
           <v-icon color="primary">{{ github.icon }}</v-icon>
         </v-btn>
@@ -36,8 +36,8 @@
 </template>
 <script>
 export default {
-  name: 'Nav-Bar',
-  data: function () {
+  name: 'Navbar',
+  data() {
     return {
       github: {
         link: 'https://github.com/tks18',
@@ -56,7 +56,6 @@ export default {
     },
     windowClick(url) {
       window.open(url);
-      return;
     },
   },
 };

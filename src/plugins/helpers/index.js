@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-param-reassign */
+
 export function scrollTo(element, scrollPixels, duration) {
   const scrollPos = element.scrollLeft;
   if (
@@ -34,21 +37,21 @@ export function countUpFromTime(countFrom) {
 
   const years = Math.floor((timeDifference / secondsInAYear) * 1);
   const weeks = Math.floor(
-    ((timeDifference % secondsInAYear) / secondsInAWeek) * 1
+    ((timeDifference % secondsInAYear) / secondsInAWeek) * 1,
   );
   const days = Math.floor(
-    ((timeDifference % secondsInAWeek) / secondsInADay) * 1
+    ((timeDifference % secondsInAWeek) / secondsInADay) * 1,
   );
   const hours = Math.floor(
-    ((timeDifference % secondsInADay) / secondsInAHour) * 1
+    ((timeDifference % secondsInADay) / secondsInAHour) * 1,
   );
   const mins = Math.floor(
-    (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1
+    (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1,
   );
   const secs = Math.floor(
     ((((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) /
       1000) *
-      1
+      1,
   );
 
   const returnVals = {
@@ -57,7 +60,7 @@ export function countUpFromTime(countFrom) {
     days,
     hours,
     minutes: mins,
-    seconds: secs
+    seconds: secs,
   };
 
   return returnVals;
@@ -133,19 +136,19 @@ export function generate_code_editor(text) {
         i + 1
       }  </span>${lines[i]}`;
     } else if (`${i + 1}`.length < 2) {
-      newLines += `<span class="grey--text text-right non-touch">     ${
+      newLines += `<span class="grey--text text-right non-touch">    ${
         i + 1
       }  </span>${lines[i]}`;
     } else if (`${i + 1}`.length > 1) {
-      newLines += `<span class="grey--text text-right non-touch">     ${
+      newLines += `<span class="grey--text text-right non-touch">   ${
         i + 1
       }  </span>${lines[i]}`;
     } else if (`${i + 1}`.length > 2) {
-      newLines += `<span class="grey--text text-right non-touch">     ${
+      newLines += `<span class="grey--text text-right non-touch">  ${
         i + 1
       }  </span>${lines[i]}`;
     } else if (`${i + 1}`.length > 3) {
-      newLines += `<span class="grey--text text-right non-touch">     ${
+      newLines += `<span class="grey--text text-right non-touch">${
         i + 1
       }  </span>${lines[i]}`;
     }
@@ -155,6 +158,6 @@ export function generate_code_editor(text) {
   }
   return {
     content: newLines,
-    total_lines
+    total_lines,
   };
 }
