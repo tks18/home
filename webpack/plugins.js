@@ -2,8 +2,8 @@ const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const metadata = require('../web-metadata');
 const zlib = require('zlib');
-const compressionPlugin = require('compression-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
@@ -13,10 +13,10 @@ const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
-let isProd = process.env.NODE_ENV != 'development';
+const isProd = process.env.NODE_ENV != 'development';
 
-let productionPlugins = [
-  new htmlWebpackPlugin({
+const productionPlugins = [
+  new HtmlWebpackPlugin({
     inject: true,
     title: metadata.title,
     twitterData: metadata.twitterData,
@@ -47,7 +47,7 @@ let productionPlugins = [
       lastmod: true,
     },
   }),
-  new compressionPlugin({
+  new CompressionPlugin({
     filename: '[path][base].br',
     algorithm: 'brotliCompress',
     compressionOptions: {
@@ -91,8 +91,8 @@ let productionPlugins = [
   }),
 ];
 
-let devPlugins = [
-  new htmlWebpackPlugin({
+const devPlugins = [
+  new HtmlWebpackPlugin({
     inject: true,
     title: metadata.title,
     keywords: metadata.keyWords,

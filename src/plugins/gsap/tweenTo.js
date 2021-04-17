@@ -2,9 +2,9 @@ import { gsap } from 'gsap';
 import observeNexecute from './observer';
 import { lettersArray, safeEmojis } from '@t/emoji-array';
 
-let update = (options) => {
-  var html = '';
-  let wordsarray = options.emoji ? safeEmojis : lettersArray;
+const update = (options) => {
+  let html = '';
+  const wordsarray = options.emoji ? safeEmojis : lettersArray;
   options.map.startArray.forEach((map) => {
     html += wordsarray[Math.round(map) % wordsarray.length];
   });
@@ -13,12 +13,12 @@ let update = (options) => {
 
 export function tweenToObserver(options) {
   observeNexecute(options.elem, () => {
-    var tl = gsap.timeline({
+    const tl = gsap.timeline({
       onUpdate: () => {
         update(options);
       },
     });
-    let wordsarray = options.emoji ? safeEmojis : lettersArray;
+    const wordsarray = options.emoji ? safeEmojis : lettersArray;
     options.map.finalArray.forEach((range, index) => {
       tl.to(
         options.map.startArray,
@@ -34,12 +34,12 @@ export function tweenToObserver(options) {
 }
 
 export default (options) => {
-  var tl = gsap.timeline({
+  const tl = gsap.timeline({
     onUpdate: () => {
       update(options);
     },
   });
-  let wordsarray = options.emoji ? safeEmojis : lettersArray;
+  const wordsarray = options.emoji ? safeEmojis : lettersArray;
   options.map.finalArray.forEach((range, index) => {
     tl.to(
       options.map.startArray,

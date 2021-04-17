@@ -1,11 +1,11 @@
 <template>
+  <!-- eslint-disable vue/no-v-html -->
   <v-sheet
+    v-if="rendered_content.length > 2"
     outlined
     class="px-5 py-5 text-capitalize non-touch"
-    v-if="rendered_content.length > 2"
     v-html="rendered_content"
-  >
-  </v-sheet>
+  />
 </template>
 
 <script>
@@ -22,6 +22,22 @@ export default {
     return {
       rendered_content: '',
     };
+  },
+  computed: {
+    ismobile() {
+      return ismobile();
+    },
+  },
+  mounted() {
+    if (this.content) {
+      const rendered_content = marked(this.content, {
+        gfm: true,
+        headerIds: false,
+        headerPrefix: false,
+        renderer: this.md_renderer(),
+      });
+      this.rendered_content = rendered_content;
+    }
   },
   methods: {
     md_renderer() {
@@ -50,8 +66,8 @@ export default {
         return `<span class="font-italic"> ${text} </span>`;
       };
       renderer.code = (code) => {
-        let formatted_content = generate_code_editor(code);
-        let theme = this.$vuetify.theme.dark ? 'theme--dark' : '';
+        const formatted_content = generate_code_editor(code);
+        const theme = this.$vuetify.theme.dark ? 'theme--dark' : '';
         return `<div
             class="code-viewer touchable text-lowercase py-2 px-2 my-3 v-sheet ${theme} v-sheet--outlined elevation-13 rounded"
         > ${formatted_content.content} </div>`;
@@ -62,22 +78,6 @@ export default {
       window.open(url);
       return;
     },
-  },
-  computed: {
-    ismobile() {
-      return ismobile();
-    },
-  },
-  mounted() {
-    if (this.content) {
-      let rendered_content = marked(this.content, {
-        gfm: true,
-        headerIds: false,
-        headerPrefix: false,
-        renderer: this.md_renderer(),
-      });
-      this.rendered_content = rendered_content;
-    }
   },
 };
 </script>

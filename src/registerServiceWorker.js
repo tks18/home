@@ -2,7 +2,7 @@
 
 import { Workbox } from 'workbox-window';
 
-let isProd = !(process.env.NODE_ENV == 'development');
+const isProd = !(process.env.NODE_ENV == 'development');
 let wb;
 
 if (isProd) {
@@ -28,5 +28,6 @@ if (isProd) {
 } else {
   wb = null;
 }
+const worker = wb;
 
-export default wb;
+export default worker;

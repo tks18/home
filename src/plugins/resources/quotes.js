@@ -1,6 +1,6 @@
 import axios from '@p/axios';
 
-let api = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
+const api = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
 
 export const breakingBad = async () => {
   return await axios

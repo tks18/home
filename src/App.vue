@@ -10,7 +10,7 @@
     />
     <v-main>
       <div class="content">
-        <router-view></router-view>
+        <router-view />
       </div>
     </v-main>
     <fabComponent />
@@ -53,9 +53,13 @@ export default {
       return ismobile();
     },
   },
+  mounted() {
+    this.notifyDarkTheme();
+    this.getServerNotifications();
+  },
   methods: {
     async getServerNotifications() {
-      let currentNotifications = await notifications.get.current();
+      const currentNotifications = await notifications.get.current();
       if (currentNotifications.success) {
         currentNotifications.data.notifications.forEach((notification) => {
           this.$notify(notification.properties);
@@ -63,8 +67,8 @@ export default {
       }
     },
     notifyDarkTheme() {
-      let notifications = JSON.parse(localStorage.getItem('notification'));
-      let dark = this.$vuetify.theme.dark;
+      const notifications = JSON.parse(localStorage.getItem('notification'));
+      const dark = this.$vuetify.theme.dark;
       if ((!dark && notifications == null) || (!dark && !notifications.dark)) {
         this.$notify({
           group: 'main',
@@ -96,10 +100,6 @@ export default {
         });
       }
     },
-  },
-  mounted() {
-    this.notifyDarkTheme();
-    this.getServerNotifications();
   },
 };
 </script>

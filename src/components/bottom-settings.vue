@@ -1,6 +1,6 @@
 <template>
-  <v-bottom-sheet inset v-model="activated" persistent>
-    <template v-slot:activator="{ on, attrs }">
+  <v-bottom-sheet v-model="activated" inset persistent>
+    <template #activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
           <v-icon>mdi-cog-refresh</v-icon>
@@ -33,9 +33,9 @@
           <h2 class="title primary--text">Settings</h2>
         </v-col>
         <v-col align="end" justify="start">
-          <v-btn color="primary" icon @click="activated = !activated"
-            ><v-icon>mdi-close</v-icon></v-btn
-          >
+          <v-btn color="primary" icon @click="activated = !activated">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -52,14 +52,14 @@
                   dense
                   inset
                   color="primary"
-                  @click="changeTheme"
                   :value="$state.store.botSettings.darkmode"
                   :label="
                     'Turn' +
                     ($state.store.botSettings.darkmode ? ' Off' : ' On') +
                     ' Dark Mode'
                   "
-                ></v-switch>
+                  @click="changeTheme"
+                />
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -78,12 +78,12 @@
               </v-card-title>
               <v-card-text>
                 <v-color-picker
+                  v-model="accent"
                   show-swatches
                   :swatches="swatches"
                   hide-inputs
                   hide-mode-switch
-                  v-model="accent"
-                ></v-color-picker>
+                />
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
@@ -91,17 +91,17 @@
                   <v-btn
                     class="subtitle text-bold"
                     color="primary"
-                    @click="changeAccent()"
                     outlined
+                    @click="changeAccent()"
                   >
                     Accept
                   </v-btn>
                 </v-col>
                 <v-col>
                   <v-btn
-                    @click="colorDiag = !colorDiag"
                     class="subtitle text-bold"
                     color="primary"
+                    @click="colorDiag = !colorDiag"
                   >
                     Close
                   </v-btn>
@@ -128,12 +128,12 @@
                   dense
                   inset
                   color="primary"
-                  @click="enableBlur"
                   :value="$state.store.botSettings.navBlur"
                   :label="
                     $state.store.botSettings.navBlur ? ' Disable' : ' Enable'
                   "
-                ></v-switch>
+                  @click="enableBlur"
+                />
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -147,10 +147,11 @@
 export default {
   props: {
     model: {
+      default: 'list',
       type: String,
     },
   },
-  data: function () {
+  data: () => {
     return {
       activated: false,
       colorDiag: false,
@@ -165,6 +166,13 @@ export default {
         ['#ffeb3b', '#ffc107', '#ff9800'],
       ],
     };
+  },
+  mounted() {
+    const themecache = JSON.parse(localStorage.getItem('themecache'));
+    if (themecache && themecache != null) {
+      this.$state.store.botSettings.darkmode = themecache.dark;
+      this.$state.store.botSettings.navBlur = themecache.blur;
+    }
   },
   methods: {
     changeTheme() {
@@ -210,13 +218,6 @@ export default {
         }),
       );
     },
-  },
-  mounted() {
-    var themecache = JSON.parse(localStorage.getItem('themecache'));
-    if (themecache && themecache != null) {
-      this.$state.store.botSettings.darkmode = themecache.dark;
-      this.$state.store.botSettings.navBlur = themecache.blur;
-    }
   },
 };
 </script>

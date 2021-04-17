@@ -1,3 +1,10 @@
+/**
+ * Scroll to function
+ * @constructor
+ * @param {HTMLelement} element - Parent Element which holds the child elements to scroll.
+ * @param {number} scrollPixels - Number of pixels to scroll.
+ * @param {number} duration - Total Duration for scrolling.
+ */
 export function scrollTo(element, scrollPixels, duration) {
   const scrollPos = element.scrollLeft;
   if (
@@ -26,34 +33,34 @@ export function scrollTo(element, scrollPixels, duration) {
 
 export function countUpFromTime(countFrom) {
   countFrom = new Date(countFrom).getTime();
-  var now = new Date(),
-    countTo = new Date(countFrom),
-    timeDifference = now - countTo;
-  var secondsInAHour = 60 * 60 * 1000;
-  var secondsInADay = secondsInAHour * 24;
-  var secondsInAWeek = secondsInADay * 7;
-  var secondsInAYear = secondsInADay * 365;
+  const now = new Date();
+  const countTo = new Date(countFrom);
+  const timeDifference = now - countTo;
+  const secondsInAHour = 60 * 60 * 1000;
+  const secondsInADay = secondsInAHour * 24;
+  const secondsInAWeek = secondsInADay * 7;
+  const secondsInAYear = secondsInADay * 365;
 
-  let years = Math.floor((timeDifference / secondsInAYear) * 1);
-  let weeks = Math.floor(
+  const years = Math.floor((timeDifference / secondsInAYear) * 1);
+  const weeks = Math.floor(
     ((timeDifference % secondsInAYear) / secondsInAWeek) * 1,
   );
-  let days = Math.floor(
+  const days = Math.floor(
     ((timeDifference % secondsInAWeek) / secondsInADay) * 1,
   );
-  let hours = Math.floor(
+  const hours = Math.floor(
     ((timeDifference % secondsInADay) / secondsInAHour) * 1,
   );
-  let mins = Math.floor(
+  const mins = Math.floor(
     (((timeDifference % secondsInADay) % secondsInAHour) / (60 * 1000)) * 1,
   );
-  let secs = Math.floor(
+  const secs = Math.floor(
     ((((timeDifference % secondsInADay) % secondsInAHour) % (60 * 1000)) /
       1000) *
       1,
   );
 
-  let returnVals = {
+  const returnVals = {
     years: years,
     weeks: weeks,
     days: days,
@@ -66,12 +73,12 @@ export function countUpFromTime(countFrom) {
 }
 
 export function getOs() {
-  var userAgent = window.navigator.userAgent,
-    platform = window.navigator.platform,
-    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-    os = null;
+  const userAgent = window.navigator.userAgent;
+  const platform = window.navigator.platform;
+  const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+  const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+  const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+  let os = null;
 
   if (macosPlatforms.indexOf(platform) !== -1) {
     os = 'Mac OS';
@@ -89,8 +96,8 @@ export function getOs() {
 }
 
 export function getViewport() {
-  var viewPortWidth;
-  var viewPortHeight;
+  let viewPortWidth;
+  let viewPortHeight;
   if (typeof window.innerWidth != 'undefined') {
     (viewPortWidth = window.innerWidth), (viewPortHeight = window.innerHeight);
   } else if (
@@ -108,7 +115,7 @@ export function getViewport() {
 }
 
 export function ismobile() {
-  var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
   if (width > 966) {
     return false;
   } else {
@@ -117,7 +124,7 @@ export function ismobile() {
 }
 
 export function pre_format_text(text) {
-  let modified_content = text
+  const modified_content = text
     .replace(/\n/g, '&#10;')
     .replace(/</g, '&#60;')
     .replace(/>/g, '&#62;');
@@ -125,8 +132,8 @@ export function pre_format_text(text) {
 }
 
 export function generate_code_editor(text) {
-  let modified_content = pre_format_text(text);
-  let lines = modified_content.split('&#10;');
+  const modified_content = pre_format_text(text);
+  const lines = modified_content.split('&#10;');
   let total_lines = 0;
   let newLines = '';
   for (let i = 0; i < lines.length; i++) {

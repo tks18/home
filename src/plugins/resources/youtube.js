@@ -1,10 +1,10 @@
 import axios from '@p/axios';
 import { api as backend } from '@p/backend/routes';
 
-let api = backend.google.youtube;
+const api = backend.google.youtube;
 
 export async function channel_data(channel) {
-  let id = channel;
+  const id = channel;
   return await axios
     .post(api.channel_data, {
       channel_id: id,

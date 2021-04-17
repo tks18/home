@@ -17,13 +17,13 @@ export async function codingData() {
     adapter: jsonpadapter,
   }).then((response) => {
     if (response && response.status == 200) {
-      let data = response.data;
-      let consolMinutes = 0,
-        dailyData = [];
+      const data = response.data;
+      let consolMinutes = 0;
+      const dailyData = [];
       data.data.forEach((codeData) => {
-        let hours = codeData.grand_total.hours,
-          minutes = codeData.grand_total.minutes;
-        let totalMinutes = hours * 60 + minutes;
+        const hours = codeData.grand_total.hours;
+        const minutes = codeData.grand_total.minutes;
+        const totalMinutes = hours * 60 + minutes;
         dailyData.push(totalMinutes);
         consolMinutes += totalMinutes;
       });
@@ -50,10 +50,10 @@ export async function languageTrend() {
     adapter: jsonpadapter,
   }).then((response) => {
     if (response && response.status == 200) {
-      let data = response.data;
-      let languageTrendData = [],
-        languageTrendLabels = [],
-        languageTrendGradients = [];
+      const data = response.data;
+      const languageTrendData = [];
+      const languageTrendLabels = [];
+      const languageTrendGradients = [];
       for (let i = 0; i < 5; i++) {
         languageTrendData.push(data.data[i].percent);
         data.data[i].name == 'JavaScript'
@@ -85,9 +85,9 @@ export async function editorsData() {
     adapter: jsonpadapter,
   }).then((response) => {
     if (response && response.status == 200) {
-      let data = response.data;
-      let editorsTrendData = [],
-        editorsTrendLabels = [];
+      const data = response.data;
+      const editorsTrendData = [];
+      const editorsTrendLabels = [];
       for (let i = 0; i < 5; i++) {
         editorsTrendData.push(Math.round(data.data[i].percent));
         editorsTrendLabels.push(data.data[i].name);

@@ -1,7 +1,7 @@
 import axios from '@p/axios';
 import { api as backend } from '@p/backend/routes';
 
-let api = backend.github;
+const api = backend.github;
 
 export async function projects(ismobile, user) {
   return await axios
@@ -10,8 +10,8 @@ export async function projects(ismobile, user) {
     })
     .then((resp) => {
       if (resp.status == 200 && resp.data && resp.data.success) {
-        let repos = resp.data.repos;
-        let slicedRepos = ismobile ? repos.slice(0, 2) : repos.slice(0, 5);
+        const repos = resp.data.repos;
+        const slicedRepos = ismobile ? repos.slice(0, 2) : repos.slice(0, 5);
         return {
           success: true,
           data: slicedRepos,

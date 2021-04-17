@@ -22,18 +22,18 @@
               :justify="ismobile ? 'center' : 'start'"
             >
               <v-tooltip
+                v-for="(social, index) in socials"
+                :key="index"
                 top
                 transition="slide-y-transition"
-                v-for="(social, index) in socials"
-                v-bind:key="index"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template #activator="{ on, attrs }">
                   <v-btn
                     icon
                     v-bind="attrs"
+                    color="primary"
                     v-on="on"
                     @click="windowLink(social.link)"
-                    color="primary"
                   >
                     <v-icon>{{ social.icon }}</v-icon>
                   </v-btn>
@@ -51,12 +51,12 @@
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
           <v-tooltip top transition="slide-x-transition">
-            <template v-slot:activator="{ on, attrs }">
+            <template #activator="{ on, attrs }">
               <div
-                v-on="on"
                 v-bind="attrs"
-                @click="$router.push('/about-this-project')"
                 class="grey--text text-overline my-0 py-0"
+                v-on="on"
+                @click="$router.push('/about-this-project')"
               >
                 Vuetify, Vuejs and More
                 <v-icon color="primary">mdi-heart</v-icon>
@@ -89,7 +89,7 @@
                 (ismobile ? ' text-center' : '')
               "
             >
-              <span @click="windowLink(github.link)" class="point-cursor">
+              <span class="point-cursor" @click="windowLink(github.link)">
                 {{ animatedArray.name.trim() + '.TK' }}
               </span>
               |
@@ -107,7 +107,7 @@
                 :color="success ? 'green' : 'yellow'"
                 size="14"
                 class="mr-2"
-              ></v-avatar>
+              />
               Backend
             </v-chip>
             <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
@@ -115,7 +115,7 @@
                 :color="success ? 'green' : 'yellow'"
                 size="14"
                 class="mr-2"
-              ></v-avatar>
+              />
               Database
             </v-chip>
             <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
@@ -154,7 +154,7 @@ import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
 import { generateWordMapsReverse } from '@p/wordmap';
 export default {
-  data: function () {
+  data: () => {
     return {
       now: new Date().toLocaleTimeString(),
       clockDiag: false,
@@ -210,38 +210,9 @@ export default {
       ],
     };
   },
-  methods: {
-    windowLink(url) {
-      window.open(url);
-      return;
-    },
-    async getBackendStatus() {
-      let backendStatus = await ping();
-      if (backendStatus.success) {
-        this.success = true;
-        this.pingstats = backendStatus.timing;
-      } else {
-        this.$notify({
-          group: 'main',
-          type: 'error',
-          duration: -100,
-          title: 'Backend Error',
-          text:
-            'Error While Connecting to Backend Server. Click the button to check my backup Servers',
-          data: {
-            loading: false,
-            dark: true,
-            type: 'Error Notification',
-          },
-        });
-        this.success = false;
-        this.pingstats = 0;
-      }
-    },
-  },
   computed: {
     ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+      const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
       if (width > 966) {
         return false;
       } else {
@@ -286,6 +257,35 @@ export default {
       arrayProperty: 'name',
     });
     this.getBackendStatus();
+  },
+  methods: {
+    windowLink(url) {
+      window.open(url);
+      return;
+    },
+    async getBackendStatus() {
+      const backendStatus = await ping();
+      if (backendStatus.success) {
+        this.success = true;
+        this.pingstats = backendStatus.timing;
+      } else {
+        this.$notify({
+          group: 'main',
+          type: 'error',
+          duration: -100,
+          title: 'Backend Error',
+          text:
+            'Error While Connecting to Backend Server. Click the button to check my backup Servers',
+          data: {
+            loading: false,
+            dark: true,
+            type: 'Error Notification',
+          },
+        });
+        this.success = false;
+        this.pingstats = 0;
+      }
+    },
   },
 };
 </script>

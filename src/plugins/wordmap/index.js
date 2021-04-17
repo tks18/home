@@ -2,7 +2,7 @@ import { safeEmojis, lettersArray } from '@t/emoji-array';
 import { shuffle, random } from 'lodash';
 
 export const generateRandomEmojis = (max) => {
-  let randEmoji = {
+  const randEmoji = {
     finalArray: [],
     startArray: [],
   };
@@ -22,7 +22,7 @@ export const generateRandomEmojis = (max) => {
 };
 
 export const generateInitialVals = (max) => {
-  let initial = [];
+  const initial = [];
   for (let i = 0; i < max; i++) {
     initial.push(random(0, lettersArray.length - 1, false));
   }
@@ -30,11 +30,11 @@ export const generateInitialVals = (max) => {
 };
 
 export const generateWordMaps = (word) => {
-  let correctedWord = word.toLowerCase();
-  let wordMap = [];
-  let initialVals = [];
+  const correctedWord = word.toLowerCase();
+  const wordMap = [];
+  const initialVals = [];
   for (let i = 0; i < correctedWord.length; i++) {
-    let currentLetter = correctedWord[i];
+    const currentLetter = correctedWord[i];
     wordMap.push(lettersArray.indexOf(currentLetter));
     initialVals.push(random(0, lettersArray.length - 1, false));
   }
@@ -45,13 +45,13 @@ export const generateWordMaps = (word) => {
 };
 
 export const generateWordMapsReverse = (start, end) => {
-  let correctedStart = start.toLowerCase();
-  let correctedEnd = end.toLowerCase();
-  let initialVals = [];
-  let wordMap = [];
+  const correctedStart = start.toLowerCase();
+  const correctedEnd = end.toLowerCase();
+  const initialVals = [];
+  const wordMap = [];
   for (let i = 0; i < correctedStart.length; i++) {
-    let startLetter = correctedStart[i];
-    let endLetter = correctedEnd[i];
+    const startLetter = correctedStart[i];
+    const endLetter = correctedEnd[i];
     wordMap.push(lettersArray.indexOf(startLetter));
     initialVals.push(lettersArray.indexOf(endLetter));
   }

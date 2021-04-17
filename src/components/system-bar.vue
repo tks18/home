@@ -1,6 +1,6 @@
 <template>
-  <v-system-bar @click="$vuetify.goTo(0)" fixed window lights-out>
-    <v-spacer></v-spacer>
+  <v-system-bar fixed window lights-out @click="$vuetify.goTo(0)">
+    <v-spacer />
     <v-icon> mdi-wifi-strength-4 </v-icon>
     <span class="non-touch point-cursor">
       {{ now | moment('h:mm:ss a') }}
@@ -10,21 +10,21 @@
 
 <script>
 export default {
-  data: function () {
+  data: () => {
     return {
       now: Date.now(),
     };
+  },
+  mounted() {
+    setInterval(() => {
+      this.now = Date.now();
+    }, 1000);
   },
   methods: {
     scrollTop() {
       window.scrollTo(0, 0);
       return;
     },
-  },
-  mounted() {
-    setInterval(() => {
-      this.now = Date.now();
-    }, 1000);
   },
 };
 </script>

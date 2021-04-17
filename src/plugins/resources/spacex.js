@@ -1,8 +1,8 @@
 import axios from '@p/axios';
 
-let base = 'https://api.spacexdata.com/v4/';
+const base = 'https://api.spacexdata.com/v4/';
 
-let api = {
+const api = {
   launches: {
     latest: base + 'launches/latest/',
   },

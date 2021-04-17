@@ -1,18 +1,18 @@
 const path = require('path');
 
 // Paths
-let src = './src';
-let assets = './src/assets';
-let component = './src/components';
-let libs = './src/libs';
-let plugins = './src/plugins';
-let router = './src/router';
-let styles = './src/styles';
-let templates = './src/templates';
-let views = './src/views';
+const src = './src';
+const assets = './src/assets';
+const component = './src/components';
+const libs = './src/libs';
+const plugins = './src/plugins';
+const router = './src/router';
+const styles = './src/styles';
+const templates = './src/templates';
+const views = './src/views';
 
 // Files
-let state = './src/plugins/state/index.js';
+const state = './src/plugins/state/index.js';
 
 module.exports = (dir) => {
   return {

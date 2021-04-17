@@ -1,6 +1,6 @@
 <template>
   <v-bottom-sheet v-model="activated" inset>
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-card
         elevation="0"
         v-bind="attrs"
@@ -19,17 +19,17 @@
     </template>
     <v-card tile>
       <v-slider
-        :max="duration == 0 ? 100 : duration"
         v-model="moveSeek"
+        :max="duration == 0 ? 100 : duration"
         thumb-label="always"
         :thumb-size="40"
         :loading="loading"
-        @click.stop="handleChange()"
         color="primary"
         class="mx-0 my-0"
         dense
+        @click.stop="handleChange()"
       >
-        <template v-slot:thumb-label>
+        <template #thumb-label>
           {{ currentText }}
         </template>
       </v-slider>
@@ -40,7 +40,7 @@
             <v-list-item-subtitle>{{ metadata.artist }}</v-list-item-subtitle>
           </v-list-item-content>
 
-          <v-spacer></v-spacer>
+          <v-spacer />
 
           <v-list-item-content class="text-center">
             <v-list-item-subtitle>
@@ -54,7 +54,7 @@
           </v-list-item-icon>
 
           <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
-            <v-btn @click="handlePlayPause()" icon>
+            <v-btn icon @click="handlePlayPause()">
               <v-icon>{{ play ? 'mdi-pause' : 'mdi-play' }}</v-icon>
             </v-btn>
           </v-list-item-icon>
@@ -80,7 +80,7 @@ export default {
       type: Boolean,
     },
   },
-  data: function () {
+  data: () => {
     return {
       activated: false,
       play: false,
@@ -122,15 +122,15 @@ export default {
     },
     handleChange() {
       if (this.audio != null) {
-        let changeVals = this.moveSeek;
-        let duration = this.audio.duration;
-        let changedTime = (changeVals / 100) * duration;
+        const changeVals = this.moveSeek;
+        const duration = this.audio.duration;
+        const changedTime = (changeVals / 100) * duration;
         this.audio.currentTime = changedTime;
       }
     },
     calculateSeeker() {
       this.audio.ontimeupdate = () => {
-        let currentFloat = this.audio.currentTime;
+        const currentFloat = this.audio.currentTime;
         let minutes = Math.floor(currentFloat / 60);
         let remainingSecs = Math.round(currentFloat % 60);
         minutes = minutes.toString().length > 1 ? minutes : `0${minutes}`;
