@@ -16,7 +16,7 @@
     <v-row align="center">
       <v-col cols="12" align="center" justify="center">
         <div class="text-overline">Select Code Base</div>
-        <v-btn v-if="repo.details.loading" color="primary" loading />
+        <v-btn v-if="repo.details.loading" color="primary" loading> </v-btn>
         <v-btn-toggle
           v-if="!repo.details.loading"
           mandatory
@@ -24,11 +24,11 @@
         >
           <v-btn
             color="primary"
-            v-for="(code_base, index) in repos"
-            :key="index"
-            @click="code_base_change(code_base.repo)"
+            v-for="(repo, index) in repos"
+            v-bind:key="index"
+            @click="code_base_change(repo.repo)"
           >
-            {{ code_base.title }}
+            {{ repo.title }}
           </v-btn>
         </v-btn-toggle>
       </v-col>
@@ -53,7 +53,7 @@
             <v-col v-if="!repo.details.loading" :cols="ismobile ? 12 : 5">
               <v-row>
                 <v-col cols="12" :align="ismobile ? 'center' : 'right'">
-                  <v-img :src="repo.details.data.img" />
+                  <v-img :src="repo.details.data.img"></v-img>
                 </v-col>
                 <v-col align="center" cols="12">
                   <div class="heading my-2">
@@ -133,7 +133,7 @@
                   Maintainer:
                   <span class="primary--text">
                     <v-avatar size="20">
-                      <v-img :src="repo.details.data.owner.avatar_url" />
+                      <v-img :src="repo.details.data.owner.avatar_url"></v-img>
                     </v-avatar>
                     {{ repo.details.data.owner.login }}
                   </span>
@@ -184,7 +184,8 @@
                 type="card"
                 class="mx-auto"
                 :width="ismobile ? 'auto' : 400"
-              />
+              >
+              </v-skeleton-loader>
             </v-col>
             <v-col cols="12" v-if="!repo.topics.loading" class="mx-4">
               <div class="heading" v-if="!repo.topics.loading">
@@ -193,7 +194,7 @@
                   <v-chip-group column>
                     <v-chip
                       v-for="(topic, index) in repo.topics.data"
-                      :key="index"
+                      v-bind:key="index"
                       @click="openGhTopic(topic)"
                       color="primary"
                       outlined
@@ -215,7 +216,8 @@
                 type="card"
                 class="mx-auto"
                 :width="ismobile ? 'auto' : 400"
-              />
+              >
+              </v-skeleton-loader>
             </v-col>
           </v-row>
         </v-col>
@@ -248,7 +250,7 @@
                     <v-btn
                       color="primary"
                       v-for="(branch, index) in repo.branches.data"
-                      :key="index"
+                      v-bind:key="index"
                       @click="branch_change(branch)"
                       small
                     >
@@ -268,7 +270,7 @@
                       v-if="repo.commits.loading"
                       :color="$vuetify.theme.dark ? 'white' : 'black'"
                       indeterminate
-                    />
+                    ></v-progress-linear>
                     <v-row
                       v-if="!repo.commits.loading"
                       align="center"
@@ -303,7 +305,7 @@
                             :align="ismobile ? 'center' : 'right'"
                           >
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on, attrs }">
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   icon
                                   v-on="on"
@@ -318,7 +320,7 @@
                               <span> Go to Comments API </span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on, attrs }">
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   @click="
                                     $vuetify.goTo('#this-project-timeline')
@@ -333,7 +335,7 @@
                               <span>More Commits</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on, attrs }">
+                              <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   v-on="on"
                                   @click="
@@ -394,18 +396,16 @@
                           <v-list>
                             <v-list-item
                               v-for="(file, index) in repo.contents.data"
-                              :key="index"
+                              v-bind:key="index"
                               @click="handleNavigation(false, file)"
                             >
-                              <v-list-item-icon>
-                                <v-icon>
-                                  {{
-                                    file.type == 'file'
-                                      ? 'mdi-file-outline'
-                                      : 'mdi-folder'
-                                  }}
-                                </v-icon>
-                              </v-list-item-icon>
+                              <v-list-item-icon
+                                ><v-icon>{{
+                                  file.type == 'file'
+                                    ? 'mdi-file-outline'
+                                    : 'mdi-folder'
+                                }}</v-icon></v-list-item-icon
+                              >
                               <v-list-item-title>
                                 {{ file.name }}
                               </v-list-item-title>
@@ -471,31 +471,28 @@
                                     icon
                                     color="primary"
                                     class="mx-1"
+                                    ><v-icon>mdi-download</v-icon></v-btn
                                   >
-                                    <v-icon>mdi-download</v-icon>
-                                  </v-btn>
                                   <v-btn
                                     small
                                     @click="
                                       copy_content_code(
-                                        current_file.decoded_content_original
+                                        current_file.decoded_content_original,
                                       )
                                     "
                                     icon
                                     color="primary"
                                     class="mx-1"
+                                    ><v-icon>mdi-content-copy</v-icon></v-btn
                                   >
-                                    <v-icon>mdi-content-copy</v-icon>
-                                  </v-btn>
                                   <v-btn
                                     icon
                                     @click="open_gh_path(current_file.path)"
                                     color="primary"
                                     class="mx-1"
                                     small
+                                    ><v-icon>mdi-xml</v-icon></v-btn
                                   >
-                                    <v-icon>mdi-xml</v-icon>
-                                  </v-btn>
                                 </v-col>
                               </v-row>
                             </v-col>
@@ -507,7 +504,7 @@
                                 rounded
                                 elevation="13"
                                 v-html="current_file.decoded_content_display"
-                              />
+                              ></v-sheet>
                             </v-col>
                           </v-row>
                         </v-col>
@@ -520,7 +517,8 @@
                             color="primary"
                             indeterminate
                             size="50"
-                          />
+                          >
+                          </v-progress-circular>
                         </v-col>
                         <v-col cols="12" align="center">
                           <div class="text-subtitle-1 my-2">
@@ -558,7 +556,7 @@
                 indeterminate
                 color="primary"
                 size="50"
-              />
+              ></v-progress-circular>
               <v-timeline
                 v-if="!repo.commits.loading"
                 align-top
@@ -567,7 +565,7 @@
                 <v-timeline-item
                   v-for="(commit, index) in repo.commits.data.slice(
                     0,
-                    repo.commits.slicer
+                    repo.commits.slicer,
                   )"
                   fill-dot
                   :class="
@@ -577,14 +575,14 @@
                       ? 'text-left'
                       : 'text-right'
                   "
-                  :key="index"
+                  v-bind:key="index"
                 >
-                  <template #icon>
+                  <template v-slot:icon>
                     <v-avatar size="50">
                       <v-icon> mdi-calendar </v-icon>
                     </v-avatar>
                   </template>
-                  <template v-if="!ismobile" #opposite>
+                  <template v-if="!ismobile" v-slot:opposite>
                     <div class="text-overline">
                       <div>
                         {{ repo.name }}
@@ -592,12 +590,12 @@
                       <div v-if="index % 2 == 0">
                         by {{ commit.author.login }}
                         <v-avatar size="20">
-                          <v-img :src="commit.author.avatar_url" />
+                          <v-img :src="commit.author.avatar_url"></v-img>
                         </v-avatar>
                       </div>
                       <div v-else>
                         <v-avatar size="20">
-                          <v-img :src="commit.author.avatar_url" />
+                          <v-img :src="commit.author.avatar_url"></v-img>
                         </v-avatar>
                         {{ commit.author.login }} by
                       </div>
@@ -620,14 +618,14 @@
                             rounded
                             elevation="13"
                             v-html="pre_format_text(commit.commit.message)"
-                          />
+                          ></v-sheet>
                         </v-col>
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer
                         v-if="ismobile ? false : index % 2 == 0 ? false : true"
-                      />
+                      ></v-spacer>
                       <v-btn icon color="primary">
                         <v-icon>mdi-github</v-icon>
                       </v-btn>
@@ -641,9 +639,9 @@
                   </v-card>
                 </v-timeline-item>
                 <v-timeline-item v-if="repo.commits.slicer > 5" large>
-                  <template #icon>
+                  <template v-slot:icon>
                     <v-tooltip left transition="slide-x-transition">
-                      <template #activator="{ on, attrs }">
+                      <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           @click="load_more_commits(true)"
                           fab
@@ -662,9 +660,9 @@
                   v-if="repo.commits.slicer != repo.commits.slicer_length"
                   large
                 >
-                  <template #icon>
+                  <template v-slot:icon>
                     <v-tooltip right transition="slide-x-transition">
-                      <template #activator="{ on, attrs }">
+                      <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           @click="load_more_commits()"
                           fab
@@ -687,7 +685,7 @@
           <render-markdown
             v-if="!repo.readme.loading"
             :content="repo.readme.data"
-          />
+          ></render-markdown>
         </v-col>
       </v-row>
     </div>
@@ -703,31 +701,30 @@ import {
   repoTopics,
   repoCommits,
   repoContents,
-  repoBranches
+  repoBranches,
 } from '@p/resources/github';
 import renderMd from '@c/render-markdown';
-
 export default {
-  metaInfo() {
+  metaInfo: function () {
     return {
-      title: 'About This Project'
+      title: 'About This Project',
     };
   },
   components: {
-    'render-markdown': renderMd
+    'render-markdown': renderMd,
   },
-  data() {
+  data: function () {
     return {
       user: 'tks18',
       repo: {
         name: 'matte-portfolio',
         details: {
           loading: true,
-          data: {}
+          data: {},
         },
         branches: {
           loading: true,
-          data: {}
+          data: {},
         },
         commits: {
           loading: true,
@@ -735,25 +732,25 @@ export default {
           nos: 30,
           slicer: 5,
           slicer_length: 0,
-          data: []
+          data: [],
         },
         topics: {
           loading: true,
-          data: []
+          data: [],
         },
         contents: {
           loading: true,
-          data: []
+          data: [],
         },
         readme: {
           loading: true,
-          data: ''
-        }
+          data: '',
+        },
       },
       branch_toggle: 0,
       code_base_toggle: 0,
       current_branch: {},
-      pre_format_text,
+      pre_format_text: pre_format_text,
       file_view: false,
       current_file: {},
       startPath: '/',
@@ -763,8 +760,8 @@ export default {
         mainTitle: '',
         detailsTitle: '',
         sourceCode: '',
-        timeline: ''
-      }
+        timeline: '',
+      },
     };
   },
   methods: {
@@ -772,13 +769,13 @@ export default {
       this.$set(this.repo.details, 'loading', true);
       const repo_data_resp = await repoData(this.user, this.repo.name);
       if (repo_data_resp.success && repo_data_resp.error == null) {
-        const repoDetails = repo_data_resp.data;
-        if (this.repo.name === 'matte-portfolio') {
-          repoDetails.img = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
+        let repoData = repo_data_resp.data;
+        if (this.repo.name == 'matte-portfolio') {
+          repoData['img'] = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
         } else {
-          repoDetails.img = 'https://i.ibb.co/w7jfhfy/image.webp';
+          repoData['img'] = 'https://i.ibb.co/w7jfhfy/image.webp';
         }
-        this.$set(this.repo.details, 'data', repoDetails);
+        this.$set(this.repo.details, 'data', repoData);
         this.$set(this.repo.details, 'loading', false);
       }
     },
@@ -797,7 +794,7 @@ export default {
         this.repo.name,
         this.current_branch.name,
         this.repo.commits.nos,
-        this.repo.commits.page
+        this.repo.commits.page,
       );
       let new_commit_array = [];
       if (repo_commits_resp.success && repo_commits_resp.commits != null) {
@@ -814,12 +811,12 @@ export default {
       this.$set(this.repo.branches, 'loading', true);
       const repo_branches_resp = await repoBranches(this.user, this.repo.name);
       if (repo_branches_resp.success && repo_branches_resp.error == null) {
-        const { branches } = repo_branches_resp;
-        [this.current_branch] = branches.filter(
-          (branch) => branch.name === 'master'
-        );
+        let branches = repo_branches_resp.branches;
+        this.current_branch = branches.filter((branch) => {
+          return branch.name == 'master';
+        })[0];
         this.branch_toggle = branches.findIndex(
-          (branch) => branch.name === 'master'
+          (branch) => branch.name == 'master',
         );
         this.$set(this.repo.branches, 'data', repo_branches_resp.branches);
         this.$set(this.repo.branches, 'loading', false);
@@ -831,17 +828,17 @@ export default {
         this.user,
         this.repo.name,
         path,
-        branch
+        branch,
       );
       if (repo_contents_resp.success && repo_contents_resp.error == null) {
         if (!backtrigger) {
           this.historyState.push(this.currentPath);
         }
         this.currentPath = path;
-        const sortedContents = this.$_.orderBy(
+        let sortedContents = this.$_.orderBy(
           repo_contents_resp.contents,
           ['type', 'name'],
-          ['asc']
+          ['asc'],
         );
         this.$set(this.repo.contents, 'data', sortedContents);
         this.render_markdown(branch);
@@ -849,18 +846,18 @@ export default {
       }
     },
     async render_markdown(branch) {
-      for (const file of this.repo.contents.data) {
-        if (file.name.toLowerCase() === 'readme.md') {
+      for (let file of this.repo.contents.data) {
+        if (file.name.toLowerCase() == 'readme.md') {
           this.$set(this.repo.readme, 'loading', true);
-          const path = this.startPath + file.path;
+          let path = this.startPath + file.path;
           const file_contents = await repoContents(
             this.user,
             this.repo.name,
             path,
-            branch
+            branch,
           );
           if (file_contents.success && file_contents.error == null) {
-            const decoded_text = atob(file_contents.contents.content);
+            let decoded_text = atob(file_contents.contents.content);
             this.$set(this.repo.readme, 'data', decoded_text);
             this.$set(this.repo.readme, 'loading', false);
           }
@@ -868,22 +865,23 @@ export default {
       }
     },
     async getFileContents(file, branch) {
-      if (file.type === 'file') {
+      if (file.type == 'file') {
         this.$set(this.repo.contents, 'loading', true);
         this.$vuetify.goTo('#this-project-source-code-content');
-        const path = this.startPath + file.path;
+        let path = this.startPath + file.path;
         const file_contents = await repoContents(
           this.user,
           this.repo.name,
           path,
-          branch
+          branch,
         );
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
-          const decoded_text = atob(this.current_file.content);
-          const formatted_content = generate_code_editor(decoded_text);
-          this.current_file.decoded_content_display = formatted_content.content;
-          this.current_file.total_lines = formatted_content.total_lines;
+          let decoded_text = atob(this.current_file.content);
+          let formatted_content = generate_code_editor(decoded_text);
+          this.current_file['decoded_content_display'] =
+            formatted_content.content;
+          this.current_file['total_lines'] = formatted_content.total_lines;
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
@@ -893,26 +891,28 @@ export default {
     },
     async handleNavigation(backtrigger, file) {
       if (backtrigger) {
-        if (this.currentPath !== '/') {
+        if (this.currentPath != '/') {
           this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
-          const newPath = this.historyState.pop();
+          let newPath = this.historyState.pop();
           this.getRepoContent(backtrigger, newPath, this.current_branch.name);
           this.file_view = false;
         }
       } else if (file) {
-        if (file.type === 'dir') {
+        if (file.type == 'dir') {
           this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
-          const newPath = this.startPath + file.path;
+          let newPath = this.startPath + file.path;
           this.getRepoContent(backtrigger, newPath, this.current_branch.name);
-        } else if (file.type === 'file') {
+        } else if (file.type == 'file') {
           this.getFileContents(file, this.current_branch.name);
         }
-      } else if (this.currentPath === '/') {
-        this.$set(this.repo.contents, 'loading', true);
-        const newPath = this.currentPath;
-        this.getRepoContent(backtrigger, newPath, this.current_branch.name);
+      } else {
+        if (this.currentPath == '/') {
+          this.$set(this.repo.contents, 'loading', true);
+          let newPath = this.currentPath;
+          this.getRepoContent(backtrigger, newPath, this.current_branch.name);
+        }
       }
     },
     copy_content_code(content) {
@@ -924,12 +924,12 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: `${this.current_file.path} Has been Copied to Clipboard.`,
+            text: this.current_file.path + ' Has been Copied to Clipboard.',
             data: {
               loading: false,
               dark: true,
-              type: 'Normal Notification'
-            }
+              type: 'Normal Notification',
+            },
           });
         })
         .catch((e) => {
@@ -938,12 +938,12 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: `Error Copying the code: ${e}`,
+            text: 'Error Copying the code: ' + e,
             data: {
               loading: false,
               dark: false,
-              type: 'Error Notification'
-            }
+              type: 'Error Notification',
+            },
           });
         });
     },
@@ -952,17 +952,17 @@ export default {
         this.$vuetify.goTo('#this-project-timeline');
         this.$set(this.repo.commits, 'slicer', 5);
       } else {
-        const length = this.repo.commits.slicer_length;
-        const current_length = this.repo.commits.slicer;
-        const existing_page = this.repo.commits.page;
+        let length = this.repo.commits.slicer_length;
+        let current_length = this.repo.commits.slicer;
+        let existing_page = this.repo.commits.page;
         if (length - current_length < 5) {
-          const extended_length = current_length + (length - current_length);
+          let extended_length = current_length + (length - current_length);
           this.$set(this.repo.commits, 'slicer', extended_length);
           this.$set(this.repo.commits, 'page', existing_page + 1);
         } else {
           this.$set(this.repo.commits, 'slicer', current_length + 5);
-          const new_length = this.repo.commits.slicer_length;
-          const new_slicer = this.repo.commits.slicer;
+          let new_length = this.repo.commits.slicer_length;
+          let new_slicer = this.repo.commits.slicer;
           if (new_length - new_slicer < 5) {
             this.$set(this.repo.commits, 'page', existing_page + 1);
             this.getRepoCommits(false);
@@ -990,23 +990,26 @@ export default {
       this.do_repo_stuffs();
     },
     open_raw_code(file_path) {
-      const base_url = `https://raw.githubusercontent.com/tks18/${this.repo.name}/`;
-      const branch = this.current_branch.name;
-      const open_url = `${base_url + branch}/${file_path}`;
+      let base_url =
+        'https://raw.githubusercontent.com/tks18/' + this.repo.name + '/';
+      let branch = this.current_branch.name;
+      let open_url = base_url + branch + '/' + file_path;
       this.gotourl(open_url);
     },
     open_gh_path(file_path) {
-      const base_url = `https://github.com/tks18/${this.repo.name}/blob/`;
-      const branch = this.current_branch.name;
-      const open_url = `${base_url + branch}/${file_path}`;
+      let base_url = 'https://github.com/tks18/' + this.repo.name + '/blob/';
+      let branch = this.current_branch.name;
+      let open_url = base_url + branch + '/' + file_path;
       this.gotourl(open_url);
     },
     gotourl(url) {
       window.open(url);
+      return;
     },
     openGhTopic(topic) {
-      const url = `https://github.com/search?q=${topic}`;
+      let url = `https://github.com/search?q=${topic}`;
       window.open(url);
+      return;
     },
     async do_repo_stuffs() {
       await this.getRepoBranches();
@@ -1014,7 +1017,7 @@ export default {
       this.getRepoCommits(true);
       this.getRepoTopics();
       this.handleNavigation(false);
-    }
+    },
   },
   computed: {
     ismobile() {
@@ -1024,18 +1027,18 @@ export default {
       return [
         {
           title: 'Frontend',
-          repo: 'matte-portfolio'
+          repo: 'matte-portfolio',
         },
         {
           title: 'Backend',
-          repo: 'portfolio-backend'
+          repo: 'portfolio-backend',
         },
         {
           title: 'Backend UI',
-          repo: 'portfolio-backend-ui'
-        }
+          repo: 'portfolio-backend-ui',
+        },
       ];
-    }
+    },
   },
   mounted() {
     tweenToObserver({
@@ -1044,7 +1047,7 @@ export default {
       emoji: false,
       arrayName: 'animatedText',
       map: generateWordMaps('About This Project'),
-      arrayProperty: 'mainTitle'
+      arrayProperty: 'mainTitle',
     });
     tweenToObserver({
       vm: this,
@@ -1052,7 +1055,7 @@ export default {
       emoji: false,
       arrayName: 'animatedText',
       map: generateWordMaps('Project Details'),
-      arrayProperty: 'detailsTitle'
+      arrayProperty: 'detailsTitle',
     });
     tweenToObserver({
       vm: this,
@@ -1060,7 +1063,7 @@ export default {
       emoji: false,
       arrayName: 'animatedText',
       map: generateWordMaps('Source Code'),
-      arrayProperty: 'sourceCode'
+      arrayProperty: 'sourceCode',
     });
     tweenToObserver({
       vm: this,
@@ -1068,10 +1071,10 @@ export default {
       emoji: false,
       arrayName: 'animatedText',
       map: generateWordMaps('Commit Timeline'),
-      arrayProperty: 'timeline'
+      arrayProperty: 'timeline',
     });
     this.do_repo_stuffs();
-  }
+  },
 };
 </script>
 

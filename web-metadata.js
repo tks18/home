@@ -1,14 +1,14 @@
-const { title, baseSite } = require('./package.json');
-
-const twitterData = {
+let title = require('./package.json').title;
+let baseSite = require('./package.json').baseSite;
+let twitterData = {
   type: 'summary_large_image',
   username: '@shantk18',
-  pic: 'assets/photos/me.jpg'
+  pic: 'assets/photos/me.jpg',
 };
-const keyWords =
+let keyWords =
   'Sudharshan TK, Portfolio, Shan.tk, https://shaaan.tk, shaaan.tk, sudharshan, Blog, Portfolio-blog';
 
-const webSiteDesc =
+let webSiteDesc =
   'Building Online Answers for Your Next Design Challenge. Sometimes Writes Blogs about Latest Tech Developments and Frameworks. Forgot, this is Sudharshan TK hehe xD';
 
 module.exports = {
@@ -16,5 +16,5 @@ module.exports = {
   baseSite,
   keyWords,
   twitterData,
-  webSiteDesc
+  webSiteDesc,
 };

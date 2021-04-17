@@ -29,7 +29,7 @@
           backgroundImage: mainBg,
           backgroundSize: 'cover',
           height: ismobile ? '400px' : '450px',
-          minWidth: '100%'
+          minWidth: '100%',
         }"
         class="hero non-touch"
       >
@@ -47,7 +47,7 @@
                 </div>
               </div>
             </v-col>
-            <v-spacer />
+            <v-spacer></v-spacer>
             <v-col
               :cols="ismobile ? 12 : 5"
               :align="ismobile ? 'center' : 'right'"
@@ -84,9 +84,7 @@
                 >
                   {{ animatedArray.hashTag }}
                 </span>
-                <span class="white--text">
-                  {{ ' Squad' }}
-                </span>
+                <span class="white--text"> {{ ' Squad' }} </span>
               </div>
             </v-col>
           </v-row>
@@ -117,7 +115,7 @@
           <v-col cols="12" align="center">
             <v-chip
               v-for="(chip, index) in aboutChips"
-              :key="index"
+              v-bind:key="index"
               color="primary"
               @click="$vuetify.goTo(chip.id)"
               outlined
@@ -150,12 +148,12 @@
                     (If You are Bad, I am Your Dad
                     <span class="font-weight-bold">Hehe Lol xD 😉</span>)
                   </v-card-subtitle>
-                  <v-divider class="opaque mx-2 my-0" />
+                  <v-divider class="opaque mx-2 my-0"></v-divider>
                   <v-card-text>
                     <v-row class="my-0">
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Name: </span>
-                        <span class="text-body-2">{{ authorData.name }}</span>
+                        <span class="text-body-1 font-weight-bold">Name: </span
+                        ><span class="text-body-2">{{ authorData.name }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
                         <span class="text-body-1 font-weight-bold">
@@ -204,15 +202,15 @@
                             v-for="(skills, index) in authorData.techSkills"
                             class="my-1 mx-1"
                             @click="gotoUrl(skills.link)"
-                            :key="index"
+                            v-bind:key="index"
                           >
                             {{ skills.name }}
                           </v-chip>
                         </v-chip-group>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">
-                          Areas of Interest:
+                        <span class="text-body-1 font-weight-bold"
+                          >Areas of Interest:
                         </span>
                         <v-chip-group column>
                           <v-chip
@@ -221,7 +219,7 @@
                             v-for="(interests, index) in authorData.aOfInt"
                             class="my-1 mx-1"
                             @click="gotoUrl(interests.link)"
-                            :key="index"
+                            v-bind:key="index"
                           >
                             {{ interests.name }}
                           </v-chip>
@@ -234,16 +232,17 @@
               <v-col :cols="ismobile ? 12 : 8">
                 <v-row>
                   <v-tooltip top transition="slide-y-transition">
-                    <template #activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                          <v-skeleton-loader type="card-avatar" height="150" />
+                          <v-skeleton-loader type="card-avatar" height="150">
+                          </v-skeleton-loader>
                         </v-col>
                         <v-col
                           v-on="on"
                           v-bind="attrs"
                           v-if="cardbgs.play"
-                          :key="cardbgs.leftKey"
+                          v-bind:key="cardbgs.leftKey"
                           :cols="ismobile ? 12 : 4"
                         >
                           <v-card
@@ -251,7 +250,8 @@
                             :height="ismobile ? 250 : 150"
                             outlined
                             elevation="6"
-                          />
+                          >
+                          </v-card>
                         </v-col>
                       </v-scroll-y-transition>
                     </template>
@@ -263,12 +263,12 @@
                       elevation="6"
                       @click="gotoUrl('http://fordrhodesparks.com')"
                     >
-                      <v-card-title class="back-blur-no-inherit">
-                        Work Profile
-                      </v-card-title>
-                      <v-card-subtitle class="back-blur-no-inherit">
-                        About my Position
-                      </v-card-subtitle>
+                      <v-card-title class="back-blur-no-inherit"
+                        >Work Profile</v-card-title
+                      >
+                      <v-card-subtitle class="back-blur-no-inherit"
+                        >About my Position</v-card-subtitle
+                      >
                       <v-card-text class="back-blur-no-inherit text-overline">
                         Working in
                         <span class="font-weight-black primary--text">
@@ -319,7 +319,7 @@
                           <v-card
                             @click="
                               gotoUrl(
-                                '/assets/downloads/resume/Sudharshan-tk-full.pdf'
+                                '/assets/downloads/resume/Sudharshan-tk-full.pdf',
                               )
                             "
                             flat
@@ -334,7 +334,7 @@
                           <v-card
                             @click="
                               gotoUrl(
-                                '/assets/downloads/resume/Sudharshan-tk-short.pdf'
+                                '/assets/downloads/resume/Sudharshan-tk-short.pdf',
                               )
                             "
                             flat
@@ -348,21 +348,20 @@
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
-                      <v-spacer />
+                      <v-spacer></v-spacer>
                       <v-btn
                         outlined
                         color="primary"
                         @click="resumeDialog = false"
+                        >Close</v-btn
                       >
-                        Close
-                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
                 <v-row>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-tooltip top transition="slide-y-transition">
-                      <template #activator="{ on, attrs }">
+                      <template v-slot:activator="{ on, attrs }">
                         <v-card
                           v-on="on"
                           v-bind="attrs"
@@ -374,8 +373,7 @@
                             class="font-weight-bold text-center my-1 pa-0 text-caption"
                           >
                             Past Week Coding Stats | This Week -
-                            {{ consolMinutes }}
-                            Minutes
+                            {{ consolMinutes }} Minutes
                           </div>
                           <v-card-text>
                             <v-sparkline
@@ -391,7 +389,8 @@
                               auto-draw
                               type="trend"
                               :smooth="7"
-                            />
+                            >
+                            </v-sparkline>
                           </v-card-text>
                         </v-card>
                       </template>
@@ -399,14 +398,15 @@
                     </v-tooltip>
                   </v-col>
                   <v-tooltip top transition="slide-y-transition">
-                    <template #activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                          <v-skeleton-loader type="card-avatar" height="150" />
+                          <v-skeleton-loader type="card-avatar" height="150">
+                          </v-skeleton-loader>
                         </v-col>
                         <v-col
                           v-if="cardbgs.play"
-                          :key="cardbgs.rightKey"
+                          v-bind:key="cardbgs.rightKey"
                           v-on="on"
                           v-bind="attrs"
                           :cols="ismobile ? 12 : 4"
@@ -416,7 +416,8 @@
                             :height="ismobile ? 250 : 150"
                             outlined
                             elevation="6"
-                          />
+                          >
+                          </v-card>
                         </v-col>
                       </v-scroll-y-transition>
                     </template>
@@ -438,7 +439,7 @@
               <v-card-text class="headline font-weight-bold">
                 <v-row>
                   <v-col cols="12" align="center">
-                    <v-img :src="tweetQr" height="180" width="180" />
+                    <v-img :src="tweetQr" height="180" width="180"></v-img>
                   </v-col>
                   <v-col cols="12">
                     "Its Better when You Share to Other People. Scan the Qr to
@@ -454,7 +455,7 @@
                       class="elevation-6"
                       alt="Author's Photo"
                       :src="authorPhoto"
-                    />
+                    ></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
@@ -484,7 +485,7 @@
               >
                 <v-row id="about-lifetime">
                   <v-tooltip top transition="slide-y-transition">
-                    <template #activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }">
                       <v-row v-ripple v-bind="attrs" v-on="on">
                         <v-col
                           :cols="ismobile ? 12 : 6"
@@ -506,41 +507,41 @@
                         >
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.years.toFixed(0)
+                              lifeTimeCountDown.years.toFixed(0),
                             ) + 'Y :'
                           }}
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.weeks.toFixed(0)
+                              lifeTimeCountDown.weeks.toFixed(0),
                             ) + 'W :'
                           }}
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.days.toFixed(0)
+                              lifeTimeCountDown.days.toFixed(0),
                             ) + 'D :'
                           }}
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.hours.toFixed(0)
+                              lifeTimeCountDown.hours.toFixed(0),
                             ) + 'H :'
                           }}
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.minutes.toFixed(0)
+                              lifeTimeCountDown.minutes.toFixed(0),
                             ) + 'M :'
                           }}
                           {{
                             new Intl.NumberFormat().format(
-                              lifeTimeCountDown.seconds.toFixed(0)
+                              lifeTimeCountDown.seconds.toFixed(0),
                             ) + 'S'
                           }}
                         </v-col>
                         <v-col
                           cols="12"
                           class="my-0 py-0 text-overline font-weight-bold"
+                          >Wish Me Good Luck in {{ birthdayDays }} Days
+                          😁😎</v-col
                         >
-                          Wish Me Good Luck in {{ birthdayDays }} Days 😁😎
-                        </v-col>
                       </v-row>
                     </template>
                     <span> Counting from my Birthday</span>
@@ -570,7 +571,8 @@
                 line-width="3"
                 auto-draw
                 type="bar"
-              />
+              >
+              </v-sparkline>
             </v-card-text>
           </v-card>
         </v-col>
@@ -593,7 +595,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(strength, index) in swot.strengths"
-                              :key="index"
+                              v-bind:key="index"
                             >
                               {{ index + 1 + '. ' + strength }}
                             </div>
@@ -602,7 +604,7 @@
                             <v-divider
                               vertical
                               class="opaque mx-0 my-0 px-0 py-0"
-                            />
+                            ></v-divider>
                           </v-col>
                           <v-col cols="5" align="left" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -610,13 +612,15 @@
                             </v-card-subtitle>
                             <div
                               v-for="(weakness, index) in swot.weakness"
-                              :key="index"
+                              v-bind:key="index"
                             >
                               {{ index + 1 + '. ' + weakness }}
                             </div>
                           </v-col>
                         </v-row>
-                        <v-divider class="opaque mx-0 my-0 px-0 py-0" />
+                        <v-divider
+                          class="opaque mx-0 my-0 px-0 py-0"
+                        ></v-divider>
                         <v-row>
                           <v-col cols="5" align="right" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -624,7 +628,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(oppor, index) in swot.opportunities"
-                              :key="index"
+                              v-bind:key="index"
                             >
                               {{ index + 1 + '. ' + oppor }}
                             </div>
@@ -633,7 +637,7 @@
                             <v-divider
                               vertical
                               class="opaque mx-0 my-0 px-0 py-0"
-                            />
+                            ></v-divider>
                           </v-col>
                           <v-col cols="5" align="left" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -641,7 +645,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(threats, index) in swot.threats"
-                              :key="index"
+                              v-bind:key="index"
                             >
                               {{ index + 1 + '. ' + threats }}
                             </div>
@@ -674,7 +678,8 @@
                         auto-draw
                         type="trend"
                         :smooth="7"
-                      />
+                      >
+                      </v-sparkline>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -689,7 +694,7 @@
                         <v-row class="mx-0">
                           <v-col
                             v-for="(editor, index) in editorsTrendData"
-                            :key="index"
+                            v-bind:key="index"
                             cols="6"
                             class="my-0 py-1"
                           >
@@ -718,14 +723,13 @@ import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
 import { countUpFromTime, ismobile } from '@p/helpers';
 import gsap from '@p/gsap';
-
 export default {
-  metaInfo() {
+  metaInfo: function () {
     return {
-      title: 'About'
+      title: 'About',
     };
   },
-  data() {
+  data: function () {
     return {
       mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
       bgs: authorData.bgs,
@@ -737,7 +741,7 @@ export default {
         lefttop: '',
         leftKey: 0,
         rightbottom: '',
-        rightKey: 0
+        rightKey: 0,
       },
       lifeTimeCountDown: {
         years: 0,
@@ -745,7 +749,7 @@ export default {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds: 0
+        seconds: 0,
       },
       dailyData: [],
       dailyLabels: [],
@@ -760,28 +764,29 @@ export default {
       resumeDialog: false,
       authorData: {
         ...authorData.main,
-        age: countUpFromTime('May 16, 2000 16:21:00').years
+        age: countUpFromTime('May 16, 2000 16:21:00').years,
       },
       workProfile: authorData.workProfile,
       animatedArray: {
         hashTag: ' ',
         title: ' ',
-        someWords: ' '
-      }
+        someWords: ' ',
+      },
     };
   },
   methods: {
     gotoUrl(url) {
       window.open(url);
+      return;
     },
     lifeTimeCounter(elem) {
       gsap.observeNexecute(elem, () => {
-        const newVals = countUpFromTime('May 16, 2000 16:21:00');
-        const tl = this.$gsap.timeline();
+        let newVals = countUpFromTime('May 16, 2000 16:21:00');
+        let tl = this.$gsap.timeline();
         for (const [key] of Object.entries(this.lifeTimeCountDown)) {
           tl.to(this.$data.lifeTimeCountDown, {
             [key]: newVals[key],
-            duration: 0.8
+            duration: 0.8,
           });
         }
         setTimeout(() => {
@@ -793,9 +798,9 @@ export default {
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
-      const firstInt = this.$_.random(0, this.bgs.length - 1);
+      let firstInt = this.$_.random(0, this.bgs.length - 1);
       let secondInt = this.$_.random(0, this.bgs.length - 1);
-      while (secondInt === firstInt) {
+      while (secondInt == firstInt) {
         secondInt = this.$_.random(0, this.bgs.length - 1);
       }
       this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
@@ -803,27 +808,27 @@ export default {
       this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
       this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
       setInterval(() => {
-        const firstIntLoop = this.$_.random(0, this.bgs.length - 1);
-        let secondIntLoop = this.$_.random(0, this.bgs.length - 1);
-        while (firstIntLoop === secondIntLoop) {
-          secondIntLoop = this.$_.random(0, this.bgs.length - 1);
+        let firstInt = this.$_.random(0, this.bgs.length - 1);
+        let secondInt = this.$_.random(0, this.bgs.length - 1);
+        while (secondInt == firstInt) {
+          secondInt = this.$_.random(0, this.bgs.length - 1);
         }
-        this.$set(this.cardbgs, 'lefttop', this.bgs[firstIntLoop]);
+        this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
         this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
-        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondIntLoop]);
+        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
         this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
         this.$set(this.cardbgs, 'play', true);
       }, Math.floor(Math.random() + 5) * 1000);
     },
     getLabels() {
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      const today = new Date();
-      const dayInText = today.getDay();
-      const currLabels = [];
-      const loopend = dayInText - 7;
-      for (let i = dayInText; i > loopend; i - 1) {
+      let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      let today = new Date();
+      let dayInText = today.getDay();
+      let currLabels = [],
+        loopend = dayInText - 7;
+      for (let i = dayInText; i > loopend; i--) {
         if (i < 0) {
-          const correctId = 7 + i;
+          let correctId = 7 + i;
           currLabels.push(days[correctId]);
         } else {
           currLabels.push(days[i]);
@@ -832,7 +837,7 @@ export default {
       this.dailyLabels = this.$_.reverse(currLabels);
     },
     async getCodingData() {
-      const codeData = await codingData();
+      let codeData = await codingData();
       if (codeData.success && codeData.data != null) {
         this.dailyData = codeData.data.dailyData;
         this.consolMinutes = codeData.data.consolMinutes;
@@ -842,7 +847,7 @@ export default {
       }
     },
     async getLanguageTrend() {
-      const trendData = await languageTrend();
+      let trendData = await languageTrend();
       if (trendData.success && trendData.data != null) {
         this.languageTrendData = trendData.data.languageTrendData;
         this.languageTrendLabels = trendData.data.languageTrendLabels;
@@ -854,7 +859,7 @@ export default {
       }
     },
     async getEditorsTrend() {
-      const editorData = await editorsData();
+      let editorData = await editorsData();
       if (editorData.success && editorData.data != null) {
         this.editorsTrendData = editorData.data.editorsTrendData;
         this.editorsTrendLabels = editorData.data.editorsTrendLabels;
@@ -869,7 +874,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMapsReverse('#keanureeves', ' #john wick '),
-        arrayProperty: 'hashTag'
+        arrayProperty: 'hashTag',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -877,7 +882,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('About me'),
-        arrayProperty: 'title'
+        arrayProperty: 'title',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -885,7 +890,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Some Words'),
-        arrayProperty: 'someWords'
+        arrayProperty: 'someWords',
       });
       this.lifeTimeCounter('#about-lifetime');
       this.setCardBgs();
@@ -893,15 +898,15 @@ export default {
       this.getCodingData();
       this.getLanguageTrend();
       this.getEditorsTrend();
-    }
+    },
   },
   computed: {
     ismobile() {
       return ismobile();
     },
     birthdayDays() {
-      const countDown = countUpFromTime('May 16, 2000 16:21:00');
-      const remainingDays = 365 - countDown.weeks * 7;
+      let countDown = countUpFromTime('May 16, 2000 16:21:00');
+      let remainingDays = 365 - countDown.weeks * 7;
       return remainingDays;
     },
     aboutChips() {
@@ -909,18 +914,18 @@ export default {
         {
           name: 'Profile Card',
           icon: 'mdi-account-box-outline',
-          id: '#about-aboutmecard'
+          id: '#about-aboutmecard',
         },
         {
           name: 'Languages Known',
           icon: 'mdi-language-csharp',
-          id: '#about-languagesknown'
+          id: '#about-languagesknown',
         },
         {
           name: 'More Stats',
           icon: 'mdi-sign-real-estate',
-          id: '#about-moreStats'
-        }
+          id: '#about-moreStats',
+        },
       ];
     },
     languagesKnown() {
@@ -928,41 +933,42 @@ export default {
         return {
           values: [79, 47, 32, 93, 41],
           labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
-          gradient: ['#77a1d3', '#79cbca', '#e684ae']
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
+      } else {
+        return {
+          values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
+          labels: [
+            'Nodejs',
+            'Python',
+            'Illustrator',
+            'ReactJs',
+            'Vuejs',
+            'Adobe Xd',
+            'Lightroom',
+            'Flutter',
+            'Ruby',
+            'Java',
+            'Excel',
+            'Photoshop',
+            'Premiere',
+          ],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
       }
-      return {
-        values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
-        labels: [
-          'Nodejs',
-          'Python',
-          'Illustrator',
-          'ReactJs',
-          'Vuejs',
-          'Adobe Xd',
-          'Lightroom',
-          'Flutter',
-          'Ruby',
-          'Java',
-          'Excel',
-          'Photoshop',
-          'Premiere'
-        ],
-        gradient: ['#77a1d3', '#79cbca', '#e684ae']
-      };
-    }
+    },
   },
   mounted() {
     this.render();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      const { params } = to;
+      let params = to.params;
       if (params.scroll) {
         vm.$vuetify.goTo(params.scrollid);
       }
     });
-  }
+  },
 };
 </script>
 

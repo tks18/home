@@ -3,27 +3,29 @@ import { api } from './routes';
 
 export default {
   get: async () => {
-    const resp = await axios
+    return await axios
       .post(api.gallery.get)
       .then((response) => {
-        if (response.status === 200 && response.data) {
+        if (response.status == 200 && response.data) {
           return {
             success: true,
             data: response.data.data,
-            error: null
+            error: null,
+          };
+        } else {
+          return {
+            success: false,
+            data: null,
+            error: 'Response Failed',
           };
         }
+      })
+      .catch((err) => {
         return {
           success: false,
+          error: err,
           data: null,
-          error: 'Response Failed'
         };
-      })
-      .catch((err) => ({
-        success: false,
-        error: err,
-        data: null
-      }));
-    return resp;
-  }
+      });
+  },
 };

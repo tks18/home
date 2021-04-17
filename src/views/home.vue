@@ -32,7 +32,7 @@
                     top
                     transition="slide-y-transition"
                   >
-                    <template #activator="{ on, attrs }">
+                    <template v-slot:activator="{ on, attrs }">
                       <span
                         v-bind="attrs"
                         v-on="on"
@@ -75,7 +75,7 @@
                 <v-row v-if="!ismobile" align="center">
                   <v-col
                     v-for="(button, index) in heroButtons"
-                    :key="index"
+                    v-bind:key="index"
                     :cols="
                       index == heroButtons.length - 1
                         ? index % 2 == 0
@@ -147,7 +147,7 @@
               @click="
                 $router.push({
                   name: 'About',
-                  params: { scroll: true, scrollid: '#about-languagesknown' }
+                  params: { scroll: true, scrollid: '#about-languagesknown' },
                 })
               "
               :class="
@@ -163,11 +163,11 @@
             <v-row align="center" justify="center">
               <v-tooltip
                 v-for="(activity, index) in activities"
-                :key="index"
+                v-bind:key="index"
                 top
                 transition="slide-y-transition"
               >
-                <template #activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-col
                     v-on="on"
                     v-bind="attrs"
@@ -184,7 +184,7 @@
                         <v-img
                           :max-width="ismobile ? 80 : 110"
                           :src="'/assets/icons/creator/' + activity.asset"
-                        />
+                        ></v-img>
                       </v-col>
                     </v-row>
                     <v-row align="center" class="text-center">
@@ -237,7 +237,7 @@
       >
         <div
           v-for="n in ismobile ? 2 : 5"
-          :key="n"
+          v-bind:key="n"
           class="scrollable-x-child column ma-0 pa-0 non-touch"
         >
           <v-skeleton-loader
@@ -245,7 +245,8 @@
             :width="ismobile ? 225 : 250"
             :height="ismobile ? 300 : 325"
             type="card"
-          />
+          >
+          </v-skeleton-loader>
         </div>
       </div>
       <div
@@ -254,7 +255,7 @@
       >
         <div
           v-for="(story, index) in stories.data"
-          :key="index"
+          v-bind:key="index"
           class="scrollable-x-child column ma-0 pa-0 non-touch"
         >
           <v-card
@@ -265,7 +266,7 @@
             :style="{
               background: 'center',
               backgroundImage: 'url(' + stories.site + story.asset + ')',
-              backgroundSize: 'cover'
+              backgroundSize: 'cover',
             }"
             :width="ismobile ? 225 : 250"
             :height="ismobile ? 300 : 325"
@@ -274,7 +275,9 @@
               <v-row align="start" justify="start" class="back-blur-no-inherit">
                 <v-col cols="2" class="mx-1 pa-0">
                   <v-avatar size="30">
-                    <v-img src="https://i.ibb.co/X4BknVG/DJI-0793-1.webp" />
+                    <v-img
+                      src="https://i.ibb.co/X4BknVG/DJI-0793-1.webp"
+                    ></v-img>
                   </v-avatar>
                 </v-col>
                 <v-col cols="8" class="text-subtitle-1 white--text mx-1 pa-0">
@@ -308,12 +311,12 @@
           </div>
         </v-col>
         <v-col align="end" justify="start" class="mr-4">
-          <v-btn icon color="primary" @click="swipeLeft('posts')">
-            <v-icon>mdi-arrow-left</v-icon>
-          </v-btn>
-          <v-btn icon color="primary" @click="swipeRight('posts')">
-            <v-icon>mdi-arrow-right</v-icon>
-          </v-btn>
+          <v-btn icon color="primary" @click="swipeLeft('posts')"
+            ><v-icon>mdi-arrow-left</v-icon></v-btn
+          >
+          <v-btn icon color="primary" @click="swipeRight('posts')"
+            ><v-icon>mdi-arrow-right</v-icon></v-btn
+          >
         </v-col>
       </v-row>
       <div
@@ -323,10 +326,10 @@
         <div
           v-for="n in 10"
           class="scrollable-x-child column ma-0 pa-0 non-touch point-cursor"
-          :key="n"
+          v-bind:key="n"
         >
           <v-hover>
-            <template #default="{ hover }">
+            <template v-slot:default="{ hover }">
               <v-card
                 elevation="3"
                 v-ripple
@@ -337,7 +340,7 @@
                 <v-card>
                   <v-img
                     src="https://i.ibb.co/BftbgSg/download-force-true-w-1920.jpg"
-                  />
+                  ></v-img>
                 </v-card>
                 <v-card-text>
                   <h2 class="text-subtitle-1 font-weight-bold primary--text">
@@ -367,7 +370,7 @@
                           elit. A necessitatibus, molestiae magni deleniti hic
                           natus facilis.
                         </v-row>
-                        <v-spacer />
+                        <v-spacer></v-spacer>
                         <v-row class="mt-1">
                           <v-btn color="primary" small>Read More</v-btn>
                         </v-row>
@@ -403,7 +406,7 @@
                   <div
                     class="text font-weight-semibold mx-2 px-2"
                     v-html="heroData.subtitle"
-                  />
+                  ></div>
                 </v-row>
                 <v-row align="end" justify="end" class="my-1 mx-2 px-2 py-1">
                   <v-btn
@@ -412,8 +415,8 @@
                         name: 'About',
                         params: {
                           scroll: true,
-                          scrollid: '#about-aboutmecard'
-                        }
+                          scrollid: '#about-aboutmecard',
+                        },
                       })
                     "
                     color="primary"
@@ -435,7 +438,7 @@
                     $vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light'
                   "
                 >
-                  <v-img :src="aboutData.image" />
+                  <v-img :src="aboutData.image"></v-img>
                 </v-avatar>
               </v-col>
             </v-row>
@@ -446,7 +449,7 @@
     <div class="column is-full">
       <v-container>
         <v-tooltip top transition="slide-y-transition">
-          <template #activator="{ on, attrs }">
+          <template v-slot:activator="{ on, attrs }">
             <v-card
               :loading="quotesLoading"
               img="https://i.ibb.co/0nf9FwS/bb-3.webp"
@@ -506,9 +509,10 @@
         </v-col>
         <v-col cols="12" v-if="projects.loading">
           <v-row>
-            <v-col v-for="n in ismobile ? 1 : 5" :key="n">
+            <v-col v-for="n in ismobile ? 1 : 5" v-bind:key="n">
               <v-card>
-                <v-skeleton-loader class="mx-auto" type="card" />
+                <v-skeleton-loader class="mx-auto" type="card">
+                </v-skeleton-loader>
               </v-card>
             </v-col>
           </v-row>
@@ -519,10 +523,10 @@
               v-for="(project, index) in projects.projects"
               class="mx-0 px-1"
               :cols="ismobile && 12"
-              :key="index"
+              v-bind:key="index"
             >
               <v-hover>
-                <template #default="{ hover }">
+                <template v-slot:default="{ hover }">
                   <v-card
                     :max-width="
                       ismobile
@@ -532,7 +536,7 @@
                           5
                     "
                   >
-                    <v-img contain :src="githubPhoto" />
+                    <v-img contain :src="githubPhoto"></v-img>
                     <v-row justify="space-between" class="ma-0 pa-0">
                       <v-col class="ma-0 pa-0" cols="12">
                         <v-card-title class="text-overline ma-1 pa-1">
@@ -598,7 +602,7 @@
                             pill
                           >
                             <v-avatar size="6" left>
-                              <v-img :src="project.owner.avatar_url" />
+                              <v-img :src="project.owner.avatar_url"></v-img>
                             </v-avatar>
                             {{ project.owner.login }}
                           </v-chip>
@@ -617,7 +621,7 @@
                         <v-row class="ma-1">
                           <v-col align="center" cols="12">
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.stargazers_url)"
@@ -632,7 +636,7 @@
                               <span>Watchers</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.forks_url)"
@@ -647,7 +651,7 @@
                               <span>Forks</span>
                             </v-tooltip>
                             <v-tooltip top transition="slide-y-transition">
-                              <template #activator="{ on }">
+                              <template v-slot:activator="{ on }">
                                 <v-chip
                                   v-on="on"
                                   @click="gotoUrl(project.stargazers_url)"
@@ -772,7 +776,7 @@
                     :cols="ismobile ? 12 : 7"
                     :class="ismobile ? 'ma-0 mb-1' : 'ml-0 my-0'"
                   >
-                    <v-img :src="!apodLoading ? apodData.hdurl : null" />
+                    <v-img :src="!apodLoading ? apodData.hdurl : null"></v-img>
                   </v-col>
                   <v-col :cols="ismobile ? 12 : 5">
                     <v-card-title v-if="!apodLoading">
@@ -809,12 +813,15 @@
         </v-col>
         <v-col cols="12">
           <div class="text-body-1 ml-4">
-            SpaceX is the innovative and ambitious private aerospace
-            manufacturer founded in 2002 by Elon Musk. SpaceX truly earned its
-            place among the aeronautical elite—and changed the economics of
-            space flight­—by making its reusable rocket system seemingly as
-            reliable as the sunrise. We will Soon have a Dedicated Page for
-            Spacex and Elon Musk (Really Sooon).
+            You Know Something ! I am Really Obsessed with Spacex and
+            Particularly
+            <span class="primary--text font-weight-bold">Elon Musk</span>.Do you
+            know Why ?<br />SpaceX is the innovative and ambitious private
+            aerospace manufacturer founded in 2002 by Elon Musk. SpaceX truly
+            earned its place among the aeronautical elite—and changed the
+            economics of space flight­—by making its reusable rocket system
+            seemingly as reliable as the sunrise. We will Soon have a Dedicated
+            Page for Spacex and Elon Musk (Really Sooon).
             <span class="primary--text font-weight-bold">
               So here is the Latest Launch News below:
             </span>
@@ -864,7 +871,7 @@
                       <div>
                         <span class="font-weight-bold"> Launch Status </span> -
                         <v-tooltip top transition="slide-y-transition">
-                          <template #activator="{ on, attrs }">
+                          <template v-slot:activator="{ on, attrs }">
                             <v-icon
                               v-on="on"
                               v-bind="attrs"
@@ -955,8 +962,7 @@
                           outlined
                           class="mx-1"
                           color="primary"
-                        >
-                          <v-icon small left> mdi-text-box-search</v-icon>
+                          ><v-icon small left> mdi-text-box-search</v-icon>
                           Article
                         </v-chip>
                         <v-chip
@@ -966,8 +972,7 @@
                           outlined
                           class="mx-1"
                           color="primary"
-                        >
-                          <v-icon small left> mdi-wikipedia</v-icon> wiki
+                          ><v-icon small left> mdi-wikipedia</v-icon> wiki
                         </v-chip>
                         <v-chip
                           @click="$router.push('/spacex/' + launchData.id)"
@@ -976,10 +981,9 @@
                           outlined
                           class="mx-1"
                           color="primary"
-                        >
-                          <v-icon small left>
-                            mdi-file-document-outline
-                          </v-icon>
+                          ><v-icon small left>
+                            mdi-file-document-outline</v-icon
+                          >
                           More Info
                         </v-chip>
                       </div>
@@ -990,14 +994,14 @@
                     align="center"
                     justify="center"
                   >
-                    <v-img :src="launchData.links.flickr.original[0]" />
+                    <v-img :src="launchData.links.flickr.original[0]"></v-img>
                   </v-col>
                 </v-row>
               </v-card-text>
               <v-card-actions class="mx-2" v-if="!launchloading">
-                <v-spacer />
+                <v-spacer></v-spacer>
                 <v-tooltip top transition="slide-x-transition">
-                  <template #activator="{ on, attrs }">
+                  <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       @click="gotoUrl(launchData.links.flickr.original[0])"
                       v-on="on"
@@ -1050,8 +1054,8 @@
                     <v-col cols="12" align="center">
                       <v-avatar
                         v-if="
-                          contextInfo.viewport.height * 0.47 > 220 &&
-                          channel.data.snippet.thumbnails
+                          channel.data.snippet.thumbnails.high.url &&
+                          contextInfo.viewport.height * 0.47 > 220
                         "
                         :size="
                           ismobile ? 150 : contextInfo.viewport.width * 0.095
@@ -1060,7 +1064,7 @@
                       >
                         <v-img
                           :src="channel.data.snippet.thumbnails.high.url"
-                        />
+                        ></v-img>
                       </v-avatar>
                     </v-col>
                     <v-col cols="12" align="center">
@@ -1075,7 +1079,7 @@
                         small
                         @click="
                           gotoUrl(
-                            'https://youtube.com/channel/' + channel.data.id
+                            'https://youtube.com/channel/' + channel.data.id,
                           )
                         "
                         color="#C4302B"
@@ -1093,11 +1097,11 @@
                 <v-slide-group :show-arrows="!ismobile">
                   <v-slide-item
                     v-for="(video, index) in channel.videos"
-                    :key="index"
+                    v-bind:key="index"
                     class="mx-2"
                   >
                     <v-hover>
-                      <template #default="{ hover }">
+                      <template v-slot:default="{ hover }">
                         <v-card
                           raised
                           :height="
@@ -1115,7 +1119,7 @@
                           <v-slide-y-transition mode="out-in">
                             <v-card-text v-if="!hover" class="inherit-height">
                               <v-row class="inherit-height" align="end">
-                                <v-spacer />
+                                <v-spacer></v-spacer>
                                 <v-col cols="12">
                                   <v-sheet
                                     class="pa-3"
@@ -1148,9 +1152,9 @@
                               <v-card-title>
                                 <v-row align="center">
                                   <v-col :cols="ismobile ? 10 : 8" align="left">
-                                    <v-icon color="#C4302B" class="mx-1">
-                                      mdi-youtube
-                                    </v-icon>
+                                    <v-icon color="#C4302B" class="mx-1"
+                                      >mdi-youtube</v-icon
+                                    >
                                     Youtube Player
                                   </v-col>
                                   <v-col :cols="ismobile ? 2 : 4" align="right">
@@ -1188,7 +1192,7 @@
                                       frameborder="0"
                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                       allowfullscreen
-                                    />
+                                    ></iframe>
                                   </v-col>
                                   <v-col
                                     :cols="ismobile ? 12 : 5"
@@ -1245,9 +1249,9 @@
                                     <v-col cols="12" align="center">
                                       <v-btn color="primary">
                                         Visit my Channel
-                                        <v-icon right>
-                                          mdi-television-classic
-                                        </v-icon>
+                                        <v-icon right
+                                          >mdi-television-classic</v-icon
+                                        >
                                       </v-btn>
                                     </v-col>
                                   </v-row>
@@ -1269,7 +1273,8 @@
             type="card"
             class="mx-auto"
             :width="ismobile ? 'auto' : 400"
-          />
+          >
+          </v-skeleton-loader>
         </v-col>
       </v-row>
     </div>
@@ -1341,7 +1346,7 @@
                   <v-card-subtitle class="my-1 py-0">
                     {{ galleryLoading ? ' ' : 'by ' + galleryData[0].by.user }}
                     <v-avatar v-if="!galleryLoading" size="25">
-                      <v-img :src="galleryData[0].by.profilePic" />
+                      <v-img :src="galleryData[0].by.profilePic"> </v-img>
                     </v-avatar>
                   </v-card-subtitle>
                   <v-card-text v-if="!galleryLoading">
@@ -1365,8 +1370,12 @@
             </v-card>
           </v-hover>
         </v-col>
-        <v-col v-for="m in ismobile ? 1 : 2" :key="m" :cols="ismobile ? 12 : 3">
-          <v-hover v-for="n in 2" :key="n" v-slot="{ hover }">
+        <v-col
+          v-for="m in ismobile ? 1 : 2"
+          v-bind:key="m"
+          :cols="ismobile ? 12 : 3"
+        >
+          <v-hover v-for="n in 2" v-bind:key="n" v-slot="{ hover }">
             <v-card
               :img="
                 galleryLoading
@@ -1435,7 +1444,8 @@
                         :src="
                           galleryData[m == 2 ? m + n : m + n - 1].by.profilePic
                         "
-                      />
+                      >
+                      </v-img>
                     </v-avatar>
                   </v-card-subtitle>
                   <v-card-text v-if="!galleryLoading">
@@ -1451,7 +1461,7 @@
                       color="primary"
                       @click="
                         gotoUrl(
-                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl
+                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl,
                         )
                       "
                     >
@@ -1462,7 +1472,7 @@
                       color="primary"
                       @click="
                         gotoUrl(
-                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink
+                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink,
                         )
                       "
                     >
@@ -1524,7 +1534,7 @@
                       label="Enter Your Name"
                       hide-details="auto"
                       outlined
-                    />
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -1538,7 +1548,7 @@
                       label="Enter Your Email ID"
                       hide-details="auto"
                       outlined
-                    />
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -1555,7 +1565,7 @@
                       label="Your Feedback bruh ?"
                       :filled="true"
                       :outlined="true"
-                    />
+                    ></v-textarea>
                   </v-col>
                 </v-row>
                 <v-row align="center">
@@ -1591,29 +1601,27 @@ import { apod } from '@p/resources/nasa';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
 import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
-
 export default {
-  metaInfo() {
+  metaInfo: function () {
     return {
-      title: 'Home'
+      title: 'Home',
     };
   },
-  data() {
+  data: function () {
     return {
       user: 'tks18',
       heroData: {
         title: 'Hello There !',
         image: 'https://i.ibb.co/CQqRR3b/profile.png',
-        subtitle:
-          '<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI\'s. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.',
+        subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
         rounded: true,
         buttonUrl: '/about',
-        buttontext: 'Contact Me !'
+        buttontext: 'Contact Me !',
       },
       stories: {
         loading: true,
         site: '',
-        data: []
+        data: [],
       },
       quotesLoading: false,
       quotesData: {},
@@ -1621,48 +1629,48 @@ export default {
         {
           name: 'About Me',
           icon: 'mdi-information-variant',
-          id: 'home-abouttitle'
+          id: 'home-abouttitle',
         },
         {
           name: 'What i Do',
           icon: 'mdi-console-network',
-          id: 'home-whatiDo'
+          id: 'home-whatiDo',
         },
         {
           name: 'My Blog',
           icon: 'mdi-post-outline',
-          id: 'home-blogtitle'
+          id: 'home-blogtitle',
         },
         {
           name: 'Some Extras',
           icon: 'mdi-one-up',
-          id: 'home-astroPicTitle'
+          id: 'home-astroPicTitle',
         },
         {
           name: 'Projects',
           icon: 'mdi-projector-screen',
-          id: 'home-projtitle'
+          id: 'home-projtitle',
         },
         {
           name: 'Contact Me',
           icon: 'mdi-contactless-payment',
-          id: 'home-feedbacktitile'
-        }
+          id: 'home-feedbacktitile',
+        },
       ],
       projects: {
         loading: false,
-        projects: {}
+        projects: {},
       },
       channel: {
         loading: true,
         data: {},
-        videos: []
+        videos: [],
       },
       ytdialog: false,
       channel_elevation: 2,
       contextInfo: {
         os: getOs(),
-        viewport: getViewport()
+        viewport: getViewport(),
       },
       toggleTooltip: false,
       galleryMaxWidth: 0,
@@ -1691,27 +1699,29 @@ export default {
         contactTitle: ' ',
         feedBack: ' ',
         spacextitle: ' ',
-        astroPicTitle: ' '
+        astroPicTitle: ' ',
       },
       aboutData: {
-        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp'
-      }
+        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
+      },
     };
   },
   methods: {
     gotoUrl(url, self) {
       if (self) {
         window.open(url, '_self');
+        return;
       } else {
         window.open(url);
+        return;
       }
     },
     swipeLeft(func) {
-      const content = `this.$refs.${func}`;
+      const content = 'this.$refs.' + func;
       scrollTo(eval(content), -400, 300);
     },
     swipeRight(func) {
-      const content = `this.$refs.${func}`;
+      const content = 'this.$refs.' + func;
       scrollTo(eval(content), 400, 300);
     },
     loopRandEmoji() {
@@ -1720,14 +1730,14 @@ export default {
         emoji: true,
         arrayName: 'animatedArray',
         map: generateRandomEmojis(3),
-        arrayProperty: 'randEmoji'
+        arrayProperty: 'randEmoji',
       });
       setTimeout(() => {
         this.toggleTooltip = false;
       }, 5000);
     },
     async getStories() {
-      const storydata = await stories.get();
+      let storydata = await stories.get();
       if (storydata.success && storydata.stories) {
         this.stories.site = storydata.website;
         this.stories.data = storydata.stories;
@@ -1750,36 +1760,37 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                }
-              }
-            ]
-          }
+                },
+              },
+            ],
+          },
         });
       }
     },
     async getChannelData() {
       this.$set(this.channel, 'loading', true);
-      const channel_data_response = await channel_data(
-        'UCD0rffboMQCgIggZJWDivjg'
+      let channel_data_response = await channel_data(
+        'UCD0rffboMQCgIggZJWDivjg',
       );
       if (channel_data_response.success && !channel_data_response.error) {
-        const data = channel_data_response.data.items[0];
+        let data = channel_data_response.data.items[0];
         this.$set(this.channel, 'data', data);
         this.$set(this.channel, 'loading', false);
       }
     },
     async getChannelVideos() {
       this.$set(this.channel, 'loading', true);
-      const video_response = await videos();
+      let video_response = await videos();
       if (video_response.success && !video_response.error) {
-        const channel_videos = video_response.data.items;
-        const new_video_array = [];
-        channel_videos.forEach((video, index) => {
-          const new_video = video;
-          new_video.model = false;
-          new_video.index = index;
+        let videos = video_response.data.items;
+        let new_video_array = [];
+        videos.forEach((video, index) => {
+          let new_video = video;
+          new_video['model'] = false;
+          new_video['index'] = index;
           new_video_array.push(new_video);
         });
+        console.log(new_video_array);
         this.$set(this.channel, 'videos', new_video_array);
         this.$set(this.channel, 'loading', false);
       }
@@ -1787,7 +1798,7 @@ export default {
     async getQuotes() {
       const quotes = await breakingBad();
       if (quotes.success && quotes.data != null) {
-        [this.quotesData] = quotes.data;
+        this.quotesData = quotes.data[0];
         this.quotesLoading = false;
       } else {
         this.quotesLoading = true;
@@ -1814,13 +1825,13 @@ export default {
       }
     },
     async getProjects() {
-      const projectsData = await projects(this.ismobile, this.user);
+      let projectsData = await projects(this.ismobile, this.user);
       if (projectsData.success && projectsData.data != null) {
         this.$set(this.projects, 'loading', false);
         this.$set(
           this.projects,
           'projects',
-          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data
+          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data,
         );
       } else {
         this.$notify({
@@ -1839,10 +1850,10 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                }
-              }
-            ]
-          }
+                },
+              },
+            ],
+          },
         });
         this.$set(this.projects, 'loading', false);
         this.$set(this.projects, 'projects', {});
@@ -1851,7 +1862,7 @@ export default {
     async getGalleryPics() {
       const galleryData = await gallery.get();
       if (galleryData.success) {
-        const shuffledPics = galleryData.data.slice(0, 5);
+        let shuffledPics = galleryData.data.slice(0, 5);
         shuffledPics.forEach((pic) => {
           this.galleryData.push({
             description: pic.description,
@@ -1860,15 +1871,15 @@ export default {
             links: {
               thumb: pic.urls.thumb,
               regular: pic.urls.regular,
-              full: pic.urls.full
+              full: pic.urls.full,
             },
             originalUrl: pic.links.html,
             downloadLink: pic.links.download,
             by: {
               user: pic.user.username,
               name: pic.user.first_name,
-              profilePic: pic.user.profile_image.medium
-            }
+              profilePic: pic.user.profile_image.medium,
+            },
           });
           this.galleryLoading = false;
         });
@@ -1890,10 +1901,10 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                }
-              }
-            ]
-          }
+                },
+              },
+            ],
+          },
         });
       }
     },
@@ -1923,10 +1934,10 @@ export default {
                   text: 'Open Email',
                   onClick: () => {
                     this.gotoUrl(this.mailtoLink);
-                  }
-                }
-              ]
-            }
+                  },
+                },
+              ],
+            },
           });
           setTimeout(() => {
             this.emailType = 'info';
@@ -1949,15 +1960,15 @@ export default {
                   text: 'Open Email',
                   onClick: () => {
                     this.gotoUrl(this.mailtoLink);
-                  }
-                }
-              ]
-            }
+                  },
+                },
+              ],
+            },
           });
           setTimeout(() => {
             this.emailType = 'info';
           }, 3003);
-        }
+        },
       );
     },
     initiateObservers() {
@@ -1967,7 +1978,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('what i do'),
-        arrayProperty: 'whatiDo'
+        arrayProperty: 'whatiDo',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1975,7 +1986,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Stories'),
-        arrayProperty: 'stories'
+        arrayProperty: 'stories',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1983,7 +1994,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('About me'),
-        arrayProperty: 'about'
+        arrayProperty: 'about',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1991,7 +2002,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Projects'),
-        arrayProperty: 'projtitle'
+        arrayProperty: 'projtitle',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1999,7 +2010,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Astro Pic of the Day'),
-        arrayProperty: 'astroPicTitle'
+        arrayProperty: 'astroPicTitle',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2007,7 +2018,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Spacex News'),
-        arrayProperty: 'spacextitle'
+        arrayProperty: 'spacextitle',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2015,7 +2026,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Youtube'),
-        arrayProperty: 'channel_title'
+        arrayProperty: 'channel_title',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2023,7 +2034,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Galleria'),
-        arrayProperty: 'gallerytitle'
+        arrayProperty: 'gallerytitle',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2031,7 +2042,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('My Blog'),
-        arrayProperty: 'blog'
+        arrayProperty: 'blog',
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2039,7 +2050,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Submit Your Feedback'),
-        arrayProperty: 'feedBack'
+        arrayProperty: 'feedBack',
       });
     },
     fetchApiS() {
@@ -2056,10 +2067,14 @@ export default {
       this.loopRandEmoji();
       this.initiateObservers();
       this.fetchApiS();
+      console.log(
+        this.contextInfo.viewport.width,
+        this.contextInfo.viewport.height,
+      );
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
-    }
+    },
   },
   computed: {
     ismobile() {
@@ -2071,46 +2086,46 @@ export default {
           asset: 'web coding.svg',
           activity: 'Developing Frontends',
           description: 'Developing Classy, Sassy, Professional Grade Frontends',
-          tooltip: 'Get to Know What Frameworks I Code for Development'
+          tooltip: 'Get to Know What Frameworks I Code for Development',
         },
         {
           asset: 'picture.svg',
           activity: 'Image Manipulation',
           description: 'Well Versed in Post Processing of Photographs',
-          tooltip: 'Get to Know What Softwares I Use for Post Processing'
+          tooltip: 'Get to Know What Softwares I Use for Post Processing',
         },
         {
           asset: 'device.svg',
           activity: 'App Development',
           description: 'Mobile App Development Based on Flutter SDK',
-          tooltip: 'Get to Know What i learnt in Flutter'
+          tooltip: 'Get to Know What i learnt in Flutter',
         },
         {
           asset: 'idea.svg',
           activity: 'Hosting Solutions Guidance',
           description:
             'Advising on Suitable and Best Hosting Solutions for a Website / Server',
-          tooltip: 'Get to Know What type of Consulting i will give'
+          tooltip: 'Get to Know What type of Consulting i will give',
         },
         {
           asset: 'programming.svg',
           activity: 'Presentations',
           description: 'Desgining Wonderful and Eye Catching Presentations',
           tooltip:
-            'Get to Know What Softwares i use for Designing Presentations'
+            'Get to Know What Softwares i use for Designing Presentations',
         },
         {
           asset: 'layer.svg',
           activity: 'Architecting Backends',
           description:
             'Constructing Secure and Powerful Backends for Frontends',
-          tooltip: 'Get to Know What Languages I Use for Backends'
+          tooltip: 'Get to Know What Languages I Use for Backends',
         },
         {
           asset: 'speed test.svg',
           activity: 'Video Editing',
           description: 'Editing and Color Grading Videos  for a Cinematic Look',
-          tooltip: 'Get to Know What Softwares I Use for Video Editing'
+          tooltip: 'Get to Know What Softwares I Use for Video Editing',
         },
         {
           asset: 'binary code.svg',
@@ -2118,13 +2133,13 @@ export default {
           description:
             'Crunching, Cleaning and Manipluating Data and Getting Insights',
           tooltip:
-            'Get to Know What Languages and Softwares with Which i Analyze Data'
-        }
+            'Get to Know What Languages and Softwares with Which i Analyze Data',
+        },
       ];
-    }
+    },
   },
   mounted() {
     this.render();
-  }
+  },
 };
 </script>

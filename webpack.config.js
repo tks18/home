@@ -1,16 +1,15 @@
-const WebpackBar = require('webpackbar');
-
 const { loaders, optimizations, plugins, resolvers } = require('./webpack');
+const WebpackBar = require('webpackbar');
 
 module.exports = {
   module: {
-    rules: [...loaders]
+    rules: [...loaders],
   },
   optimization: optimizations,
   plugins: [...plugins, new WebpackBar()],
   resolve: resolvers(__dirname),
   resolveLoader: {
-    modules: ['node_modules']
+    modules: ['node_modules'],
   },
-  stats: 'normal'
+  stats: 'normal',
 };

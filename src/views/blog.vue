@@ -1,20 +1,20 @@
 <template>
   <div>
     <p class="text">Welcome to Blog Vue Page</p>
-    <v-skeleton-loader class="mx-auto" type="card" />
+    <v-skeleton-loader class="mx-auto" type="card"></v-skeleton-loader>
   </div>
 </template>
 
 <script>
 export default {
-  metaInfo() {
+  metaInfo: function () {
     return {
-      title: 'Blog'
+      title: 'Blog',
     };
   },
-  data() {
+  data: function () {
     return {};
-  }
+  },
 };
 </script>
 

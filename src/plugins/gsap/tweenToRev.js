@@ -1,10 +1,10 @@
 import { gsap } from 'gsap';
-import { lettersArray, safeEmojis } from '@t/emoji-array';
 import observeNexecute from './observer';
+import { lettersArray, safeEmojis } from '@t/emoji-array';
 
-const update = (options) => {
-  let html = '';
-  const wordsarray = options.emoji ? safeEmojis : lettersArray;
+let update = (options) => {
+  var html = '';
+  let wordsarray = options.emoji ? safeEmojis : lettersArray;
   options.map.startArray.forEach((map) => {
     html += wordsarray[Math.round(map) % wordsarray.length];
   });
@@ -13,48 +13,48 @@ const update = (options) => {
 
 export function tweenToRevObserver(options) {
   observeNexecute(options.elem, () => {
-    const tl = gsap.timeline({
+    var tl = gsap.timeline({
       repeat: -1,
       yoyo: true,
       repeatDelay: 2,
       onUpdate: () => {
         update(options);
-      }
+      },
     });
-    const wordsarray = options.emoji ? safeEmojis : lettersArray;
+    let wordsarray = options.emoji ? safeEmojis : lettersArray;
     options.map.finalArray.forEach((range, index) => {
       tl.to(
         options.map.startArray,
         {
           [index]: wordsarray.length * 2 + range,
           ease: 'power4',
-          duration: index / 4 + 1
+          duration: index / 4 + 1,
         },
-        0
+        0,
       );
     });
   });
 }
 
 export default (options) => {
-  const tl = gsap.timeline({
+  var tl = gsap.timeline({
     repeat: -1,
     yoyo: true,
     repeatDelay: 2,
     onUpdate: () => {
       update(options);
-    }
+    },
   });
-  const wordsarray = options.emoji ? safeEmojis : lettersArray;
+  let wordsarray = options.emoji ? safeEmojis : lettersArray;
   options.map.finalArray.forEach((range, index) => {
     tl.to(
       options.map.startArray,
       {
         [index]: wordsarray.length * 2 + range,
         ease: 'power4',
-        duration: index / 4 + 1
+        duration: index / 4 + 1,
       },
-      0
+      0,
     );
   });
 };

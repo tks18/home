@@ -1,12 +1,12 @@
 export default (elem, callback) => {
-  let observer = null;
-  const target = document.querySelector(elem);
-  const options = {
+  let observer;
+  let target = document.querySelector(elem);
+  let options = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.6
+    threshold: 0.6,
   };
-  const handleIntersect = (entries) => {
+  let handleIntersect = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         callback();
