@@ -34,16 +34,14 @@
 </template>
 
 <script>
-import { ismobile } from '@p/helpers';
-import musicPlayer from './music-player.vue';
-import bottomSettings from './bottom-settings.vue';
-
+import musicPlayer from './music-player';
+import bottomSettings from './bottom-settings';
 export default {
   components: {
     musicPlayer,
     bottomSettings,
   },
-  data() {
+  data: function () {
     return {
       fab: false,
       endofPage: false,
@@ -65,7 +63,12 @@ export default {
   },
   computed: {
     ismobile() {
-      return ismobile();
+      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+      if (width > 966) {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
   mounted() {

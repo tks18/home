@@ -1,6 +1,6 @@
 <template>
   <v-bottom-sheet inset v-model="activated" persistent>
-    <template #activator="{ on, attrs }">
+    <template v-slot:activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>
           <v-icon>mdi-cog-refresh</v-icon>
@@ -33,9 +33,9 @@
           <h2 class="title primary--text">Settings</h2>
         </v-col>
         <v-col align="end" justify="start">
-          <v-btn color="primary" icon @click="activated = !activated">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
+          <v-btn color="primary" icon @click="activated = !activated"
+            ><v-icon>mdi-close</v-icon></v-btn
+          >
         </v-col>
       </v-row>
       <v-row>
@@ -59,7 +59,7 @@
                     ($state.store.botSettings.darkmode ? ' Off' : ' On') +
                     ' Dark Mode'
                   "
-                />
+                ></v-switch>
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -83,7 +83,7 @@
                   hide-inputs
                   hide-mode-switch
                   v-model="accent"
-                />
+                ></v-color-picker>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
@@ -133,7 +133,7 @@
                   :label="
                     $state.store.botSettings.navBlur ? ' Disable' : ' Enable'
                   "
-                />
+                ></v-switch>
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -147,11 +147,10 @@
 export default {
   props: {
     model: {
-      default: 'list',
       type: String,
     },
   },
-  data() {
+  data: function () {
     return {
       activated: false,
       colorDiag: false,
@@ -213,7 +212,7 @@ export default {
     },
   },
   mounted() {
-    const themecache = JSON.parse(localStorage.getItem('themecache'));
+    var themecache = JSON.parse(localStorage.getItem('themecache'));
     if (themecache && themecache != null) {
       this.$state.store.botSettings.darkmode = themecache.dark;
       this.$state.store.botSettings.navBlur = themecache.blur;

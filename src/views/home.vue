@@ -147,7 +147,7 @@
               @click="
                 $router.push({
                   name: 'About',
-                  params: { scroll: true, scrollid: '#about-languagesknown' },
+                  params: { scroll: true, scrollid: '#about-languagesknown' }
                 })
               "
               :class="
@@ -265,7 +265,7 @@
             :style="{
               background: 'center',
               backgroundImage: 'url(' + stories.site + story.asset + ')',
-              backgroundSize: 'cover',
+              backgroundSize: 'cover'
             }"
             :width="ismobile ? 225 : 250"
             :height="ismobile ? 300 : 325"
@@ -412,8 +412,8 @@
                         name: 'About',
                         params: {
                           scroll: true,
-                          scrollid: '#about-aboutmecard',
-                        },
+                          scrollid: '#about-aboutmecard'
+                        }
                       })
                     "
                     color="primary"
@@ -1075,7 +1075,7 @@
                         small
                         @click="
                           gotoUrl(
-                            'https://youtube.com/channel/' + channel.data.id,
+                            'https://youtube.com/channel/' + channel.data.id
                           )
                         "
                         color="#C4302B"
@@ -1451,7 +1451,7 @@
                       color="primary"
                       @click="
                         gotoUrl(
-                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl,
+                          galleryData[m == 2 ? m + n : m + n - 1].originalUrl
                         )
                       "
                     >
@@ -1462,7 +1462,7 @@
                       color="primary"
                       @click="
                         gotoUrl(
-                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink,
+                          galleryData[m == 2 ? m + n : m + n - 1].downloadLink
                         )
                       "
                     >
@@ -1585,9 +1585,9 @@
 import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
 import { channel_data, videos } from '@p/resources/youtube';
-import breakingBad from '@p/resources/quotes';
+import { breakingBad } from '@p/resources/quotes';
 import { latestLaunches } from '@p/resources/spacex';
-import apod from '@p/resources/nasa';
+import { apod } from '@p/resources/nasa';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
 import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
@@ -1595,7 +1595,7 @@ import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
 export default {
   metaInfo() {
     return {
-      title: 'Home',
+      title: 'Home'
     };
   },
   data() {
@@ -1608,12 +1608,12 @@ export default {
           '<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI\'s. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.',
         rounded: true,
         buttonUrl: '/about',
-        buttontext: 'Contact Me !',
+        buttontext: 'Contact Me !'
       },
       stories: {
         loading: true,
         site: '',
-        data: [],
+        data: []
       },
       quotesLoading: false,
       quotesData: {},
@@ -1621,48 +1621,48 @@ export default {
         {
           name: 'About Me',
           icon: 'mdi-information-variant',
-          id: 'home-abouttitle',
+          id: 'home-abouttitle'
         },
         {
           name: 'What i Do',
           icon: 'mdi-console-network',
-          id: 'home-whatiDo',
+          id: 'home-whatiDo'
         },
         {
           name: 'My Blog',
           icon: 'mdi-post-outline',
-          id: 'home-blogtitle',
+          id: 'home-blogtitle'
         },
         {
           name: 'Some Extras',
           icon: 'mdi-one-up',
-          id: 'home-astroPicTitle',
+          id: 'home-astroPicTitle'
         },
         {
           name: 'Projects',
           icon: 'mdi-projector-screen',
-          id: 'home-projtitle',
+          id: 'home-projtitle'
         },
         {
           name: 'Contact Me',
           icon: 'mdi-contactless-payment',
-          id: 'home-feedbacktitile',
-        },
+          id: 'home-feedbacktitile'
+        }
       ],
       projects: {
         loading: false,
-        projects: {},
+        projects: {}
       },
       channel: {
         loading: true,
         data: {},
-        videos: [],
+        videos: []
       },
       ytdialog: false,
       channel_elevation: 2,
       contextInfo: {
         os: getOs(),
-        viewport: getViewport(),
+        viewport: getViewport()
       },
       toggleTooltip: false,
       galleryMaxWidth: 0,
@@ -1691,11 +1691,11 @@ export default {
         contactTitle: ' ',
         feedBack: ' ',
         spacextitle: ' ',
-        astroPicTitle: ' ',
+        astroPicTitle: ' '
       },
       aboutData: {
-        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
-      },
+        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp'
+      }
     };
   },
   methods: {
@@ -1720,7 +1720,7 @@ export default {
         emoji: true,
         arrayName: 'animatedArray',
         map: generateRandomEmojis(3),
-        arrayProperty: 'randEmoji',
+        arrayProperty: 'randEmoji'
       });
       setTimeout(() => {
         this.toggleTooltip = false;
@@ -1750,17 +1750,17 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                },
-              },
-            ],
-          },
+                }
+              }
+            ]
+          }
         });
       }
     },
     async getChannelData() {
       this.$set(this.channel, 'loading', true);
       const channel_data_response = await channel_data(
-        'UCD0rffboMQCgIggZJWDivjg',
+        'UCD0rffboMQCgIggZJWDivjg'
       );
       if (channel_data_response.success && !channel_data_response.error) {
         const data = channel_data_response.data.items[0];
@@ -1820,7 +1820,7 @@ export default {
         this.$set(
           this.projects,
           'projects',
-          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data,
+          this.ismobile ? projectsData.data.slice(0, 2) : projectsData.data
         );
       } else {
         this.$notify({
@@ -1839,10 +1839,10 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                },
-              },
-            ],
-          },
+                }
+              }
+            ]
+          }
         });
         this.$set(this.projects, 'loading', false);
         this.$set(this.projects, 'projects', {});
@@ -1860,15 +1860,15 @@ export default {
             links: {
               thumb: pic.urls.thumb,
               regular: pic.urls.regular,
-              full: pic.urls.full,
+              full: pic.urls.full
             },
             originalUrl: pic.links.html,
             downloadLink: pic.links.download,
             by: {
               user: pic.user.username,
               name: pic.user.first_name,
-              profilePic: pic.user.profile_image.medium,
-            },
+              profilePic: pic.user.profile_image.medium
+            }
           });
           this.galleryLoading = false;
         });
@@ -1890,10 +1890,10 @@ export default {
                 text: 'Reload Now',
                 onClick: () => {
                   this.$router.go();
-                },
-              },
-            ],
-          },
+                }
+              }
+            ]
+          }
         });
       }
     },
@@ -1923,10 +1923,10 @@ export default {
                   text: 'Open Email',
                   onClick: () => {
                     this.gotoUrl(this.mailtoLink);
-                  },
-                },
-              ],
-            },
+                  }
+                }
+              ]
+            }
           });
           setTimeout(() => {
             this.emailType = 'info';
@@ -1949,15 +1949,15 @@ export default {
                   text: 'Open Email',
                   onClick: () => {
                     this.gotoUrl(this.mailtoLink);
-                  },
-                },
-              ],
-            },
+                  }
+                }
+              ]
+            }
           });
           setTimeout(() => {
             this.emailType = 'info';
           }, 3003);
-        },
+        }
       );
     },
     initiateObservers() {
@@ -1967,7 +1967,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('what i do'),
-        arrayProperty: 'whatiDo',
+        arrayProperty: 'whatiDo'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1975,7 +1975,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Stories'),
-        arrayProperty: 'stories',
+        arrayProperty: 'stories'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1983,7 +1983,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('About me'),
-        arrayProperty: 'about',
+        arrayProperty: 'about'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1991,7 +1991,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Projects'),
-        arrayProperty: 'projtitle',
+        arrayProperty: 'projtitle'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -1999,7 +1999,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Astro Pic of the Day'),
-        arrayProperty: 'astroPicTitle',
+        arrayProperty: 'astroPicTitle'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2007,7 +2007,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Spacex News'),
-        arrayProperty: 'spacextitle',
+        arrayProperty: 'spacextitle'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2015,7 +2015,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Youtube'),
-        arrayProperty: 'channel_title',
+        arrayProperty: 'channel_title'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2023,7 +2023,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Galleria'),
-        arrayProperty: 'gallerytitle',
+        arrayProperty: 'gallerytitle'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2031,7 +2031,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('My Blog'),
-        arrayProperty: 'blog',
+        arrayProperty: 'blog'
       });
       gsap.tweenToObserver({
         vm: this,
@@ -2039,7 +2039,7 @@ export default {
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Submit Your Feedback'),
-        arrayProperty: 'feedBack',
+        arrayProperty: 'feedBack'
       });
     },
     fetchApiS() {
@@ -2059,7 +2059,7 @@ export default {
       setTimeout(() => {
         this.toggleTooltip = true;
       }, 2000);
-    },
+    }
   },
   computed: {
     ismobile() {
@@ -2071,46 +2071,46 @@ export default {
           asset: 'web coding.svg',
           activity: 'Developing Frontends',
           description: 'Developing Classy, Sassy, Professional Grade Frontends',
-          tooltip: 'Get to Know What Frameworks I Code for Development',
+          tooltip: 'Get to Know What Frameworks I Code for Development'
         },
         {
           asset: 'picture.svg',
           activity: 'Image Manipulation',
           description: 'Well Versed in Post Processing of Photographs',
-          tooltip: 'Get to Know What Softwares I Use for Post Processing',
+          tooltip: 'Get to Know What Softwares I Use for Post Processing'
         },
         {
           asset: 'device.svg',
           activity: 'App Development',
           description: 'Mobile App Development Based on Flutter SDK',
-          tooltip: 'Get to Know What i learnt in Flutter',
+          tooltip: 'Get to Know What i learnt in Flutter'
         },
         {
           asset: 'idea.svg',
           activity: 'Hosting Solutions Guidance',
           description:
             'Advising on Suitable and Best Hosting Solutions for a Website / Server',
-          tooltip: 'Get to Know What type of Consulting i will give',
+          tooltip: 'Get to Know What type of Consulting i will give'
         },
         {
           asset: 'programming.svg',
           activity: 'Presentations',
           description: 'Desgining Wonderful and Eye Catching Presentations',
           tooltip:
-            'Get to Know What Softwares i use for Designing Presentations',
+            'Get to Know What Softwares i use for Designing Presentations'
         },
         {
           asset: 'layer.svg',
           activity: 'Architecting Backends',
           description:
             'Constructing Secure and Powerful Backends for Frontends',
-          tooltip: 'Get to Know What Languages I Use for Backends',
+          tooltip: 'Get to Know What Languages I Use for Backends'
         },
         {
           asset: 'speed test.svg',
           activity: 'Video Editing',
           description: 'Editing and Color Grading Videos  for a Cinematic Look',
-          tooltip: 'Get to Know What Softwares I Use for Video Editing',
+          tooltip: 'Get to Know What Softwares I Use for Video Editing'
         },
         {
           asset: 'binary code.svg',
@@ -2118,13 +2118,13 @@ export default {
           description:
             'Crunching, Cleaning and Manipluating Data and Getting Insights',
           tooltip:
-            'Get to Know What Languages and Softwares with Which i Analyze Data',
-        },
+            'Get to Know What Languages and Softwares with Which i Analyze Data'
+        }
       ];
-    },
+    }
   },
   mounted() {
     this.render();
-  },
+  }
 };
 </script>

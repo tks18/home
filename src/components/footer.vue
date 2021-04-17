@@ -25,9 +25,9 @@
                 top
                 transition="slide-y-transition"
                 v-for="(social, index) in socials"
-                :key="index"
+                v-bind:key="index"
               >
-                <template #activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     icon
                     v-bind="attrs"
@@ -51,7 +51,7 @@
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
           <v-tooltip top transition="slide-x-transition">
-            <template #activator="{ on, attrs }">
+            <template v-slot:activator="{ on, attrs }">
               <div
                 v-on="on"
                 v-bind="attrs"
@@ -107,7 +107,7 @@
                 :color="success ? 'green' : 'yellow'"
                 size="14"
                 class="mr-2"
-              />
+              ></v-avatar>
               Backend
             </v-chip>
             <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
@@ -115,7 +115,7 @@
                 :color="success ? 'green' : 'yellow'"
                 size="14"
                 class="mr-2"
-              />
+              ></v-avatar>
               Database
             </v-chip>
             <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
@@ -152,11 +152,9 @@
 import { ping } from '@p/backend';
 import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
-import { ismobile } from '@p/helpers';
 import { generateWordMapsReverse } from '@p/wordmap';
-
 export default {
-  data() {
+  data: function () {
     return {
       now: new Date().toLocaleTimeString(),
       clockDiag: false,
@@ -215,9 +213,10 @@ export default {
   methods: {
     windowLink(url) {
       window.open(url);
+      return;
     },
     async getBackendStatus() {
-      const backendStatus = await ping();
+      let backendStatus = await ping();
       if (backendStatus.success) {
         this.success = true;
         this.pingstats = backendStatus.timing;
@@ -242,7 +241,12 @@ export default {
   },
   computed: {
     ismobile() {
-      return ismobile();
+      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+      if (width > 966) {
+        return false;
+      } else {
+        return true;
+      }
     },
     nameMap() {
       return {

@@ -4,7 +4,7 @@ import minifyTheme from 'minify-css-string';
 
 Vue.use(Vuetify);
 
-const themecache = JSON.parse(localStorage.getItem('themecache'));
+let themecache = JSON.parse(localStorage.getItem('themecache'));
 
 export default new Vuetify({
   theme: {
@@ -30,7 +30,7 @@ export default new Vuetify({
       },
     },
     options: {
-      minifyTheme,
+      minifyTheme: minifyTheme,
       variations: false,
     },
   },

@@ -1,4 +1,4 @@
-const _import = require(`@/libs/util.import.${process.env.NODE_ENV}`);
+const _import = require('@/libs/util.import.' + process.env.NODE_ENV);
 
 const routes = [
   {

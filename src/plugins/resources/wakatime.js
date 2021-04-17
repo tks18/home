@@ -11,19 +11,19 @@ const wakatimeStats = {
 };
 
 export async function codingData() {
-  const resp = await axios({
+  return await axios({
     url: wakatimeStats.dailyStats,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      let consolMinutes = 0;
-      const dailyData = [];
+    if (response && response.status == 200) {
+      let data = response.data;
+      let consolMinutes = 0,
+        dailyData = [];
       data.data.forEach((codeData) => {
-        const { hours } = codeData.grand_total;
-        const { minutes } = codeData.grand_total;
-        const totalMinutes = hours * 60 + minutes;
+        let hours = codeData.grand_total.hours,
+          minutes = codeData.grand_total.minutes;
+        let totalMinutes = hours * 60 + minutes;
         dailyData.push(totalMinutes);
         consolMinutes += totalMinutes;
       });
@@ -34,29 +34,29 @@ export async function codingData() {
           dailyData,
         },
       };
+    } else {
+      return {
+        success: false,
+        data: null,
+      };
     }
-    return {
-      success: false,
-      data: null,
-    };
   });
-  return resp;
 }
 
 export async function languageTrend() {
-  const resp = await axios({
+  return await axios({
     url: wakatimeStats.languageTrend,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      const languageTrendData = [];
-      const languageTrendLabels = [];
-      const languageTrendGradients = [];
-      for (let i = 0; i < 5; i + 1) {
+    if (response && response.status == 200) {
+      let data = response.data;
+      let languageTrendData = [],
+        languageTrendLabels = [],
+        languageTrendGradients = [];
+      for (let i = 0; i < 5; i++) {
         languageTrendData.push(data.data[i].percent);
-        data.data[i].name === 'JavaScript'
+        data.data[i].name == 'JavaScript'
           ? languageTrendLabels.push('JS')
           : languageTrendLabels.push(data.data[i].name);
         languageTrendGradients.push(data.data[i].color);
@@ -69,26 +69,26 @@ export async function languageTrend() {
           languageTrendGradients,
         },
       };
+    } else {
+      return {
+        success: false,
+        data: null,
+      };
     }
-    return {
-      success: false,
-      data: null,
-    };
   });
-  return resp;
 }
 
 export async function editorsData() {
-  const resp = await axios({
+  return await axios({
     url: wakatimeStats.editors,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      const editorsTrendData = [];
-      const editorsTrendLabels = [];
-      for (let i = 0; i < 5; i + 1) {
+    if (response && response.status == 200) {
+      let data = response.data;
+      let editorsTrendData = [],
+        editorsTrendLabels = [];
+      for (let i = 0; i < 5; i++) {
         editorsTrendData.push(Math.round(data.data[i].percent));
         editorsTrendLabels.push(data.data[i].name);
       }
@@ -99,11 +99,11 @@ export async function editorsData() {
           editorsTrendLabels,
         },
       };
+    } else {
+      return {
+        success: false,
+        data: null,
+      };
     }
-    return {
-      success: false,
-      data: null,
-    };
   });
-  return resp;
 }

@@ -1,26 +1,28 @@
 import axios from '@p/axios';
 
-const api = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
+let api = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
 
-export default async () => {
-  const resp = await axios
+export const breakingBad = async () => {
+  return await axios
     .get(api)
     .then((response) => {
-      if (response.status === 200 && response.data) {
+      if (response.status == 200 && response.data) {
         return {
           success: true,
           data: response.data,
         };
+      } else {
+        return {
+          success: false,
+          data: null,
+        };
       }
+    })
+    .catch((error) => {
       return {
         success: false,
         data: null,
+        error,
       };
-    })
-    .catch((error) => ({
-      success: false,
-      data: null,
-      error,
-    }));
-  return resp;
+    });
 };
