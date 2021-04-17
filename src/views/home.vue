@@ -113,7 +113,7 @@
                       text
                       raised
                       outlined
-                      @click="$vuetify.goTo('#home-feedbacktitile')"
+                      @click="$vuetify.goTo('#home-feedbacktitle')"
                     >
                       <v-icon> mdi-alarm-bell </v-icon>
                       Contact Me
@@ -1500,7 +1500,7 @@
     </div>
     <div class="column is-full">
       <div
-        id="home-feedbacktitile"
+        id="home-feedbacktitle"
         :class="
           'non-touch text-center font-weight-black my-2 text-capitalize' +
           (ismobile ? ' text-h6 ' : ' text-h4 ')
@@ -1700,7 +1700,61 @@ export default {
         {
           name: 'Contact Me',
           icon: 'mdi-contactless-payment',
-          id: 'home-feedbacktitile',
+          id: 'home-feedbacktitle',
+        },
+      ];
+    },
+    observersMap() {
+      return [
+        {
+          elem: '#home-whatiDo',
+          map_word: 'what i do',
+          prop: 'whatiDo',
+        },
+        {
+          elem: '#home-storytitle',
+          map_word: 'Stories',
+          prop: 'stories',
+        },
+        {
+          elem: '#home-abouttitle',
+          map_word: 'About me',
+          prop: 'about',
+        },
+        {
+          elem: '#home-projtitle',
+          map_word: 'Projects',
+          prop: 'projtitle',
+        },
+        {
+          elem: '#home-astroPicTitle',
+          map_word: 'Astro Pic of the day',
+          prop: 'astroPicTitle',
+        },
+        {
+          elem: '#home-spacextitle',
+          map_word: 'Spacex News',
+          prop: 'spacextitle',
+        },
+        {
+          elem: '#home-channel-title',
+          map_word: 'Youtube',
+          prop: 'channel_title',
+        },
+        {
+          elem: '#home-gallerytitle',
+          map_word: 'Galleria',
+          prop: 'gallerytitle',
+        },
+        {
+          elem: '#home-blogtitle',
+          map_word: 'My Blog',
+          prop: 'blog',
+        },
+        {
+          elem: '#home-feedbacktitle',
+          map_word: 'Submit your feedback',
+          prop: 'feedBack',
         },
       ];
     },
@@ -2031,86 +2085,18 @@ export default {
       );
     },
     initiateObservers() {
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-whatiDo',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('what i do'),
-        arrayProperty: 'whatiDo',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-storytitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Stories'),
-        arrayProperty: 'stories',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-abouttitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('About me'),
-        arrayProperty: 'about',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-projtitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Projects'),
-        arrayProperty: 'projtitle',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-astroPicTitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Astro Pic of the Day'),
-        arrayProperty: 'astroPicTitle',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-spacextitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Spacex News'),
-        arrayProperty: 'spacextitle',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-channel-title',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Youtube'),
-        arrayProperty: 'channel_title',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-gallerytitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Galleria'),
-        arrayProperty: 'gallerytitle',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-blogtitle',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('My Blog'),
-        arrayProperty: 'blog',
-      });
-      gsap.tweenToObserver({
-        vm: this,
-        elem: '#home-feedbacktitile',
-        emoji: false,
-        arrayName: 'animatedArray',
-        map: generateWordMaps('Submit Your Feedback'),
-        arrayProperty: 'feedBack',
-      });
+      if (this.observersMap) {
+        this.observersMap.forEach((observer) => {
+          gsap.tweenToObserver({
+            vm: this,
+            elem: observer.elem,
+            emoji: false,
+            arrayName: 'animatedArray',
+            map: generateWordMaps(observer.map_word),
+            arrayProperty: observer.prop,
+          });
+        });
+      }
     },
     fetchApiS() {
       this.getQuotes();
