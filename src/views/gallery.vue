@@ -7,14 +7,10 @@
 
 <script>
 export default {
-  metaInfo: () => {
-    return {
-      title: 'Gallery',
-    };
-  },
-  data: () => {
-    return {};
-  },
+  metaInfo: () => ({
+    title: 'Gallery',
+  }),
+  data: () => ({}),
 };
 </script>
 

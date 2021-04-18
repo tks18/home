@@ -34,19 +34,18 @@
     </v-tooltip>
   </v-app-bar>
 </template>
+
 <script>
 export default {
   name: 'NavBar',
-  data: () => {
-    return {
-      github: {
-        link: 'https://github.com/tks18',
-        icon: 'mdi-github',
-        title: "Shan.tk's Github Profile",
-      },
-      avatar: 'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
-    };
-  },
+  data: () => ({
+    github: {
+      link: 'https://github.com/tks18',
+      icon: 'mdi-github',
+      title: "Shan.tk's Github Profile",
+    },
+    avatar: 'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
+  }),
   methods: {
     navclick() {
       this.$state.store.navbar.active = true;
@@ -56,9 +55,9 @@ export default {
     },
     windowClick(url) {
       window.open(url);
-      return;
     },
   },
 };
 </script>
+
 <style></style>

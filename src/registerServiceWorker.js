@@ -2,7 +2,7 @@
 
 import { Workbox } from 'workbox-window';
 
-const isProd = !(process.env.NODE_ENV == 'development');
+const isProd = !(process.env.NODE_ENV === 'development');
 let wb;
 
 if (isProd) {

@@ -1,7 +1,11 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable prefer-template */
+/* eslint-disable no-param-reassign */
+
 /**
  * Scroll to function
  * @constructor
- * @param {HTMLelement} element - Parent Element which holds the child elements to scroll.
+ * @param {string} element - id of Parent Element which holds the child elements to scroll.
  * @param {number} scrollPixels - Number of pixels to scroll.
  * @param {number} duration - Total Duration for scrolling.
  */
@@ -23,8 +27,6 @@ export function scrollTo(element, scrollPixels, duration) {
       element.scrollLeft = scrollPos + scrollPixels * progress;
       if (timeElapsed < duration) {
         window.requestAnimationFrame(scroll);
-      } else {
-        return;
       }
     };
     window.requestAnimationFrame(scroll);
@@ -61,10 +63,10 @@ export function countUpFromTime(countFrom) {
   );
 
   const returnVals = {
-    years: years,
-    weeks: weeks,
-    days: days,
-    hours: hours,
+    years,
+    weeks,
+    days,
+    hours,
     minutes: mins,
     seconds: secs,
   };
@@ -73,8 +75,8 @@ export function countUpFromTime(countFrom) {
 }
 
 export function getOs() {
-  const userAgent = window.navigator.userAgent;
-  const platform = window.navigator.platform;
+  const { userAgent } = window.navigator;
+  const { platform } = window.navigator;
   const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
   const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
   const iosPlatforms = ['iPhone', 'iPad', 'iPod'];
@@ -98,18 +100,19 @@ export function getOs() {
 export function getViewport() {
   let viewPortWidth;
   let viewPortHeight;
-  if (typeof window.innerWidth != 'undefined') {
-    (viewPortWidth = window.innerWidth), (viewPortHeight = window.innerHeight);
+  if (typeof window.innerWidth !== 'undefined') {
+    viewPortWidth = window.innerWidth;
+    viewPortHeight = window.innerHeight;
   } else if (
-    typeof document.documentElement != 'undefined' &&
-    typeof document.documentElement.clientWidth != 'undefined' &&
-    document.documentElement.clientWidth != 0
+    typeof document.documentElement !== 'undefined' &&
+    typeof document.documentElement.clientWidth !== 'undefined' &&
+    document.documentElement.clientWidth !== 0
   ) {
-    (viewPortWidth = document.documentElement.clientWidth),
-      (viewPortHeight = document.documentElement.clientHeight);
+    viewPortWidth = document.documentElement.clientWidth;
+    viewPortHeight = document.documentElement.clientHeight;
   } else {
-    (viewPortWidth = document.getElementsByTagName('body')[0].clientWidth),
-      (viewPortHeight = document.getElementsByTagName('body')[0].clientHeight);
+    viewPortWidth = document.getElementsByTagName('body')[0].clientWidth;
+    viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
   }
   return { width: viewPortWidth, height: viewPortHeight };
 }
@@ -118,9 +121,8 @@ export function ismobile() {
   const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
   if (width > 966) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
 export function pre_format_text(text) {
@@ -137,43 +139,37 @@ export function generate_code_editor(text) {
   let total_lines = 0;
   let newLines = '';
   for (let i = 0; i < lines.length; i++) {
-    if (i == 0) {
+    if (i === 0) {
       newLines +=
         `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
         lines[i];
-    } else {
-      if (`${i + 1}`.length < 2) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">     ${
-            i + 1
-          }  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 1) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">    ${
-            i + 1
-          }  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 2) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">   ${i + 1}  </span>` +
-          lines[i];
-      } else if (`${i + 1}`.length > 3) {
-        newLines +=
-          `<br />` +
-          `<span class="grey--text text-right non-touch">  ${i + 1}  </span>` +
-          lines[i];
-      }
+    } else if (`${i + 1}`.length < 2) {
+      newLines +=
+        `<br />` +
+        `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
+        lines[i];
+    } else if (`${i + 1}`.length > 1) {
+      newLines +=
+        `<br />` +
+        `<span class="grey--text text-right non-touch">    ${i + 1}  </span>` +
+        lines[i];
+    } else if (`${i + 1}`.length > 2) {
+      newLines +=
+        `<br />` +
+        `<span class="grey--text text-right non-touch">   ${i + 1}  </span>` +
+        lines[i];
+    } else if (`${i + 1}`.length > 3) {
+      newLines +=
+        `<br />` +
+        `<span class="grey--text text-right non-touch">  ${i + 1}  </span>` +
+        lines[i];
     }
-    if (i == lines.length - 1) {
+    if (i === lines.length - 1) {
       total_lines = i + 1;
     }
   }
   return {
     content: newLines,
-    total_lines: total_lines,
+    total_lines,
   };
 }

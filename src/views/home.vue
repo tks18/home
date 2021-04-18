@@ -1583,89 +1583,87 @@
 </template>
 
 <script>
+/* eslint-disable no-eval */
+
 import { stories, gallery } from '@p/backend';
 import { projects } from '@p/resources/github';
 import { channel_data, videos } from '@p/resources/youtube';
-import { breakingBad } from '@p/resources/quotes';
-import { latestLaunches } from '@p/resources/spacex';
-import { apod } from '@p/resources/nasa';
+import breakingBad from '@p/resources/quotes';
+import latestLaunches from '@p/resources/spacex';
+import apod from '@p/resources/nasa';
 import gsap from '@p/gsap';
 import { generateRandomEmojis, generateWordMaps } from '@p/wordmap';
 import { scrollTo, getOs, getViewport, ismobile } from '@p/helpers';
 
 export default {
-  metaInfo: () => {
-    return {
-      title: 'Home',
-    };
-  },
-  data: () => {
-    return {
-      user: 'tks18',
-      heroData: {
-        title: 'Hello There !',
-        image: 'https://i.ibb.co/CQqRR3b/profile.png',
-        subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
-        rounded: true,
-        buttonUrl: '/about',
-        buttontext: 'Contact Me !',
-      },
-      stories: {
-        loading: true,
-        site: '',
-        data: [],
-      },
-      quotesLoading: false,
-      quotesData: {},
-      projects: {
-        loading: false,
-        projects: {},
-      },
-      channel: {
-        loading: true,
-        data: {},
-        videos: [],
-      },
-      ytdialog: false,
-      channel_elevation: 2,
-      contextInfo: {
-        os: getOs(),
-        viewport: getViewport(),
-      },
-      toggleTooltip: false,
-      galleryMaxWidth: 0,
-      galleryLoading: true,
-      apodData: {},
-      apodLoading: true,
-      launchloading: true,
-      launchData: {},
-      galleryData: [],
-      showw: false,
-      mailtoLink:
-        'mailto:me@shaaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
-      githubPhoto:
-        'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
-      emailType: 'info',
-      animatedArray: {
-        blog: ' ',
-        stories: ' ',
-        about: ' ',
-        whatiDo: ' ',
-        stat: ' ',
-        projtitle: ' ',
-        channel_title: ' ',
-        gallerytitle: ' ',
-        randEmoji: ' ',
-        contactTitle: ' ',
-        feedBack: ' ',
-        spacextitle: ' ',
-        astroPicTitle: ' ',
-      },
-      aboutData: {
-        image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
-      },
-    };
-  },
+  metaInfo: () => ({
+    title: 'Home',
+  }),
+  data: () => ({
+    user: 'tks18',
+    heroData: {
+      title: 'Hello There !',
+      image: 'https://i.ibb.co/CQqRR3b/profile.png',
+      subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
+      rounded: true,
+      buttonUrl: '/about',
+      buttontext: 'Contact Me !',
+    },
+    stories: {
+      loading: true,
+      site: '',
+      data: [],
+    },
+    quotesLoading: false,
+    quotesData: {},
+    projects: {
+      loading: false,
+      projects: {},
+    },
+    channel: {
+      loading: true,
+      data: {},
+      videos: [],
+    },
+    ytdialog: false,
+    channel_elevation: 2,
+    contextInfo: {
+      os: getOs(),
+      viewport: getViewport(),
+    },
+    toggleTooltip: false,
+    galleryMaxWidth: 0,
+    galleryLoading: true,
+    apodData: {},
+    apodLoading: true,
+    launchloading: true,
+    launchData: {},
+    galleryData: [],
+    showw: false,
+    mailtoLink:
+      'mailto:me@shaaan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
+    githubPhoto:
+      'https://i.ibb.co/C6Y6Rwt/6efb9bc5d143-article-190612-github-body-text.webp',
+    emailType: 'info',
+    animatedArray: {
+      blog: ' ',
+      stories: ' ',
+      about: ' ',
+      whatiDo: ' ',
+      stat: ' ',
+      projtitle: ' ',
+      channel_title: ' ',
+      gallerytitle: ' ',
+      randEmoji: ' ',
+      contactTitle: ' ',
+      feedBack: ' ',
+      spacextitle: ' ',
+      astroPicTitle: ' ',
+    },
+    aboutData: {
+      image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
+    },
+  }),
   computed: {
     ismobile() {
       return ismobile();
@@ -1823,18 +1821,16 @@ export default {
     gotoUrl(url, self) {
       if (self) {
         window.open(url, '_self');
-        return;
       } else {
         window.open(url);
-        return;
       }
     },
     swipeLeft(func) {
-      const content = 'this.$refs.' + func;
+      const content = `this.$refs.${func}`;
       scrollTo(eval(content), -400, 300);
     },
     swipeRight(func) {
-      const content = 'this.$refs.' + func;
+      const content = `this.$refs.${func}`;
       scrollTo(eval(content), 400, 300);
     },
     loopRandEmoji() {
@@ -1895,15 +1891,14 @@ export default {
       this.$set(this.channel, 'loading', true);
       const video_response = await videos();
       if (video_response.success && !video_response.error) {
-        const videos = video_response.data.items;
+        const channel_videos = video_response.data.items;
         const new_video_array = [];
-        videos.forEach((video, index) => {
+        channel_videos.forEach((video, index) => {
           const new_video = video;
-          new_video['model'] = false;
-          new_video['index'] = index;
+          new_video.model = false;
+          new_video.index = index;
           new_video_array.push(new_video);
         });
-        console.log(new_video_array);
         this.$set(this.channel, 'videos', new_video_array);
         this.$set(this.channel, 'loading', false);
       }
@@ -1911,7 +1906,7 @@ export default {
     async getQuotes() {
       const quotes = await breakingBad();
       if (quotes.success && quotes.data != null) {
-        this.quotesData = quotes.data[0];
+        [this.quotesData] = quotes.data;
         this.quotesLoading = false;
       } else {
         this.quotesLoading = true;

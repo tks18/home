@@ -11,18 +11,18 @@ const wakatimeStats = {
 };
 
 export async function codingData() {
-  return await axios({
+  const resp = await axios({
     url: wakatimeStats.dailyStats,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status == 200) {
-      const data = response.data;
+    if (response && response.status === 200) {
+      const { data } = response;
       let consolMinutes = 0;
       const dailyData = [];
       data.data.forEach((codeData) => {
-        const hours = codeData.grand_total.hours;
-        const minutes = codeData.grand_total.minutes;
+        const { hours } = codeData.grand_total;
+        const { minutes } = codeData.grand_total;
         const totalMinutes = hours * 60 + minutes;
         dailyData.push(totalMinutes);
         consolMinutes += totalMinutes;
@@ -34,29 +34,29 @@ export async function codingData() {
           dailyData,
         },
       };
-    } else {
-      return {
-        success: false,
-        data: null,
-      };
     }
+    return {
+      success: false,
+      data: null,
+    };
   });
+  return resp;
 }
 
 export async function languageTrend() {
-  return await axios({
+  const resp = await axios({
     url: wakatimeStats.languageTrend,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status == 200) {
-      const data = response.data;
+    if (response && response.status === 200) {
+      const { data } = response;
       const languageTrendData = [];
       const languageTrendLabels = [];
       const languageTrendGradients = [];
       for (let i = 0; i < 5; i++) {
         languageTrendData.push(data.data[i].percent);
-        data.data[i].name == 'JavaScript'
+        data.data[i].name === 'JavaScript'
           ? languageTrendLabels.push('JS')
           : languageTrendLabels.push(data.data[i].name);
         languageTrendGradients.push(data.data[i].color);
@@ -69,23 +69,23 @@ export async function languageTrend() {
           languageTrendGradients,
         },
       };
-    } else {
-      return {
-        success: false,
-        data: null,
-      };
     }
+    return {
+      success: false,
+      data: null,
+    };
   });
+  return resp;
 }
 
 export async function editorsData() {
-  return await axios({
+  const resp = await axios({
     url: wakatimeStats.editors,
     method: 'get',
     adapter: jsonpadapter,
   }).then((response) => {
-    if (response && response.status == 200) {
-      const data = response.data;
+    if (response && response.status === 200) {
+      const { data } = response;
       const editorsTrendData = [];
       const editorsTrendLabels = [];
       for (let i = 0; i < 5; i++) {
@@ -99,11 +99,11 @@ export async function editorsData() {
           editorsTrendLabels,
         },
       };
-    } else {
-      return {
-        success: false,
-        data: null,
-      };
     }
+    return {
+      success: false,
+      data: null,
+    };
   });
+  return resp;
 }

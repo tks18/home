@@ -7,14 +7,10 @@
 
 <script>
 export default {
-  metaInfo: () => {
-    return {
-      title: 'Careers',
-    };
-  },
-  data: () => {
-    return {};
-  },
+  metaInfo: () => ({
+    title: 'Careers',
+  }),
+  data: () => ({}),
 };
 </script>
 

@@ -9,7 +9,9 @@
     "plugin:vue/recommended",
     "plugin:vue/strongly-recommended",
     "eslint:recommended",
-    "google"
+    "airbnb",
+    "google",
+    "standard"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -24,8 +26,11 @@
     "valid-jsdoc": "off",
     // not required
     "vue/html-indent": "off",
+    "semi": "off",
+    "space-before-function-paren": "off",
     "vue/max-attributes-per-line": "off",
     "vue/singleline-html-element-content-newline": "off",
+    "no-unmodified-loop-condition": "off",
     "object-curly-spacing": "off",
     "linebreak-style": "off",
     "no-undef": "off",
@@ -34,6 +39,11 @@
     "max-len": "off",
     "operator-linebreak": "off",
     "comma-dangle": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "no-await-in-loop": "off",
+    // Webpack Resolvers not loading
+    "import/no-unresolved": "off",
+    // Breaks the Server
+    "no-plusplus": "off"
   }
 }

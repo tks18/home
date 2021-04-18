@@ -9,8 +9,11 @@
 </template>
 
 <script>
+/* eslint-disable implicit-arrow-linebreak */
+
 import { ismobile, generate_code_editor } from '@p/helpers';
 import marked from 'marked';
+
 export default {
   props: {
     content: {
@@ -18,11 +21,9 @@ export default {
       required: true,
     },
   },
-  data: () => {
-    return {
-      rendered_content: '',
-    };
-  },
+  data: () => ({
+    rendered_content: '',
+  }),
   computed: {
     ismobile() {
       return ismobile();
@@ -44,27 +45,22 @@ export default {
       const renderer = new marked.Renderer();
       renderer.heading = (text, level) => {
         let correct_level = 0;
-        console.log(level);
-        if (level == 1 || level == 2) {
+        if (level === 1 || level === 2) {
           correct_level = 'h4';
-        } else if (level == 3) {
+        } else if (level === 3) {
           correct_level = 'h5';
-        } else if (level == 4) {
+        } else if (level === 4) {
           correct_level = 'h6';
-        } else if (level == 5 || level == 6) {
-          correct_level = 'subtitle' + level - 4;
+        } else if (level === 5 || level === 6) {
+          correct_level = `subtitle${level}` - 4;
         }
         return `<div class="text-${correct_level}  my-2 font-weight-bold">${text}</div>`;
       };
-      renderer.paragraph = (text) => {
-        return `<div class="text-body-1 my-2"> ${text} </div>`;
-      };
-      renderer.strong = (text) => {
-        return `<span class="font-weight-bold"> ${text} </span>`;
-      };
-      renderer.em = (text) => {
-        return `<span class="font-italic"> ${text} </span>`;
-      };
+      renderer.paragraph = (text) =>
+        `<div class="text-body-1 my-2"> ${text} </div>`;
+      renderer.strong = (text) =>
+        `<span class="font-weight-bold"> ${text} </span>`;
+      renderer.em = (text) => `<span class="font-italic"> ${text} </span>`;
       renderer.code = (code) => {
         const formatted_content = generate_code_editor(code);
         const theme = this.$vuetify.theme.dark ? 'theme--dark' : '';
@@ -76,7 +72,6 @@ export default {
     },
     goTourl(url) {
       window.open(url);
-      return;
     },
   },
 };

@@ -63,6 +63,7 @@
     </template>
   </notifications>
 </template>
+
 <script>
 export default {
   title: 'MainNotification',
@@ -78,13 +79,13 @@ export default {
   },
   methods: {
     handleClick(props) {
-      if (props.item.data.onClick != undefined) {
+      if (props.item.data.onClick !== undefined) {
         props.item.data.onClick();
         props.close();
       }
     },
     handleClose(props) {
-      if (props.item.data.onClose != undefined) {
+      if (props.item.data.onClose !== undefined) {
         props.item.data.onClose();
         props.close();
       } else {

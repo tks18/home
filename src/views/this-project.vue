@@ -170,7 +170,9 @@
                   Repo Size:
                   <v-chip outlined small color="primary">
                     <v-icon left small> mdi-arrow-split-vertical </v-icon>
-                    {{ $_.round(repo.details.data.size / 8192, 2) + ' mb' }}
+                    {{
+                      $lodash.round(repo.details.data.size / 8192, 2) + ' mb'
+                    }}
                   </v-chip>
                 </div>
               </div>
@@ -694,6 +696,8 @@
 </template>
 
 <script>
+/* eslint-disable no-restricted-syntax */
+
 import { generateWordMaps } from '@p/wordmap';
 import { tweenToObserver } from '@p/gsap';
 import { ismobile, generate_code_editor, pre_format_text } from '@p/helpers';
@@ -705,66 +709,63 @@ import {
   repoBranches,
 } from '@p/resources/github';
 import renderMd from '@c/render-markdown';
+
 export default {
-  metaInfo: () => {
-    return {
-      title: 'About This Project',
-    };
-  },
+  metaInfo: () => ({
+    title: 'About This Project',
+  }),
   components: {
     'render-markdown': renderMd,
   },
-  data: () => {
-    return {
-      user: 'tks18',
-      repo: {
-        name: 'matte-portfolio',
-        details: {
-          loading: true,
-          data: {},
-        },
-        branches: {
-          loading: true,
-          data: {},
-        },
-        commits: {
-          loading: true,
-          page: 1,
-          nos: 30,
-          slicer: 5,
-          slicer_length: 0,
-          data: [],
-        },
-        topics: {
-          loading: true,
-          data: [],
-        },
-        contents: {
-          loading: true,
-          data: [],
-        },
-        readme: {
-          loading: true,
-          data: '',
-        },
+  data: () => ({
+    user: 'tks18',
+    repo: {
+      name: 'matte-portfolio',
+      details: {
+        loading: true,
+        data: {},
       },
-      branch_toggle: 0,
-      code_base_toggle: 0,
-      current_branch: {},
-      pre_format_text: pre_format_text,
-      file_view: false,
-      current_file: {},
-      startPath: '/',
-      currentPath: '/',
-      historyState: [],
-      animatedText: {
-        mainTitle: '',
-        detailsTitle: '',
-        sourceCode: '',
-        timeline: '',
+      branches: {
+        loading: true,
+        data: {},
       },
-    };
-  },
+      commits: {
+        loading: true,
+        page: 1,
+        nos: 30,
+        slicer: 5,
+        slicer_length: 0,
+        data: [],
+      },
+      topics: {
+        loading: true,
+        data: [],
+      },
+      contents: {
+        loading: true,
+        data: [],
+      },
+      readme: {
+        loading: true,
+        data: '',
+      },
+    },
+    branch_toggle: 0,
+    code_base_toggle: 0,
+    current_branch: {},
+    pre_format_text,
+    file_view: false,
+    current_file: {},
+    startPath: '/',
+    currentPath: '/',
+    historyState: [],
+    animatedText: {
+      mainTitle: '',
+      detailsTitle: '',
+      sourceCode: '',
+      timeline: '',
+    },
+  }),
   computed: {
     ismobile() {
       return ismobile();
@@ -826,13 +827,13 @@ export default {
       this.$set(this.repo.details, 'loading', true);
       const repo_data_resp = await repoData(this.user, this.repo.name);
       if (repo_data_resp.success && repo_data_resp.error == null) {
-        const repoData = repo_data_resp.data;
-        if (this.repo.name == 'matte-portfolio') {
-          repoData['img'] = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
+        const repo_details = repo_data_resp.data;
+        if (this.repo.name === 'matte-portfolio') {
+          repo_details.img = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
         } else {
-          repoData['img'] = 'https://i.ibb.co/w7jfhfy/image.webp';
+          repo_details.img = 'https://i.ibb.co/w7jfhfy/image.webp';
         }
-        this.$set(this.repo.details, 'data', repoData);
+        this.$set(this.repo.details, 'data', repo_details);
         this.$set(this.repo.details, 'loading', false);
       }
     },
@@ -867,13 +868,13 @@ export default {
     async getRepoBranches() {
       this.$set(this.repo.branches, 'loading', true);
       const repo_branches_resp = await repoBranches(this.user, this.repo.name);
-      if (repo_branches_resp.success && repo_branches_resp.error == null) {
-        const branches = repo_branches_resp.branches;
-        this.current_branch = branches.filter((branch) => {
-          return branch.name == 'master';
-        })[0];
+      if (repo_branches_resp.success && repo_branches_resp.error === null) {
+        const { branches } = repo_branches_resp;
+        [this.current_branch] = branches.filter(
+          (branch) => branch.name === 'master',
+        );
         this.branch_toggle = branches.findIndex(
-          (branch) => branch.name == 'master',
+          (branch) => branch.name === 'master',
         );
         this.$set(this.repo.branches, 'data', repo_branches_resp.branches);
         this.$set(this.repo.branches, 'loading', false);
@@ -892,7 +893,7 @@ export default {
           this.historyState.push(this.currentPath);
         }
         this.currentPath = path;
-        const sortedContents = this.$_.orderBy(
+        const sortedContents = this.$lodash.orderBy(
           repo_contents_resp.contents,
           ['type', 'name'],
           ['asc'],
@@ -904,7 +905,7 @@ export default {
     },
     async render_markdown(branch) {
       for (const file of this.repo.contents.data) {
-        if (file.name.toLowerCase() == 'readme.md') {
+        if (file.name.toLowerCase() === 'readme.md') {
           this.$set(this.repo.readme, 'loading', true);
           const path = this.startPath + file.path;
           const file_contents = await repoContents(
@@ -922,7 +923,7 @@ export default {
       }
     },
     async getFileContents(file, branch) {
-      if (file.type == 'file') {
+      if (file.type === 'file') {
         this.$set(this.repo.contents, 'loading', true);
         this.$vuetify.goTo('#this-project-source-code-content');
         const path = this.startPath + file.path;
@@ -936,9 +937,8 @@ export default {
           this.current_file = file_contents.contents;
           const decoded_text = atob(this.current_file.content);
           const formatted_content = generate_code_editor(decoded_text);
-          this.current_file['decoded_content_display'] =
-            formatted_content.content;
-          this.current_file['total_lines'] = formatted_content.total_lines;
+          this.current_file.decoded_content_display = formatted_content.content;
+          this.current_file.total_lines = formatted_content.total_lines;
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
@@ -948,7 +948,7 @@ export default {
     },
     async handleNavigation(backtrigger, file) {
       if (backtrigger) {
-        if (this.currentPath != '/') {
+        if (this.currentPath !== '/') {
           this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
           const newPath = this.historyState.pop();
@@ -956,20 +956,18 @@ export default {
           this.file_view = false;
         }
       } else if (file) {
-        if (file.type == 'dir') {
+        if (file.type === 'dir') {
           this.$vuetify.goTo('#this-project-source-code-content');
           this.$set(this.repo.contents, 'loading', true);
           const newPath = this.startPath + file.path;
           this.getRepoContent(backtrigger, newPath, this.current_branch.name);
-        } else if (file.type == 'file') {
+        } else if (file.type === 'file') {
           this.getFileContents(file, this.current_branch.name);
         }
-      } else {
-        if (this.currentPath == '/') {
-          this.$set(this.repo.contents, 'loading', true);
-          const newPath = this.currentPath;
-          this.getRepoContent(backtrigger, newPath, this.current_branch.name);
-        }
+      } else if (this.currentPath === '/') {
+        this.$set(this.repo.contents, 'loading', true);
+        const newPath = this.currentPath;
+        this.getRepoContent(backtrigger, newPath, this.current_branch.name);
       }
     },
     copy_content_code(content) {
@@ -981,7 +979,7 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: this.current_file.path + ' Has been Copied to Clipboard.',
+            text: `${this.current_file.path} Has been Copied to Clipboard.`,
             data: {
               loading: false,
               dark: true,
@@ -995,7 +993,7 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: 'Error Copying the code: ' + e,
+            text: `Error Copying the code: ${e}`,
             data: {
               loading: false,
               dark: false,
@@ -1047,26 +1045,23 @@ export default {
       this.do_repo_stuffs();
     },
     open_raw_code(file_path) {
-      const base_url =
-        'https://raw.githubusercontent.com/tks18/' + this.repo.name + '/';
+      const base_url = `https://raw.githubusercontent.com/tks18/${this.repo.name}/`;
       const branch = this.current_branch.name;
-      const open_url = base_url + branch + '/' + file_path;
+      const open_url = `${base_url + branch}/${file_path}`;
       this.gotourl(open_url);
     },
     open_gh_path(file_path) {
-      const base_url = 'https://github.com/tks18/' + this.repo.name + '/blob/';
+      const base_url = `https://github.com/tks18/${this.repo.name}/blob/`;
       const branch = this.current_branch.name;
-      const open_url = base_url + branch + '/' + file_path;
+      const open_url = `${base_url + branch}/${file_path}`;
       this.gotourl(open_url);
     },
     gotourl(url) {
       window.open(url);
-      return;
     },
     openGhTopic(topic) {
       const url = `https://github.com/search?q=${topic}`;
       window.open(url);
-      return;
     },
     async do_repo_stuffs() {
       await this.getRepoBranches();

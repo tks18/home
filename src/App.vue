@@ -26,18 +26,19 @@ import fabComponent from '@c/fab-component';
 import sysBar from '@c/system-bar';
 import { notifications } from '@p/backend';
 import { ismobile } from '@p/helpers';
+
 export default {
   name: 'App',
   metaInfo: {
     title: 'Sudharshan TK',
     titleTemplate: (insertedTitle) => {
-      if (insertedTitle == 'Sudharshan TK') {
+      if (insertedTitle === 'Sudharshan TK') {
         return insertedTitle;
-      } else if (insertedTitle == 'Careers') {
-        return `${insertedTitle} @ Sudharshan TK`;
-      } else {
-        return `${insertedTitle} | Sudharshan TK`;
       }
+      if (insertedTitle === 'Careers') {
+        return `${insertedTitle} @ Sudharshan TK`;
+      }
+      return `${insertedTitle} | Sudharshan TK`;
     },
   },
   components: {
@@ -67,9 +68,14 @@ export default {
       }
     },
     notifyDarkTheme() {
-      const notifications = JSON.parse(localStorage.getItem('notification'));
-      const dark = this.$vuetify.theme.dark;
-      if ((!dark && notifications == null) || (!dark && !notifications.dark)) {
+      const notifications_store = JSON.parse(
+        localStorage.getItem('notification'),
+      );
+      const { dark } = this.$vuetify.theme;
+      if (
+        (!dark && notifications_store == null) ||
+        (!dark && !notifications_store.dark)
+      ) {
         this.$notify({
           group: 'main',
           type: 'info',

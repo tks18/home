@@ -34,27 +34,24 @@
 </template>
 
 <script>
-import musicPlayer from './music-player';
-import bottomSettings from './bottom-settings';
+/* eslint-disable no-restricted-globals */
+
+import { ismobile } from '@p/helpers';
+import musicPlayer from './music-player.vue';
+import bottomSettings from './bottom-settings.vue';
+
 export default {
   components: {
     musicPlayer,
     bottomSettings,
   },
-  data: () => {
-    return {
-      fab: false,
-      endofPage: false,
-    };
-  },
+  data: () => ({
+    fab: false,
+    endofPage: false,
+  }),
   computed: {
     ismobile() {
-      const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
     },
   },
   mounted() {

@@ -10,11 +10,9 @@
 
 <script>
 export default {
-  data: () => {
-    return {
-      now: Date.now(),
-    };
-  },
+  data: () => ({
+    now: Date.now(),
+  }),
   mounted() {
     setInterval(() => {
       this.now = Date.now();
@@ -23,7 +21,6 @@ export default {
   methods: {
     scrollTop() {
       window.scrollTo(0, 0);
-      return;
     },
   },
 };

@@ -153,71 +153,66 @@ import { ping } from '@p/backend';
 import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
 import { generateWordMapsReverse } from '@p/wordmap';
+import { ismobile } from '@p/helpers';
+
 export default {
-  data: () => {
-    return {
-      now: new Date().toLocaleTimeString(),
-      clockDiag: false,
-      success: false,
-      pingstats: 0,
-      animatedArray: {
-        name: '',
+  data: () => ({
+    now: new Date().toLocaleTimeString(),
+    clockDiag: false,
+    success: false,
+    pingstats: 0,
+    animatedArray: {
+      name: '',
+    },
+    github: {
+      link: 'https://github.com/tks18',
+    },
+    socials: [
+      {
+        icon: 'mdi-twitter',
+        title: 'Twitter',
+        link: 'https://twitter.com/shantk18',
       },
-      github: {
+      {
+        icon: 'mdi-instagram',
+        title: 'Instagram',
+        link: 'https://instagram.com/shantk18',
+      },
+      {
+        icon: 'mdi-github',
+        title: 'Github',
         link: 'https://github.com/tks18',
       },
-      socials: [
-        {
-          icon: 'mdi-twitter',
-          title: 'Twitter',
-          link: 'https://twitter.com/shantk18',
-        },
-        {
-          icon: 'mdi-instagram',
-          title: 'Instagram',
-          link: 'https://instagram.com/shantk18',
-        },
-        {
-          icon: 'mdi-github',
-          title: 'Github',
-          link: 'https://github.com/tks18',
-        },
-        {
-          icon: 'mdi-gitlab',
-          title: 'Gitlab',
-          link: 'https://gitlab.com/tks18',
-        },
-        {
-          icon: 'mdi-bitbucket',
-          title: 'Bit Bucket',
-          link: 'https://bitbucket.org/Shan-tk/',
-        },
-        {
-          icon: 'mdi-quality-medium',
-          title: 'Medium',
-          link: 'https://medium.com/@tksudharshan',
-        },
-        {
-          icon: 'mdi-email-edit',
-          title: 'Email Me',
-          link: 'mailto:tksudharshan@infozy.tk',
-        },
-        {
-          icon: 'mdi-google-photos',
-          title: 'Photography',
-          link: 'https://unsplash.com/@shantk18',
-        },
-      ],
-    };
-  },
+      {
+        icon: 'mdi-gitlab',
+        title: 'Gitlab',
+        link: 'https://gitlab.com/tks18',
+      },
+      {
+        icon: 'mdi-bitbucket',
+        title: 'Bit Bucket',
+        link: 'https://bitbucket.org/Shan-tk/',
+      },
+      {
+        icon: 'mdi-quality-medium',
+        title: 'Medium',
+        link: 'https://medium.com/@tksudharshan',
+      },
+      {
+        icon: 'mdi-email-edit',
+        title: 'Email Me',
+        link: 'mailto:tksudharshan@infozy.tk',
+      },
+      {
+        icon: 'mdi-google-photos',
+        title: 'Photography',
+        link: 'https://unsplash.com/@shantk18',
+      },
+    ],
+  }),
   computed: {
     ismobile() {
-      const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
+      return ismobile();
     },
     nameMap() {
       return {
@@ -261,7 +256,6 @@ export default {
   methods: {
     windowLink(url) {
       window.open(url);
-      return;
     },
     async getBackendStatus() {
       const backendStatus = await ping();

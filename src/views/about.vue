@@ -710,6 +710,8 @@
 </template>
 
 <script>
+/* eslint-disable no-restricted-syntax */
+
 import { generateWordMaps, generateWordMapsReverse } from '@p/wordmap';
 import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
@@ -717,64 +719,60 @@ import { countUpFromTime, ismobile } from '@p/helpers';
 import gsap from '@p/gsap';
 
 export default {
-  metaInfo: () => {
-    return {
-      title: 'About',
-    };
-  },
+  metaInfo: () => ({
+    title: 'About',
+  }),
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      const params = to.params;
+      const { params } = to;
       if (params.scroll) {
         vm.$vuetify.goTo(params.scrollid);
       }
     });
   },
-  data: () => {
-    return {
-      mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
-      bgs: authorData.bgs,
-      tweetQr: 'https://i.ibb.co/4tZFDrh/qr-code-2.png',
-      authorPhoto: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
-      bgPlay: true,
-      cardbgs: {
-        play: false,
-        lefttop: '',
-        leftKey: 0,
-        rightbottom: '',
-        rightKey: 0,
-      },
-      lifeTimeCountDown: {
-        years: 0,
-        weeks: 0,
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      },
-      dailyData: [],
-      dailyLabels: [],
-      dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
-      consolMinutes: 0,
-      languageTrendData: [],
-      languageTrendLabels: [],
-      languageTrendGradients: [],
-      editorsTrendData: [],
-      editorsTrendLabels: [],
-      swot: authorData.swot,
-      resumeDialog: false,
-      authorData: {
-        ...authorData.main,
-        age: countUpFromTime('May 16, 2000 16:21:00').years,
-      },
-      workProfile: authorData.workProfile,
-      animatedArray: {
-        hashTag: ' ',
-        title: ' ',
-        someWords: ' ',
-      },
-    };
-  },
+  data: () => ({
+    mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
+    bgs: authorData.bgs,
+    tweetQr: 'https://i.ibb.co/4tZFDrh/qr-code-2.png',
+    authorPhoto: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
+    bgPlay: true,
+    cardbgs: {
+      play: false,
+      lefttop: '',
+      leftKey: 0,
+      rightbottom: '',
+      rightKey: 0,
+    },
+    lifeTimeCountDown: {
+      years: 0,
+      weeks: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    },
+    dailyData: [],
+    dailyLabels: [],
+    dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
+    consolMinutes: 0,
+    languageTrendData: [],
+    languageTrendLabels: [],
+    languageTrendGradients: [],
+    editorsTrendData: [],
+    editorsTrendLabels: [],
+    swot: authorData.swot,
+    resumeDialog: false,
+    authorData: {
+      ...authorData.main,
+      age: countUpFromTime('May 16, 2000 16:21:00').years,
+    },
+    workProfile: authorData.workProfile,
+    animatedArray: {
+      hashTag: ' ',
+      title: ' ',
+      someWords: ' ',
+    },
+  }),
   computed: {
     ismobile() {
       return ismobile();
@@ -810,27 +808,26 @@ export default {
           labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
           gradient: ['#77a1d3', '#79cbca', '#e684ae'],
         };
-      } else {
-        return {
-          values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
-          labels: [
-            'Nodejs',
-            'Python',
-            'Illustrator',
-            'ReactJs',
-            'Vuejs',
-            'Adobe Xd',
-            'Lightroom',
-            'Flutter',
-            'Ruby',
-            'Java',
-            'Excel',
-            'Photoshop',
-            'Premiere',
-          ],
-          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
-        };
       }
+      return {
+        values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
+        labels: [
+          'Nodejs',
+          'Python',
+          'Illustrator',
+          'ReactJs',
+          'Vuejs',
+          'Adobe Xd',
+          'Lightroom',
+          'Flutter',
+          'Ruby',
+          'Java',
+          'Excel',
+          'Photoshop',
+          'Premiere',
+        ],
+        gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+      };
     },
   },
   mounted() {
@@ -839,7 +836,6 @@ export default {
   methods: {
     gotoUrl(url) {
       window.open(url);
-      return;
     },
     lifeTimeCounter(elem) {
       gsap.observeNexecute(elem, () => {
@@ -860,24 +856,24 @@ export default {
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
-      const firstInt = this.$_.random(0, this.bgs.length - 1);
-      let secondInt = this.$_.random(0, this.bgs.length - 1);
-      while (secondInt == firstInt) {
-        secondInt = this.$_.random(0, this.bgs.length - 1);
+      const firstInt = this.$lodash.random(0, this.bgs.length - 1);
+      let secondInt = this.$lodash.random(0, this.bgs.length - 1);
+      while (secondInt === firstInt) {
+        secondInt = this.$lodash.random(0, this.bgs.length - 1);
       }
       this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
       this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
       this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
       this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
       setInterval(() => {
-        const firstInt = this.$_.random(0, this.bgs.length - 1);
-        let secondInt = this.$_.random(0, this.bgs.length - 1);
-        while (secondInt == firstInt) {
-          secondInt = this.$_.random(0, this.bgs.length - 1);
+        const firstIntLoop = this.$lodash.random(0, this.bgs.length - 1);
+        let secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
+        while (secondIntLoop === firstIntLoop) {
+          secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
         }
-        this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
+        this.$set(this.cardbgs, 'lefttop', this.bgs[firstIntLoop]);
         this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
-        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
+        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondIntLoop]);
         this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
         this.$set(this.cardbgs, 'play', true);
       }, Math.floor(Math.random() + 5) * 1000);
@@ -896,7 +892,7 @@ export default {
           currLabels.push(days[i]);
         }
       }
-      this.dailyLabels = this.$_.reverse(currLabels);
+      this.dailyLabels = this.$lodash.reverse(currLabels);
     },
     async getCodingData() {
       const codeData = await codingData();

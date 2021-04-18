@@ -1,5 +1,5 @@
-const { loaders, optimizations, plugins, resolvers } = require('./webpack');
 const WebpackBar = require('webpackbar');
+const { loaders, optimizations, plugins, resolvers } = require('./webpack');
 
 module.exports = {
   module: {

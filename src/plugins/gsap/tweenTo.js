@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
-import observeNexecute from './observer';
 import { lettersArray, safeEmojis } from '@t/emoji-array';
+import observeNexecute from './observer';
 
 const update = (options) => {
   let html = '';

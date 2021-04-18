@@ -80,25 +80,23 @@ export default {
       type: Boolean,
     },
   },
-  data: () => {
-    return {
-      activated: false,
-      play: false,
-      audio: null,
-      moveSeek: 0,
-      changeSeek: 0,
-      duration: 0,
-      loading: false,
-      clip:
-        'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
-      metadata: {
-        name: 'The Nights',
-        artist: 'by Avicii',
-      },
-      durationText: '00:00',
-      currentText: '00:00',
-    };
-  },
+  data: () => ({
+    activated: false,
+    play: false,
+    audio: null,
+    moveSeek: 0,
+    changeSeek: 0,
+    duration: 0,
+    loading: false,
+    clip:
+      'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
+    metadata: {
+      name: 'The Nights',
+      artist: 'by Avicii',
+    },
+    durationText: '00:00',
+    currentText: '00:00',
+  }),
   methods: {
     createElement() {
       this.loading = true;
@@ -123,7 +121,7 @@ export default {
     handleChange() {
       if (this.audio != null) {
         const changeVals = this.moveSeek;
-        const duration = this.audio.duration;
+        const { duration } = this.audio;
         const changedTime = (changeVals / 100) * duration;
         this.audio.currentTime = changedTime;
       }
