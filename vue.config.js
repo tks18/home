@@ -1,3 +1,4 @@
+/* eslint-disable */
 const webpackConfig = require('./webpack.config');
 const metadata = require('./web-metadata');
 

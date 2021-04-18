@@ -1,21 +1,24 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "es6",
-      "baseUrl": ".",
-      "paths": {
-          "@/*": ["src/*"],
-        "@a/*": ["src/assets/*"],
-        "@c/*": ["src/components/*"],
-        "@l/*": ["src/libs/*"],
-        "@p/*": ["src/plugins/*"],
-        "@r/*": ["src/router/*"],
-        "@styles/*": ["src/styles/*"],
-        "@t/*": ["src/templates/*"],
-        "@v/*": ["src/views/*"],
-        "@state": ["src/plugins/state/index.js/*"],
-      },
-    },
-    "exclude": ["node_modules","dist"],
-    "include": ["src/**/*"]
-  }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@a/*": ["src/assets/*"],
+      "@c/*": ["src/components/*"],
+      "@l/*": ["src/libs/*"],
+      "@p/*": ["src/plugins/*"],
+      "@r/*": ["src/router/*"],
+      "@styles/*": ["src/styles/*"],
+      "@t/*": ["src/templates/*"],
+      "@v/*": ["src/views/*"],
+      "@state": ["src/plugins/state/index.js/*"]
+    }
+  },
+  "typeAcquisition": {
+    "exclude": ["agent-base"]
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*"]
+}

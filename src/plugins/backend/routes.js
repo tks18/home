@@ -1,7 +1,4 @@
-const isProd = !(process.env.NODE_ENV === 'development');
-export const backend = isProd
-  ? 'https://api.shaaan.tk/'
-  : 'https://development.api.shaaan.tk/';
+export const backend = process.env.VUE_APP_BACKEND;
 
 export const api = {
   blog: {

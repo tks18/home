@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const loaders = [

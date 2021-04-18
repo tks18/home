@@ -1,17 +1,19 @@
+/* eslint-disable */
+
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
-const metadata = require('../web-metadata');
 const zlib = require('zlib');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
-const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
-  .WebpackBundleSizeAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {
+  WebpackBundleSizeAnalyzerPlugin,
+} = require('webpack-bundle-size-analyzer');
 const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const metadata = require('../web-metadata');
 
 const isProd = process.env.NODE_ENV != 'development';
 
@@ -88,7 +90,7 @@ const productionPlugins = [
   new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
   new StatsWriterPlugin({
     filename: './stats/raw-stats.json',
-  }),
+  })
 ];
 
 const devPlugins = [

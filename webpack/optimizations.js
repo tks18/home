@@ -1,6 +1,6 @@
 const Minimizers = require('./minimizers');
 
-const isProd = process.env.NODE_ENV != 'development';
+const isProd = process.env.NODE_ENV !== 'development';
 
 const productionConfig = {
   splitChunks: {
