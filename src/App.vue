@@ -4,10 +4,7 @@
     <navbar />
     <sysBar />
     <Notification group="main" position="top right" />
-    <Notification
-      group="server"
-      :position="ismobile ? 'bottom left' : 'top left'"
-    />
+    <Notification group="worker" position="bottom right" />
     <v-main>
       <div class="content">
         <router-view />
@@ -57,6 +54,7 @@ export default {
   mounted() {
     this.notifyDarkTheme();
     this.getServerNotifications();
+    this.updateServiceWorker();
   },
   methods: {
     async getServerNotifications() {
@@ -64,6 +62,35 @@ export default {
       if (currentNotifications.success) {
         currentNotifications.data.notifications.forEach((notification) => {
           this.$notify(notification.properties);
+        });
+      }
+    },
+    updateServiceWorker() {
+      if (this.$worker) {
+        this.$worker.addEventListener('waiting', () => {
+          this.$notify({
+            group: 'worker',
+            type: 'info',
+            duration: -100,
+            title: 'Update Available',
+            text:
+              'New Content is Available from the Server. Click the below button to update the App.',
+            data: {
+              loading: true,
+              type: 'Worker Updates',
+              buttons: [
+                {
+                  text: 'Update Now',
+                  onClick: async () => {
+                    this.$worker.addEventListener('controlling', () => {
+                      this.$router.go();
+                    });
+                    await this.$worker.messageSW({ type: 'SKIP_WAITING' });
+                  },
+                },
+              ],
+            },
+          });
         });
       }
     },
