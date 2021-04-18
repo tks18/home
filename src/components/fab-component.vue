@@ -62,7 +62,7 @@ export default {
       window.onscroll = () => {
         if (
           window.innerHeight + window.pageYOffset >=
-          document.body.offsetHeight
+          document.body.offsetHeight - 60
         ) {
           this.endofPage = true;
         } else {

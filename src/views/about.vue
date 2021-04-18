@@ -28,7 +28,7 @@
           background: 'center',
           backgroundImage: mainBg,
           backgroundSize: 'cover',
-          height: ismobile ? '400px' : '450px',
+          height: ismobile ? '220px' : '450px',
           minWidth: '100%',
         }"
         class="hero non-touch"

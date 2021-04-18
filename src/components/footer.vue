@@ -1,12 +1,20 @@
 <template>
-  <v-footer class="non-touch" elevation="22" inset dense small rounded>
+  <v-footer
+    class="pa-2 mt-3 non-touch"
+    elevation="22"
+    inset
+    dense
+    outlined
+    small
+    rounded
+  >
     <v-row align="center" justify="center" class="my-1 py-0">
-      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-0">
+      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-1">
         <v-row>
           <v-col
             :align="ismobile ? 'center' : 'start'"
             justify="center"
-            class="ma-1 my-0 py-0"
+            class="ma-1 my-1 py-2"
           >
             <v-row
               v-if="!ismobile"
@@ -44,17 +52,22 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col :cols="ismobile ? 12 : 4" align="center" class="my-0 py-0">
+      <v-col :cols="ismobile ? 12 : 4" align="center" class="my-1 py-0">
         <div class="text">
           <div class="grey--text text-overline my-0 py-0">
             Portfolio Website
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
-          <v-tooltip top transition="slide-x-transition">
+          <v-tooltip top transition="slide-y-transition">
             <template #activator="{ on, attrs }">
               <div
                 v-bind="attrs"
-                class="grey--text text-overline my-0 py-0"
+                :class="
+                  'grey--text point-cursor text-overline my-0 py-0' +
+                  ($vuetify.theme.dark
+                    ? ' underhover-light'
+                    : ' underhover-dark')
+                "
                 v-on="on"
                 @click="$router.push('/about-this-project')"
               >
@@ -68,7 +81,7 @@
           </v-tooltip>
         </div>
       </v-col>
-      <v-col :cols="ismobile ? 12 : 4" class="my-0 py-0">
+      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-0">
         <v-row class="my-0 mt-1 py-0">
           <v-col
             class="my-0 py-0 text-caption"
@@ -99,32 +112,24 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" align="center" class="ma-0 pa-0">
+      <v-col cols="12" align="center" class="ma-0 my-1 pa-0">
         <v-row align="center" class="ma-0 pa-0">
           <v-col cols="12" class="ma-0 pa-0">
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-avatar
-                :color="success ? 'green' : 'yellow'"
-                size="14"
-                class="mr-2"
-              />
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-web' : 'mdi-web-clock' }}
+              </v-icon>
               Backend
             </v-chip>
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-avatar
-                :color="success ? 'green' : 'yellow'"
-                size="14"
-                class="mr-2"
-              />
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-database-check' : 'mdi-database-alert' }}
+              </v-icon>
               Database
             </v-chip>
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-icon
-                left
-                class="mr-2 ml-1"
-                :color="success ? 'green' : 'yellow'"
-              >
-                mdi-lan-pending
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-lan-check' : 'mdi-lan-pending' }}
               </v-icon>
               Latency - {{ pingstats }} ms
             </v-chip>
@@ -134,14 +139,20 @@
           <v-col
             cols="12"
             align="center"
-            :class="
-              'ma-0 pa-0 text-overline' +
-              (success ? ' green--text' : ' yellow--text')
-            "
+            class="'ma-0 pa-0 text-overline font-weight-bold'"
           >
-            {{
-              success ? 'All Systems Operational' : 'Connecting to Server...'
-            }}
+            <v-chip class="ma-2" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{
+                  success
+                    ? 'mdi-checkbox-multiple-marked-circle'
+                    : 'mdi-checkbox-multiple-blank-circle'
+                }}
+              </v-icon>
+              {{
+                success ? 'All Systems Operational' : 'Connecting to Server...'
+              }}
+            </v-chip>
           </v-col>
         </v-row>
       </v-col>
@@ -150,7 +161,6 @@
 </template>
 <script>
 import { ping } from '@p/backend';
-import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
 import { generateWordMapsReverse } from '@p/wordmap';
 import { ismobile } from '@p/helpers';
@@ -213,34 +223,6 @@ export default {
   computed: {
     ismobile() {
       return ismobile();
-    },
-    nameMap() {
-      return {
-        initial: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-        ],
-        map: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('u'),
-          lettersArray.indexOf('d'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('r'),
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-        ],
-      };
     },
   },
   mounted() {
