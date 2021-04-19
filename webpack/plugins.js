@@ -13,9 +13,31 @@ const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const JavaScriptObfuscator = require('webpack-obfuscator');
 const metadata = require('../web-metadata');
 
 const isProd = process.env.NODE_ENV != 'development';
+const obfuscate = process.env.VUE_APP_OBFUSCATE == 1;
+
+const obfustcatePlugin = [
+  new JavaScriptObfuscator(
+    {
+      compact: false,
+      rotateStringArray: true,
+      stringArray: true,
+      shuffleStringArray: true,
+      numbersToExpressions: true,
+      simplify: true,
+      splitStrings: true,
+    },
+    [
+      'worker.js',
+      'js/chunk-vendors.*.js',
+      'js/chunk-vendors.*.js.br',
+      'js/chunk-vendors.*.js.map',
+    ],
+  ),
+];
 
 const productionPlugins = [
   new HtmlWebpackPlugin({
@@ -90,7 +112,7 @@ const productionPlugins = [
   new WebpackBundleSizeAnalyzerPlugin('./stats/size-analysis.txt'),
   new StatsWriterPlugin({
     filename: './stats/raw-stats.json',
-  })
+  }),
 ];
 
 const devPlugins = [
@@ -128,4 +150,7 @@ const devPlugins = [
   }),
 ];
 
-module.exports = isProd ? productionPlugins : devPlugins;
+const exportedplugins = isProd ? productionPlugins : devPlugins;
+module.exports = obfuscate
+  ? exportedplugins.concat(obfustcatePlugin)
+  : exportedplugins.concat([]);
