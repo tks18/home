@@ -1,14 +1,21 @@
 import axios from '@p/axios';
-import { api as backend } from '@p/backend/routes';
+import { generate_backend_hash } from '@p/crypto';
+import { api as backend, utils } from '@p/backend';
 
-const api = backend.google.youtube;
+const api = backend.routes.google.youtube;
 
 export async function channel_data(channel) {
   const id = channel;
   const resp = await axios
-    .post(api.channel_data, {
-      channel_id: id,
-    })
+    .post(
+      api.channel_data,
+      {
+        channel_id: id,
+      },
+      {
+        headers: utils.headers(generate_backend_hash()),
+      },
+    )
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
@@ -33,7 +40,13 @@ export async function channel_data(channel) {
 
 export async function videos() {
   const resp = await axios
-    .post(api.videos)
+    .post(
+      api.videos,
+      {},
+      {
+        headers: utils.headers(generate_backend_hash()),
+      },
+    )
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {

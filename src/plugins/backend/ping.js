@@ -1,9 +1,17 @@
 import axios from '@p/axios';
+import { generate_backend_hash } from '@p/crypto';
+import { utils } from '@p/backend';
 import { backend } from './routes';
 
 export default async () => {
   const resp = await axios
-    .post(backend)
+    .post(
+      backend,
+      {},
+      {
+        headers: utils.headers(generate_backend_hash()),
+      },
+    )
     .then((response) => {
       if (response.status === 200 && response.data) {
         return {
