@@ -1399,13 +1399,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@statoscope/ui-webpack@npm:^3.3.0":
-  version: 3.5.0
-  resolution: "@statoscope/ui-webpack@npm:3.5.0"
+"@statoscope/ui-webpack@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@statoscope/ui-webpack@npm:4.0.0"
   dependencies:
     "@discoveryjs/json-ext": ^0.5.2
-    open: ^7.4.2
-  checksum: a104442c80f3fc09223aade61b4ba52beee8ea1108912d5d0791d8d8d655e8de6504ee00608cef28f44843cbfe3c5a8fecabd42fc07025e4efd9ef0748405d61
+    open: ^8.0.4
+  checksum: f1a62b900364d4e9c191597ad6f017cfac3bdf9c81347065d323e33e85372f34e152b1e37d05711bda0a78914c2ad2fd9d9834381aaadd29faee7e7611a968b8
   languageName: node
   linkType: hard
 
@@ -3494,6 +3494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"callsite@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "callsite@npm:1.0.0"
+  checksum: 5940b23533433f4886dea106cdb16d8a511b36ebaf2ac0bbe0adae547a4259f142d37074f864e12f424927b50cf364fffd1fd75d45a62a622d22984d2375e859
+  languageName: node
+  linkType: hard
+
 "callsites@npm:^2.0.0":
   version: 2.0.0
   resolution: "callsites@npm:2.0.0"
@@ -3575,6 +3582,13 @@ __metadata:
   version: 1.0.30001209
   resolution: "caniuse-lite@npm:1.0.30001209"
   checksum: 09883c58dcfef4274d130469c300b0fe51f309859697b9639d601282d3f44cf8e234cf746b43a3f40ce9e26763af5941c7306bb40a51e98455bde8f4f5c0288f
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001211":
+  version: 1.0.30001211
+  resolution: "caniuse-lite@npm:1.0.30001211"
+  checksum: 7222b15450c8f8227be02a2c3c28981f6ba58374e309e04eec12036b4dbc31cfa904a13a28fe505771024c0bb701ec320a4eab50db5c5c996b4c34c8594dab03
   languageName: node
   linkType: hard
 
@@ -4677,6 +4691,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"decache@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "decache@npm:4.6.0"
+  dependencies:
+    callsite: ^1.0.0
+  checksum: f599e1cefae0a1d64d6f4b9d24bbe24ca467d752ba071225655352a8151188a16d5e46331f41aead3e8b9e7a14aa90010341c5490a2fd3b4fe48096e864a6c58
+  languageName: node
+  linkType: hard
+
 "decamelize@npm:^1.1.2, decamelize@npm:^1.2.0":
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0"
@@ -4751,6 +4774,13 @@ __metadata:
   dependencies:
     clone: ^1.0.2
   checksum: 974f63dd0acb79d14e94ac0f2ea69a880ab2a6e4b341bb9bdc2409b4091b928abe2709a4e140528948d02f29c286efdef22851d1dc972636eed2ce8e1c5b7465
+  languageName: node
+  linkType: hard
+
+"define-lazy-prop@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "define-lazy-prop@npm:2.0.0"
+  checksum: aefea62111b83127cdbc030a230e06a1c718049f737ef72892b036aeaa882fcbd801f311145fbbb66df0c34b035dfe745eab1ad76c52e633427ca6f84eca38ef
   languageName: node
   linkType: hard
 
@@ -5958,7 +5988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-loader@npm:^4.0.0, file-loader@npm:^4.2.0":
+"file-loader@npm:^4.2.0":
   version: 4.3.0
   resolution: "file-loader@npm:4.3.0"
   dependencies:
@@ -5967,6 +5997,18 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0
   checksum: 03535f889b56836dc462f20e138ba5ad46893cc079cfb970b3434aa4d4e959a1e52770fa62e87d657f4d7d3dd9207726a464dee19eb82ccdafdc2e5c6a80f92a
+  languageName: node
+  linkType: hard
+
+"file-loader@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "file-loader@npm:6.2.0"
+  dependencies:
+    loader-utils: ^2.0.0
+    schema-utils: ^3.0.0
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 0f103418c072ec66c081a9908cd7824ee19905e18be16889cb050f5f373998afaf7ca4c2fd2df4cabf703a2cd526aefe59105930e3f8d266a5b35e6d5f5b3cf4
   languageName: node
   linkType: hard
 
@@ -6520,7 +6562,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"gsap@npm:^3.5.1":
+"gsap@npm:^3.6.1":
   version: 3.6.1
   resolution: "gsap@npm:3.6.1"
   checksum: 399667dee8050b89c4a8455f2a869106b3be7edaa70e225ea1443f87fd8efd86711f246552e9af5383c6286b73be59bd7c8192ef262e4c6ce71e59e99567e6b8
@@ -7524,7 +7566,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"is-docker@npm:^2.0.0":
+"is-docker@npm:^2.0.0, is-docker@npm:^2.1.1":
   version: 2.2.1
   resolution: "is-docker@npm:2.2.1"
   bin:
@@ -7801,7 +7843,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"is-wsl@npm:^2.1.1":
+"is-wsl@npm:^2.1.1, is-wsl@npm:^2.2.0":
   version: 2.2.0
   resolution: "is-wsl@npm:2.2.0"
   dependencies:
@@ -8264,7 +8306,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^1.0.2, loader-utils@npm:^1.1.0, loader-utils@npm:^1.2.0, loader-utils@npm:^1.2.3, loader-utils@npm:^1.4.0":
+"loader-utils@npm:^1.0.2, loader-utils@npm:^1.1.0, loader-utils@npm:^1.2.3, loader-utils@npm:^1.4.0":
   version: 1.4.0
   resolution: "loader-utils@npm:1.4.0"
   dependencies:
@@ -8577,7 +8619,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"marked@npm:^2.0.1":
+"marked@npm:^2.0.3":
   version: 2.0.3
   resolution: "marked@npm:2.0.3"
   bin:
@@ -9645,13 +9687,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"open@npm:^7.4.2":
-  version: 7.4.2
-  resolution: "open@npm:7.4.2"
+"open@npm:^8.0.4":
+  version: 8.0.6
+  resolution: "open@npm:8.0.6"
   dependencies:
-    is-docker: ^2.0.0
-    is-wsl: ^2.1.1
-  checksum: 07545fa768e5fbc25c6f53c6f17465f1b7ee663a494f87608d99a7b3227c83d2d2e0f0e5ecb70325b4ddef97dcd02d206f9afe3f8d6bb3d6612db9ca310ed4eb
+    define-lazy-prop: ^2.0.0
+    is-docker: ^2.1.1
+    is-wsl: ^2.2.0
+  checksum: a36b386583106e57f9204678b45b689f0b0c4a4d26a17215e4d6c7f322bd08bd4491b55693a23c7ee86facec1b114901c77aed2090cb64f95ba7049245630669
   languageName: node
   linkType: hard
 
@@ -10242,7 +10285,7 @@ fsevents@~2.3.1:
   dependencies:
     "@babel/core": ^7.13.15
     "@babel/eslint-parser": ^7.13.14
-    "@statoscope/ui-webpack": ^3.3.0
+    "@statoscope/ui-webpack": ^4.0.0
     "@vue/cli-plugin-babel": ~4.5.0
     "@vue/cli-plugin-eslint": ~4.5.0
     "@vue/cli-service": ~4.5.0
@@ -10253,7 +10296,7 @@ fsevents@~2.3.1:
     babel-plugin-lodash: ^3.3.4
     browserslist: ^4.16.4
     bulma: ^0.9.0
-    caniuse-lite: ^1.0.30001208
+    caniuse-lite: ^1.0.30001211
     compression-webpack-plugin: 6.1.1
     core-js: ^3.6.5
     crypto-js: ^4.0.0
@@ -10270,32 +10313,31 @@ fsevents@~2.3.1:
     eslint-plugin-react: ^7.23.2
     eslint-plugin-vue: ^7.9.0
     fibers: ^5.0.0
-    gsap: ^3.5.1
+    gsap: ^3.6.1
     html-minimizer-webpack-plugin: 1.0.1
     html-webpack-plugin: ^4.5.1
     javascript-obfuscator: ^2.12.0
     lodash: ^4.17.20
     lodash-webpack-plugin: ^0.11.6
-    marked: ^2.0.1
+    marked: ^2.0.3
     mini-css-extract-plugin: ^1.4.1
     minify-css-string: ^1.0.0
     node-sass: ^4.12.0
     sass: 1.32.8
     sass-loader: ^8.0.2
-    sitemap-webpack-plugin: ^1.0.0
-    vue: ^2.6.11
-    vue-cli-plugin-vuetify: ~2.0.7
+    sitemap-webpack-plugin: ^1.1.0
+    vue: ^2.6.12
+    vue-cli-plugin-vuetify: ~2.3.1
     vue-eslint-parser: ^7.6.0
     vue-meta: ^2.4.0
     vue-moment: ^4.1.0
     vue-notification: ^1.3.20
-    vue-router: ^3.4.3
+    vue-router: ^3.5.1
     vue-template-compiler: ^2.6.11
     vue2-animate: ^2.1.4
-    vuetify: ^2.2.11
-    vuetify-loader: 1.5.0
-    web-vitals: ^1.1.0
-    webpack-bundle-analyzer: ^4.4.0
+    vuetify: ^2.4.10
+    vuetify-loader: 1.7.2
+    webpack-bundle-analyzer: ^4.4.1
     webpack-bundle-size-analyzer: ^3.1.0
     webpack-bundle-tracker: ^1.0.0-alpha.1
     webpack-manifest-plugin: ^3.0.0
@@ -10303,7 +10345,7 @@ fsevents@~2.3.1:
     webpack-obfuscator: 2.6.0
     webpack-stats-plugin: ^1.0.3
     webpackbar: ^5.0.0-3
-    workbox-window: ^6.1.0
+    workbox-window: ^6.1.5
   languageName: unknown
   linkType: soft
 
@@ -11955,7 +11997,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sitemap-webpack-plugin@npm:^1.0.0":
+"sitemap-webpack-plugin@npm:^1.1.0":
   version: 1.1.0
   resolution: "sitemap-webpack-plugin@npm:1.1.0"
   dependencies:
@@ -13447,9 +13489,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue-cli-plugin-vuetify@npm:~2.0.7":
-  version: 2.0.9
-  resolution: "vue-cli-plugin-vuetify@npm:2.0.9"
+"vue-cli-plugin-vuetify@npm:~2.3.1":
+  version: 2.3.1
+  resolution: "vue-cli-plugin-vuetify@npm:2.3.1"
   dependencies:
     null-loader: ^3.0.0
     semver: ^7.1.2
@@ -13459,7 +13501,7 @@ resolve@^2.0.0-next.3:
       optional: true
     vuetify-loader:
       optional: true
-  checksum: 64605ef3bf57ed9ab041f5f7854d1ff17caa8995886f27a95a74c58efb6f1a32236c69a4ed995698f2420e1f6f8ee628252de92df8f671a6b6c5d05a89ed796f
+  checksum: 6f5cacc97c00967689af29f70e16a31f675ae218fdb4aa39cf7b14d63ff64ba4a344aa4b87e2f20196b2bccc2fd9e6f41e9c9629d650865119f0062c46db1196
   languageName: node
   linkType: hard
 
@@ -13547,7 +13589,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue-router@npm:^3.4.3":
+"vue-router@npm:^3.5.1":
   version: 3.5.1
   resolution: "vue-router@npm:3.5.1"
   checksum: cf53dc6bdb280090831fb68d324326a5d5da3cb686c4b5a53fd1ac25294c03009442c5102ac94f82596ea9851805ba4ef796cbe734e215602adede1fb94304c7
@@ -13588,33 +13630,34 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vue@npm:^2.6.11":
+"vue@npm:^2.6.12":
   version: 2.6.12
   resolution: "vue@npm:2.6.12"
   checksum: 92ed547e55a4b27a2a45aa9ab7ff5999f891dc9754562a37226dd190b323d9f99daec892dd8bd39786e404e6e065d808e165b1a0c127ce8d45fd1bde79ec7312
   languageName: node
   linkType: hard
 
-"vuetify-loader@npm:1.5.0":
-  version: 1.5.0
-  resolution: "vuetify-loader@npm:1.5.0"
+"vuetify-loader@npm:1.7.2":
+  version: 1.7.2
+  resolution: "vuetify-loader@npm:1.7.2"
   dependencies:
-    file-loader: ^4.0.0
-    loader-utils: ^1.2.0
+    decache: ^4.6.0
+    file-loader: ^6.2.0
+    loader-utils: ^2.0.0
   peerDependencies:
     vue-template-compiler: ^2.6.10
     vuetify: ^1.3.0 || ^2.0.0
-    webpack: ^4.0.0
-  checksum: 13525493cd2da94b70b48e8ac5596b61d0210e49680139038baae9fdc30b80b93ada393eef6e795b70fe8247130413468168d8702cff10b74ce3b9073444e5f5
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 4e4fb2ed10fd4a6ede70d49cc5f79b36979ec4b9ab40c6c6678b4f6ae07d58b95094920341dab55046602dfa94320f6d823bc128ccbf7990c640ce7c5d79f615
   languageName: node
   linkType: hard
 
-"vuetify@npm:^2.2.11":
-  version: 2.4.9
-  resolution: "vuetify@npm:2.4.9"
+"vuetify@npm:^2.4.10":
+  version: 2.4.10
+  resolution: "vuetify@npm:2.4.10"
   peerDependencies:
     vue: ^2.6.4
-  checksum: e0794fa18c2d78c2f14c43677f0722a96d4136017dfc5de5276c8ad9b44763b8a6596a2788a052284b5549d8e23c18326b32f9381850fbb0177b5df0d466ac71
+  checksum: f63704486cbd6352ba8c1e15bb39e088c6d4951743f418ad246e12b3f1169688040883e67011309fc4a1b023c2f8eed828538abcd908069998e982f5fe055d9f
   languageName: node
   linkType: hard
 
@@ -13662,13 +13705,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^1.1.0":
-  version: 1.1.1
-  resolution: "web-vitals@npm:1.1.1"
-  checksum: e84e449f46d5bdae9bc3d9d03647e654970bbe7fd448ecc8051ae06bcb869aa29cdcd16486786db416ca7a6e43a2f87e0f66662437ec5679761bcdd753a8c055
-  languageName: node
-  linkType: hard
-
 "webpack-bundle-analyzer@npm:^3.8.0":
   version: 3.9.0
   resolution: "webpack-bundle-analyzer@npm:3.9.0"
@@ -13692,7 +13728,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-bundle-analyzer@npm:^4.4.0":
+"webpack-bundle-analyzer@npm:^4.4.1":
   version: 4.4.1
   resolution: "webpack-bundle-analyzer@npm:4.4.1"
   dependencies:
@@ -14057,7 +14093,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"workbox-window@npm:^6.1.0":
+"workbox-window@npm:^6.1.5":
   version: 6.1.5
   resolution: "workbox-window@npm:6.1.5"
   dependencies:
