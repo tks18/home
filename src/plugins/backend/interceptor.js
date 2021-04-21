@@ -1,6 +1,14 @@
 import axios from 'axios';
+import { calculate_resp_ms } from '@p/axios';
+import { generate_backend_hash } from '@p/crypto';
+import headers from './utils';
+import { backend } from './routes';
 
-const instance = axios.create();
+// console.log(api);
+const instance = axios.create({
+  baseURL: backend,
+  headers: headers(generate_backend_hash()),
+});
 
 instance.interceptors.request.use((config) => {
   const conf = config;
@@ -8,15 +16,6 @@ instance.interceptors.request.use((config) => {
   conf.meta.requestStartedAt = new Date().getTime();
   return conf;
 });
-
-export const calculate_resp_ms = (response) => {
-  const start = response.config.meta.requestStartedAt;
-  const end = new Date().getTime();
-  response.config.meta.requestEndedAt = end;
-  const milliseconds = end - start;
-  response.responsetime = milliseconds;
-  return response;
-};
 
 instance.interceptors.response.use(
   (response) => {

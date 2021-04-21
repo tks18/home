@@ -1,21 +1,13 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { utils } from '@p/backend';
 import { api } from './routes';
+import axios from './interceptor';
 
 export default {
   get: {
     current: async () => {
       const resp = await axios
-        .post(
-          api.notification.get,
-          {
-            type: 'current',
-          },
-          {
-            headers: utils.headers(generate_backend_hash()),
-          },
-        )
+        .post(api.notification.get, {
+          type: 'current',
+        })
         .then((response) => {
           if (
             response.status === 200 &&
@@ -43,15 +35,9 @@ export default {
     },
     all: async () => {
       const resp = await axios
-        .post(
-          api.notification.get,
-          {
-            type: 'all',
-          },
-          {
-            headers: utils.headers(generate_backend_hash()),
-          },
-        )
+        .post(api.notification.get, {
+          type: 'all',
+        })
         .then((response) => {
           if (
             response.status === 200 &&

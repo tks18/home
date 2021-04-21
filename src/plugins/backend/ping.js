@@ -1,17 +1,8 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { utils } from '@p/backend';
-import { backend } from './routes';
+import axios from './interceptor';
 
 export default async () => {
   const resp = await axios
-    .post(
-      backend,
-      {},
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post('/')
     .then((response) => {
       if (response.status === 200 && response.data) {
         return {

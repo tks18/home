@@ -5,6 +5,7 @@ import Stories from './stories';
 import Gallery from './gallery';
 import Notification from './notifications';
 import headers from './utils';
+import interceptor from './interceptor';
 
 export const api = {
   url,
@@ -15,6 +16,7 @@ export const blog = Blog;
 export const notifications = Notification;
 export const stories = Stories;
 export const gallery = Gallery;
+export const axios = interceptor;
 export const utils = {
   headers,
 };

@@ -1,20 +1,12 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { api as backend, utils } from '@p/backend';
+import { axios, api as backend } from '@p/backend';
 
 const api = backend.routes.github;
 
 export async function projects(ismobile, user) {
   const resp = await axios
-    .post(
-      api.repo.list,
-      {
-        user,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.list, {
+      user,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         const { repos } = response.data;
@@ -39,16 +31,10 @@ export async function projects(ismobile, user) {
 
 export async function repoData(user, repo) {
   const resp = await axios
-    .post(
-      api.repo.data,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.data, {
+      user,
+      repo,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
@@ -73,19 +59,13 @@ export async function repoData(user, repo) {
 
 export async function repoCommits(user, repo, branch, nos, page) {
   const resp = await axios
-    .post(
-      api.repo.commits,
-      {
-        user,
-        repo,
-        branch,
-        nos,
-        page,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.commits, {
+      user,
+      repo,
+      branch,
+      nos,
+      page,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
@@ -110,16 +90,10 @@ export async function repoCommits(user, repo, branch, nos, page) {
 
 export async function repoTopics(user, repo) {
   const resp = await axios
-    .post(
-      api.repo.topics,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.topics, {
+      user,
+      repo,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
@@ -144,18 +118,12 @@ export async function repoTopics(user, repo) {
 
 export async function repoContents(user, repo, path, branch) {
   const resp = await axios
-    .post(
-      api.repo.contents,
-      {
-        user,
-        repo,
-        path,
-        branch,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.contents, {
+      user,
+      repo,
+      path,
+      branch,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
@@ -180,16 +148,10 @@ export async function repoContents(user, repo, path, branch) {
 
 export async function repoBranches(user, repo) {
   const resp = await axios
-    .post(
-      api.repo.branches,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
+    .post(api.repo.branches, {
+      user,
+      repo,
+    })
     .then((response) => {
       if (response.status === 200 && response.data && response.data.success) {
         return {
