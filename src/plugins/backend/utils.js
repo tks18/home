@@ -15,16 +15,16 @@ export const make_request = async (options) => {
       if (resp.status === 200 && resp.data) {
         return {
           success: true,
-          data: response.data,
+          data: resp.data,
           error: null,
-          timing: response.responsetime,
+          timing: resp.responsetime,
         };
       }
       return {
         success: false,
         data: null,
         error: 'Error Fetching Request',
-        timing: response.responsetime,
+        timing: resp.responsetime,
       };
     })
     .catch((err) => ({
