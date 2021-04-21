@@ -2,40 +2,40 @@ export const backend = process.env.VUE_APP_BACKEND;
 
 export const api = {
   blog: {
-    get: 'blog/get',
-    set: 'blog/set',
-    delete: 'blog/delete',
+    get: `${backend}blog/get`,
+    set: `${backend}blog/set`,
+    delete: `${backend}blog/delete`,
   },
   notification: {
-    get: 'notification/get',
-    set: 'notification/set',
+    get: `${backend}notification/get`,
+    set: `${backend}notification/set`,
   },
   stories: {
-    get: 'stories/get',
-    set: 'stories/set',
+    get: `${backend}stories/get`,
+    set: `${backend}stories/set`,
   },
   gallery: {
-    get: 'gallery/get',
+    get: `${backend}gallery/get`,
   },
   externals: {
     nasa: {
-      apod: 'externals/nasa/apod',
+      apod: `${backend}externals/nasa/apod`,
     },
   },
   google: {
     youtube: {
-      videos: 'google/youtube/videos',
-      channel_data: 'google/youtube/channel-data',
+      videos: `${backend}google/youtube/videos`,
+      channel_data: `${backend}google/youtube/channel-data`,
     },
   },
   github: {
     repo: {
-      list: 'github/repo/list',
-      data: 'github/repo/data',
-      topics: 'github/repo/topics',
-      contents: 'github/repo/contents',
-      branches: 'github/repo/branches',
-      commits: 'github/repo/commits',
+      list: `${backend}github/repo/list`,
+      data: `${backend}github/repo/data`,
+      topics: `${backend}github/repo/topics`,
+      contents: `${backend}github/repo/contents`,
+      branches: `${backend}github/repo/branches`,
+      commits: `${backend}github/repo/commits`,
     },
   },
 };
