@@ -1,70 +1,43 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { api as backend, utils } from '@p/backend';
+import { api as backend, requester } from '@p/backend';
 
 const api = backend.routes.google.youtube;
 
 export async function channel_data(channel) {
   const id = channel;
-  const resp = await axios
-    .post(
-      api.channel_data,
-      {
-        channel_id: id,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          error: null,
-          data: response.data.data,
-        };
-      }
-      return {
-        success: false,
-        error: 'Response Failed to Fetch Data',
-        data: null,
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      error,
-      data: null,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.channel_data,
+    postData: {
+      channel_id: id,
+    },
+  });
+  if (resp.data.success) {
+    return {
+      success: true,
+      error: null,
+      data: resp.data.data,
+    };
+  }
+  return {
+    success: false,
+    error: resp.error,
+    data: null,
+  };
 }
 
 export async function videos() {
-  const resp = await axios
-    .post(
-      api.videos,
-      {},
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          error: null,
-          data: response.data.data,
-        };
-      }
-      return {
-        success: false,
-        error: 'Response Failed to Fetch Data',
-        data: null,
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      error,
-      data: null,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.videos,
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      error: null,
+      data: resp.data.data,
+    };
+  }
+  return {
+    success: false,
+    error: resp.error,
+    data: null,
+  };
 }

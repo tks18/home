@@ -1,29 +1,21 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { utils } from '@p/backend';
+import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
   get: async () => {
-    const resp = await axios
-      .post(
-        api.stories.get,
-        {},
-        {
-          headers: utils.headers(generate_backend_hash()),
-        },
-      )
-      .then((response) => response.data)
-      .catch((err) => err.response.data);
-    return resp;
+    const resp = await requester({
+      url: api.stories.get,
+      postData: {
+        type: 'current',
+      },
+    });
+    return resp.data;
   },
   set: async (storyData) => {
-    const resp = await axios
-      .post(api.stories.set, storyData, {
-        headers: utils.headers(generate_backend_hash()),
-      })
-      .then((response) => response.data)
-      .catch((err) => err.response.data);
-    return resp;
+    const resp = await requester({
+      url: api.stories.set,
+      postData: storyData,
+    });
+    return resp.data;
   },
 };

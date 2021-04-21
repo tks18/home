@@ -1,213 +1,128 @@
-import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
-import { api as backend, utils } from '@p/backend';
+import { api as backend, requester } from '@p/backend';
 
 const api = backend.routes.github;
 
 export async function projects(ismobile, user) {
-  const resp = await axios
-    .post(
-      api.repo.list,
-      {
-        user,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        const { repos } = response.data;
-        const slicedRepos = ismobile ? repos.slice(0, 2) : repos.slice(0, 5);
-        return {
-          success: true,
-          data: slicedRepos,
-        };
-      }
-      return {
-        success: true,
-        data: null,
-      };
-    })
-    .catch((e) => ({
+  const resp = await requester({
+    url: api.repo.list,
+    postData: {
+      user,
+    },
+  });
+  if (resp.success) {
+    const { repos } = resp.data;
+    const slicedRepos = ismobile ? repos.slice(0, 2) : repos.slice(0, 5);
+    return {
       success: true,
-      data: null,
-      error: e,
-    }));
-  return resp;
+      data: slicedRepos,
+    };
+  }
+  return {
+    success: true,
+    data: resp.error,
+  };
 }
 
 export async function repoData(user, repo) {
-  const resp = await axios
-    .post(
-      api.repo.data,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          data: response.data,
-          error: null,
-        };
-      }
-      return {
-        success: false,
-        data: null,
-        error: 'Not Able to Continue',
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      data: null,
-      error,
-    }));
+  const resp = await requester({
+    url: api.repo.data,
+    postData: {
+      user,
+      repo,
+    },
+  });
   return resp;
 }
 
 export async function repoCommits(user, repo, branch, nos, page) {
-  const resp = await axios
-    .post(
-      api.repo.commits,
-      {
-        user,
-        repo,
-        branch,
-        nos,
-        page,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          commits: response.data.commits,
-          error: null,
-        };
-      }
-      return {
-        success: false,
-        commits: null,
-        error: 'Error Fetching the api',
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      commits: null,
-      error,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.repo.commits,
+    postData: {
+      user,
+      repo,
+      branch,
+      nos,
+      page,
+    },
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      commits: resp.data.commits,
+      error: null,
+    };
+  }
+  return {
+    success: false,
+    commits: null,
+    error: resp.error,
+  };
 }
 
 export async function repoTopics(user, repo) {
-  const resp = await axios
-    .post(
-      api.repo.topics,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          topics: response.data,
-          error: null,
-        };
-      }
-      return {
-        success: false,
-        topics: null,
-        error: 'Not Able to Continue',
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      topics: null,
-      error,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.repo.topics,
+    postData: {
+      user,
+      repo,
+    },
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      topics: resp.data,
+      error: null,
+    };
+  }
+  return {
+    success: false,
+    topics: null,
+    error: resp.error,
+  };
 }
 
 export async function repoContents(user, repo, path, branch) {
-  const resp = await axios
-    .post(
-      api.repo.contents,
-      {
-        user,
-        repo,
-        path,
-        branch,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          contents: response.data.Contents,
-          error: null,
-        };
-      }
-      return {
-        success: false,
-        contents: null,
-        error: 'Not Able to Continue',
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      contents: null,
-      error,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.repo.contents,
+    postData: {
+      user,
+      repo,
+      path,
+      branch,
+    },
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      contents: resp.data.Contents,
+      error: null,
+    };
+  }
+  return {
+    success: false,
+    contents: null,
+    error: resp.error,
+  };
 }
 
 export async function repoBranches(user, repo) {
-  const resp = await axios
-    .post(
-      api.repo.branches,
-      {
-        user,
-        repo,
-      },
-      {
-        headers: utils.headers(generate_backend_hash()),
-      },
-    )
-    .then((response) => {
-      if (response.status === 200 && response.data && response.data.success) {
-        return {
-          success: true,
-          branches: response.data.branches,
-          error: null,
-        };
-      }
-      return {
-        success: false,
-        branches: null,
-        error: 'Not Able to Continue',
-      };
-    })
-    .catch((error) => ({
-      success: false,
-      branches: null,
-      error,
-    }));
-  return resp;
+  const resp = await requester({
+    url: api.repo.branches,
+    postData: {
+      user,
+      repo,
+    },
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      branches: resp.data.branches,
+      error: null,
+    };
+  }
+  return {
+    success: false,
+    branches: null,
+    error: resp.error,
+  };
 }
