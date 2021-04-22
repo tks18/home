@@ -56,9 +56,15 @@ export async function languageTrend() {
       const languageTrendGradients = [];
       for (let i = 0; i < 5; i++) {
         languageTrendData.push(data.data[i].percent);
-        data.data[i].name === 'JavaScript'
-          ? languageTrendLabels.push('JS')
-          : languageTrendLabels.push(data.data[i].name);
+        if (data.data[i].name === 'JavaScript') {
+          languageTrendLabels.push('JS');
+        } else if (data.data[i].name === 'Python') {
+          languageTrendLabels.push('PY');
+        } else if (data.data[i].name === 'Vue.js') {
+          languageTrendLabels.push('Vue');
+        } else {
+          languageTrendLabels.push(data.data[i].name);
+        }
         languageTrendGradients.push(data.data[i].color);
       }
       return {
