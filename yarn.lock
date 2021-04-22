@@ -9460,6 +9460,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"nprogress@npm:0.2.0, nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 652dfcfea776f9d9a2c3ad1f79b4cbd3056a03e7c6884966eab70fb184e8e70bfca9e0343ba89d11aa1ed95370d648fb638fab91b5dc027bdad54c8d37c96478
+  languageName: node
+  linkType: hard
+
 "nth-check@npm:^1.0.2":
   version: 1.0.2
   resolution: "nth-check@npm:1.0.2"
@@ -10323,6 +10330,7 @@ fsevents@~2.3.1:
     mini-css-extract-plugin: ^1.4.1
     minify-css-string: ^1.0.0
     node-sass: ^4.12.0
+    nprogress: ^0.2.0
     sass: 1.32.8
     sass-loader: ^8.0.2
     sitemap-webpack-plugin: ^1.1.0
@@ -10332,6 +10340,7 @@ fsevents@~2.3.1:
     vue-meta: ^2.4.0
     vue-moment: ^4.1.0
     vue-notification: ^1.3.20
+    vue-nprogress: ^0.2.0
     vue-router: ^3.5.1
     vue-template-compiler: ^2.6.11
     vue2-animate: ^2.1.4
@@ -13586,6 +13595,17 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     vue: ^2.0.0
   checksum: 8eb3064006dd75a9ae87644296ac78e81b3fb2b69af9ff08110c455fd9d96419a19ed1dd8d92dcb891e83aa85e6ebabe7a4f2c6aa007c6d7afe63a495054f5d7
+  languageName: node
+  linkType: hard
+
+"vue-nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "vue-nprogress@npm:0.2.0"
+  dependencies:
+    nprogress: 0.2.0
+  peerDependencies:
+    vue: ">=2"
+  checksum: 1e32eff54e5ab45d86e3eb092ca83508ebed90d81b7d9d4de99e99a32eccff58e3c1c1903d5801ba0fe7668de706705db9dc75e8b82a1ea151a666847b6ec988
   languageName: node
   linkType: hard
 

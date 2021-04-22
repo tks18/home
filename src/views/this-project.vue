@@ -901,6 +901,7 @@ export default {
         this.$set(this.repo.contents, 'data', sortedContents);
         this.render_markdown(branch);
         this.$set(this.repo.contents, 'loading', false);
+        this.$loader.done();
       }
     },
     async render_markdown(branch) {
@@ -943,10 +944,12 @@ export default {
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
           this.file_view = true;
+          this.$loader.done();
         }
       }
     },
     async handleNavigation(backtrigger, file) {
+      this.$loader.start();
       if (backtrigger) {
         if (this.currentPath !== '/') {
           this.$vuetify.goTo('#this-project-source-code-content');
