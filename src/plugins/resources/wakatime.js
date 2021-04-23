@@ -1,5 +1,4 @@
-import axios from 'axios';
-import jsonpadapter from 'axios-jsonp';
+import { jsonpRequester } from '@p/axios';
 
 const wakatimeStats = {
   dailyStats:
@@ -11,105 +10,87 @@ const wakatimeStats = {
 };
 
 export async function codingData() {
-  const resp = await axios({
-    url: wakatimeStats.dailyStats,
-    method: 'get',
-    adapter: jsonpadapter,
-  }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      let consolMinutes = 0;
-      const dailyData = [];
-      data.data.forEach((codeData) => {
-        const { hours } = codeData.grand_total;
-        const { minutes } = codeData.grand_total;
-        const totalMinutes = hours * 60 + minutes;
-        dailyData.push(totalMinutes);
-        consolMinutes += totalMinutes;
-      });
-      return {
-        success: true,
-        data: {
-          consolMinutes,
-          dailyData,
-        },
-      };
-    }
+  const resp = await jsonpRequester(wakatimeStats.dailyStats);
+  if (resp.success) {
+    const { data } = resp;
+    let consolMinutes = 0;
+    const dailyData = [];
+    data.data.forEach((codeData) => {
+      const { hours } = codeData.grand_total;
+      const { minutes } = codeData.grand_total;
+      const totalMinutes = hours * 60 + minutes;
+      dailyData.push(totalMinutes);
+      consolMinutes += totalMinutes;
+    });
     return {
-      success: false,
-      data: null,
+      success: true,
+      data: {
+        consolMinutes,
+        dailyData,
+      },
     };
-  });
-  return resp;
+  }
+  return {
+    success: false,
+    data: null,
+  };
 }
 
 export async function languageTrend() {
-  const resp = await axios({
-    url: wakatimeStats.languageTrend,
-    method: 'get',
-    adapter: jsonpadapter,
-  }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      const languageTrendData = [];
-      const languageTrendLabels = [];
-      const languageTrendGradients = [];
-      for (let i = 0; i < 5; i++) {
-        languageTrendData.push(data.data[i].percent);
-        if (data.data[i].name === 'JavaScript') {
-          languageTrendLabels.push('JS');
-        } else if (data.data[i].name === 'Python') {
-          languageTrendLabels.push('PY');
-        } else if (data.data[i].name === 'Vue.js') {
-          languageTrendLabels.push('Vue');
-        } else {
-          languageTrendLabels.push(data.data[i].name);
-        }
-        languageTrendGradients.push(data.data[i].color);
+  const resp = await jsonpRequester(wakatimeStats.languageTrend);
+  if (resp.success) {
+    const { data } = resp;
+    const languageTrendData = [];
+    const languageTrendLabels = [];
+    const languageTrendGradients = [];
+    for (let i = 0; i < 5; i++) {
+      languageTrendData.push(data.data[i].percent);
+      if (data.data[i].name === 'JavaScript') {
+        languageTrendLabels.push('JS');
+      } else if (data.data[i].name === 'Python') {
+        languageTrendLabels.push('PY');
+      } else if (data.data[i].name === 'Vue.js') {
+        languageTrendLabels.push('Vue');
+      } else {
+        languageTrendLabels.push(data.data[i].name);
       }
-      return {
-        success: true,
-        data: {
-          languageTrendData,
-          languageTrendLabels,
-          languageTrendGradients,
-        },
-      };
+      languageTrendGradients.push(data.data[i].color);
     }
     return {
-      success: false,
-      data: null,
+      success: true,
+      data: {
+        languageTrendData,
+        languageTrendLabels,
+        languageTrendGradients,
+      },
     };
-  });
-  return resp;
+  }
+  return {
+    success: false,
+    data: null,
+  };
 }
 
 export async function editorsData() {
-  const resp = await axios({
-    url: wakatimeStats.editors,
-    method: 'get',
-    adapter: jsonpadapter,
-  }).then((response) => {
-    if (response && response.status === 200) {
-      const { data } = response;
-      const editorsTrendData = [];
-      const editorsTrendLabels = [];
-      for (let i = 0; i < 5; i++) {
-        editorsTrendData.push(Math.round(data.data[i].percent));
-        editorsTrendLabels.push(data.data[i].name);
-      }
-      return {
-        success: true,
-        data: {
-          editorsTrendData,
-          editorsTrendLabels,
-        },
-      };
+  const resp = await jsonpRequester(wakatimeStats.editors);
+  if (resp.success) {
+    const { data } = resp;
+    const editorsTrendData = [];
+    const editorsTrendLabels = [];
+    for (let i = 0; i < 5; i++) {
+      editorsTrendData.push(Math.round(data.data[i].percent));
+      editorsTrendLabels.push(data.data[i].name);
     }
     return {
-      success: false,
-      data: null,
+      success: true,
+      data: {
+        editorsTrendData,
+        editorsTrendLabels,
+      },
     };
-  });
-  return resp;
+  }
+  return {
+    success: false,
+    data: null,
+  };
 }

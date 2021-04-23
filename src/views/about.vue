@@ -665,7 +665,7 @@
                         gradient-direction="top"
                         :label-size="ismobile ? 9 : 8"
                         stroke-linecap="round"
-                        class="mx-1"
+                        class="mx-2"
                         :height="ismobile ? 90 : 97"
                         line-width="2"
                         auto-draw
