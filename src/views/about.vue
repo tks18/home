@@ -724,10 +724,12 @@ export default {
   }),
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      const { params } = to;
-      if (params.scroll) {
-        vm.$vuetify.goTo(params.scrollid);
-      }
+      setTimeout(() => {
+        const { params } = to;
+        if (params.scroll) {
+          vm.$vuetify.goTo(params.scrollid);
+        }
+      }, 1000);
     });
   },
   data: () => ({
