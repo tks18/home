@@ -120,16 +120,6 @@ export default {
           prop: 'projtitle',
         },
         {
-          elem: '#home-astroPicTitle',
-          map_word: 'Astro Pic of the day',
-          prop: 'astroPicTitle',
-        },
-        {
-          elem: '#home-spacextitle',
-          map_word: 'Spacex News',
-          prop: 'spacextitle',
-        },
-        {
           elem: '#home-channel-title',
           map_word: 'Youtube',
           prop: 'channel_title',
