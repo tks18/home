@@ -70,6 +70,7 @@ import contact_tip_component from '@v/home/components/contact-tip-component';
 import feedback_component from '@v/home/components/feedback-component';
 
 export default {
+  name: 'Home',
   metaInfo: () => ({
     title: 'Home',
   }),

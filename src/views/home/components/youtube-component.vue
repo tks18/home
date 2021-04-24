@@ -289,7 +289,7 @@ export default {
   },
   methods: {
     yt_video_model(video) {
-      if (this.channel.videos[video.index].model) {
+      if (this.videos[video.index].model) {
         this.$set(this.videos[video.index], 'model', false);
       } else {
         this.$set(this.videos[video.index], 'model', true);
