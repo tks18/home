@@ -19,16 +19,6 @@
       :context-info="contextInfo"
       :goto-url="gotoUrl"
     />
-    <h-nasa-apod-component
-      :ismobile="ismobile"
-      :title="animatedArray.astroPicTitle"
-      :goto-url="gotoUrl"
-    />
-    <h-spacex-launches-component
-      :ismobile="ismobile"
-      :title="animatedArray.spacextitle"
-      :goto-url="gotoUrl"
-    />
     <h-youtube-component
       :ismobile="ismobile"
       :title="animatedArray.channel_title"
@@ -62,8 +52,6 @@ import blog_component from '@v/home/components/blog-component';
 import about_component from '@v/home/components/about-component';
 import breaking_bad_component from '@v/home/components/breaking-bad-component';
 import projects_component from '@v/home/components/projects-component';
-import nasa_apod_component from '@v/home/components/nasa-apod-component';
-import spacex_launches_component from '@v/home/components/spacex-launches-component';
 import youtube_component from '@v/home/components/youtube-component';
 import gallery_component from '@v/home/components/gallery-component';
 import contact_tip_component from '@v/home/components/contact-tip-component';
@@ -82,8 +70,6 @@ export default {
     'h-about-component': about_component,
     'h-breaking-bad': breaking_bad_component,
     'h-projects-component': projects_component,
-    'h-nasa-apod-component': nasa_apod_component,
-    'h-spacex-launches-component': spacex_launches_component,
     'h-youtube-component': youtube_component,
     'h-gallery-component': gallery_component,
     'h-contact-tip-component': contact_tip_component,
