@@ -2,6 +2,7 @@ const WebpackBar = require('webpackbar');
 const { loaders, optimizations, plugins, resolvers } = require('./webpack');
 
 module.exports = {
+  devtool: 'source-map',
   module: {
     rules: [...loaders],
   },
