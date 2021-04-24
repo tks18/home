@@ -2,15 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "type": "edge",
       "request": "launch",
-      "name": "vuejs: chrome",
+      "name": "vuejs: edge",
       "url": "http://localhost:8080",
       "webRoot": "${workspaceFolder}/src",
       "breakOnLoad": true,
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }
+    },
+    {
+      "command": "yarn serve",
+      "name": "dev: server",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }

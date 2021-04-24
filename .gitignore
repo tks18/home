@@ -25,6 +25,7 @@ pnpm-debug.log*
 .idea
 .vscode/*
 !.vscode/launch.json
+!.vscode/tasks.json
 *.suo
 *.ntvs*
 *.njsproj
