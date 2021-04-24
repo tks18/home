@@ -3,16 +3,14 @@
     <v-container>
       <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
         <v-col cols="12">
-          <div
-            id="home-astroPicTitle"
-            :class="
-              'clip-text-back text-h5 non-touch ml-2 text-capitalize' +
-              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-            "
-          >
-            {{ title }}
-            <v-icon>mdi-arrow-right-circle</v-icon>
-          </div>
+          <h-title-component
+            id="astroPicTitle"
+            :title="title"
+            arrow="right"
+            :center="false"
+            :large="false"
+            :darker="false"
+          />
         </v-col>
         <v-col :cols="12">
           <v-card :loading="loading" elevation="15" class="mx-auto">
@@ -45,10 +43,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import apod from '@p/resources/nasa';
 
 export default {
   name: 'HomeApodComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -68,7 +70,7 @@ export default {
     apod: {},
   }),
   mounted() {
-    fetchApis();
+    this.fetchApis();
   },
   methods: {
     async getNasaApod() {
@@ -87,5 +89,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

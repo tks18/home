@@ -2,17 +2,15 @@
   <div class="column is-full">
     <v-row :class="ismobile ? 'ma-0' : 'ma-2'">
       <v-col cols="12" align="start" justify="start">
-        <div
-          id="home-projtitle"
-          :class="
-            'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="$router.push('/projects')"
-        >
-          {{ title }}
-          <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="projtitle"
+          :title="title"
+          arrow="right"
+          link="/projects"
+          :center="false"
+          :large="false"
+          :darker="false"
+        />
       </v-col>
       <v-col v-if="loading" cols="12">
         <v-row>
@@ -262,10 +260,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import { projects } from '@p/resources/github';
 
 export default {
   name: 'HomeProjectsComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,

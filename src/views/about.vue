@@ -722,16 +722,6 @@ export default {
   metaInfo: () => ({
     title: 'About',
   }),
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      setTimeout(() => {
-        const { params } = to;
-        if (params.scroll) {
-          vm.$vuetify.goTo(params.scrollid);
-        }
-      }, 1000);
-    });
-  },
   data: () => ({
     mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
     bgs: authorData.bgs,
@@ -833,11 +823,19 @@ export default {
     },
   },
   mounted() {
+    this.check_scroll_callback();
     this.render();
   },
   methods: {
     gotoUrl(url) {
       window.open(url);
+    },
+    check_scroll_callback() {
+      const router = this.$route;
+      const { params } = router;
+      if (params.scroll) {
+        this.$vuetify.goTo(params.scrollid);
+      }
     },
     lifeTimeCounter(elem) {
       gsap.observeNexecute(elem, () => {

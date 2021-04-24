@@ -3,22 +3,14 @@
     <v-container class="non-touch">
       <v-row align="center" justify="center" class="ma-0 pa-0">
         <v-col cols="12" align="center">
-          <div
-            id="home-whatiDo"
-            :class="
-              'text point-cursor text-center text-capitalize ma-0 pa-0 text-h4 font-weight-black ' +
-              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-            "
-            @click="
-              $router.push({
-                name: 'About',
-                params: { scroll: true, scrollid: '#about-languagesknown' },
-              })
-            "
-          >
-            {{ title }}
-            <v-icon large>mdi-arrow-down-circle</v-icon>
-          </div>
+          <h-title-component
+            id="whatiDo"
+            :title="title"
+            arrow="down"
+            :center="true"
+            :large="true"
+            :darker="true"
+          />
         </v-col>
         <v-col align="center" justify="center" class="text-center" cols="12">
           <v-row align="center" justify="center">
@@ -76,8 +68,13 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
+
 export default {
   name: 'HomeWhatIDoComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,

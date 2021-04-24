@@ -2,16 +2,14 @@
   <div class="column is-full ma-2">
     <v-row>
       <v-col align="start" justify="start">
-        <div
-          id="home-storytitle"
-          :class="
-            'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="gotoUrl('https://webstories.shaaan.tk')"
-        >
-          {{ title }} <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="storytitle"
+          :title="title"
+          arrow="right"
+          :center="false"
+          :large="false"
+          :darker="false"
+        />
       </v-col>
       <v-col align="end" justify="start" class="mr-4">
         <v-btn icon color="primary"><v-icon>mdi-arrow-left</v-icon></v-btn>
@@ -50,7 +48,7 @@
           class="mx-2"
           :style="{
             background: 'center',
-            backgroundImage: 'url(' + site.site + story.asset + ')',
+            backgroundImage: 'url(' + site + story.asset + ')',
             backgroundSize: 'cover',
           }"
           :width="ismobile ? 225 : 250"
@@ -83,10 +81,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import { stories } from '@p/backend';
 
 export default {
   name: 'HomeStoriesComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -148,5 +150,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

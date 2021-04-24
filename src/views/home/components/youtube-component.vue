@@ -2,17 +2,15 @@
   <div class="column is-full non-touch">
     <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
       <v-col cols="12">
-        <div
-          id="home-channel-title"
-          :class="
-            'clip-text-back text-h5 point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="$router.push('/gallery')"
-        >
-          {{ title }}
-          <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="channel-title"
+          :title="title"
+          arrow="right"
+          link="/gallery"
+          :center="false"
+          :large="false"
+          :darker="false"
+        />
       </v-col>
       <v-col v-if="!loading" cols="12">
         <v-row align="center" :justify="ismobile ? 'center' : null">
@@ -253,10 +251,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import { channel_data, videos } from '@p/resources/youtube';
 
 export default {
   name: 'HomeYoutubeComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -282,6 +284,9 @@ export default {
     channel: {},
     videos: [],
   }),
+  mounted() {
+    this.fetchApis();
+  },
   methods: {
     yt_video_model(video) {
       if (this.channel.videos[video.index].model) {
@@ -317,8 +322,10 @@ export default {
         this.loading = false;
       }
     },
+    fetchApis() {
+      this.getChannelData();
+      this.getChannelVideos();
+    },
   },
 };
 </script>
-
-<style></style>

@@ -2,17 +2,15 @@
   <div class="column is-full">
     <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
       <v-col cols="12">
-        <div
-          id="home-spacextitle"
-          :class="
-            'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="$router.push('/spacex')"
-        >
-          {{ title }}
-          <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="spacextitle"
+          :title="title"
+          arrow="right"
+          link="/spacex"
+          :center="false"
+          :large="false"
+          :darker="false"
+        />
       </v-col>
       <v-col cols="12">
         <div class="text-body-1 ml-4">
@@ -217,10 +215,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import latestLaunches from '@p/resources/spacex';
 
 export default {
   name: 'HomeSpacexLaunchesComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -259,5 +261,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

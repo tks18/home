@@ -1,15 +1,17 @@
 <template>
   <div class="column is-full">
-    <div
-      id="home-feedbacktitle"
-      :class="
-        'non-touch text-center font-weight-black my-2 text-capitalize' +
-        (ismobile ? ' text-h6 ' : ' text-h4 ')
-      "
-    >
-      {{ title }}
-      <v-icon large>mdi-arrow-down-circle</v-icon>
-    </div>
+    <v-row align="center" justify="center" class="ma-0 pa-0">
+      <v-col cols="12" align="center">
+        <h-title-component
+          id="feedbacktitle"
+          :title="title"
+          arrow="down"
+          :center="true"
+          :large="true"
+          :darker="true"
+        />
+      </v-col>
+    </v-row>
     <div class="hero is-medium">
       <div :class="'hero-body contact-bg ' + (ismobile ? 'ma-0 pa-0' : '')">
         <div class="container pa-2">
@@ -83,8 +85,13 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
+
 export default {
   name: 'HomeFeedbackComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -97,5 +104,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

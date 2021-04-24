@@ -2,16 +2,15 @@
   <div class="column is-full ma-2">
     <v-row>
       <v-col align="start" justify="start">
-        <div
-          id="home-blogtitle"
-          :class="
-            'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="$router.push('/blog')"
-        >
-          {{ title }} <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="blogtitle"
+          :title="title"
+          arrow="right"
+          link="/blog"
+          :large="false"
+          :center="false"
+          :darker="false"
+        />
       </v-col>
       <v-col align="end" justify="start" class="mr-4">
         <v-btn icon color="primary" @click="swipeLeft('posts')">
@@ -92,9 +91,13 @@
 <script>
 /* eslint-disable no-eval */
 import { scrollTo } from '@p/helpers';
+import title_component from '@v/home/components/common/title-component';
 
 export default {
   name: 'HomeBlogComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -117,5 +120,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

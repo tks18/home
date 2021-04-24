@@ -2,17 +2,15 @@
   <div class="column is-full">
     <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
       <v-col cols="12">
-        <div
-          id="home-gallerytitle"
-          :class="
-            'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-            ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-          "
-          @click="$router.push('/gallery')"
-        >
-          {{ title }}
-          <v-icon>mdi-arrow-right-circle</v-icon>
-        </div>
+        <h-title-component
+          id="gallerytitle"
+          :title="title"
+          arrow="right"
+          link="/gallery"
+          :center="false"
+          :large="false"
+          :darker="false"
+        />
       </v-col>
       <v-col :cols="ismobile ? 12 : 6">
         <v-hover v-slot="{ hover }">
@@ -194,10 +192,14 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
 import { gallery } from '@p/backend';
 
 export default {
   name: 'HomeGalleryComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -279,5 +281,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

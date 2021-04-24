@@ -3,16 +3,15 @@
     <v-container>
       <v-row class="my-0 py-0">
         <v-col cols="12" class="my-0 mx-2 px-2 py-0">
-          <div
-            id="home-abouttitle"
-            :class="
-              'clip-text-back text-h5 non-touch point-cursor ml-6 text-capitalize' +
-              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-            "
-            @click="$router.push('/about')"
-          >
-            {{ title }} <v-icon>mdi-arrow-right-circle</v-icon>
-          </div>
+          <h-title-component
+            id="abouttitle"
+            :title="title"
+            arrow="right"
+            link="/about"
+            :large="false"
+            :center="false"
+            :darker="false"
+          />
         </v-col>
         <v-col cols="12" class="my-0 py-0">
           <v-row align="center" justify="center">
@@ -65,8 +64,13 @@
 </template>
 
 <script>
+import title_component from '@v/home/components/common/title-component';
+
 export default {
   name: 'HomeAboutComponent',
+  components: {
+    'h-title-component': title_component,
+  },
   props: {
     title: {
       type: String,
@@ -85,5 +89,3 @@ export default {
   }),
 };
 </script>
-
-<style></style>
