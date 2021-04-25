@@ -19,12 +19,12 @@
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
-  "plugins": ["vue"],
+  "plugins": [
+    "vue"
+  ],
   "rules": {
-    // Will be implemented in future
     "require-jsdoc": "off",
     "valid-jsdoc": "off",
-    // not required
     "vue/html-indent": "off",
     "semi": "off",
     "space-before-function-paren": "off",
@@ -41,9 +41,27 @@
     "comma-dangle": "off",
     "quotes": "off",
     "no-await-in-loop": "off",
-    // Webpack Resolvers not loading
     "import/no-unresolved": "off",
-    // Breaks the Server
     "no-plusplus": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)"
+      ],
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": [
+        "**/__tests__/*.{j,t}s?(x)",
+        "**/tests/unit/**/*.spec.{j,t}s?(x)"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

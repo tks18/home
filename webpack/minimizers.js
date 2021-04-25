@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const minimizers = [

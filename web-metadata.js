@@ -1,5 +1,6 @@
-const title = require('./package.json').title;
-const baseSite = require('./package.json').baseSite;
+const { title } = require('./package.json');
+const { baseSite } = require('./package.json');
+
 const twitterData = {
   type: 'summary_large_image',
   username: '@shantk18',

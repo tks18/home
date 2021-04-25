@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build-dev": "vue-cli-service build --mode development",
     "build": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint"
-  },
-  "vetur": {
-    "tags": "./tags.json",
-    "attributes": "./attributes.json"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "build-dev": "vue-cli-service build --mode development"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -39,7 +36,9 @@
     "@statoscope/ui-webpack": "^4.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-lodash": "^3.3.4",
@@ -65,6 +64,7 @@
     "lodash-webpack-plugin": "^0.11.6",
     "mini-css-extract-plugin": "^1.4.1",
     "node-sass": "^4.12.0",
+    "prettier": "^2.2.1",
     "sass-loader": "^8.0.2",
     "sitemap-webpack-plugin": "^1.1.0",
     "vue-cli-plugin-vuetify": "~2.3.1",
@@ -82,5 +82,9 @@
   },
   "baseSite": "https://shaaan.tk/",
   "license": "MIT",
-  "title": "Sudharshan TK"
+  "title": "Sudharshan TK",
+  "vetur": {
+    "tags": "./tags.json",
+    "attributes": "./attributes.json"
+  }
 }
