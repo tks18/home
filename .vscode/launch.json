@@ -8,6 +8,7 @@
       "url": "http://localhost:8080",
       "webRoot": "${workspaceFolder}/src",
       "breakOnLoad": true,
+      "preLaunchTask": "vuejs: start",
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }

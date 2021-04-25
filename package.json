@@ -7,6 +7,10 @@
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
+  "vetur": {
+    "tags": "./tags.json",
+    "attributes": "./attributes.json"
+  },
   "dependencies": {
     "axios": "^0.20.0",
     "axios-jsonp": "^1.0.4",

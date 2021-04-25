@@ -1,0 +1,102 @@
+{
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+  "terminal.integrated.rendererType": "dom",
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "explorer.confirmDelete": false,
+  "telemetry.enableTelemetry": false,
+  "workbench.preferredDarkColorTheme": "monokai-charcoal (purple)",
+  "telemetry.enableCrashReporter": false,
+  "editor.suggestSelection": "first",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace"
+  },
+  "[sass]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "extensions.ignoreRecommendations": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.snippetSuggestions": "top",
+  "editor.fontFamily": "\"Hack\", 'Courier New', monospace",
+  "editor.fontSize": 13.5,
+  "workbench.startupEditor": "none",
+  "material-icon-theme.showWelcomeMessage": false,
+  "prettier.prettierPath": "C:\\Users\\Sudharshan\\AppData\\Roaming\\npm\\node_modules\\prettier",
+  "prettier.configPath": "C:\\Users\\Sudharshan\\AppData\\Roaming\\npm\\node_modules\\.prettierrc.json",
+  "prettier.singleQuote": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vetur.format.options.useTabs": true,
+  "vetur.format.styleInitialIndent": true,
+  "vetur.format.scriptInitialIndent": true,
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "force-expand-multiline"
+    },
+    "prettyhtml": {
+      "printWidth": 100,
+      "singleQuote": false,
+      "wrapAttributes": false,
+      "sortAttributes": false
+    }
+  },
+  "vetur.validation.templateProps": false,
+  "workbench.colorTheme": "monokai-charcoal (purple)",
+  "git.confirmSync": false,
+  "prettier.ignorePath": "",
+  "prettier.useTabs": true,
+  "prettier.trailingComma": "all",
+  "prettier.jsxSingleQuote": true,
+  "prettier.tabWidth": 1,
+  "prettier.vueIndentScriptAndStyle": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "css.validate": false,
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  "editor.linkedEditing": true,
+  "html.format.endWithNewline": true,
+  "html.format.indentInnerHtml": true,
+  "emmet.includeLanguages": {
+    "vue": "html"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.productIconTheme": "material-product-icons",
+  "material-icon-theme.folders.associations": {
+    "home": "content"
+  }
+}

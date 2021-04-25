@@ -1,0 +1,8 @@
+{
+  "Button Primary": {
+    "scope": "vue-html",
+    "body": ["<v-btn color=\"primary\" text outlined> $0 </v-btn>"],
+    "description": "Log output to console",
+    "prefix": "button-primary"
+  }
+}
