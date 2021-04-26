@@ -12,7 +12,6 @@
     />
     <h-blog-component :ismobile="ismobile" :title="animatedArray.blog" />
     <h-about-component :ismobile="ismobile" :title="animatedArray.about" />
-    <h-breaking-bad :ismobile="ismobile" :goto-url="gotoUrl" />
     <h-projects-component
       :ismobile="ismobile"
       :title="animatedArray.projtitle"
@@ -50,7 +49,6 @@ import what_i_do_component from '@v/home/components/what-i-do-component';
 import stories_component from '@v/home/components/stories-component';
 import blog_component from '@v/home/components/blog-component';
 import about_component from '@v/home/components/about-component';
-import breaking_bad_component from '@v/home/components/breaking-bad-component';
 import projects_component from '@v/home/components/projects-component';
 import youtube_component from '@v/home/components/youtube-component';
 import gallery_component from '@v/home/components/gallery-component';
@@ -68,7 +66,6 @@ export default {
     'h-stories-component': stories_component,
     'h-blog-component': blog_component,
     'h-about-component': about_component,
-    'h-breaking-bad': breaking_bad_component,
     'h-projects-component': projects_component,
     'h-youtube-component': youtube_component,
     'h-gallery-component': gallery_component,
