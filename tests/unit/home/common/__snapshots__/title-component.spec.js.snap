@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common Home Title Component.vue Checks Vue instance and Matches with Snapshot 1`] = `
+<div id="home-testing-id" class="clip-text-back text-h5  ml-6  non-touch point-cursor text-capitalize underhover-dark">
+  Testing Title <i aria-hidden="true" class="v-icon notranslate mdi mdi-arrow-right-circle theme--light"></i></div>
+`;

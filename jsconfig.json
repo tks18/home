@@ -13,11 +13,11 @@
       "@styles/*": ["src/styles/*"],
       "@t/*": ["src/templates/*"],
       "@v/*": ["src/views/*"],
-      "@state": ["src/plugins/state/index.js/*"]
+      "@state": ["src/plugins/state/index.js"]
     }
   },
   "typeAcquisition": {
-    "exclude": ["agent-base", "dotenv"]
+    "exclude": ["agent-base", "dotenv", "https-proxy-agent"]
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]

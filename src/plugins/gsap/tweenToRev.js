@@ -52,7 +52,7 @@ export default (options) => {
       {
         [index]: wordsarray.length * 2 + range,
         ease: 'power4',
-        duration: index / 4 + 1,
+        duration: index / 2 + 1,
       },
       0,
     );
