@@ -1,9 +1,10 @@
 import { api as routes, backend as url } from './routes';
-import { default as pingit } from './ping';
-import { default as Blog } from './blog';
-import { default as Stories } from './stories';
-import { default as Gallery } from './gallery';
-import { default as Notification } from './notifications';
+import pingit from './ping';
+import Blog from './blog';
+import Stories from './stories';
+import Gallery from './gallery';
+import Notification from './notifications';
+import { headers, make_request } from './utils';
 
 export const api = {
   url,
@@ -14,3 +15,7 @@ export const blog = Blog;
 export const notifications = Notification;
 export const stories = Stories;
 export const gallery = Gallery;
+export const utils = {
+  headers,
+};
+export const requester = make_request;

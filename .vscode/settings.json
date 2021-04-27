@@ -1,0 +1,97 @@
+{
+  // Default Workbench Settings
+  "workbench.preferredDarkColorTheme": "monokai-charcoal (purple)",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "monokai-charcoal (purple)",
+  "workbench.productIconTheme": "material-product-icons",
+  "material-icon-theme.folders.associations": {
+    "home": "content"
+  },
+  "material-icon-theme.showWelcomeMessage": false,
+  // Terminal Settings
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+  "terminal.integrated.rendererType": "dom",
+  // Git Settings
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  // Editor Settings
+  "editor.suggestSelection": "first",
+  "editor.snippetSuggestions": "top",
+  "editor.linkedEditing": true,
+  "editor.fontFamily": "\"Hack\", 'Courier New', monospace",
+  "editor.fontSize": 13.5,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "extensions.ignoreRecommendations": true,
+  // HTML Settings
+  "html.format.endWithNewline": true,
+  "html.format.indentInnerHtml": true,
+  // Prettier Settings
+  "prettier.prettierPath": "node_modules\\prettier",
+  "prettier.configPath": ".prettierrc.json",
+  "prettier.ignorePath": ".prettierignore",
+  "prettier.singleQuote": true,
+  "prettier.useTabs": true,
+  "prettier.trailingComma": "all",
+  "prettier.jsxSingleQuote": true,
+  "prettier.tabWidth": 1,
+  "prettier.vueIndentScriptAndStyle": true,
+  // Eslint Settings
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  // Emmet Settings
+  "emmet.includeLanguages": {
+    "vue": "html"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "css.validate": false,
+  // Vetur Settings
+  "vetur.format.options.useTabs": true,
+  "vetur.format.styleInitialIndent": true,
+  "vetur.format.scriptInitialIndent": true,
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "force-expand-multiline"
+    },
+    "prettyhtml": {
+      "printWidth": 100,
+      "singleQuote": false,
+      "wrapAttributes": false,
+      "sortAttributes": false
+    }
+  },
+  "vetur.validation.templateProps": false,
+  // Language based Settings
+  "[scss]": {
+    "editor.suggest.insertMode": "replace"
+  },
+  "[sass]": {
+    "editor.suggest.insertMode": "replace"
+  },
+  // Performance Improvements
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  // Miscs
+  "explorer.confirmDelete": false,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false
+}

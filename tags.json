@@ -1,0 +1,6 @@
+{
+  "bottomSettings": {
+    "description": "Scaffolds a Bottom Bar with all the Settings for Customization",
+    "attributes": ["model"]
+  }
+}

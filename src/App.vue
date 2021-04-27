@@ -4,13 +4,10 @@
     <navbar />
     <sysBar />
     <Notification group="main" position="top right" />
-    <Notification
-      group="server"
-      :position="ismobile ? 'bottom left' : 'top left'"
-    />
+    <Notification group="worker" position="bottom right" />
     <v-main>
       <div class="content">
-        <router-view></router-view>
+        <router-view />
       </div>
     </v-main>
     <fabComponent />
@@ -26,18 +23,19 @@ import fabComponent from '@c/fab-component';
 import sysBar from '@c/system-bar';
 import { notifications } from '@p/backend';
 import { ismobile } from '@p/helpers';
+
 export default {
   name: 'App',
   metaInfo: {
     title: 'Sudharshan TK',
     titleTemplate: (insertedTitle) => {
-      if (insertedTitle == 'Sudharshan TK') {
+      if (insertedTitle === 'Sudharshan TK') {
         return insertedTitle;
-      } else if (insertedTitle == 'Careers') {
-        return `${insertedTitle} @ Sudharshan TK`;
-      } else {
-        return `${insertedTitle} | Sudharshan TK`;
       }
+      if (insertedTitle === 'Careers') {
+        return `${insertedTitle} @ Sudharshan TK`;
+      }
+      return `${insertedTitle} | Sudharshan TK`;
     },
   },
   components: {
@@ -53,19 +51,58 @@ export default {
       return ismobile();
     },
   },
+  mounted() {
+    this.notifyDarkTheme();
+    this.getServerNotifications();
+    this.updateServiceWorker();
+  },
   methods: {
     async getServerNotifications() {
-      let currentNotifications = await notifications.get.current();
+      const currentNotifications = await notifications.get.current();
       if (currentNotifications.success) {
         currentNotifications.data.notifications.forEach((notification) => {
           this.$notify(notification.properties);
         });
       }
     },
+    updateServiceWorker() {
+      if (this.$worker) {
+        this.$worker.addEventListener('waiting', () => {
+          this.$notify({
+            group: 'worker',
+            type: 'info',
+            duration: -100,
+            title: 'Update Available',
+            text:
+              'New Content is Available from the Server. Click the below button to update the App.',
+            data: {
+              loading: true,
+              type: 'Worker Updates',
+              buttons: [
+                {
+                  text: 'Update Now',
+                  onClick: async () => {
+                    this.$worker.addEventListener('controlling', () => {
+                      this.$router.go();
+                    });
+                    await this.$worker.messageSW({ type: 'SKIP_WAITING' });
+                  },
+                },
+              ],
+            },
+          });
+        });
+      }
+    },
     notifyDarkTheme() {
-      let notifications = JSON.parse(localStorage.getItem('notification'));
-      let dark = this.$vuetify.theme.dark;
-      if ((!dark && notifications == null) || (!dark && !notifications.dark)) {
+      const notifications_store = JSON.parse(
+        localStorage.getItem('notification'),
+      );
+      const { dark } = this.$vuetify.theme;
+      if (
+        (!dark && notifications_store == null) ||
+        (!dark && !notifications_store.dark)
+      ) {
         this.$notify({
           group: 'main',
           type: 'info',
@@ -96,10 +133,6 @@ export default {
         });
       }
     },
-  },
-  mounted() {
-    this.notifyDarkTheme();
-    this.getServerNotifications();
   },
 };
 </script>

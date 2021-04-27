@@ -1,22 +1,46 @@
+/* eslint-disable */
+
 const routes = require('./routes-seo');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
-const metadata = require('../web-metadata');
 const zlib = require('zlib');
-const compressionPlugin = require('compression-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
-const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer')
-  .WebpackBundleSizeAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {
+  WebpackBundleSizeAnalyzerPlugin,
+} = require('webpack-bundle-size-analyzer');
 const StatoscopeWebpackPlugin = require('@statoscope/ui-webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const JavaScriptObfuscator = require('webpack-obfuscator');
+const metadata = require('../web-metadata');
 
-let isProd = process.env.NODE_ENV != 'development';
+const isProd = process.env.NODE_ENV != 'development';
+const obfuscate = process.env.VUE_APP_OBFUSCATE == 1;
 
-let productionPlugins = [
-  new htmlWebpackPlugin({
+const obfustcatePlugin = [
+  new JavaScriptObfuscator(
+    {
+      compact: false,
+      rotateStringArray: true,
+      stringArray: true,
+      shuffleStringArray: true,
+      numbersToExpressions: true,
+      simplify: true,
+      splitStrings: true,
+    },
+    [
+      'worker.js',
+      'js/chunk-vendors.*.js',
+      'js/chunk-vendors.*.js.br',
+      'js/chunk-vendors.*.js.map',
+    ],
+  ),
+];
+
+const productionPlugins = [
+  new HtmlWebpackPlugin({
     inject: true,
     title: metadata.title,
     twitterData: metadata.twitterData,
@@ -47,7 +71,7 @@ let productionPlugins = [
       lastmod: true,
     },
   }),
-  new compressionPlugin({
+  new CompressionPlugin({
     filename: '[path][base].br',
     algorithm: 'brotliCompress',
     compressionOptions: {
@@ -91,8 +115,8 @@ let productionPlugins = [
   }),
 ];
 
-let devPlugins = [
-  new htmlWebpackPlugin({
+const devPlugins = [
+  new HtmlWebpackPlugin({
     inject: true,
     title: metadata.title,
     keywords: metadata.keyWords,
@@ -126,4 +150,7 @@ let devPlugins = [
   }),
 ];
 
-module.exports = isProd ? productionPlugins : devPlugins;
+const exportedplugins = isProd ? productionPlugins : devPlugins;
+module.exports = obfuscate
+  ? exportedplugins.concat(obfustcatePlugin)
+  : exportedplugins.concat([]);

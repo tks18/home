@@ -1,26 +1,21 @@
-import axios from '@p/axios';
+import { make_request as requester } from './utils';
 import { backend } from './routes';
 
 export default async () => {
-  return await axios
-    .post(backend)
-    .then((response) => {
-      if (response.status == 200 && response.data) {
-        return {
-          success: true,
-          timing: response.responsetime,
-        };
-      } else {
-        return {
-          success: false,
-          timing: response.responsetime,
-        };
-      }
-    })
-    .catch((error) => {
-      return {
-        data: error,
-        success: false,
-      };
-    });
+  const resp = await requester({
+    url: backend,
+    postData: {
+      type: 'current',
+    },
+  });
+  if (resp.success) {
+    return {
+      success: true,
+      timing: resp.timing,
+    };
+  }
+  return {
+    success: false,
+    timing: resp.timing,
+  };
 };

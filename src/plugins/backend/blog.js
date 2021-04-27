@@ -1,25 +1,18 @@
-import axios from '@p/axios';
+import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
   get: async () => {
-    return await axios
-      .post(api.blog.get)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await requester({
+      url: api.blog.get,
+    });
+    return resp;
   },
   set: async (postData) => {
-    return await axios
-      .post(api.blog.set, postData)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await requester({
+      url: api.blog.set,
+      postData,
+    });
+    return resp;
   },
 };

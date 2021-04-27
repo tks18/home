@@ -1,25 +1,21 @@
-import axios from '@p/axios';
+import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
   get: async () => {
-    return await axios
-      .post(api.stories.get)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await requester({
+      url: api.stories.get,
+      postData: {
+        type: 'current',
+      },
+    });
+    return resp.data;
   },
   set: async (storyData) => {
-    return await axios
-      .post(api.stories.set, storyData)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const resp = await requester({
+      url: api.stories.set,
+      postData: storyData,
+    });
+    return resp.data;
   },
 };

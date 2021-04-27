@@ -1,31 +1,22 @@
-import axios from '@p/axios';
+import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
   get: async () => {
-    return await axios
-      .post(api.gallery.get)
-      .then((response) => {
-        if (response.status == 200 && response.data) {
-          return {
-            success: true,
-            data: response.data.data,
-            error: null,
-          };
-        } else {
-          return {
-            success: false,
-            data: null,
-            error: 'Response Failed',
-          };
-        }
-      })
-      .catch((err) => {
-        return {
-          success: false,
-          error: err,
-          data: null,
-        };
-      });
+    const resp = await requester({
+      url: api.gallery.get,
+    });
+    if (resp.success) {
+      return {
+        success: true,
+        data: resp.data.data,
+        error: null,
+      };
+    }
+    return {
+      success: false,
+      data: null,
+      error: resp.error,
+    };
   },
 };

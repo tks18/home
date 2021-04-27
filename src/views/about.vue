@@ -14,10 +14,10 @@
     >
       <v-btn
         class="ma-0 pa-0"
-        @click="$vuetify.goTo('#about-aboutmecard')"
+        color="primary"
         text
         plain
-        color="primary"
+        @click="$vuetify.goTo('#about-aboutmecard')"
       >
         (Skip to Main Content)
       </v-btn>
@@ -28,7 +28,7 @@
           background: 'center',
           backgroundImage: mainBg,
           backgroundSize: 'cover',
-          height: ismobile ? '400px' : '450px',
+          height: ismobile ? '220px' : '450px',
           minWidth: '100%',
         }"
         class="hero non-touch"
@@ -47,7 +47,7 @@
                 </div>
               </div>
             </v-col>
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-col
               :cols="ismobile ? 12 : 5"
               :align="ismobile ? 'center' : 'right'"
@@ -115,11 +115,11 @@
           <v-col cols="12" align="center">
             <v-chip
               v-for="(chip, index) in aboutChips"
-              v-bind:key="index"
+              :key="index"
               color="primary"
-              @click="$vuetify.goTo(chip.id)"
               outlined
               class="my-1 mx-1"
+              @click="$vuetify.goTo(chip.id)"
             >
               <v-icon left color="primary">
                 {{ chip.icon }}
@@ -148,12 +148,12 @@
                     (If You are Bad, I am Your Dad
                     <span class="font-weight-bold">Hehe Lol xD 😉</span>)
                   </v-card-subtitle>
-                  <v-divider class="opaque mx-2 my-0"></v-divider>
+                  <v-divider class="opaque mx-2 my-0" />
                   <v-card-text>
                     <v-row class="my-0">
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold">Name: </span
-                        ><span class="text-body-2">{{ authorData.name }}</span>
+                        <span class="text-body-1 font-weight-bold">Name: </span>
+                        <span class="text-body-2">{{ authorData.name }}</span>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
                         <span class="text-body-1 font-weight-bold">
@@ -197,29 +197,29 @@
                         </span>
                         <v-chip-group column>
                           <v-chip
+                            v-for="(skills, index) in authorData.techSkills"
+                            :key="index"
                             small
                             color="primary"
-                            v-for="(skills, index) in authorData.techSkills"
                             class="my-1 mx-1"
                             @click="gotoUrl(skills.link)"
-                            v-bind:key="index"
                           >
                             {{ skills.name }}
                           </v-chip>
                         </v-chip-group>
                       </v-col>
                       <v-col class="my-0 py-0" cols="12" align="left">
-                        <span class="text-body-1 font-weight-bold"
-                          >Areas of Interest:
+                        <span class="text-body-1 font-weight-bold">
+                          Areas of Interest:
                         </span>
                         <v-chip-group column>
                           <v-chip
+                            v-for="(interests, index) in authorData.aOfInt"
+                            :key="index"
                             small
                             color="primary"
-                            v-for="(interests, index) in authorData.aOfInt"
                             class="my-1 mx-1"
                             @click="gotoUrl(interests.link)"
-                            v-bind:key="index"
                           >
                             {{ interests.name }}
                           </v-chip>
@@ -232,26 +232,24 @@
               <v-col :cols="ismobile ? 12 : 8">
                 <v-row>
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                          <v-skeleton-loader type="card-avatar" height="150">
-                          </v-skeleton-loader>
+                          <v-skeleton-loader type="card-avatar" height="150" />
                         </v-col>
                         <v-col
-                          v-on="on"
-                          v-bind="attrs"
                           v-if="cardbgs.play"
-                          v-bind:key="cardbgs.leftKey"
+                          v-bind="attrs"
+                          :key="cardbgs.leftKey"
                           :cols="ismobile ? 12 : 4"
+                          v-on="on"
                         >
                           <v-card
                             :img="cardbgs.lefttop"
                             :height="ismobile ? 250 : 150"
                             outlined
                             elevation="6"
-                          >
-                          </v-card>
+                          />
                         </v-col>
                       </v-scroll-y-transition>
                     </template>
@@ -263,12 +261,12 @@
                       elevation="6"
                       @click="gotoUrl('http://fordrhodesparks.com')"
                     >
-                      <v-card-title class="back-blur-no-inherit"
-                        >Work Profile</v-card-title
-                      >
-                      <v-card-subtitle class="back-blur-no-inherit"
-                        >About my Position</v-card-subtitle
-                      >
+                      <v-card-title class="back-blur-no-inherit">
+                        Work Profile
+                      </v-card-title>
+                      <v-card-subtitle class="back-blur-no-inherit">
+                        About my Position
+                      </v-card-subtitle>
                       <v-card-text class="back-blur-no-inherit text-overline">
                         Working in
                         <span class="font-weight-black primary--text">
@@ -285,7 +283,6 @@
                 <v-row>
                   <v-col align="center" cols="12">
                     <v-card
-                      @click="resumeDialog = true"
                       :height="ismobile ? null : null"
                       :class="
                         $vuetify.theme.dark
@@ -294,6 +291,7 @@
                       "
                       outlined
                       elevation="6"
+                      @click="resumeDialog = true"
                     >
                       <v-row
                         class="inherit-height center-align-div"
@@ -317,12 +315,12 @@
                       <v-row class="inherit-height" align="center">
                         <v-col cols="6">
                           <v-card
+                            flat
                             @click="
                               gotoUrl(
                                 '/assets/downloads/resume/Sudharshan-tk-full.pdf',
                               )
                             "
-                            flat
                           >
                             <v-card-text>
                               <v-icon> mdi-download </v-icon>
@@ -332,12 +330,12 @@
                         </v-col>
                         <v-col cols="6">
                           <v-card
+                            flat
                             @click="
                               gotoUrl(
                                 '/assets/downloads/resume/Sudharshan-tk-short.pdf',
                               )
                             "
-                            flat
                           >
                             <v-card-text>
                               <v-icon> mdi-download </v-icon>
@@ -348,25 +346,26 @@
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
-                      <v-spacer></v-spacer>
+                      <v-spacer />
                       <v-btn
                         outlined
                         color="primary"
                         @click="resumeDialog = false"
-                        >Close</v-btn
                       >
+                        Close
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
                 <v-row>
                   <v-col :cols="ismobile ? 12 : 8">
                     <v-tooltip top transition="slide-y-transition">
-                      <template v-slot:activator="{ on, attrs }">
+                      <template #activator="{ on, attrs }">
                         <v-card
-                          v-on="on"
                           v-bind="attrs"
                           outlined
                           elevation="6"
+                          v-on="on"
                           @click="$vuetify.goTo('#about-moreStats')"
                         >
                           <div
@@ -389,8 +388,7 @@
                               auto-draw
                               type="trend"
                               :smooth="7"
-                            >
-                            </v-sparkline>
+                            />
                           </v-card-text>
                         </v-card>
                       </template>
@@ -398,26 +396,24 @@
                     </v-tooltip>
                   </v-col>
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                       <v-scroll-y-transition mode="out-in">
                         <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                          <v-skeleton-loader type="card-avatar" height="150">
-                          </v-skeleton-loader>
+                          <v-skeleton-loader type="card-avatar" height="150" />
                         </v-col>
                         <v-col
                           v-if="cardbgs.play"
-                          v-bind:key="cardbgs.rightKey"
-                          v-on="on"
+                          :key="cardbgs.rightKey"
                           v-bind="attrs"
                           :cols="ismobile ? 12 : 4"
+                          v-on="on"
                         >
                           <v-card
                             :img="cardbgs.rightbottom"
                             :height="ismobile ? 250 : 150"
                             outlined
                             elevation="6"
-                          >
-                          </v-card>
+                          />
                         </v-col>
                       </v-scroll-y-transition>
                     </template>
@@ -439,7 +435,7 @@
               <v-card-text class="headline font-weight-bold">
                 <v-row>
                   <v-col cols="12" align="center">
-                    <v-img :src="tweetQr" height="180" width="180"></v-img>
+                    <v-img :src="tweetQr" height="180" width="180" />
                   </v-col>
                   <v-col cols="12">
                     "Its Better when You Share to Other People. Scan the Qr to
@@ -455,7 +451,7 @@
                       class="elevation-6"
                       alt="Author's Photo"
                       :src="authorPhoto"
-                    ></v-img>
+                    />
                   </v-list-item-avatar>
 
                   <v-list-item-content>
@@ -485,7 +481,7 @@
               >
                 <v-row id="about-lifetime">
                   <v-tooltip top transition="slide-y-transition">
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                       <v-row v-ripple v-bind="attrs" v-on="on">
                         <v-col
                           :cols="ismobile ? 12 : 6"
@@ -539,9 +535,9 @@
                         <v-col
                           cols="12"
                           class="my-0 py-0 text-overline font-weight-bold"
-                          >Wish Me Good Luck in {{ birthdayDays }} Days
-                          😁😎</v-col
                         >
+                          Wish Me Good Luck in {{ birthdayDays }} Days 😁😎
+                        </v-col>
                       </v-row>
                     </template>
                     <span> Counting from my Birthday</span>
@@ -551,7 +547,7 @@
             </v-row>
           </v-container>
         </v-col>
-        <v-col cols="12" id="about-languagesknown">
+        <v-col id="about-languagesknown" cols="12">
           <v-card flat elevation="12">
             <v-card-title class="mx-2 no-break-words">
               Top Languages, Frameworks, Softwares that i Know
@@ -571,8 +567,7 @@
                 line-width="3"
                 auto-draw
                 type="bar"
-              >
-              </v-sparkline>
+              />
             </v-card-text>
           </v-card>
         </v-col>
@@ -595,7 +590,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(strength, index) in swot.strengths"
-                              v-bind:key="index"
+                              :key="index"
                             >
                               {{ index + 1 + '. ' + strength }}
                             </div>
@@ -604,7 +599,7 @@
                             <v-divider
                               vertical
                               class="opaque mx-0 my-0 px-0 py-0"
-                            ></v-divider>
+                            />
                           </v-col>
                           <v-col cols="5" align="left" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -612,15 +607,13 @@
                             </v-card-subtitle>
                             <div
                               v-for="(weakness, index) in swot.weakness"
-                              v-bind:key="index"
+                              :key="index"
                             >
                               {{ index + 1 + '. ' + weakness }}
                             </div>
                           </v-col>
                         </v-row>
-                        <v-divider
-                          class="opaque mx-0 my-0 px-0 py-0"
-                        ></v-divider>
+                        <v-divider class="opaque mx-0 my-0 px-0 py-0" />
                         <v-row>
                           <v-col cols="5" align="right" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -628,7 +621,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(oppor, index) in swot.opportunities"
-                              v-bind:key="index"
+                              :key="index"
                             >
                               {{ index + 1 + '. ' + oppor }}
                             </div>
@@ -637,7 +630,7 @@
                             <v-divider
                               vertical
                               class="opaque mx-0 my-0 px-0 py-0"
-                            ></v-divider>
+                            />
                           </v-col>
                           <v-col cols="5" align="left" justify="center">
                             <v-card-subtitle class="text-overline">
@@ -645,7 +638,7 @@
                             </v-card-subtitle>
                             <div
                               v-for="(threats, index) in swot.threats"
-                              v-bind:key="index"
+                              :key="index"
                             >
                               {{ index + 1 + '. ' + threats }}
                             </div>
@@ -672,14 +665,13 @@
                         gradient-direction="top"
                         :label-size="ismobile ? 9 : 8"
                         stroke-linecap="round"
-                        class="mx-1"
+                        class="mx-2"
                         :height="ismobile ? 90 : 97"
                         line-width="2"
                         auto-draw
                         type="trend"
                         :smooth="7"
-                      >
-                      </v-sparkline>
+                      />
                     </v-card>
                   </v-col>
                 </v-row>
@@ -694,7 +686,7 @@
                         <v-row class="mx-0">
                           <v-col
                             v-for="(editor, index) in editorsTrendData"
-                            v-bind:key="index"
+                            :key="index"
                             cols="6"
                             class="my-0 py-1"
                           >
@@ -718,71 +710,137 @@
 </template>
 
 <script>
+/* eslint-disable no-restricted-syntax */
+
 import { generateWordMaps, generateWordMapsReverse } from '@p/wordmap';
 import authorData from '@t/authorData';
 import { codingData, languageTrend, editorsData } from '@p/resources/wakatime';
 import { countUpFromTime, ismobile } from '@p/helpers';
 import gsap from '@p/gsap';
+
 export default {
-  metaInfo: function () {
-    return {
-      title: 'About',
-    };
+  metaInfo: () => ({
+    title: 'About',
+  }),
+  data: () => ({
+    mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
+    bgs: authorData.bgs,
+    tweetQr: 'https://i.ibb.co/4tZFDrh/qr-code-2.png',
+    authorPhoto: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
+    bgPlay: true,
+    cardbgs: {
+      play: false,
+      lefttop: '',
+      leftKey: 0,
+      rightbottom: '',
+      rightKey: 0,
+    },
+    lifeTimeCountDown: {
+      years: 0,
+      weeks: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    },
+    dailyData: [],
+    dailyLabels: [],
+    dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
+    consolMinutes: 0,
+    languageTrendData: [],
+    languageTrendLabels: [],
+    languageTrendGradients: [],
+    editorsTrendData: [],
+    editorsTrendLabels: [],
+    swot: authorData.swot,
+    resumeDialog: false,
+    authorData: {
+      ...authorData.main,
+      age: countUpFromTime('May 16, 2000 16:21:00').years,
+    },
+    workProfile: authorData.workProfile,
+    animatedArray: {
+      hashTag: ' ',
+      title: ' ',
+      someWords: ' ',
+    },
+  }),
+  computed: {
+    ismobile() {
+      return ismobile();
+    },
+    birthdayDays() {
+      const countDown = countUpFromTime('May 16, 2000 16:21:00');
+      const remainingDays = 365 - countDown.weeks * 7;
+      return remainingDays;
+    },
+    aboutChips() {
+      return [
+        {
+          name: 'Profile Card',
+          icon: 'mdi-account-box-outline',
+          id: '#about-aboutmecard',
+        },
+        {
+          name: 'Languages Known',
+          icon: 'mdi-language-csharp',
+          id: '#about-languagesknown',
+        },
+        {
+          name: 'More Stats',
+          icon: 'mdi-sign-real-estate',
+          id: '#about-moreStats',
+        },
+      ];
+    },
+    languagesKnown() {
+      if (this.ismobile) {
+        return {
+          values: [79, 47, 32, 93, 41],
+          labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
+          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+        };
+      }
+      return {
+        values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
+        labels: [
+          'Nodejs',
+          'Python',
+          'Illustrator',
+          'ReactJs',
+          'Vuejs',
+          'Adobe Xd',
+          'Lightroom',
+          'Flutter',
+          'Ruby',
+          'Java',
+          'Excel',
+          'Photoshop',
+          'Premiere',
+        ],
+        gradient: ['#77a1d3', '#79cbca', '#e684ae'],
+      };
+    },
   },
-  data: function () {
-    return {
-      mainBg: "url('https://i.ibb.co/DVtbmxt/ezgif-6-6fa4128fb00b.webp')",
-      bgs: authorData.bgs,
-      tweetQr: 'https://i.ibb.co/4tZFDrh/qr-code-2.png',
-      authorPhoto: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
-      bgPlay: true,
-      cardbgs: {
-        play: false,
-        lefttop: '',
-        leftKey: 0,
-        rightbottom: '',
-        rightKey: 0,
-      },
-      lifeTimeCountDown: {
-        years: 0,
-        weeks: 0,
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      },
-      dailyData: [],
-      dailyLabels: [],
-      dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
-      consolMinutes: 0,
-      languageTrendData: [],
-      languageTrendLabels: [],
-      languageTrendGradients: [],
-      editorsTrendData: [],
-      editorsTrendLabels: [],
-      swot: authorData.swot,
-      resumeDialog: false,
-      authorData: {
-        ...authorData.main,
-        age: countUpFromTime('May 16, 2000 16:21:00').years,
-      },
-      workProfile: authorData.workProfile,
-      animatedArray: {
-        hashTag: ' ',
-        title: ' ',
-        someWords: ' ',
-      },
-    };
+  mounted() {
+    this.check_scroll_callback();
+    this.render();
   },
   methods: {
     gotoUrl(url) {
       window.open(url);
-      return;
+    },
+    check_scroll_callback() {
+      const router = this.$route;
+      const { params } = router;
+      if (params.scroll) {
+        this.$vuetify.goTo(params.scrollid);
+      }
     },
     lifeTimeCounter(elem) {
       gsap.observeNexecute(elem, () => {
-        let newVals = countUpFromTime('May 16, 2000 16:21:00');
-        let tl = this.$gsap.timeline();
+        const newVals = countUpFromTime('May 16, 2000 16:21:00');
+        const tl = this.$gsap.timeline();
         for (const [key] of Object.entries(this.lifeTimeCountDown)) {
           tl.to(this.$data.lifeTimeCountDown, {
             [key]: newVals[key],
@@ -798,46 +856,46 @@ export default {
     },
     setCardBgs() {
       this.$set(this.cardbgs, 'play', false);
-      let firstInt = this.$_.random(0, this.bgs.length - 1);
-      let secondInt = this.$_.random(0, this.bgs.length - 1);
-      while (secondInt == firstInt) {
-        secondInt = this.$_.random(0, this.bgs.length - 1);
+      const firstInt = this.$lodash.random(0, this.bgs.length - 1);
+      let secondInt = this.$lodash.random(0, this.bgs.length - 1);
+      while (secondInt === firstInt) {
+        secondInt = this.$lodash.random(0, this.bgs.length - 1);
       }
       this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
       this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
       this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
       this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
       setInterval(() => {
-        let firstInt = this.$_.random(0, this.bgs.length - 1);
-        let secondInt = this.$_.random(0, this.bgs.length - 1);
-        while (secondInt == firstInt) {
-          secondInt = this.$_.random(0, this.bgs.length - 1);
+        const firstIntLoop = this.$lodash.random(0, this.bgs.length - 1);
+        let secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
+        while (secondIntLoop === firstIntLoop) {
+          secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
         }
-        this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
+        this.$set(this.cardbgs, 'lefttop', this.bgs[firstIntLoop]);
         this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
-        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
+        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondIntLoop]);
         this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
         this.$set(this.cardbgs, 'play', true);
       }, Math.floor(Math.random() + 5) * 1000);
     },
     getLabels() {
-      let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let today = new Date();
-      let dayInText = today.getDay();
-      let currLabels = [],
-        loopend = dayInText - 7;
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const today = new Date();
+      const dayInText = today.getDay();
+      const currLabels = [];
+      const loopend = dayInText - 7;
       for (let i = dayInText; i > loopend; i--) {
         if (i < 0) {
-          let correctId = 7 + i;
+          const correctId = 7 + i;
           currLabels.push(days[correctId]);
         } else {
           currLabels.push(days[i]);
         }
       }
-      this.dailyLabels = this.$_.reverse(currLabels);
+      this.dailyLabels = this.$lodash.reverse(currLabels);
     },
     async getCodingData() {
-      let codeData = await codingData();
+      const codeData = await codingData();
       if (codeData.success && codeData.data != null) {
         this.dailyData = codeData.data.dailyData;
         this.consolMinutes = codeData.data.consolMinutes;
@@ -847,7 +905,7 @@ export default {
       }
     },
     async getLanguageTrend() {
-      let trendData = await languageTrend();
+      const trendData = await languageTrend();
       if (trendData.success && trendData.data != null) {
         this.languageTrendData = trendData.data.languageTrendData;
         this.languageTrendLabels = trendData.data.languageTrendLabels;
@@ -859,7 +917,7 @@ export default {
       }
     },
     async getEditorsTrend() {
-      let editorData = await editorsData();
+      const editorData = await editorsData();
       if (editorData.success && editorData.data != null) {
         this.editorsTrendData = editorData.data.editorsTrendData;
         this.editorsTrendLabels = editorData.data.editorsTrendLabels;
@@ -899,75 +957,6 @@ export default {
       this.getLanguageTrend();
       this.getEditorsTrend();
     },
-  },
-  computed: {
-    ismobile() {
-      return ismobile();
-    },
-    birthdayDays() {
-      let countDown = countUpFromTime('May 16, 2000 16:21:00');
-      let remainingDays = 365 - countDown.weeks * 7;
-      return remainingDays;
-    },
-    aboutChips() {
-      return [
-        {
-          name: 'Profile Card',
-          icon: 'mdi-account-box-outline',
-          id: '#about-aboutmecard',
-        },
-        {
-          name: 'Languages Known',
-          icon: 'mdi-language-csharp',
-          id: '#about-languagesknown',
-        },
-        {
-          name: 'More Stats',
-          icon: 'mdi-sign-real-estate',
-          id: '#about-moreStats',
-        },
-      ];
-    },
-    languagesKnown() {
-      if (this.ismobile) {
-        return {
-          values: [79, 47, 32, 93, 41],
-          labels: ['Nodejs', 'Python', 'ReactJs', 'Vuejs', 'Flutter'],
-          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
-        };
-      } else {
-        return {
-          values: [79, 47, 38, 32, 93, 39, 49, 52, 21, 26, 99, 48, 62],
-          labels: [
-            'Nodejs',
-            'Python',
-            'Illustrator',
-            'ReactJs',
-            'Vuejs',
-            'Adobe Xd',
-            'Lightroom',
-            'Flutter',
-            'Ruby',
-            'Java',
-            'Excel',
-            'Photoshop',
-            'Premiere',
-          ],
-          gradient: ['#77a1d3', '#79cbca', '#e684ae'],
-        };
-      }
-    },
-  },
-  mounted() {
-    this.render();
-  },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      let params = to.params;
-      if (params.scroll) {
-        vm.$vuetify.goTo(params.scrollid);
-      }
-    });
   },
 };
 </script>

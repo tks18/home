@@ -7,29 +7,29 @@ const state = Vue.observable({
   botSettings: {
     darkmode: false,
     navBlur: false,
-  }
+  },
 });
 
 export const getters = {
   navbar: {
     key: () => state.navbar.key,
-    active: () => state.navbar.active
+    active: () => state.navbar.active,
   },
   botSettings: {
     darkmode: () => state.botSettings.darkmode,
     navBlur: () => state.botSettings.navBlur,
-  }
-}
+  },
+};
 
 export const mutations = {
   navbar: {
-    key: (val) => state.navbar.key = val,
-    active: (val) => state.navbar.active = val,
+    key: (val) => (state.navbar.key = val),
+    active: (val) => (state.navbar.active = val),
   },
   botSettings: {
-    darkmode: (val) => state.botSettings.darkmode = val,
-    navBlur: (val) => state.botSettings.navBlur = val,
-  }
-}
+    darkmode: (val) => (state.botSettings.darkmode = val),
+    navBlur: (val) => (state.botSettings.navBlur = val),
+  },
+};
 
 export default state;

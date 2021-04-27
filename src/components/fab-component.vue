@@ -5,17 +5,17 @@
         (endofPage ? 'fab-button-bottom' : 'fab-button') +
         ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
       "
-      @click="fab = !fab"
       :bottom="true"
       :absolute="true"
       :fixed="true"
       :right="true"
       rounded
       fab
+      @click="fab = !fab"
     >
       <v-icon>mdi-tune</v-icon>
     </v-btn>
-    <v-dialog transition="slide-y-transition" v-model="fab" max-width="400">
+    <v-dialog v-model="fab" transition="slide-y-transition" max-width="400">
       <v-card>
         <v-card-title>Quick Actions</v-card-title>
         <v-card-text class="text-center">
@@ -34,25 +34,35 @@
 </template>
 
 <script>
-import musicPlayer from './music-player';
-import bottomSettings from './bottom-settings';
+/* eslint-disable no-restricted-globals */
+
+import { ismobile } from '@p/helpers';
+import musicPlayer from './music-player.vue';
+import bottomSettings from './bottom-settings.vue';
+
 export default {
   components: {
     musicPlayer,
     bottomSettings,
   },
-  data: function () {
-    return {
-      fab: false,
-      endofPage: false,
-    };
+  data: () => ({
+    fab: false,
+    endofPage: false,
+  }),
+  computed: {
+    ismobile() {
+      return ismobile();
+    },
+  },
+  mounted() {
+    this.scroll();
   },
   methods: {
     scroll() {
       window.onscroll = () => {
         if (
           window.innerHeight + window.pageYOffset >=
-          document.body.offsetHeight
+          document.body.offsetHeight - 60
         ) {
           this.endofPage = true;
         } else {
@@ -60,19 +70,6 @@ export default {
         }
       };
     },
-  },
-  computed: {
-    ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
-    },
-  },
-  mounted() {
-    this.scroll();
   },
 };
 </script>

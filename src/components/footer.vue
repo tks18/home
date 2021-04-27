@@ -1,12 +1,20 @@
 <template>
-  <v-footer class="non-touch" elevation="22" inset dense small rounded>
+  <v-footer
+    class="pa-2 mt-3 non-touch"
+    elevation="22"
+    inset
+    dense
+    outlined
+    small
+    rounded
+  >
     <v-row align="center" justify="center" class="my-1 py-0">
-      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-0">
+      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-1">
         <v-row>
           <v-col
             :align="ismobile ? 'center' : 'start'"
             justify="center"
-            class="ma-1 my-0 py-0"
+            class="ma-1 my-1 py-2"
           >
             <v-row
               v-if="!ismobile"
@@ -22,18 +30,18 @@
               :justify="ismobile ? 'center' : 'start'"
             >
               <v-tooltip
+                v-for="(social, index) in socials"
+                :key="index"
                 top
                 transition="slide-y-transition"
-                v-for="(social, index) in socials"
-                v-bind:key="index"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template #activator="{ on, attrs }">
                   <v-btn
                     icon
                     v-bind="attrs"
+                    color="primary"
                     v-on="on"
                     @click="windowLink(social.link)"
-                    color="primary"
                   >
                     <v-icon>{{ social.icon }}</v-icon>
                   </v-btn>
@@ -44,19 +52,24 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col :cols="ismobile ? 12 : 4" align="center" class="my-0 py-0">
+      <v-col :cols="ismobile ? 12 : 4" align="center" class="my-1 py-0">
         <div class="text">
           <div class="grey--text text-overline my-0 py-0">
             Portfolio Website
           </div>
           <div class="text-caption my-0 py-0">Powered by</div>
-          <v-tooltip top transition="slide-x-transition">
-            <template v-slot:activator="{ on, attrs }">
+          <v-tooltip top transition="slide-y-transition">
+            <template #activator="{ on, attrs }">
               <div
-                v-on="on"
                 v-bind="attrs"
+                :class="
+                  'grey--text point-cursor text-overline my-0 py-0' +
+                  ($vuetify.theme.dark
+                    ? ' underhover-light'
+                    : ' underhover-dark')
+                "
+                v-on="on"
                 @click="$router.push('/about-this-project')"
-                class="grey--text text-overline my-0 py-0"
               >
                 Vuetify, Vuejs and More
                 <v-icon color="primary">mdi-heart</v-icon>
@@ -68,7 +81,7 @@
           </v-tooltip>
         </div>
       </v-col>
-      <v-col :cols="ismobile ? 12 : 4" class="my-0 py-0">
+      <v-col :cols="ismobile ? 12 : 4" class="my-1 py-0">
         <v-row class="my-0 mt-1 py-0">
           <v-col
             class="my-0 py-0 text-caption"
@@ -89,7 +102,7 @@
                 (ismobile ? ' text-center' : '')
               "
             >
-              <span @click="windowLink(github.link)" class="point-cursor">
+              <span class="point-cursor" @click="windowLink(github.link)">
                 {{ animatedArray.name.trim() + '.TK' }}
               </span>
               |
@@ -99,32 +112,24 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" align="center" class="ma-0 pa-0">
+      <v-col cols="12" align="center" class="ma-0 my-1 pa-0">
         <v-row align="center" class="ma-0 pa-0">
           <v-col cols="12" class="ma-0 pa-0">
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-avatar
-                :color="success ? 'green' : 'yellow'"
-                size="14"
-                class="mr-2"
-              ></v-avatar>
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-web' : 'mdi-web-clock' }}
+              </v-icon>
               Backend
             </v-chip>
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-avatar
-                :color="success ? 'green' : 'yellow'"
-                size="14"
-                class="mr-2"
-              ></v-avatar>
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-database-check' : 'mdi-database-alert' }}
+              </v-icon>
               Database
             </v-chip>
-            <v-chip class="ma-2" outlined :color="success ? 'green' : 'yellow'">
-              <v-icon
-                left
-                class="mr-2 ml-1"
-                :color="success ? 'green' : 'yellow'"
-              >
-                mdi-lan-pending
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{ success ? 'mdi-lan-check' : 'mdi-lan-pending' }}
               </v-icon>
               Latency - {{ pingstats }} ms
             </v-chip>
@@ -134,14 +139,20 @@
           <v-col
             cols="12"
             align="center"
-            :class="
-              'ma-0 pa-0 text-overline' +
-              (success ? ' green--text' : ' yellow--text')
-            "
+            class="'ma-0 pa-0 text-overline font-weight-bold'"
           >
-            {{
-              success ? 'All Systems Operational' : 'Connecting to Server...'
-            }}
+            <v-chip class="ma-2" small :color="success ? 'primary' : 'error'">
+              <v-icon left small class="mr-2 ml-1">
+                {{
+                  success
+                    ? 'mdi-checkbox-multiple-marked-circle'
+                    : 'mdi-checkbox-multiple-blank-circle'
+                }}
+              </v-icon>
+              {{
+                success ? 'All Systems Operational' : 'Connecting to Server...'
+              }}
+            </v-chip>
           </v-col>
         </v-row>
       </v-col>
@@ -150,73 +161,86 @@
 </template>
 <script>
 import { ping } from '@p/backend';
-import { lettersArray } from '@t/emoji-array';
 import { tweenToRev } from '@p/gsap';
 import { generateWordMapsReverse } from '@p/wordmap';
+import { ismobile } from '@p/helpers';
+
 export default {
-  data: function () {
-    return {
-      now: new Date().toLocaleTimeString(),
-      clockDiag: false,
-      success: false,
-      pingstats: 0,
-      animatedArray: {
-        name: '',
+  data: () => ({
+    now: new Date().toLocaleTimeString(),
+    clockDiag: false,
+    success: false,
+    pingstats: 0,
+    animatedArray: {
+      name: '',
+    },
+    github: {
+      link: 'https://github.com/tks18',
+    },
+    socials: [
+      {
+        icon: 'mdi-twitter',
+        title: 'Twitter',
+        link: 'https://twitter.com/shantk18',
       },
-      github: {
+      {
+        icon: 'mdi-instagram',
+        title: 'Instagram',
+        link: 'https://instagram.com/shantk18',
+      },
+      {
+        icon: 'mdi-github',
+        title: 'Github',
         link: 'https://github.com/tks18',
       },
-      socials: [
-        {
-          icon: 'mdi-twitter',
-          title: 'Twitter',
-          link: 'https://twitter.com/shantk18',
-        },
-        {
-          icon: 'mdi-instagram',
-          title: 'Instagram',
-          link: 'https://instagram.com/shantk18',
-        },
-        {
-          icon: 'mdi-github',
-          title: 'Github',
-          link: 'https://github.com/tks18',
-        },
-        {
-          icon: 'mdi-gitlab',
-          title: 'Gitlab',
-          link: 'https://gitlab.com/tks18',
-        },
-        {
-          icon: 'mdi-bitbucket',
-          title: 'Bit Bucket',
-          link: 'https://bitbucket.org/Shan-tk/',
-        },
-        {
-          icon: 'mdi-quality-medium',
-          title: 'Medium',
-          link: 'https://medium.com/@tksudharshan',
-        },
-        {
-          icon: 'mdi-email-edit',
-          title: 'Email Me',
-          link: 'mailto:tksudharshan@infozy.tk',
-        },
-        {
-          icon: 'mdi-google-photos',
-          title: 'Photography',
-          link: 'https://unsplash.com/@shantk18',
-        },
-      ],
-    };
+      {
+        icon: 'mdi-gitlab',
+        title: 'Gitlab',
+        link: 'https://gitlab.com/tks18',
+      },
+      {
+        icon: 'mdi-bitbucket',
+        title: 'Bit Bucket',
+        link: 'https://bitbucket.org/Shan-tk/',
+      },
+      {
+        icon: 'mdi-quality-medium',
+        title: 'Medium',
+        link: 'https://medium.com/@tksudharshan',
+      },
+      {
+        icon: 'mdi-email-edit',
+        title: 'Email Me',
+        link: 'mailto:tksudharshan@infozy.tk',
+      },
+      {
+        icon: 'mdi-google-photos',
+        title: 'Photography',
+        link: 'https://unsplash.com/@shantk18',
+      },
+    ],
+  }),
+  computed: {
+    ismobile() {
+      return ismobile();
+    },
+  },
+  mounted() {
+    tweenToRev({
+      vm: this,
+      emoji: false,
+      arrayName: 'animatedArray',
+      map: generateWordMapsReverse('Sudharshan', 'shan      '),
+      arrayProperty: 'name',
+    });
+    this.getBackendStatus();
   },
   methods: {
     windowLink(url) {
       window.open(url);
-      return;
     },
     async getBackendStatus() {
-      let backendStatus = await ping();
+      const backendStatus = await ping();
       if (backendStatus.success) {
         this.success = true;
         this.pingstats = backendStatus.timing;
@@ -238,54 +262,6 @@ export default {
         this.pingstats = 0;
       }
     },
-  },
-  computed: {
-    ismobile() {
-      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-      if (width > 966) {
-        return false;
-      } else {
-        return true;
-      }
-    },
-    nameMap() {
-      return {
-        initial: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-          lettersArray.indexOf(' '),
-        ],
-        map: [
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('u'),
-          lettersArray.indexOf('d'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('r'),
-          lettersArray.indexOf('s'),
-          lettersArray.indexOf('h'),
-          lettersArray.indexOf('a'),
-          lettersArray.indexOf('n'),
-        ],
-      };
-    },
-  },
-  mounted() {
-    tweenToRev({
-      vm: this,
-      emoji: false,
-      arrayName: 'animatedArray',
-      map: generateWordMapsReverse('Sudharshan', 'shan      '),
-      arrayProperty: 'name',
-    });
-    this.getBackendStatus();
   },
 };
 </script>

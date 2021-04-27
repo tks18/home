@@ -2,11 +2,8 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import minifyTheme from 'minify-css-string';
 
-Vue.use(Vuetify);
-
-let themecache = JSON.parse(localStorage.getItem('themecache'));
-
-export default new Vuetify({
+const themecache = JSON.parse(localStorage.getItem('themecache'));
+const options = {
   theme: {
     dark: themecache == null ? false : themecache.dark,
     themes: {
@@ -30,8 +27,13 @@ export default new Vuetify({
       },
     },
     options: {
-      minifyTheme: minifyTheme,
+      minifyTheme,
       variations: false,
     },
   },
-});
+};
+
+export const vuetifyOptions = options;
+
+Vue.use(Vuetify);
+export default new Vuetify(options);

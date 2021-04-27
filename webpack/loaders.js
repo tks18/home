@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-let loaders = [
+const loaders = [
   {
     test: /\.(png|svg|jpg|gif|pdf)$/,
     use: [

@@ -1,71 +1,25 @@
-import axios from '@p/axios';
+import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
   get: {
     current: async () => {
-      return await axios
-        .post(api.notification.get, {
+      const resp = await requester({
+        url: api.notification.get,
+        postData: {
           type: 'current',
-        })
-        .then((response) => {
-          if (
-            response.status == 200 &&
-            response.data &&
-            response.data.success
-          ) {
-            return {
-              success: true,
-              data: response.data,
-              error: null,
-            };
-          } else {
-            return {
-              success: false,
-              data: null,
-              error: null,
-            };
-          }
-        })
-        .catch((error) => {
-          return {
-            success: false,
-            data: null,
-            error,
-          };
-        });
+        },
+      });
+      return resp;
     },
     all: async () => {
-      return await axios
-        .post(api.notification.get, {
+      const resp = await requester({
+        url: api.notification.get,
+        postData: {
           type: 'all',
-        })
-        .then((response) => {
-          if (
-            response.status == 200 &&
-            response.data &&
-            response.data.success
-          ) {
-            return {
-              success: true,
-              data: response.data,
-              error: null,
-            };
-          } else {
-            return {
-              success: false,
-              data: null,
-              error: null,
-            };
-          }
-        })
-        .catch((error) => {
-          return {
-            success: false,
-            data: null,
-            error,
-          };
-        });
+        },
+      });
+      return resp;
     },
   },
 };

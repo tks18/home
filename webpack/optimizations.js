@@ -1,8 +1,8 @@
 const Minimizers = require('./minimizers');
 
-let isProd = process.env.NODE_ENV != 'development';
+const isProd = process.env.NODE_ENV !== 'development';
 
-let productionConfig = {
+const productionConfig = {
   splitChunks: {
     chunks: 'async',
     minSize: 20000,
@@ -28,7 +28,7 @@ let productionConfig = {
   minimizer: [...Minimizers],
 };
 
-let devConfig = {
+const devConfig = {
   minimize: false,
   minimizer: [...Minimizers],
 };

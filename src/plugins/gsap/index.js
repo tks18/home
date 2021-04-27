@@ -1,6 +1,6 @@
-import { default as oNe } from './observer';
-import { default as tT, tweenToObserver as tTo } from './tweenTo';
-import { default as tTr, tweenToRevObserver as tTrO } from './tweenToRev';
+import oNe from './observer';
+import tT, { tweenToObserver as tTo } from './tweenTo';
+import tTr, { tweenToRevObserver as tTrO } from './tweenToRev';
 
 export default {
   tweenToObserver: tTo,
