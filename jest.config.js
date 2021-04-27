@@ -19,7 +19,7 @@ module.exports = {
   transformIgnorePatterns: ['/node_modules/(?!(vuetify)/)'],
   setupFiles: ['./tests/setup.js'],
   prettierPath: '<rootDir>/node_modules/prettier',
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     '**/*.{js,vue}',
     '!**/node_modules/**',
