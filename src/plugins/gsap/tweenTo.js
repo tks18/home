@@ -25,7 +25,7 @@ export function tweenToObserver(options) {
         {
           [index]: wordsarray.length * 2 + range,
           ease: 'power4',
-          duration: index / 8 + 4,
+          duration: index / (8 + 4),
         },
         0,
       );
@@ -46,7 +46,7 @@ export default (options) => {
       {
         [index]: wordsarray.length * 2 + range,
         ease: 'power4',
-        duration: index / 8 + 4,
+        duration: index / (8 + 4),
       },
       0,
     );
