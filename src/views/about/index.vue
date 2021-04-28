@@ -34,6 +34,7 @@
           <a-profile-card-component
             :ismobile="ismobile"
             :author-data="authorData"
+            :bgs="bgs"
             :work-profile="workProfile"
           />
           <a-share-card-component :ismobile="ismobile" />
@@ -81,6 +82,7 @@ export default {
       ...authorData.main,
       age: countUpFromTime('May 16, 2000 16:21:00').years,
     },
+    bgs: authorData.bgs,
     workProfile: authorData.workProfile,
     animatedArray: {
       hashTag: ' ',

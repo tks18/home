@@ -281,6 +281,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    bgs: {
+      type: Array,
+      default: () => [],
+    },
     workProfile: {
       type: Object,
       default: () => {},
@@ -291,7 +295,6 @@ export default {
     },
   },
   data: () => ({
-    bgs: authorData.bgs,
     bgPlay: true,
     dailyData: [],
     dailyLabels: [],

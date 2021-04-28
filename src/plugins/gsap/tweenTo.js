@@ -23,9 +23,9 @@ export function tweenToObserver(options) {
       tl.to(
         options.map.startArray,
         {
-          [index]: wordsarray.length * 2 + range,
+          [index]: wordsarray.length * 3 + range,
           ease: 'power4',
-          duration: index / (8 + 4),
+          duration: index / (8 + 1),
         },
         0,
       );
@@ -44,9 +44,9 @@ export default (options) => {
     tl.to(
       options.map.startArray,
       {
-        [index]: wordsarray.length * 2 + range,
+        [index]: wordsarray.length * 3 + range,
         ease: 'power4',
-        duration: index / (8 + 4),
+        duration: index / (8 + 1),
       },
       0,
     );
