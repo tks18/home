@@ -24,7 +24,7 @@ export function tweenToObserver(options) {
         options.map.startArray,
         {
           [index]: wordsarray.length * 3 + range,
-          ease: 'power4',
+          ease: 'elastic',
           duration: index / (8 + 1),
         },
         0,
@@ -45,7 +45,7 @@ export default (options) => {
       options.map.startArray,
       {
         [index]: wordsarray.length * 3 + range,
-        ease: 'power4',
+        ease: 'elastic',
         duration: index / (8 + 1),
       },
       0,
