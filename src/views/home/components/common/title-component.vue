@@ -11,7 +11,7 @@
     "
     @click="link !== '/' && $router.push(link)"
   >
-    {{ title }} <v-icon :large="large">mdi-arrow-right-circle</v-icon>
+    {{ title }} <v-icon :large="large">mdi-arrow-{{ arrow }}-circle</v-icon>
   </div>
 </template>
 
