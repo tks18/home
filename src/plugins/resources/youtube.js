@@ -10,7 +10,7 @@ export async function channel_data(channel) {
       channel_id: id,
     },
   });
-  if (resp.data.success) {
+  if (resp.success) {
     return {
       success: true,
       error: null,

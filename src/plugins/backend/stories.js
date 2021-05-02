@@ -9,13 +9,13 @@ export default {
         type: 'current',
       },
     });
-    return resp.data;
+    return resp;
   },
   set: async (storyData) => {
     const resp = await requester({
       url: api.stories.set,
       postData: storyData,
     });
-    return resp.data;
+    return resp;
   },
 };
