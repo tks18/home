@@ -1,5 +1,5 @@
 import axios from '@p/axios';
-import { mutations } from '@state';
+import state from '@state';
 import { generate_backend_hash } from '@p/crypto';
 
 export const headers = (hash_obj) => ({
@@ -8,15 +8,15 @@ export const headers = (hash_obj) => ({
 });
 
 export const make_request = async (options) => {
-  mutations.backend.progress = true;
+  state.backend.progress = true;
   const response = await axios
     .post(options.url, options.postData ? options.postData : {}, {
       headers: headers(generate_backend_hash()),
     })
     .then((resp) => {
       if (resp.status === 200 && resp.data) {
-        mutations.backend.progress = false;
-        mutations.backend.timing = responsetime;
+        state.backend.progress = false;
+        state.backend.timing = resp.responsetime;
         return {
           success: true,
           data: resp.data,

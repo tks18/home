@@ -39,11 +39,6 @@ export default {
     backendStatus: false,
     strength: 4,
   }),
-  watch: {
-    'this.$state.store.backend.progress': function (progress) {
-      console.log(progress);
-    },
-  },
   mounted() {
     this.checkBackend();
     setInterval(() => {
