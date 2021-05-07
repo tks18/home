@@ -114,7 +114,7 @@ export default {
   methods: {
     async getStories() {
       this.loading = true;
-      const storydata = await stories.get();
+      const storydata = await stories.get(this.$state.store);
       if (storydata.success && storydata.data) {
         this.site = storydata.data.website;
         this.stories = storydata.data.stories;

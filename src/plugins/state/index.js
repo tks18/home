@@ -1,6 +1,9 @@
 import Vue from 'vue';
 
 const state = Vue.observable({
+  app: {
+    online: true,
+  },
   navbar: {
     active: false,
   },

@@ -240,7 +240,7 @@ export default {
       window.open(url);
     },
     async getBackendStatus() {
-      const backendStatus = await ping();
+      const backendStatus = await ping(this.$state.store);
       if (backendStatus.success) {
         this.success = true;
         this.pingstats = backendStatus.timing;

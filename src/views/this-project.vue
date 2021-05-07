@@ -825,7 +825,11 @@ export default {
   methods: {
     async getRepoData() {
       this.$set(this.repo.details, 'loading', true);
-      const repo_data_resp = await repoData(this.user, this.repo.name);
+      const repo_data_resp = await repoData(
+        this.user,
+        this.repo.name,
+        this.$state.store,
+      );
       if (repo_data_resp.success && repo_data_resp.error == null) {
         const repo_details = repo_data_resp.data;
         if (this.repo.name === 'matte-portfolio') {
@@ -839,7 +843,11 @@ export default {
     },
     async getRepoTopics() {
       this.$set(this.repo.topics, 'loading', true);
-      const repo_topics_resp = await repoTopics(this.user, this.repo.name);
+      const repo_topics_resp = await repoTopics(
+        this.user,
+        this.repo.name,
+        this.$state.store,
+      );
       if (repo_topics_resp.success && repo_topics_resp.error == null) {
         this.$set(this.repo.topics, 'data', repo_topics_resp.topics.names);
         this.$set(this.repo.topics, 'loading', false);
@@ -853,6 +861,7 @@ export default {
         this.current_branch.name,
         this.repo.commits.nos,
         this.repo.commits.page,
+        this.$state.store,
       );
       let new_commit_array = [];
       if (repo_commits_resp.success && repo_commits_resp.commits != null) {
@@ -867,7 +876,11 @@ export default {
     },
     async getRepoBranches() {
       this.$set(this.repo.branches, 'loading', true);
-      const repo_branches_resp = await repoBranches(this.user, this.repo.name);
+      const repo_branches_resp = await repoBranches(
+        this.user,
+        this.repo.name,
+        this.$state.store,
+      );
       if (repo_branches_resp.success && repo_branches_resp.error === null) {
         const { branches } = repo_branches_resp;
         [this.current_branch] = branches.filter(
@@ -887,6 +900,7 @@ export default {
         this.repo.name,
         path,
         branch,
+        this.$state.store,
       );
       if (repo_contents_resp.success && repo_contents_resp.error == null) {
         if (!backtrigger) {
@@ -914,6 +928,7 @@ export default {
             this.repo.name,
             path,
             branch,
+            this.$state.store,
           );
           if (file_contents.success && file_contents.error == null) {
             const decoded_text = atob(file_contents.contents.content);
@@ -933,6 +948,7 @@ export default {
           this.repo.name,
           path,
           branch,
+          this.$state.store,
         );
         if (file_contents.success && file_contents.error == null) {
           this.current_file = file_contents.contents;
@@ -982,7 +998,7 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: `${this.current_file.path} Has been Copied to Clipboard.`,
+            text: `${this.current_file.path} has been Copied to Clipboard.`,
             data: {
               loading: false,
               dark: true,
@@ -1076,5 +1092,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

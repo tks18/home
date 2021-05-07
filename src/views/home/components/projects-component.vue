@@ -310,7 +310,11 @@ export default {
   methods: {
     async getProjects() {
       this.loading = true;
-      const projectsData = await projects(this.ismobile, this.user);
+      const projectsData = await projects(
+        this.ismobile,
+        this.user,
+        this.$state.store,
+      );
       if (projectsData.success && projectsData.data != null) {
         this.projects = this.ismobile
           ? projectsData.data.slice(0, 2)
