@@ -18,7 +18,7 @@
     </v-row>
     <div
       v-if="loading"
-      class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+      class="scrollable-x columns ma-1 pa-1 is-vcentered is-mobile"
     >
       <div
         v-for="n in ismobile ? 1 : 5"
@@ -35,7 +35,7 @@
     </div>
     <div
       v-if="!loading"
-      class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
+      class="scrollable-x columns ma-1 pa-1 is-vcentered is-mobile"
     >
       <div
         v-for="(story, index) in stories"
@@ -114,13 +114,13 @@ export default {
   methods: {
     async getStories() {
       this.loading = true;
-      const storydata = await stories.get();
-      if (storydata.success && storydata.stories) {
-        this.site = storydata.website;
-        this.stories = storydata.stories;
+      const storydata = await stories.get(this.$state.store);
+      if (storydata.success && storydata.data) {
+        this.site = storydata.data.website;
+        this.stories = storydata.data.stories;
         this.loading = false;
       } else {
-        this.loading = false;
+        this.loading = true;
         this.$notify({
           group: 'main',
           type: 'error',

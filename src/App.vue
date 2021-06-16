@@ -58,7 +58,9 @@ export default {
   },
   methods: {
     async getServerNotifications() {
-      const currentNotifications = await notifications.get.current();
+      const currentNotifications = await notifications.get.current(
+        this.$state.store,
+      );
       if (currentNotifications.success) {
         currentNotifications.data.notifications.forEach((notification) => {
           this.$notify(notification.properties);

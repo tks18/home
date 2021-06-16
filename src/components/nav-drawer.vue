@@ -5,7 +5,9 @@
     temporary
     :src="$state.store.botSettings.navBlur ? drawerBackImg : undefined"
   >
-    <v-container :class="$state.store.botSettings.navBlur ? 'back-blur' : ' '">
+    <v-container
+      :class="$state.store.botSettings.navBlur ? 'back-blur' : ' ' + ' my-5'"
+    >
       <v-row align="center" justify="center">
         <v-avatar
           class="point-cursor non-touch border-light"

@@ -227,7 +227,7 @@ export default {
   },
   methods: {
     async getGalleryPics() {
-      const galleryData = await gallery.get();
+      const galleryData = await gallery.get(this.$state.store);
       if (galleryData.success) {
         const shuffledPics = galleryData.data.slice(0, 5);
         shuffledPics.forEach((pic) => {

@@ -84,7 +84,7 @@
     "webpack-stats-plugin": "^1.0.3",
     "webpackbar": "^5.0.0-3"
   },
-  "baseSite": "https://shaaan.tk/",
+  "baseSite": "https://sudharshan.tk/",
   "license": "MIT",
   "title": "Sudharshan TK",
   "vetur": {

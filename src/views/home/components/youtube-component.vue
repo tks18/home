@@ -299,6 +299,7 @@ export default {
       this.loading = true;
       const channel_data_response = await channel_data(
         'UCD0rffboMQCgIggZJWDivjg',
+        this.$state.store,
       );
       if (channel_data_response.success && !channel_data_response.error) {
         const data = channel_data_response.data.items[0];
@@ -308,7 +309,7 @@ export default {
     },
     async getChannelVideos() {
       this.loading = true;
-      const video_response = await videos();
+      const video_response = await videos(this.$state.store);
       if (video_response.success && !video_response.error) {
         const channel_videos = video_response.data.items;
         const new_video_array = [];

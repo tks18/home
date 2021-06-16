@@ -6,7 +6,8 @@
   "workbench.colorTheme": "monokai-charcoal (purple)",
   "workbench.productIconTheme": "material-product-icons",
   "material-icon-theme.folders.associations": {
-    "home": "content"
+    "home": "content",
+    "about": "content"
   },
   "material-icon-theme.showWelcomeMessage": false,
   // Terminal Settings

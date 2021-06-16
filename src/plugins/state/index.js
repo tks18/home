@@ -1,12 +1,19 @@
 import Vue from 'vue';
 
 const state = Vue.observable({
+  app: {
+    online: true,
+  },
   navbar: {
     active: false,
   },
   botSettings: {
     darkmode: false,
     navBlur: false,
+  },
+  backend: {
+    progress: false,
+    timing: 0,
   },
 });
 
@@ -19,6 +26,10 @@ export const getters = {
     darkmode: () => state.botSettings.darkmode,
     navBlur: () => state.botSettings.navBlur,
   },
+  backend: {
+    progress: () => state.backend.progress,
+    timing: () => state.backend.timing,
+  },
 };
 
 export const mutations = {
@@ -29,6 +40,10 @@ export const mutations = {
   botSettings: {
     darkmode: (val) => (state.botSettings.darkmode = val),
     navBlur: (val) => (state.botSettings.navBlur = val),
+  },
+  backend: {
+    progress: (val) => (state.backend.progress = val),
+    timing: (val) => (state.backend.timing = val),
   },
 };
 

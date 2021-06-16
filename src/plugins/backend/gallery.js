@@ -2,9 +2,10 @@ import { make_request as requester } from './utils';
 import { api } from './routes';
 
 export default {
-  get: async () => {
+  get: async (store) => {
     const resp = await requester({
       url: api.gallery.get,
+      store,
     });
     if (resp.success) {
       return {

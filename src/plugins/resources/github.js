@@ -2,12 +2,13 @@ import { api as backend, requester } from '@p/backend';
 
 const api = backend.routes.github;
 
-export async function projects(ismobile, user) {
+export async function projects(ismobile, user, store) {
   const resp = await requester({
     url: api.repo.list,
     postData: {
       user,
     },
+    store,
   });
   if (resp.success) {
     const { repos } = resp.data;
@@ -23,18 +24,19 @@ export async function projects(ismobile, user) {
   };
 }
 
-export async function repoData(user, repo) {
+export async function repoData(user, repo, store) {
   const resp = await requester({
     url: api.repo.data,
     postData: {
       user,
       repo,
     },
+    store,
   });
   return resp;
 }
 
-export async function repoCommits(user, repo, branch, nos, page) {
+export async function repoCommits(user, repo, branch, nos, page, store) {
   const resp = await requester({
     url: api.repo.commits,
     postData: {
@@ -44,6 +46,7 @@ export async function repoCommits(user, repo, branch, nos, page) {
       nos,
       page,
     },
+    store,
   });
   if (resp.success) {
     return {
@@ -59,13 +62,14 @@ export async function repoCommits(user, repo, branch, nos, page) {
   };
 }
 
-export async function repoTopics(user, repo) {
+export async function repoTopics(user, repo, store) {
   const resp = await requester({
     url: api.repo.topics,
     postData: {
       user,
       repo,
     },
+    store,
   });
   if (resp.success) {
     return {
@@ -81,7 +85,7 @@ export async function repoTopics(user, repo) {
   };
 }
 
-export async function repoContents(user, repo, path, branch) {
+export async function repoContents(user, repo, path, branch, store) {
   const resp = await requester({
     url: api.repo.contents,
     postData: {
@@ -90,6 +94,7 @@ export async function repoContents(user, repo, path, branch) {
       path,
       branch,
     },
+    store,
   });
   if (resp.success) {
     return {
@@ -105,13 +110,14 @@ export async function repoContents(user, repo, path, branch) {
   };
 }
 
-export async function repoBranches(user, repo) {
+export async function repoBranches(user, repo, store) {
   const resp = await requester({
     url: api.repo.branches,
     postData: {
       user,
       repo,
     },
+    store,
   });
   if (resp.success) {
     return {

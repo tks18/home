@@ -16,13 +16,24 @@
         <v-row>
           <v-col v-for="n in ismobile ? 1 : 5" :key="n">
             <v-card>
-              <v-skeleton-loader class="mx-auto" type="card" />
+              <v-skeleton-loader
+                class="mx-auto"
+                :width="
+                  ismobile
+                    ? null
+                    : (contextInfo.viewport.width -
+                        contextInfo.viewport.width * 0.1) /
+                      5
+                "
+                :height="ismobile ? 300 : 400"
+                type="card"
+              />
             </v-card>
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12">
-        <v-row v-if="!loading" class="mx-2 non-touch">
+      <v-col v-if="!loading" cols="12">
+        <v-row class="mx-2 non-touch">
           <v-col
             v-for="(project, index) in projects"
             :key="index"
@@ -298,13 +309,19 @@ export default {
   },
   methods: {
     async getProjects() {
-      const projectsData = await projects(this.ismobile, this.user);
+      this.loading = true;
+      const projectsData = await projects(
+        this.ismobile,
+        this.user,
+        this.$state.store,
+      );
       if (projectsData.success && projectsData.data != null) {
         this.projects = this.ismobile
           ? projectsData.data.slice(0, 2)
           : projectsData.data;
         this.loading = false;
       } else {
+        this.loading = true;
         this.$notify({
           group: 'main',
           type: 'error',
@@ -326,8 +343,6 @@ export default {
             ],
           },
         });
-        this.loading = false;
-        this.projects = [];
       }
     },
     fetchApis() {

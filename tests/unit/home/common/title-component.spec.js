@@ -29,11 +29,13 @@ describe('Common Home Title Component.vue', () => {
   it('Checks the Element id with the passed id', () => {
     const div = wrapper.find('div');
     expect(div.attributes('id')).toBe(`home-${propsData.id}`);
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('Checks Title text with the Props Sent', () => {
     const title = wrapper.find(`#home-${propsData.id}`);
     expect(title.exists()).toBeTruthy();
     expect(title.text()).toBe(propsData.title);
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });

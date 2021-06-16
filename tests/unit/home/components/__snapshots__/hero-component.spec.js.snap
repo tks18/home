@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Hero Component.vue Checks Vue instance and Matches with Snapshot 1`] = `
+<div id="testing-id" class="column is-full non-touch" title="Testing Title">
+  <div class="hero is-fullheight grad-back-light">
+    <div class="hero-body ma-2 pa-8">
+      <div class="container">
+        <div class="columns is-multiline is-centered is-vcentered">
+          <div class="column is-full">
+            <div class="text text-center font-weight-bold text-h2">
+              Designer, Front-end &amp; Backend Developer
+            </div>
+            <div class="text font-weight-bold my-2 py-2 mx-2 px-2 text-center text-h3"><span aria-haspopup="true" aria-expanded="false" class="fit-text non-touch point-cursor">
+
+                  </span><span class="v-tooltip v-tooltip--top"><!----></span></div>
+            <div class="text text-center font-weight-bold text-body-1">
+              I design and code beautifully simple things, and I love what I
+              do.
+            </div>
+          </div>
+          <div class="column is-half has-text-right">
+            <div class="v-avatar" style="height: 380px; min-width: 380px; width: 380px;">
+              <div aria-label="Main Image" role="img" class="v-image v-responsive theme--light">
+                <transition-stub name="fade-transition" mode="in-out">
+                  <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
+                </transition-stub>
+                <div class="v-responsive__content"></div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-centered is-half  text text-center text-overline font-weight-bold">
+            <div class="row align-center">
+              <div align="right" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-information-variant theme--light"></i>
+                  About Me
+                </span></button></div>
+              <div align="left" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-console-network theme--light"></i>
+                  What i Do
+                </span></button></div>
+              <div align="right" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-post-outline theme--light"></i>
+                  My Blog
+                </span></button></div>
+              <div align="left" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-one-up theme--light"></i>
+                  Some Extras
+                </span></button></div>
+              <div align="right" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-projector-screen theme--light"></i>
+                  Projects
+                </span></button></div>
+              <div align="left" class="col col-6"><button type="button" class="v-btn v-btn--outlined v-btn--text theme--light elevation-24 v-size--large" raised=""><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-contactless-payment theme--light"></i>
+                  Contact Me
+                </span></button></div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

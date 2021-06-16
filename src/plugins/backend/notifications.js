@@ -3,12 +3,13 @@ import { api } from './routes';
 
 export default {
   get: {
-    current: async () => {
+    current: async (store) => {
       const resp = await requester({
         url: api.notification.get,
         postData: {
           type: 'current',
         },
+        store,
       });
       return resp;
     },

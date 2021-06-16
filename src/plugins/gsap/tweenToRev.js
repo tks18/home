@@ -26,9 +26,9 @@ export function tweenToRevObserver(options) {
       tl.to(
         options.map.startArray,
         {
-          [index]: wordsarray.length * 2 + range,
-          ease: 'power4',
-          duration: index / 8 + 1,
+          [index]: wordsarray.length * 3 + range,
+          ease: 'elastic',
+          duration: index / (8 + 1),
         },
         0,
       );
@@ -50,9 +50,9 @@ export default (options) => {
     tl.to(
       options.map.startArray,
       {
-        [index]: wordsarray.length * 2 + range,
-        ease: 'power4',
-        duration: index / 8 + 1,
+        [index]: wordsarray.length * 3 + range,
+        ease: 'elastic',
+        duration: index / (8 + 1),
       },
       0,
     );
