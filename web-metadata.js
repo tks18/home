@@ -7,7 +7,7 @@ const twitterData = {
   pic: 'assets/photos/me.jpg',
 };
 const keyWords =
-  'Sudharshan TK, Portfolio, Shan.tk, https://shaaan.tk, shaaan.tk, sudharshan, Blog, Portfolio-blog';
+  'Sudharshan TK, Portfolio, Shan.tk, https://sudharshan.tk, sudharshan.tk, sudharshan, Blog, Portfolio-blog';
 
 const webSiteDesc =
   'Building Online Answers for Your Next Design Challenge. Sometimes Writes Blogs about Latest Tech Developments and Frameworks. Forgot, this is Sudharshan TK hehe xD';
