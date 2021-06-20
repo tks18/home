@@ -35,6 +35,7 @@
             :ismobile="ismobile"
             :author-data="authorData"
             :bgs="bgs"
+            :goto-url="gotoUrl"
             :work-profile="workProfile"
           />
           <a-share-card-component :ismobile="ismobile" />
