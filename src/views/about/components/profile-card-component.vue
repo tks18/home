@@ -289,6 +289,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    gotoUrl: {
+      type: Function,
+      default: () => {},
+    },
     ismobile: {
       type: Boolean,
       default: false,
