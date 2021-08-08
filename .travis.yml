@@ -1,13 +1,23 @@
-language: node_js
-node_js:
-  - "node"
-cache: npm
+os: linux
+
 branches:
   only:
-  - master
-cache: npm
+    - master
+
+language: node_js
+
+node_js:
+  - 14
+
+git:
+  depth: 3
+  quiet: true
+  submodules: false
+
+cache: yarn
+
 script:
-  - npm run build
+  - yarn build
 
 deploy:
   provider: pages

@@ -21,7 +21,8 @@
         </v-btn>
       </v-col>
     </v-row>
-    <div
+    <!-- Fetching Blog Posts to be Implemented in Future -->
+    <!-- <div
       ref="posts"
       class="scrollable-x columns ma-2 pa-1 is-vcentered is-mobile"
     >
@@ -84,7 +85,17 @@
           </template>
         </v-hover>
       </div>
-    </div>
+    </div> -->
+    <!-- Temporary Skeleton  -->
+    <v-row>
+      <v-col align="center">
+        <v-skeleton-loader type="card" max-width="300" class="mx-auto" />
+        <div class="text-body-1">
+          Blog Posts Under Construction, I will Come Striking
+        </div>
+      </v-col>
+    </v-row>
+    <!-- End - Temporary Skeleton  -->
   </div>
 </template>
 

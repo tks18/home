@@ -15,20 +15,18 @@
       <v-col v-if="loading" cols="12">
         <v-row>
           <v-col v-for="n in ismobile ? 1 : 5" :key="n">
-            <v-card>
-              <v-skeleton-loader
-                class="mx-auto"
-                :width="
-                  ismobile
-                    ? null
-                    : (contextInfo.viewport.width -
-                        contextInfo.viewport.width * 0.1) /
-                      5
-                "
-                :height="ismobile ? 300 : 400"
-                type="card"
-              />
-            </v-card>
+            <v-skeleton-loader
+              class="mx-auto"
+              :width="
+                ismobile
+                  ? null
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.25) /
+                    5
+              "
+              :height="ismobile ? 300 : 400"
+              type="card"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -109,6 +107,7 @@
                           {{ project.default_branch }}
                         </v-chip>
                         <v-chip
+                          v-if="project.owner.avatar_url"
                           class="text-right ma-1"
                           color="primary"
                           outlined
@@ -321,7 +320,6 @@ export default {
           : projectsData.data;
         this.loading = false;
       } else {
-        this.loading = true;
         this.$notify({
           group: 'main',
           type: 'error',
