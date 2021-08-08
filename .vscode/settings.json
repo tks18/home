@@ -10,8 +10,6 @@
     "about": "content"
   },
   "material-icon-theme.showWelcomeMessage": false,
-  // Terminal Settings
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
   "terminal.integrated.rendererType": "dom",
   // Git Settings
   "git.enableSmartCommit": true,
