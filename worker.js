@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 
 console.log(
   '%cDone',
@@ -6,21 +6,24 @@ console.log(
   ': App is being served from cache by a service worker.\n' +
     'For more details, visit https://goo.gl/AFskqB',
 );
+
 console.log(
   '%cWORKER:',
   'background: #FFC107; font-weight: bold; color: black',
   ' executing.',
 );
-let cachedPages = [
+
+const cachedPages = [
   '/',
   '/offline.html',
   '/about',
   '/gallery',
   '/blog',
   '/projects',
+  '/about-this-project',
 ];
 
-self.addEventListener('install', function (event) {
+self.addEventListener('install', (event) => {
   console.log(
     '%cWORKER:',
     'background: #FFC107; font-weight: bold; color: black',
@@ -29,10 +32,8 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches
       .open('offline')
-      .then(function (cache) {
-        return cache.addAll(cachedPages);
-      })
-      .then(function () {
+      .then((cache) => cache.addAll(cachedPages))
+      .then(() => {
         console.log(
           '%cWORKER:',
           'background: #4BB543; font-weight: bold; color: black',
@@ -41,7 +42,8 @@ self.addEventListener('install', function (event) {
       }),
   );
 });
-self.addEventListener('fetch', function (event) {
+
+self.addEventListener('fetch', (event) => {
   console.log(
     '%cWORKER:',
     'background: #FFC107; font-weight: bold; color: black',
@@ -58,8 +60,8 @@ self.addEventListener('fetch', function (event) {
     return;
   }
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      var networked = fetch(event.request)
+    caches.match(event.request).then((cached) => {
+      const networked = fetch(event.request)
         .then(fetchedFromNetwork, unableToResolve)
         .catch(unableToResolve);
       console.log(
@@ -71,7 +73,7 @@ self.addEventListener('fetch', function (event) {
       );
       return cached || networked;
       function fetchedFromNetwork(response) {
-        var cacheCopy = response.clone();
+        const cacheCopy = response.clone();
         console.log(
           '%cWORKER:',
           'background: #4BB543; font-weight: bold; color: black',
@@ -80,10 +82,8 @@ self.addEventListener('fetch', function (event) {
         );
         caches
           .open('offline')
-          .then(function add(cache) {
-            return cache.put(event.request, cacheCopy);
-          })
-          .then(function () {
+          .then((cache) => cache.put(event.request, cacheCopy))
+          .then(() => {
             console.log(
               '%cWORKER:',
               'background: #4BB543; font-weight: bold; color: black',
@@ -94,8 +94,8 @@ self.addEventListener('fetch', function (event) {
         return response;
       }
       function unableToResolve() {
-        return caches.open('offline').then(function (cache) {
-          return cache.match(event.request).then(function (matching) {
+        return caches.open('offline').then((cache) =>
+          cache.match(event.request).then((matching) => {
             if (!matching || matching.status == 404) {
               console.log(
                 '%cWORKER:',
@@ -103,22 +103,21 @@ self.addEventListener('fetch', function (event) {
                 ' Cache Not Found. Using Offline File',
               );
               return cache.match('offline.html');
-            } else {
-              console.log(
-                '%cWORKER:',
-                'background: #FFC107; font-weight: bold; color: black',
-                ' File Found From Cache.',
-              );
-              return matching;
             }
-          });
-        });
+            console.log(
+              '%cWORKER:',
+              'background: #FFC107; font-weight: bold; color: black',
+              ' File Found From Cache.',
+            );
+            return matching;
+          }),
+        );
       }
     }),
   );
 });
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', (event) => {
   console.log(
     '%cWORKER:',
     'background: #FFC107; font-weight: bold; color: black',
@@ -127,18 +126,14 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches
       .keys()
-      .then(function (keys) {
-        return Promise.all(
+      .then((keys) =>
+        Promise.all(
           keys
-            .filter(function (key) {
-              return !key.startsWith('offline');
-            })
-            .map(function (key) {
-              return caches.delete(key);
-            }),
-        );
-      })
-      .then(function () {
+            .filter((key) => !key.startsWith('offline'))
+            .map((key) => caches.delete(key)),
+        ),
+      )
+      .then(() => {
         console.log(
           '%cWORKER:',
           'background: #4BB543; font-weight: bold; color: black',
@@ -146,4 +141,20 @@ self.addEventListener('activate', function (event) {
         );
       }),
   );
+});
+
+self.addEventListener('message', (event) => {
+  console.log(
+    '%cWORKER:',
+    'background: #4BB543; font-weight: bold; color: black',
+    'New Message from the Console.',
+  );
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log(
+      '%cWORKER:',
+      'background: #4BB543; font-weight: bold; color: black',
+      'New Version is getting Updated now !',
+    );
+    self.skipWaiting();
+  }
 });
