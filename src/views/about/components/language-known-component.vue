@@ -34,7 +34,7 @@ export default {
       default: false,
     },
   },
-  data: () => {},
+  data: () => ({}),
   computed: {
     languagesKnown() {
       if (this.ismobile) {

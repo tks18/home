@@ -119,6 +119,7 @@
                           :activator="video.model"
                           :video="video"
                           :close-function="yt_video_model"
+                          :context-info="contextInfo"
                         />
                         <transition name="fade" mode="out-in">
                           <v-overlay

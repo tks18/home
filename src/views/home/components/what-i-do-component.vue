@@ -44,7 +44,13 @@
                     <v-col
                       cols="12"
                       align="center"
-                      class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                      class="
+                        text-overline
+                        ma-0
+                        pa-0
+                        text-center
+                        font-weight-bold
+                      "
                     >
                       {{ activity.activity }}
                     </v-col>
@@ -85,7 +91,7 @@ export default {
       default: false,
     },
   },
-  data: () => {},
+  data: () => ({}),
   computed: {
     activities() {
       return [
