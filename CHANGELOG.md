@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/tks18/matte-portfolio/compare/v0.1.7...v0.1.8) (2021-08-09)
+
+
+### Bug Fixes
+
+* fix data obj in components which crashed router ([860d87b](https://github.com/tks18/matte-portfolio/commit/860d87b69251426b2a23d7c427c8ac277ce60dd1))
+* router navigation bug data not a obj ([4831ecb](https://github.com/tks18/matte-portfolio/commit/4831ecb6734aaeaf78381075135364cc93c5343f))
+
+
+### Tests
+
+* revert blog component changes ([0f75d2a](https://github.com/tks18/matte-portfolio/commit/0f75d2abecb94d2527b216fd6783911aa7a1dd1e))
+
 ### [0.1.7](https://github.com/tks18/matte-portfolio/compare/v0.1.6...v0.1.7) (2021-08-09)
 
 
