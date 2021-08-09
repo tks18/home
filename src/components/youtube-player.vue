@@ -84,7 +84,11 @@ export default {
       type: Function,
       default: () => {},
     },
+    contextInfo: {
+      type: Object,
+      default: () => {},
+    },
   },
-  data: () => {},
+  data: () => ({}),
 };
 </script>

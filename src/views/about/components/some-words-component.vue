@@ -54,7 +54,7 @@ export default {
       default: false,
     },
   },
-  data: () => {},
+  data: () => ({}),
   computed: {
     aboutChips() {
       return [
