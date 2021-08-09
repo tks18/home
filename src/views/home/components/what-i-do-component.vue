@@ -85,6 +85,7 @@ export default {
       default: false,
     },
   },
+  data: () => {},
   computed: {
     activities() {
       return [

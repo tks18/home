@@ -119,6 +119,7 @@ export default {
       default: false,
     },
   },
+  data: () => {},
   methods: {
     swipeLeft(func) {
       const content = `this.$refs.${func}`;

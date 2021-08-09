@@ -48,5 +48,6 @@ export default {
       default: '/',
     },
   },
+  data: () => {},
 };
 </script>
