@@ -17,7 +17,6 @@ git:
 cache: yarn
 
 script:
-  - yarn install
   - yarn build
 
 deploy:
