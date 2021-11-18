@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/tks18/matte-portfolio/compare/v0.1.8...v0.1.9) (2021-11-18)
+
+
+### Others
+
+* **environment:** move to linux dev environment ([bca2190](https://github.com/tks18/matte-portfolio/commit/bca219053e719d0016c404d78fcb84aa86abed4e))
+
+
+### Build System
+
+* **packages:** upgrade all packages to latest versions ([131a715](https://github.com/tks18/matte-portfolio/commit/131a715c524e3bd250af41c201bf741bc522fd1d))
+
 ### [0.1.8](https://github.com/tks18/matte-portfolio/compare/v0.1.7...v0.1.8) (2021-08-09)
 
 
