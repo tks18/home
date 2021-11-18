@@ -6,6 +6,7 @@
     "stage": "git add",
     "commit": "cz",
     "release": "standard-version --sign",
+    "push": "git push --follow-tags origin dev",
     "prerelease": "standard-version --prerelease --sign",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
