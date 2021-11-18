@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/tks18/matte-portfolio/compare/v0.1.9...v0.1.10) (2021-11-18)
+
+
+### Bug Fixes
+
+* **yarn:** fix gitignore file ignoring yarn berry file ([526dd20](https://github.com/tks18/matte-portfolio/commit/526dd20bb1bc01b45e04f74bee5c3e0560549f82))
+
 ### [0.1.9](https://github.com/tks18/matte-portfolio/compare/v0.1.8...v0.1.9) (2021-11-18)
 
 
