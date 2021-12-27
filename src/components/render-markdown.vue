@@ -44,17 +44,17 @@ export default {
     md_renderer() {
       const renderer = new marked.Renderer();
       renderer.heading = (text, level) => {
-        let correct_level = 0;
+        let correctLevel = 0;
         if (level === 1 || level === 2) {
-          correct_level = 'h4';
+          correctLevel = 'h4';
         } else if (level === 3) {
-          correct_level = 'h5';
+          correctLevel = 'h5';
         } else if (level === 4) {
-          correct_level = 'h6';
+          correctLevel = 'h6';
         } else if (level === 5 || level === 6) {
-          correct_level = `subtitle${level}` - 4;
+          correctLevel = `subtitle${level}` - 4;
         }
-        return `<div class="text-${correct_level}  my-2 font-weight-bold">${text}</div>`;
+        return `<div class="text-${correctLevel}  my-2 font-weight-bold">${text}</div>`;
       };
       renderer.paragraph = (text) =>
         `<div class="text-body-1 my-2"> ${text} </div>`;

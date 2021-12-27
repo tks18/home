@@ -18,7 +18,7 @@ export const object_crypto = {
   },
 };
 
-export const generate_backend_hash = () => {
+export const generateBackendHash = () => {
   const current_time = Date.now();
   const validity = current_time + 10000;
   const hash = process.env.VUE_APP_HASHSECRET + validity;

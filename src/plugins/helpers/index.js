@@ -4,7 +4,7 @@
 
 /**
  * Scroll to function
- * @constructor
+ *
  * @param {string} element - id of Parent Element which holds the child elements to scroll.
  * @param {number} scrollPixels - Number of pixels to scroll.
  * @param {number} duration - Total Duration for scrolling.
@@ -125,7 +125,7 @@ export function ismobile() {
   return true;
 }
 
-export function pre_format_text(text) {
+export function preFormatText(text) {
   const modified_content = text
     .replace(/\n/g, '&#10;')
     .replace(/</g, '&#60;')
@@ -133,8 +133,8 @@ export function pre_format_text(text) {
   return modified_content;
 }
 
-export function generate_code_editor(text) {
-  const modified_content = pre_format_text(text);
+export function generateCodeEditor(text) {
+  const modified_content = preFormatText(text);
   const lines = modified_content.split('&#10;');
   let total_lines = 0;
   let newLines = '';

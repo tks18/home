@@ -75,8 +75,7 @@ export default {
             type: 'info',
             duration: -100,
             title: 'Update Available',
-            text:
-              'New Content is Available from the Server. Click the below button to update the App.',
+            text: 'New Content is Available from the Server. Click the below button to update the App.',
             data: {
               loading: true,
               type: 'Worker Updates',

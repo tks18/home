@@ -21,7 +21,8 @@
       "agent-base",
       "dotenv",
       "https-proxy-agent",
-      "socks-proxy-agent"
+      "socks-proxy-agent",
+      "source-map"
     ]
   },
   "exclude": ["node_modules", "dist"],
