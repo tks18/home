@@ -70,37 +70,33 @@
               "
             >
               <v-row v-if="!ismobile" align="center">
-                <v-col
-                  v-for="(button, index) in heroButtons"
-                  :key="index"
-                  :cols="
-                    index == heroButtons.length - 1
-                      ? index % 2 == 0
-                        ? 12
-                        : 6
-                      : 6
-                  "
-                  :align="
-                    index == heroButtons.length - 1
-                      ? index % 2 == 0
-                        ? 'center'
-                        : 'left'
-                      : index % 2 == 0
-                      ? 'right'
-                      : 'left'
-                  "
-                >
-                  <v-btn
-                    large
-                    elevation="24"
-                    text
-                    raised
-                    outlined
-                    @click="$vuetify.goTo('#' + button.id)"
-                  >
-                    <v-icon> {{ button.icon }} </v-icon>
-                    {{ button.name }}
-                  </v-btn>
+                <v-col cols="8" align="center">
+                  <v-row align="center">
+                    <v-col
+                      v-for="(button, index) in heroButtons"
+                      :key="index"
+                      :cols="
+                        index == heroButtons.length - 1
+                          ? index % 2 == 0
+                            ? 12
+                            : 6
+                          : 6
+                      "
+                      align="center"
+                    >
+                      <v-btn
+                        large
+                        elevation="24"
+                        text
+                        raised
+                        outlined
+                        @click="$vuetify.goTo('#' + button.id)"
+                      >
+                        <v-icon> {{ button.icon }} </v-icon>
+                        {{ button.name }}
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-row>
               <v-row v-if="ismobile" align="center">
@@ -176,11 +172,6 @@ export default {
           name: 'My Blog',
           icon: 'mdi-post-outline',
           id: 'home-blogtitle',
-        },
-        {
-          name: 'Some Extras',
-          icon: 'mdi-one-up',
-          id: 'home-astroPicTitle',
         },
         {
           name: 'Projects',

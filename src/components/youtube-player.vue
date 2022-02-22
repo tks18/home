@@ -76,6 +76,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    ismobile: {
+      type: Function,
+      default: () => {},
+    },
     video: {
       type: Object,
       default: () => {},

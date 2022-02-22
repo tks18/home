@@ -18,7 +18,7 @@
           v-on="on"
           @click="routerPush('/')"
         >
-          Shan.tk ✌
+          Shan.tk ✌{{ ismobile ? '' : ' | Chartered Accountant' }}
         </v-toolbar-title>
       </template>
       <span>Sudharshan TK</span>
@@ -38,6 +38,12 @@
 <script>
 export default {
   name: 'NavBar',
+  props: {
+    ismobile: {
+      type: Boolean,
+      default: () => {},
+    },
+  },
   data: () => ({
     github: {
       link: 'https://github.com/tks18',
