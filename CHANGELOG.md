@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/tks18/matte-portfolio/compare/v0.1.11...v0.1.12) (2022-02-22)
+
+
+### Features
+
+* fixed various vuetify components, add new  wordings wherever required ([175fb86](https://github.com/tks18/matte-portfolio/commit/175fb869d957bbdf1ebfa27e9cab6c03a64f93ce))
+
 ### [0.1.11](https://github.com/tks18/matte-portfolio/compare/v0.1.11-0...v0.1.11) (2022-02-22)
 
 
