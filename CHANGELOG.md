@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/tks18/matte-portfolio/compare/v0.1.11-0...v0.1.11) (2022-02-22)
+
+
+### Bug Fixes
+
+* completely remove many useless components ([06a22f9](https://github.com/tks18/matte-portfolio/commit/06a22f9f8ef6a3a5295bf3c50aef04c441889c0b))
+* **components:** fix imports in markdown render component ([62a2588](https://github.com/tks18/matte-portfolio/commit/62a258893901307632de5d70f4d13f1ea20cc5ef))
+
+
+### Code Refactoring
+
+* **public:** refactor index.html file ([27c807a](https://github.com/tks18/matte-portfolio/commit/27c807a7de0df6c222ca3f38b485a6831a29e503))
+
+
+### Build System
+
+* **packages:** add various and remove useless packages ([9b74233](https://github.com/tks18/matte-portfolio/commit/9b74233909b2f98525102aa6f58552bf845e7cf4))
+
 ### [0.1.11-0](https://github.com/tks18/matte-portfolio/compare/v0.1.10...v0.1.11-0) (2021-12-27)
 
 
