@@ -11,7 +11,7 @@
 <script>
 /* eslint-disable implicit-arrow-linebreak */
 
-import { ismobile, generate_code_editor } from '@p/helpers';
+import { ismobile, generateCodeEditor } from '@p/helpers';
 import marked from 'marked';
 
 export default {
@@ -44,17 +44,17 @@ export default {
     md_renderer() {
       const renderer = new marked.Renderer();
       renderer.heading = (text, level) => {
-        let correct_level = 0;
+        let correctLevel = 0;
         if (level === 1 || level === 2) {
-          correct_level = 'h4';
+          correctLevel = 'h4';
         } else if (level === 3) {
-          correct_level = 'h5';
+          correctLevel = 'h5';
         } else if (level === 4) {
-          correct_level = 'h6';
+          correctLevel = 'h6';
         } else if (level === 5 || level === 6) {
-          correct_level = `subtitle${level}` - 4;
+          correctLevel = `subtitle${level}` - 4;
         }
-        return `<div class="text-${correct_level}  my-2 font-weight-bold">${text}</div>`;
+        return `<div class="text-${correctLevel}  my-2 font-weight-bold">${text}</div>`;
       };
       renderer.paragraph = (text) =>
         `<div class="text-body-1 my-2"> ${text} </div>`;
@@ -62,7 +62,7 @@ export default {
         `<span class="font-weight-bold"> ${text} </span>`;
       renderer.em = (text) => `<span class="font-italic"> ${text} </span>`;
       renderer.code = (code) => {
-        const formatted_content = generate_code_editor(code);
+        const formatted_content = generateCodeEditor(code);
         const theme = this.$vuetify.theme.dark ? 'theme--dark' : '';
         return `<div
             class="code-viewer touchable text-lowercase py-2 px-2 my-3 v-sheet ${theme} v-sheet--outlined elevation-13 rounded"

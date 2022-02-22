@@ -1,4 +1,4 @@
-import { make_request as requester } from './utils';
+import { makeRequest as requester } from './utils';
 import { api } from './routes';
 
 export default {

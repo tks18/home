@@ -4,7 +4,7 @@ import Blog from './blog';
 import Stories from './stories';
 import Gallery from './gallery';
 import Notification from './notifications';
-import { headers, make_request } from './utils';
+import { headers, makeRequest } from './utils';
 
 export const api = {
   url,
@@ -18,4 +18,4 @@ export const gallery = Gallery;
 export const utils = {
   headers,
 };
-export const requester = make_request;
+export const requester = makeRequest;

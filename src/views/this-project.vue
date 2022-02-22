@@ -385,7 +385,14 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
+                                  class="
+                                    text-body-1
+                                    d-inline-block
+                                    text-truncate
+                                    font-weight-light
+                                    darken-1
+                                    breadcrumb
+                                  "
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -439,7 +446,14 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
+                                  class="
+                                    text-body-1
+                                    d-inline-block
+                                    text-truncate
+                                    font-weight-light
+                                    darken-1
+                                    breadcrumb
+                                  "
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -457,7 +471,11 @@
                                   class="d-inline-block text-truncate"
                                 >
                                   <div
-                                    class="text-subtitle-1 mx-2 font-weight-bold"
+                                    class="
+                                      text-subtitle-1
+                                      mx-2
+                                      font-weight-bold
+                                    "
                                   >
                                     {{ repo.name + '/' + current_file.path }}
                                   </div>
@@ -620,7 +638,7 @@
                             max-height="300"
                             rounded
                             elevation="13"
-                            v-html="pre_format_text(commit.commit.message)"
+                            v-html="preFormatText(commit.commit.message)"
                           />
                         </v-col>
                       </v-row>
@@ -649,7 +667,7 @@
                           fab
                           color="primary"
                           v-bind="attrs"
-                          @click="load_more_commits(true)"
+                          @click="loadMoreCommits(true)"
                           v-on="on"
                         >
                           <v-icon large>mdi-minus</v-icon>
@@ -670,7 +688,7 @@
                           fab
                           color="primary"
                           v-bind="attrs"
-                          @click="load_more_commits()"
+                          @click="loadMoreCommits()"
                           v-on="on"
                         >
                           <v-icon large>mdi-plus</v-icon>
@@ -700,7 +718,7 @@
 
 import { generateWordMaps } from '@p/wordmap';
 import { tweenToObserver } from '@p/gsap';
-import { ismobile, generate_code_editor, pre_format_text } from '@p/helpers';
+import { ismobile, generateCodeEditor, preFormatText } from '@p/helpers';
 import {
   repoData,
   repoTopics,
@@ -753,7 +771,7 @@ export default {
     branch_toggle: 0,
     code_base_toggle: 0,
     current_branch: {},
-    pre_format_text,
+    preFormatText,
     file_view: false,
     current_file: {},
     startPath: '/',
@@ -825,13 +843,13 @@ export default {
   methods: {
     async getRepoData() {
       this.$set(this.repo.details, 'loading', true);
-      const repo_data_resp = await repoData(
+      const repoDataResp = await repoData(
         this.user,
         this.repo.name,
         this.$state.store,
       );
-      if (repo_data_resp.success && repo_data_resp.error == null) {
-        const repo_details = repo_data_resp.data;
+      if (repoDataResp.success && repoDataResp.error == null) {
+        const repo_details = repoDataResp.data;
         if (this.repo.name === 'matte-portfolio') {
           repo_details.img = 'https://i.ibb.co/Y7BFDqN/shan-tk-1.png';
         } else {
@@ -843,19 +861,19 @@ export default {
     },
     async getRepoTopics() {
       this.$set(this.repo.topics, 'loading', true);
-      const repo_topics_resp = await repoTopics(
+      const repoTopicsResp = await repoTopics(
         this.user,
         this.repo.name,
         this.$state.store,
       );
-      if (repo_topics_resp.success && repo_topics_resp.error == null) {
-        this.$set(this.repo.topics, 'data', repo_topics_resp.topics.names);
+      if (repoTopicsResp.success && repoTopicsResp.error == null) {
+        this.$set(this.repo.topics, 'data', repoTopicsResp.topics.names);
         this.$set(this.repo.topics, 'loading', false);
       }
     },
     async getRepoCommits(reset) {
       this.$set(this.repo.commits, 'loading', true);
-      const repo_commits_resp = await repoCommits(
+      const repoCommitsResp = await repoCommits(
         this.user,
         this.repo.name,
         this.current_branch.name,
@@ -863,75 +881,75 @@ export default {
         this.repo.commits.page,
         this.$state.store,
       );
-      let new_commit_array = [];
-      if (repo_commits_resp.success && repo_commits_resp.commits != null) {
-        new_commit_array = reset
-          ? [].concat(repo_commits_resp.commits)
-          : this.repo.commits.data.concat(repo_commits_resp.commits);
-        this.$set(this.repo.commits, 'slicer_length', new_commit_array.length);
-        this.$set(this.repo.commits, 'data', new_commit_array);
-        !reset && this.load_more_commits(false);
+      let newCommitArray = [];
+      if (repoCommitsResp.success && repoCommitsResp.commits != null) {
+        newCommitArray = reset
+          ? [].concat(repoCommitsResp.commits)
+          : this.repo.commits.data.concat(repoCommitsResp.commits);
+        this.$set(this.repo.commits, 'slicer_length', newCommitArray.length);
+        this.$set(this.repo.commits, 'data', newCommitArray);
+        !reset && this.loadMoreCommits(false);
         this.$set(this.repo.commits, 'loading', false);
       }
     },
     async getRepoBranches() {
       this.$set(this.repo.branches, 'loading', true);
-      const repo_branches_resp = await repoBranches(
+      const repoBranchesResp = await repoBranches(
         this.user,
         this.repo.name,
         this.$state.store,
       );
-      if (repo_branches_resp.success && repo_branches_resp.error === null) {
-        const { branches } = repo_branches_resp;
+      if (repoBranchesResp.success && repoBranchesResp.error === null) {
+        const { branches } = repoBranchesResp;
         [this.current_branch] = branches.filter(
           (branch) => branch.name === 'master',
         );
         this.branch_toggle = branches.findIndex(
           (branch) => branch.name === 'master',
         );
-        this.$set(this.repo.branches, 'data', repo_branches_resp.branches);
+        this.$set(this.repo.branches, 'data', repoBranchesResp.branches);
         this.$set(this.repo.branches, 'loading', false);
       }
     },
     async getRepoContent(backtrigger, path, branch) {
       this.$set(this.repo.contents, 'loading', true);
-      const repo_contents_resp = await repoContents(
+      const repoContentsResp = await repoContents(
         this.user,
         this.repo.name,
         path,
         branch,
         this.$state.store,
       );
-      if (repo_contents_resp.success && repo_contents_resp.error == null) {
+      if (repoContentsResp.success && repoContentsResp.error == null) {
         if (!backtrigger) {
           this.historyState.push(this.currentPath);
         }
         this.currentPath = path;
         const sortedContents = this.$lodash.orderBy(
-          repo_contents_resp.contents,
+          repoContentsResp.contents,
           ['type', 'name'],
           ['asc'],
         );
         this.$set(this.repo.contents, 'data', sortedContents);
-        this.render_markdown(branch);
+        this.renderMarkdown(branch);
         this.$set(this.repo.contents, 'loading', false);
         this.$loader.done();
       }
     },
-    async render_markdown(branch) {
+    async renderMarkdown(branch) {
       for (const file of this.repo.contents.data) {
         if (file.name.toLowerCase() === 'readme.md') {
           this.$set(this.repo.readme, 'loading', true);
           const path = this.startPath + file.path;
-          const file_contents = await repoContents(
+          const fileContents = await repoContents(
             this.user,
             this.repo.name,
             path,
             branch,
             this.$state.store,
           );
-          if (file_contents.success && file_contents.error == null) {
-            const decoded_text = atob(file_contents.contents.content);
+          if (fileContents.success && fileContents.error == null) {
+            const decoded_text = atob(fileContents.contents.content);
             this.$set(this.repo.readme, 'data', decoded_text);
             this.$set(this.repo.readme, 'loading', false);
           }
@@ -943,19 +961,19 @@ export default {
         this.$set(this.repo.contents, 'loading', true);
         this.$vuetify.goTo('#this-project-source-code-content');
         const path = this.startPath + file.path;
-        const file_contents = await repoContents(
+        const fileContents = await repoContents(
           this.user,
           this.repo.name,
           path,
           branch,
           this.$state.store,
         );
-        if (file_contents.success && file_contents.error == null) {
-          this.current_file = file_contents.contents;
-          const decoded_text = atob(this.current_file.content);
-          const formatted_content = generate_code_editor(decoded_text);
-          this.current_file.decoded_content_display = formatted_content.content;
-          this.current_file.total_lines = formatted_content.total_lines;
+        if (fileContents.success && fileContents.error == null) {
+          this.currentFile = fileContents.contents;
+          const decodedText = atob(this.currentFile.content);
+          const formattedContent = generateCodeEditor(decodedText);
+          this.currentFile.decoded_content_display = formattedContent.content;
+          this.currentFile.total_lines = formattedContent.total_lines;
           this.historyState.push(this.currentPath);
           this.currentPath = file.path;
           this.$set(this.repo.contents, 'loading', false);
@@ -998,7 +1016,7 @@ export default {
             type: 'success',
             duration: 5000,
             title: 'Code Copied',
-            text: `${this.current_file.path} has been Copied to Clipboard.`,
+            text: `${this.currentFile.path} has been Copied to Clipboard.`,
             data: {
               loading: false,
               dark: true,
@@ -1021,7 +1039,7 @@ export default {
           });
         });
     },
-    load_more_commits(revert) {
+    loadMoreCommits(revert) {
       if (revert) {
         this.$vuetify.goTo('#this-project-timeline');
         this.$set(this.repo.commits, 'slicer', 5);
@@ -1048,7 +1066,7 @@ export default {
       this.$set(this.repo.contents, 'loading', true);
       this.current_branch = branch;
       this.currentPath = '/';
-      this.current_file = {};
+      this.currentFile = {};
       this.file_view = false;
       this.handleNavigation(false);
       this.$set(this.repo.commits, 'slicer', 5);
@@ -1058,7 +1076,7 @@ export default {
     code_base_change(name) {
       this.repo.name = name;
       this.currentPath = '/';
-      this.current_file = {};
+      this.currentFile = {};
       this.file_view = false;
       this.$set(this.repo.commits, 'slicer', 5);
       this.do_repo_stuffs();

@@ -1,4 +1,4 @@
-import { make_request as requester } from './utils';
+import { makeRequest as requester } from './utils';
 import { backend } from './routes';
 
 export default async (store) => {

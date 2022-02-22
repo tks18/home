@@ -1,17 +1,17 @@
 /* eslint-disable no-param-reassign */
 import axios from '@p/axios';
-import { generate_backend_hash } from '@p/crypto';
+import { generateBackendHash } from '@p/crypto';
 
 export const headers = (hash_obj) => ({
   secure_hash: hash_obj.hash,
   requested_at: hash_obj.at,
 });
 
-export const make_request = async (options) => {
+export const makeRequest = async (options) => {
   options.store.backend.progress = true;
   const response = await axios
     .post(options.url, options.postData ? options.postData : {}, {
-      headers: headers(generate_backend_hash()),
+      headers: headers(generateBackendHash()),
     })
     .then((resp) => {
       if (resp.status === 200 && resp.data) {

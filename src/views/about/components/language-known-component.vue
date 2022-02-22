@@ -1,28 +1,26 @@
 <template>
-  <v-col id="about-languagesknown" cols="12">
-    <v-card flat elevation="12">
-      <v-card-title class="mx-2 no-break-words">
-        Top Languages, Frameworks, Softwares that i Know
-      </v-card-title>
-      <v-card-subtitle class="mx-2 no-break-words">
-        (Scores upto 100)
-      </v-card-subtitle>
-      <v-card-text>
-        <v-sparkline
-          :value="languagesKnown.values"
-          :labels="languagesKnown.labels"
-          :gradient="languagesKnown.gradient"
-          gradient-direction="top"
-          :label-size="ismobile ? 10 : 3"
-          :height="ismobile ? 130 : 70"
-          :class="ismobile ? 'mx-0' : 'mx-2'"
-          line-width="3"
-          auto-draw
-          type="bar"
-        />
-      </v-card-text>
-    </v-card>
-  </v-col>
+  <v-card flat elevation="12">
+    <v-card-title class="mx-2 no-break-words">
+      Top Languages, Frameworks, Softwares that i Know
+    </v-card-title>
+    <v-card-subtitle class="mx-2 no-break-words">
+      (Scores upto 100)
+    </v-card-subtitle>
+    <v-card-text>
+      <v-sparkline
+        :value="languagesKnown.values"
+        :labels="languagesKnown.labels"
+        :gradient="languagesKnown.gradient"
+        gradient-direction="top"
+        :label-size="ismobile ? 10 : 3"
+        :height="ismobile ? 130 : 70"
+        :class="ismobile ? 'mx-0' : 'mx-2'"
+        line-width="3"
+        auto-draw
+        type="bar"
+      />
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
