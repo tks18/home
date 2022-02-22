@@ -53,7 +53,7 @@
           }"
           :width="ismobile ? 225 : 250"
           :height="ismobile ? 300 : 325"
-          @click="gotoUrl(site.site + story.link)"
+          @click="gotoUrl(`${site}${story.link}`)"
         >
           <v-card-text class="inherit-height-responsive">
             <v-row align="start" justify="start" class="back-blur-no-inherit">
@@ -126,8 +126,7 @@ export default {
           type: 'error',
           duration: 5000,
           title: 'Stories Error',
-          text:
-            'Error While Getting Stories from the Server. Please Reload the Website to Get the Data',
+          text: 'Error While Getting Stories from the Server. Please Reload the Website to Get the Data',
           data: {
             loading: false,
             dark: true,

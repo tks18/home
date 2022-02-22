@@ -29,7 +29,7 @@
             (aka Shan.tk)
           </v-list-item-subtitle>
           <v-list-item-subtitle class="text-center non-touch font-weight-light">
-            Web Developer/Aspiring Chartered Accountant
+            Chartered Accountant / Web Developer
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -116,7 +116,7 @@ export default {
         link: '/about-this-project',
       },
       {
-        icon: 'mdi-blogger',
+        icon: 'mdi-post',
         title: 'Blog',
         subtitle: 'My Personal Blog',
         link: '/blog',
@@ -134,7 +134,7 @@ export default {
         link: '/careers',
       },
       {
-        icon: 'mdi-google-photos',
+        icon: 'mdi-camera',
         title: 'Gallery',
         subtitle: 'My Photography Skills',
         link: '/gallery',

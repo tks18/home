@@ -214,7 +214,7 @@ export default {
         link: 'mailto:tksudharshan@infozy.tk',
       },
       {
-        icon: 'mdi-google-photos',
+        icon: 'mdi-camera',
         title: 'Photography',
         link: 'https://unsplash.com/@shantk18',
       },
@@ -250,8 +250,7 @@ export default {
           type: 'error',
           duration: -100,
           title: 'Backend Error',
-          text:
-            'Error While Connecting to Backend Server. Click the button to check my backup Servers',
+          text: 'Error While Connecting to Backend Server. Click the button to check my backup Servers',
           data: {
             loading: false,
             dark: true,

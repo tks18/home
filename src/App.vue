@@ -1,7 +1,7 @@
 <template>
   <v-app id="app has-navbar-fixed-top">
     <navDrawer />
-    <navbar />
+    <navbar :ismobile="ismobile" />
     <sysBar />
     <Notification group="main" position="top right" />
     <Notification group="worker" position="bottom right" />
