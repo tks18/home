@@ -38,6 +38,10 @@ export default {
       return `${insertedTitle} | Sudharshan TK`;
     },
   },
+  jsonld: () => ({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+  }),
   components: {
     navbar,
     navDrawer,

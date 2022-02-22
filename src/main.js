@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import meta from 'vue-meta';
+import vueJsonLD from 'vue-jsonld';
 import store, { mutations, getters } from '@state';
 import moment from 'vue-moment';
 import lodash from 'lodash';
@@ -18,6 +19,7 @@ Vue.use(Notifications);
 Vue.use(meta, {
   refreshOnceOnNavigation: true,
 });
+Vue.use(vueJsonLD);
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 Vue.prototype.$worker = wb;
