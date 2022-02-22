@@ -11,7 +11,7 @@
 <script>
 /* eslint-disable implicit-arrow-linebreak */
 
-import { ismobile, generate_code_editor } from '@p/helpers';
+import { ismobile, generateCodeEditor } from '@p/helpers';
 import marked from 'marked';
 
 export default {
@@ -62,7 +62,7 @@ export default {
         `<span class="font-weight-bold"> ${text} </span>`;
       renderer.em = (text) => `<span class="font-italic"> ${text} </span>`;
       renderer.code = (code) => {
-        const formatted_content = generate_code_editor(code);
+        const formatted_content = generateCodeEditor(code);
         const theme = this.$vuetify.theme.dark ? 'theme--dark' : '';
         return `<div
             class="code-viewer touchable text-lowercase py-2 px-2 my-3 v-sheet ${theme} v-sheet--outlined elevation-13 rounded"
