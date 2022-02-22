@@ -22,7 +22,8 @@
       "dotenv",
       "https-proxy-agent",
       "socks-proxy-agent",
-      "source-map"
+      "source-map",
+      "vue-jsonld"
     ]
   },
   "exclude": ["node_modules", "dist"],
