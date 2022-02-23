@@ -2,18 +2,6 @@
   <div class="column is-full py-1">
     <v-container>
       <v-row>
-        <v-col align="start" justify="start">
-          <div
-            id="about-someWordsTitle"
-            :class="
-              'clip-text-back text-h5 non-touch text-capitalize' +
-              ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
-            "
-          >
-            {{ title }}
-            <v-icon>mdi-arrow-right-circle</v-icon>
-          </div>
-        </v-col>
         <v-col cols="12" :class="(ismobile ? 'mx-1' : 'mx-2') + ' text-body-1'">
           {{ authorData.intro }}
         </v-col>

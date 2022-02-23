@@ -38,8 +38,8 @@ export default {
       required: true,
     },
     ismobile: {
-      type: Function,
-      default: () => {},
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({
