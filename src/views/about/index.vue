@@ -86,11 +86,6 @@ export default {
           map_word: 'About me',
           prop: 'title',
         },
-        {
-          elem: '#about-someWordsTitle',
-          map_word: 'Some Words',
-          prop: 'someWords',
-        },
       ];
     },
   },
