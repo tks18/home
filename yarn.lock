@@ -11492,6 +11492,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.split@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "lodash.split@npm:4.4.2"
+  checksum: 0a025c9cd21974459c75e030e29644543b8f4599b7ef0bd34cab81537fbf7b76f2a226cb8b3ea8512a2f4f9e85fb0ff10320d5296968d0ca7f2d2530bb4b6ab5
+  languageName: node
+  linkType: hard
+
 "lodash.transform@npm:^4.6.0":
   version: 4.6.0
   resolution: "lodash.transform@npm:4.6.0"
@@ -13575,6 +13582,7 @@ __metadata:
     vue-nprogress: ^0.2.0
     vue-router: ^3.5.3
     vue-template-compiler: ^2.6.14
+    vue-typer: ^1.2.0
     vue2-animate: ^2.1.4
     vuetify: ^2.6.2
     vuetify-loader: 1.7.3
@@ -17381,6 +17389,15 @@ __metadata:
   version: 1.9.1
   resolution: "vue-template-es2015-compiler@npm:1.9.1"
   checksum: ad1e85662783be3ee262c323b05d12e6a5036fca24f16dc0f7ab92736b675919cb4fa4b79b28753eac73119b709d1b36789bf60e8ae423f50c4db35de9370e8b
+  languageName: node
+  linkType: hard
+
+"vue-typer@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "vue-typer@npm:1.2.0"
+  dependencies:
+    lodash.split: ^4.4.2
+  checksum: b35010820828b2674ab5df8b22fd0ab55196ddc11ff326db0ac47abd0a9e14601379896d3e1ab0885045c3b4e20c66204021bd56e77dea619efc4623d2d3f865
   languageName: node
   linkType: hard
 

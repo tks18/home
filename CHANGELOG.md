@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/tks18/matte-portfolio/compare/v0.1.12...v0.1.13) (2022-02-23)
+
+
+### Features
+
+* **components:** add new images ([35029a0](https://github.com/tks18/matte-portfolio/commit/35029a066666d29e5ff73fd5adcbc9c85f5b278e))
+* **home:** add new cool typer animation to hero banner ([1dcc2fb](https://github.com/tks18/matte-portfolio/commit/1dcc2fb224999c1dece63845f9d61c41041f61e2))
+* **public:** add new logos, favicons, images ([72fc03d](https://github.com/tks18/matte-portfolio/commit/72fc03d95df32f8d1e30f209d382ec8f5fa03267))
+* **templates:** add new data to author data ([bb10062](https://github.com/tks18/matte-portfolio/commit/bb10062c897fd2e738ac4ede32a433cde5000af0))
+
+
+### Bug Fixes
+
+* **about:** remove useless components ([135a617](https://github.com/tks18/matte-portfolio/commit/135a617720a2ae3084b22968e8442f2793a1c68b))
+
 ### [0.1.12](https://github.com/tks18/matte-portfolio/compare/v0.1.11...v0.1.12) (2022-02-22)
 
 

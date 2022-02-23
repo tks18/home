@@ -83,8 +83,8 @@ export default {
   },
   data: () => ({
     aboutData: {
-      subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Its Been a Great Journey for the Past 3 Years of Self-learning Web development and Creating Amazing Websites. Currently Focussing More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent.I am Pursuing Chartered Accountancy Course as my Profession.`,
-      image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
+      subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. I Focus More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent. Professionally I am a Chartered Accountant.</span>`,
+      image: 'https://i.ibb.co/CWY7dSm/IMG-20220206-130734-Close-up.webp',
     },
   }),
 };

@@ -1,0 +1,14 @@
+@keyframes rocking {
+  0%,
+  100% {
+    transform: rotateZ(-10deg);
+  }
+  50% {
+    transform: rotateZ(10deg);
+  }
+}
+
+.vue-typer .custom.caret {
+  animation: rocking 1s ease-in-out 0s infinite;
+  word-break: break-word;
+}

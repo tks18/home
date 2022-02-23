@@ -50,7 +50,7 @@ export default {
       icon: 'mdi-github',
       title: "Shan.tk's Github Profile",
     },
-    avatar: 'https://i.ibb.co/9YwxPwZ/IMG-20191218-222419-347.webp',
+    avatar: 'https://i.ibb.co/CWY7dSm/IMG-20220206-130734-Close-up.webp',
   }),
   methods: {
     navclick() {

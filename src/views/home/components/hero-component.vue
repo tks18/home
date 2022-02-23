@@ -16,7 +16,19 @@
                   (ismobile ? ' text-h4' : ' text-h2')
                 "
               >
-                Designer, Front-end & Backend Developer
+                <vue-typer
+                  :text="taglines"
+                  :repeat="Infinity"
+                  :shuffle="true"
+                  initial-action="typing"
+                  :pre-type-delay="70"
+                  :type-delay="70"
+                  :pre-erase-delay="800"
+                  :erase-delay="100"
+                  erase-style="backspace"
+                  :erase-on-complete="false"
+                  caret-animation="smooth"
+                />
               </div>
               <div
                 :class="
@@ -135,10 +147,14 @@
 
 <script>
 import gsap from '@p/gsap';
+import { VueTyper } from 'vue-typer';
 import { generateRandomEmojis } from '@p/wordmap';
 
 export default {
   name: 'HomeHeroComponent',
+  components: {
+    VueTyper,
+  },
   props: {
     ismobile: {
       type: Boolean,
@@ -148,6 +164,14 @@ export default {
   data: () => ({
     heroImg: 'https://i.ibb.co/CQqRR3b/profile.png',
     toggleTooltip: false,
+    taglines: [
+      'Designer, Front-end & Backend Developer',
+      'Chartered Accountant by Profession 💼',
+      'Software Developer by Passion 👨‍💻',
+      'Full Stack Developer 💯',
+      'Absolut Developer 🐱‍🏍',
+      'It’s just a simple matter of programming 🤷‍♀️',
+    ],
     animatedArray: {
       randEmoji: ' ',
     },

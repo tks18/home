@@ -3,10 +3,6 @@
     <v-col id="about-aboutmecard" :cols="ismobile ? 12 : 4" class="my-0 py-0">
       <v-card outlined elevation="6">
         <v-card-title class="text-h5 text-center"> About Me </v-card-title>
-        <v-card-subtitle>
-          (If You are Bad, I am Your Dad
-          <span class="font-weight-bold">Hehe Lol xD 😉</span>)
-        </v-card-subtitle>
         <v-divider class="opaque mx-2 my-0" />
         <v-card-text>
           <v-row class="my-0">
@@ -85,30 +81,6 @@
     <v-col :cols="ismobile ? 12 : 8">
       <v-row>
         <photo-carousel :bgs="bgs" :duration="6" :ismobile="ismobile" />
-        <!-- <v-tooltip top transition="slide-y-transition">
-          <template #activator="{ on, attrs }">
-            <v-scroll-y-transition mode="out-in">
-              <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                <v-skeleton-loader type="card-avatar" height="150" />
-              </v-col>
-              <v-col
-                v-if="cardbgs.play"
-                v-bind="attrs"
-                :key="cardbgs.leftKey"
-                :cols="ismobile ? 12 : 4"
-                v-on="on"
-              >
-                <v-card
-                  :img="cardbgs.lefttop"
-                  :height="ismobile ? 250 : 150"
-                  outlined
-                  elevation="6"
-                />
-              </v-col>
-            </v-scroll-y-transition>
-          </template>
-          <span>Click here to View My Gallery</span>
-        </v-tooltip> -->
         <v-col :cols="ismobile ? 12 : 8">
           <v-card
             outlined
@@ -237,30 +209,7 @@
             <span>Click here for More Stats</span>
           </v-tooltip>
         </v-col>
-        <v-tooltip top transition="slide-y-transition">
-          <template #activator="{ on, attrs }">
-            <v-scroll-y-transition mode="out-in">
-              <v-col v-if="!cardbgs.play" :cols="ismobile ? 12 : 4">
-                <v-skeleton-loader type="card-avatar" height="150" />
-              </v-col>
-              <v-col
-                v-if="cardbgs.play"
-                :key="cardbgs.rightKey"
-                v-bind="attrs"
-                :cols="ismobile ? 12 : 4"
-                v-on="on"
-              >
-                <v-card
-                  :img="cardbgs.rightbottom"
-                  :height="ismobile ? 250 : 150"
-                  outlined
-                  elevation="6"
-                />
-              </v-col>
-            </v-scroll-y-transition>
-          </template>
-          <span>Click here to View My Gallery</span>
-        </v-tooltip>
+        <photo-carousel :bgs="bgs" :duration="4" :ismobile="ismobile" />
       </v-row>
     </v-col>
   </v-row>
@@ -298,50 +247,17 @@ export default {
     },
   },
   data: () => ({
-    bgPlay: true,
     dailyData: [],
     dailyLabels: [],
     dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
     consolMinutes: 0,
     resumeDialog: false,
-    cardbgs: {
-      play: false,
-      lefttop: '',
-      leftKey: 0,
-      rightbottom: '',
-      rightKey: 0,
-    },
   }),
   mounted() {
-    this.setCardBgs();
     this.getLabels();
     this.getCodingData();
   },
   methods: {
-    setCardBgs() {
-      this.$set(this.cardbgs, 'play', false);
-      const firstInt = this.$lodash.random(0, this.bgs.length - 1);
-      let secondInt = this.$lodash.random(0, this.bgs.length - 1);
-      while (secondInt === firstInt) {
-        secondInt = this.$lodash.random(0, this.bgs.length - 1);
-      }
-      this.$set(this.cardbgs, 'lefttop', this.bgs[firstInt]);
-      this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
-      this.$set(this.cardbgs, 'rightbottom', this.bgs[secondInt]);
-      this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
-      setInterval(() => {
-        const firstIntLoop = this.$lodash.random(0, this.bgs.length - 1);
-        let secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
-        while (secondIntLoop === firstIntLoop) {
-          secondIntLoop = this.$lodash.random(0, this.bgs.length - 1);
-        }
-        this.$set(this.cardbgs, 'lefttop', this.bgs[firstIntLoop]);
-        this.$set(this.cardbgs, 'leftKey', this.cardbgs.leftKey + 1);
-        this.$set(this.cardbgs, 'rightbottom', this.bgs[secondIntLoop]);
-        this.$set(this.cardbgs, 'rightKey', this.cardbgs.rightKey + 1);
-        this.$set(this.cardbgs, 'play', true);
-      }, Math.floor(Math.random() + 5) * 1000);
-    },
     getLabels() {
       const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const today = new Date();
