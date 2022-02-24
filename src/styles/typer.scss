@@ -8,7 +8,24 @@
   }
 }
 
-.vue-typer .custom.caret {
-  animation: rocking 1s ease-in-out 0s infinite;
-  word-break: break-word;
+.vue-typer.light {
+  & .custom.caret {
+    animation: rocking 1s ease-in-out 0s infinite;
+    word-break: break-word;
+    background-color: black;
+  }
+  & .custom.char {
+    color: black;
+  }
+}
+
+.vue-typer.dark {
+  & .custom.caret {
+    animation: rocking 1s ease-in-out 0s infinite;
+    word-break: break-word;
+    background-color: white;
+  }
+  & .custom.char {
+    color: white;
+  }
 }

@@ -17,7 +17,9 @@
                 "
               >
                 <vue-typer
+                  :key="$vuetify.theme.dark ? 0 : 1"
                   :text="taglines"
+                  :class="$vuetify.theme.dark ? 'dark' : 'light'"
                   :repeat="Infinity"
                   :shuffle="true"
                   initial-action="typing"
