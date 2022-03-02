@@ -47,6 +47,10 @@ export async function languageTrend() {
       languageTrendData.push(data.data[i].percent);
       if (data.data[i].name === 'JavaScript') {
         languageTrendLabels.push('JS');
+      } else if (data.data[i].name === 'TypeScript') {
+        languageTrendLabels.push('TS');
+      } else if (data.data[i].name === 'reStructuredText') {
+        languageTrendLabels.push('ReST');
       } else if (data.data[i].name === 'Python') {
         languageTrendLabels.push('PY');
       } else if (data.data[i].name === 'Vue.js') {
