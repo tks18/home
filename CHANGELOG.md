@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/tks18/matte-portfolio/compare/v0.1.13...v0.1.14) (2022-03-02)
+
+
+### Features
+
+* **authordata:** add more data to authordata.json ([e59b826](https://github.com/tks18/matte-portfolio/commit/e59b826f8b00113328f16c181b317da16593b893))
+* **router:** add animation to router changes ([4843759](https://github.com/tks18/matte-portfolio/commit/484375976b813e997b03692bbcf41c3f2b41526f))
+* **views/about:** more structured components, fix clutter in about route ([63a71e2](https://github.com/tks18/matte-portfolio/commit/63a71e2a8288d1e28d0bb47f2e61f9809e29ddbe))
+
+
+### Bug Fixes
+
+* **components/footer:** fix many clutter in footer component ([f4d00dc](https://github.com/tks18/matte-portfolio/commit/f4d00dc991c916bae27da5ba785ae25085753d71))
+* **home/hero:** fix typer not changing color on theme change ([ad0aaba](https://github.com/tks18/matte-portfolio/commit/ad0aaba1d24147d1c146e3b7c2df25ee593c58bd))
+* **plugins/wakatime:** fix language names not displaying in full ([736d582](https://github.com/tks18/matte-portfolio/commit/736d5821bdd441bc200e499c0368fe9fe8ba58ca))
+
 ### [0.1.13](https://github.com/tks18/matte-portfolio/compare/v0.1.12...v0.1.13) (2022-02-23)
 
 
