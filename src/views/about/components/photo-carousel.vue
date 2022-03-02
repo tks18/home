@@ -2,22 +2,21 @@
   <v-tooltip top transition="slide-y-transition">
     <template #activator="{ on, attrs }">
       <v-scroll-y-transition mode="out-in">
-        <v-col v-if="!play" :cols="ismobile ? 12 : 4">
-          <v-skeleton-loader type="card-avatar" height="150" />
-        </v-col>
         <v-col
-          v-if="play"
           :key="animatorKey"
           v-bind="attrs"
           :cols="ismobile ? 12 : 4"
           v-on="on"
         >
-          <v-card
-            :img="currentBg"
-            :height="ismobile ? 250 : 150"
-            outlined
-            elevation="6"
-          />
+          <v-card outlined elevation="6">
+            <v-img :src="currentBg" :aspect-ratio="16 / 9">
+              <template #placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5" />
+                </v-row>
+              </template>
+            </v-img>
+          </v-card>
         </v-col>
       </v-scroll-y-transition>
     </template>
@@ -44,7 +43,6 @@ export default {
   },
   data: () => ({
     localBgs: [],
-    play: false,
     currentBg: '',
     animatorKey: 0,
   }),
@@ -54,7 +52,6 @@ export default {
   methods: {
     setCardBgs() {
       this.localBgs = this.bgs;
-      this.play = false;
       const initBgId = this.$lodash.random(0, this.localBgs.length - 1);
       this.currentBg = this.localBgs[initBgId];
       this.animatorKey += 1;
@@ -62,7 +59,6 @@ export default {
         const intervalBgId = this.$lodash.random(0, this.localBgs.length - 1);
         this.currentBg = this.localBgs[intervalBgId];
         this.animatorKey += 1;
-        this.play = true;
       }, Math.floor(Math.random() + this.duration) * 1000);
     },
   },
