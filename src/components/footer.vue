@@ -54,9 +54,6 @@
       </v-col>
       <v-col :cols="ismobile ? 12 : 4" align="center" class="my-1 py-0">
         <div class="text">
-          <div class="grey--text text-overline my-0 py-0">
-            Portfolio Website
-          </div>
           <div class="text-caption my-0 py-0">Powered by</div>
           <v-tooltip top transition="slide-y-transition">
             <template #activator="{ on, attrs }">
@@ -103,7 +100,7 @@
               "
             >
               <span class="point-cursor" @click="windowLink(github.link)">
-                {{ animatedArray.name.trim() + '.TK' }}
+                {{ name }}
               </span>
               |
               <v-icon color="primary">mdi-copyright</v-icon>
@@ -133,15 +130,7 @@
               </v-icon>
               Latency - {{ pingstats }} ms
             </v-chip>
-          </v-col>
-        </v-row>
-        <v-row class="ma-0 pa-0">
-          <v-col
-            cols="12"
-            align="center"
-            class="'ma-0 pa-0 text-overline font-weight-bold'"
-          >
-            <v-chip class="ma-2" small :color="success ? 'primary' : 'error'">
+            <v-chip class="ma-1" small :color="success ? 'primary' : 'error'">
               <v-icon left small class="mr-2 ml-1">
                 {{
                   success
@@ -161,19 +150,16 @@
 </template>
 <script>
 import { ping } from '@p/backend';
-import { tweenToRev } from '@p/gsap';
-import { generateWordMapsReverse } from '@p/wordmap';
+import authorData from '@t/authorData';
 import { ismobile } from '@p/helpers';
 
 export default {
   data: () => ({
     now: new Date().toLocaleTimeString(),
     clockDiag: false,
+    name: authorData.main.name,
     success: false,
     pingstats: 0,
-    animatedArray: {
-      name: '',
-    },
     github: {
       link: 'https://github.com/tks18',
     },
@@ -226,13 +212,6 @@ export default {
     },
   },
   mounted() {
-    tweenToRev({
-      vm: this,
-      emoji: false,
-      arrayName: 'animatedArray',
-      map: generateWordMapsReverse('Sudharshan', 'shan      '),
-      arrayProperty: 'name',
-    });
     this.getBackendStatus();
   },
   methods: {

@@ -1,8 +1,8 @@
 <template>
   <v-row align="center" class="my-0 py-0">
-    <v-col id="about-aboutmecard" :cols="ismobile ? 12 : 4" class="my-0 py-0">
+    <v-col id="about-aboutmecard" :cols="ismobile ? 12 : 3" class="my-0 py-0">
       <v-card outlined elevation="6">
-        <v-card-title class="text-h5 text-center"> About Me </v-card-title>
+        <v-card-title class="text-h5 text-center"> Bio </v-card-title>
         <v-divider class="opaque mx-2 my-0" />
         <v-card-text>
           <v-row class="my-0">
@@ -78,7 +78,7 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col :cols="ismobile ? 12 : 8">
+    <v-col :cols="ismobile ? 12 : 9">
       <v-row>
         <photo-carousel :bgs="bgs" :duration="6" :ismobile="ismobile" />
         <v-col :cols="ismobile ? 12 : 8">
@@ -198,10 +198,10 @@
                     stroke-linecap="round"
                     :class="ismobile ? 'mx-1' : 'mx-2'"
                     line-width="2"
-                    :height="ismobile ? 82 : 60"
+                    :height="ismobile ? 80 : 50"
                     auto-draw
                     type="trend"
-                    :smooth="7"
+                    :smooth="10"
                   />
                 </v-card-text>
               </v-card>

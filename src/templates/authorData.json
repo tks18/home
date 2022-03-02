@@ -3,7 +3,7 @@
     "name": "Sudharshan TK",
     "intro": "I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. I Focus More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent. Professionally I am a Chartered Accountant.",
     "nickName": "Shan.tk",
-    "status": "Currently Automating Workflows",
+    "status": "Automating Workflows",
     "nationality": "A Proud Indian",
     "profComp": "Chartered Accountant",
     "techSkills": [
@@ -65,5 +65,28 @@
     "https://i.ibb.co/NKpNqbt/IMG-20191028-170205.webp",
     "https://i.ibb.co/FxT2W24/DJI-0566-1.webp",
     "https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp"
-  ]
+  ],
+  "languagesKnown": {
+    "mobile": {
+      "langs": ["Vuejs", "Nodejs", "Python", "Flutter", "ReactJs"],
+      "perct": [93, 79, 47, 41, 32]
+    },
+    "desktop": {
+      "langs": [
+        "Excel",
+        "VueJS",
+        "NodeJS",
+        "Python",
+        "Flutter",
+        "Lightroom",
+        "ReactJs",
+        "Illustrator",
+        "Adobe Xd",
+        "Photoshop",
+        "Premiere",
+        "Java"
+      ],
+      "perct": [99, 93, 79, 65, 57, 55, 49, 40, 35, 32, 28, 20]
+    }
+  }
 }

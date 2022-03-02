@@ -1,22 +1,29 @@
 <template>
   <div class="columns is-multiline non-touch">
-    <div
-      id="about-aboutMeTitle"
-      :class="
-        'column is-full text-center text-capitalize text font-weight-bold mt-3 mb-0 pb-0 ' +
-        (ismobile ? 'text-h5' : 'text-h4')
-      "
-    >
-      {{ animatedArray.title }}
-    </div>
-    <a-some-word-component
-      :ismobile="ismobile"
-      :author-data="authorData"
-      :title="animatedArray.someWords"
-    />
     <div class="column is-full py-1">
       <v-container class="my-2 mb-4">
         <v-row>
+          <v-col cols="12">
+            <div
+              id="about-aboutMeTitle"
+              :class="
+                'column is-full text-capitalize text font-weight-bold ' +
+                (ismobile ? 'text-h5' : 'text-h4')
+              "
+            >
+              {{ animatedArray.title }}
+            </div>
+          </v-col>
+          <v-col cols="12">
+            <a-about-me-text :author-data="authorData" />
+          </v-col>
+          <v-col cols="12" align="center">
+            <a-profile-chips
+              :ismobile="ismobile"
+              :author-data="authorData"
+              :title="animatedArray.someWords"
+            />
+          </v-col>
           <v-col cols="12" class="my-0 py-0">
             <a-profile-card-component
               :ismobile="ismobile"
@@ -45,7 +52,8 @@ import { generateWordMaps } from '@p/wordmap';
 import authorData from '@t/authorData';
 import { countUpFromTime, ismobile } from '@p/helpers';
 import { tweenToObserver } from '@p/gsap';
-import some_words_component from '@v/about/components/some-words-component';
+import some_words_about_me_component from '@v/about/components/some-words-about-me';
+import profile_chips_component from '@v/about/components/profile-chips';
 import profile_card_component from '@v/about/components/profile-card-component';
 import languages_known_component from '@v/about/components/language-known-component';
 import more_info_card_component from '@v/about/components/more-info-card-component';
@@ -56,10 +64,11 @@ export default {
     title: 'About',
   }),
   components: {
-    'a-some-word-component': some_words_component,
     'a-profile-card-component': profile_card_component,
     'a-known-languages-component': languages_known_component,
     'a-more-info-card-component': more_info_card_component,
+    'a-about-me-text': some_words_about_me_component,
+    'a-profile-chips': profile_chips_component,
   },
   data: () => ({
     swot: authorData.swot,

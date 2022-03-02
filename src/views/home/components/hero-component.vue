@@ -177,9 +177,6 @@ export default {
     animatedArray: {
       randEmoji: ' ',
     },
-    aboutData: {
-      image: 'https://i.ibb.co/b27v0Xf/profile-2.webp',
-    },
   }),
   computed: {
     heroButtons() {
