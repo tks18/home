@@ -140,29 +140,33 @@ export function generateCodeEditor(text) {
   let newLines = '';
   for (let i = 0; i < lines.length; i++) {
     if (i === 0) {
-      newLines +=
-        `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
-        lines[i];
+      newLines += `<span class="grey--text text-right non-touch my-0 py-0">     ${
+        i + 1
+      }  </span><span class="my-0 py-0"> ${lines[i]} </span>`;
     } else if (`${i + 1}`.length < 2) {
       newLines +=
         `<br />` +
-        `<span class="grey--text text-right non-touch">     ${i + 1}  </span>` +
-        lines[i];
+        `<span class="grey--text text-right non-touch my-0 py-0">     ${
+          i + 1
+        }  </span><span class="my-0 py-0"> ${lines[i]} </span>`;
     } else if (`${i + 1}`.length > 1) {
       newLines +=
         `<br />` +
-        `<span class="grey--text text-right non-touch">    ${i + 1}  </span>` +
-        lines[i];
+        `<span class="grey--text text-right non-touch my-0 py-0">    ${
+          i + 1
+        }  </span><span class="my-0 py-0"> ${lines[i]} </span>`;
     } else if (`${i + 1}`.length > 2) {
       newLines +=
         `<br />` +
-        `<span class="grey--text text-right non-touch">   ${i + 1}  </span>` +
-        lines[i];
+        `<span class="grey--text text-right non-touch my-0 py-0">   ${
+          i + 1
+        }  </span><span class="my-0 py-0"> ${lines[i]} </span>`;
     } else if (`${i + 1}`.length > 3) {
       newLines +=
         `<br />` +
-        `<span class="grey--text text-right non-touch">  ${i + 1}  </span>` +
-        lines[i];
+        `<span class="grey--text text-right non-touch my-0 py-0">  ${
+          i + 1
+        }  </span><span class="my-0 py-0"> ${lines[i]} </span>`;
     }
     if (i === lines.length - 1) {
       total_lines = i + 1;
