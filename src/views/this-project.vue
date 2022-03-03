@@ -385,14 +385,7 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="
-                                    text-body-1
-                                    d-inline-block
-                                    text-truncate
-                                    font-weight-light
-                                    darken-1
-                                    breadcrumb
-                                  "
+                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -446,14 +439,7 @@
                             >
                               <v-slide-y-transition>
                                 <div
-                                  class="
-                                    text-body-1
-                                    d-inline-block
-                                    text-truncate
-                                    font-weight-light
-                                    darken-1
-                                    breadcrumb
-                                  "
+                                  class="text-body-1 d-inline-block text-truncate font-weight-light darken-1 breadcrumb"
                                 >
                                   {{ currentPath }}
                                 </div>
@@ -471,13 +457,9 @@
                                   class="d-inline-block text-truncate"
                                 >
                                   <div
-                                    class="
-                                      text-subtitle-1
-                                      mx-2
-                                      font-weight-bold
-                                    "
+                                    class="text-subtitle-1 mx-2 font-weight-bold"
                                   >
-                                    {{ repo.name + '/' + current_file.path }}
+                                    {{ repo.name + '/' + currentFile.path }}
                                   </div>
                                 </v-col>
                                 <v-col
@@ -489,7 +471,7 @@
                                     icon
                                     color="primary"
                                     class="mx-1"
-                                    @click="open_raw_code(current_file.path)"
+                                    @click="open_raw_code(currentFile.path)"
                                   >
                                     <v-icon>mdi-download</v-icon>
                                   </v-btn>
@@ -500,7 +482,7 @@
                                     class="mx-1"
                                     @click="
                                       copy_content_code(
-                                        current_file.decoded_content_original,
+                                        currentFile.decoded_content_original,
                                       )
                                     "
                                   >
@@ -511,7 +493,7 @@
                                     color="primary"
                                     class="mx-1"
                                     small
-                                    @click="open_gh_path(current_file.path)"
+                                    @click="open_gh_path(currentFile.path)"
                                   >
                                     <v-icon>mdi-xml</v-icon>
                                   </v-btn>
@@ -525,7 +507,7 @@
                                 :max-height="ismobile ? 700 : 650"
                                 rounded
                                 elevation="13"
-                                v-html="current_file.decoded_content_display"
+                                v-html="currentFile.decoded_content_display"
                               />
                             </v-col>
                           </v-row>
@@ -773,7 +755,10 @@ export default {
     current_branch: {},
     preFormatText,
     file_view: false,
-    current_file: {},
+    currentFile: {
+      decoded_content_display: '',
+      total_lines: 0,
+    },
     startPath: '/',
     currentPath: '/',
     historyState: [],
