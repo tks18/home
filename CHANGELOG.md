@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://github.com/tks18/matte-portfolio/compare/v0.1.14...v0.1.15) (2022-03-03)
+
+
+### Features
+
+* **home/stories:** enable viewing stories in the same page for desktops ([dfac667](https://github.com/tks18/matte-portfolio/commit/dfac66719c312effbc82fc680d2993a47b1604e4))
+
+
+### Bug Fixes
+
+* **code-viewer:** fix code-viewer displaying undefined ([b625054](https://github.com/tks18/matte-portfolio/commit/b625054c28e3195d6256101417658d304272ef54))
+* **this-project:** fix code viewer displaying undefined on github api calls ([358a9cd](https://github.com/tks18/matte-portfolio/commit/358a9cdf193c54b0e06aacf407dd4e19f94745d7))
+
 ### [0.1.14](https://github.com/tks18/matte-portfolio/compare/v0.1.13...v0.1.14) (2022-03-02)
 
 
