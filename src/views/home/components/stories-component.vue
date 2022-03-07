@@ -45,7 +45,7 @@
         <v-dialog
           v-model="dialog"
           fullscreen
-          hide-overlay
+          :persistent="false"
           transition="dialog-bottom-transition"
         >
           <template #activator="{ on, attrs }">
