@@ -18,10 +18,11 @@
             <v-col :cols="ismobile ? 12 : 9" align="start" justify="center">
               <v-row align="start" justify="start" class="my-0 py-0">
                 <!-- eslint-disable vue/no-v-html -->
-                <div
-                  class="text font-weight-semibold mx-2 px-2"
-                  v-html="aboutData.subtitle"
-                />
+                <div class="text font-weight-semibold mx-2 px-2">
+                  <span class="text-body-1">
+                    {{ aboutData.subtitle }}
+                  </span>
+                </div>
               </v-row>
               <v-row align="end" justify="end" class="my-1 mx-2 px-2 py-1">
                 <v-btn
@@ -65,6 +66,7 @@
 
 <script>
 import title_component from '@v/home/components/common/title-component';
+import authorData from '@t/authorData';
 
 export default {
   name: 'HomeAboutComponent',
@@ -83,7 +85,7 @@ export default {
   },
   data: () => ({
     aboutData: {
-      subtitle: `<div class="text-overline">This is <span class="primary--text font-weight-black">Sudharshan TK</span> A.K.A <span class="primary--text font-weight-black">(Shan.tk)</span>.</div><span class="text-body-1">I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. I Focus More on Backend Development Like Nodejs and Django. I Also Know Android Debugging and Rom Development to Some Extent. Professionally I am a Chartered Accountant.</span>`,
+      subtitle: authorData.main.intro,
       image: 'https://i.ibb.co/CWY7dSm/IMG-20220206-130734-Close-up.webp',
     },
   }),
