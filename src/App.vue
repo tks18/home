@@ -7,7 +7,7 @@
     <Notification group="worker" position="bottom right" />
     <v-main>
       <div class="content">
-        <transition name="fadeDown" mode="out-in">
+        <transition name="fade" mode="out-in">
           <router-view />
         </transition>
       </div>
