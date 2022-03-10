@@ -149,6 +149,7 @@
 
 <script>
 import gsap from '@p/gsap';
+import authorData from '@t/authorData';
 import { VueTyper } from 'vue-typer';
 import { generateRandomEmojis } from '@p/wordmap';
 
@@ -164,16 +165,9 @@ export default {
     },
   },
   data: () => ({
-    heroImg: 'https://i.ibb.co/CQqRR3b/profile.png',
+    heroImg: authorData.main.bannerImg,
     toggleTooltip: false,
-    taglines: [
-      'Designer, Front-end & Backend Developer',
-      'Chartered Accountant by Profession 💼',
-      'Software Developer by Passion 👨‍💻',
-      'Full Stack Developer 💯',
-      'Absolut Developer 🐱‍🏍',
-      'It’s just a simple matter of programming 🤷‍♀️',
-    ],
+    taglines: authorData.main.taglines,
     animatedArray: {
       randEmoji: ' ',
     },

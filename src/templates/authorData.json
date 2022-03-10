@@ -2,6 +2,15 @@
   "main": {
     "name": "Sudharshan TK",
     "intro": "Chartered Accountant by Profession & Software Developer by Passion. I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Currently Focussing more on Backend Development Like Nodejs and Django. I am Also Interested in Topics such as Accounting, Finance, Taxation.",
+    "taglines": [
+      "Designer, Front-end & Backend Developer",
+      "Chartered Accountant by Profession 💼",
+      "Software Developer by Passion 👨‍💻",
+      "Full Stack Developer 💯",
+      "Absolut Developer 🐱‍🏍",
+      "It’s just a simple matter of programming 🤷‍♀️"
+    ],
+    "bannerImg": "https://i.ibb.co/zxycH9L/PXL-20220121-134535768-rounded-transp-compress.png",
     "nickName": "Shan.tk",
     "status": "Automating Workflows",
     "nationality": "A Proud Indian",
