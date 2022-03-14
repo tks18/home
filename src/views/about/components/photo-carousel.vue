@@ -1,7 +1,7 @@
 <template>
   <v-tooltip top transition="slide-y-transition">
     <template #activator="{ on, attrs }">
-      <v-scroll-y-transition mode="out-in">
+      <transition :name="transition" mode="out-in">
         <v-col
           :key="animatorKey"
           v-bind="attrs"
@@ -18,7 +18,7 @@
             </v-img>
           </v-card>
         </v-col>
-      </v-scroll-y-transition>
+      </transition>
     </template>
     <span>Click here to View My Gallery</span>
   </v-tooltip>
@@ -26,10 +26,14 @@
 
 <script>
 export default {
-  name: 'ComponentName',
+  name: 'AboutPhotoCarousel',
   props: {
     bgs: {
       type: Array,
+      required: true,
+    },
+    transition: {
+      type: String,
       required: true,
     },
     duration: {
