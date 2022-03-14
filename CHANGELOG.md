@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.16-0](https://github.com/tks18/matte-portfolio/compare/v0.1.15...v0.1.16-0) (2022-03-14)
+
+
+### Features
+
+* **routes/about:** add new certifications gallery card ([ae27e04](https://github.com/tks18/matte-portfolio/commit/ae27e048a9a6b206c41289913e4eeb10b8e048b8))
+* **routes/about:** add new skills to bio, add animation to photo carousel ([eb8254d](https://github.com/tks18/matte-portfolio/commit/eb8254deea05905963189355d304b231395297a6))
+* **routes/about:** add transition to photo carousel ([6d6a40a](https://github.com/tks18/matte-portfolio/commit/6d6a40a8cdeef6e140225a619493b9df93fa6556))
+
+
+### Bug Fixes
+
+* **components:** fix css for youtube player component ([587c60d](https://github.com/tks18/matte-portfolio/commit/587c60dd485ca8dde11f749137d82a0f208b0df3))
+* **components:** fix youtube player not rendering description properly ([1704d8d](https://github.com/tks18/matte-portfolio/commit/1704d8de047b2f669c0b0bbed94077efc6189e2a))
+* **routes/home:** fix home page feedback component ([f46f285](https://github.com/tks18/matte-portfolio/commit/f46f2857b611b41763f8ca2b76c823e7c4506b8c))
+
+
+### Code Refactoring
+
+* **about-data:** change author intro in home and about page ([bba5f87](https://github.com/tks18/matte-portfolio/commit/bba5f8794e5ff0ea3e9ca5ee98acacc8a4401212))
+* **home:** change home hero pic ([fcb3e73](https://github.com/tks18/matte-portfolio/commit/fcb3e73c49df25f31c6b92bd56203107b3a7f1f0))
+* **routes/about:** remove wastefull css classes ([accb86a](https://github.com/tks18/matte-portfolio/commit/accb86a7fddae43d0c80b680db5308cc09798a30))
+
 ### [0.1.15](https://github.com/tks18/matte-portfolio/compare/v0.1.14...v0.1.15) (2022-03-03)
 
 
