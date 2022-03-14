@@ -23,33 +23,29 @@
         <v-row :class="ismobile ? 'mx-0 px-0' : ' '">
           <v-col
             :cols="ismobile ? 12 : 7"
-            align="center"
             :class="ismobile ? 'mx-0 px-0' : ' '"
           >
-            <iframe
-              :width="
-                ismobile
-                  ? contextInfo.viewport.width * 0.8
-                  : contextInfo.viewport.width * 0.55
-              "
-              :height="
-                ismobile
-                  ? contextInfo.viewport.height * 0.5
-                  : contextInfo.viewport.height * 0.6
-              "
-              :src="'https://www.youtube.com/embed/' + video.id.videoId"
-              :title="video.snippet.title"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            />
-          </v-col>
-          <v-col
-            :cols="ismobile ? 12 : 5"
-            :class="ismobile ? 'mx-0 px-0' : ' '"
-          >
-            <v-row>
-              <v-col cols="12">
+            <v-row align="center">
+              <v-col cols="12" align="center">
+                <iframe
+                  :width="
+                    ismobile
+                      ? contextInfo.viewport.width * 0.8
+                      : contextInfo.viewport.width * 0.55
+                  "
+                  :height="
+                    ismobile
+                      ? contextInfo.viewport.height * 0.5
+                      : contextInfo.viewport.height * 0.6
+                  "
+                  :src="'https://www.youtube.com/embed/' + video.id.videoId"
+                  :title="video.snippet.title"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                />
+              </v-col>
+              <v-col cols="12" align="left">
                 <v-card-title>
                   {{ video.snippet.title }}
                 </v-card-title>
@@ -57,7 +53,16 @@
                   Posted on
                   {{ video.snippet.publishTime | moment('DD-MM-YYYY @ HH:MM') }}
                 </v-card-subtitle>
-                <v-card-text>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col
+            :cols="ismobile ? 12 : 5"
+            :class="ismobile ? 'mx-0 px-0' : ' '"
+          >
+            <v-row>
+              <v-col cols="12">
+                <v-card-text class="youtube-video-description">
                   {{ video.snippet.description }}
                 </v-card-text>
               </v-col>
@@ -77,7 +82,7 @@ export default {
       default: false,
     },
     ismobile: {
-      type: Function,
+      type: Boolean,
       default: () => {},
     },
     video: {
