@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
     <v-card flat elevation="12">
-      <v-card-title class="mx-2 no-break-words">
+      <v-card-title class="no-break-words">
         Top Languages, Frameworks, Softwares that i Know
       </v-card-title>
-      <v-card-subtitle class="mx-2 no-break-words">
+      <v-card-subtitle class="no-break-words">
         (Scores upto 100)
       </v-card-subtitle>
       <v-card-text>
@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import authorData from '@t/authorData';
-
 export default {
   name: 'AboutKnownLangsComponent',
   props: {
@@ -36,20 +34,24 @@ export default {
       type: Boolean,
       default: false,
     },
+    sparklineData: {
+      type: Object,
+      default: () => {},
+    },
   },
   data: () => ({}),
   computed: {
     languagesKnown() {
       if (this.ismobile) {
         return {
-          values: authorData.languagesKnown.mobile.perct,
-          labels: authorData.languagesKnown.mobile.langs,
+          values: this.sparklineData.mobile.perct,
+          labels: this.sparklineData.mobile.langs,
           gradient: ['#f72047', '#ffd200', '#1feaea'],
         };
       }
       return {
-        values: authorData.languagesKnown.desktop.perct,
-        labels: authorData.languagesKnown.desktop.langs,
+        values: this.sparklineData.desktop.perct,
+        labels: this.sparklineData.desktop.langs,
         gradient: ['#f72047', '#ffd200', '#1feaea'],
       };
     },
