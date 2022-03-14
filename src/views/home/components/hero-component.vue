@@ -165,9 +165,9 @@ export default {
     },
   },
   data: () => ({
-    heroImg: authorData.main.bannerImg,
+    heroImg: authorData.bannerImg,
     toggleTooltip: false,
-    taglines: authorData.main.taglines,
+    taglines: authorData.taglines,
     animatedArray: {
       randEmoji: ' ',
     },

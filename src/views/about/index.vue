@@ -36,8 +36,14 @@
         </v-row>
       </v-container>
       <v-row>
+        <v-col id="about-certifications-gallery" cols="12">
+          <a-certifications-gallery :goto-url="gotoUrl" />
+        </v-col>
         <v-col id="about-languagesknown" cols="12">
-          <a-known-languages-component :ismobile="ismobile" />
+          <a-known-languages-component
+            :ismobile="ismobile"
+            :sparkline-data="technologies"
+          />
         </v-col>
         <v-col id="about-moreStats" cols="12">
           <a-more-info-card-component :ismobile="ismobile" :swot="swot" />
@@ -55,6 +61,7 @@ import { tweenToObserver } from '@p/gsap';
 import some_words_about_me_component from '@v/about/components/some-words-about-me';
 import profile_chips_component from '@v/about/components/profile-chips';
 import profile_card_component from '@v/about/components/profile-card-component';
+import certifications_gallery_component from '@v/about/components/certifications-gallery';
 import languages_known_component from '@v/about/components/language-known-component';
 import more_info_card_component from '@v/about/components/more-info-card-component';
 
@@ -65,6 +72,7 @@ export default {
   }),
   components: {
     'a-profile-card-component': profile_card_component,
+    'a-certifications-gallery': certifications_gallery_component,
     'a-known-languages-component': languages_known_component,
     'a-more-info-card-component': more_info_card_component,
     'a-about-me-text': some_words_about_me_component,
@@ -73,7 +81,7 @@ export default {
   data: () => ({
     swot: authorData.swot,
     authorData: {
-      ...authorData.main,
+      ...authorData,
       age: countUpFromTime('May 16, 2000 16:21:00').years,
     },
     bgs: authorData.bgs,
@@ -83,6 +91,7 @@ export default {
       title: ' ',
       someWords: ' ',
     },
+    technologies: authorData.technologies,
   }),
   computed: {
     ismobile() {

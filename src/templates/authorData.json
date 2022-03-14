@@ -1,61 +1,81 @@
 {
-  "main": {
-    "name": "Sudharshan TK",
-    "intro": "Chartered Accountant by Profession & Software Developer by Passion. I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Currently Focussing more on Backend Development Like Nodejs and Django. I am Also Interested in Topics such as Accounting, Finance, Taxation.",
-    "taglines": [
-      "Designer, Front-end & Backend Developer",
-      "Chartered Accountant by Profession 💼",
-      "Software Developer by Passion 👨‍💻",
-      "Full Stack Developer 💯",
-      "Absolut Developer 🐱‍🏍",
-      "It’s just a simple matter of programming 🤷‍♀️"
-    ],
-    "bannerImg": "https://i.ibb.co/zxycH9L/PXL-20220121-134535768-rounded-transp-compress.png",
-    "nickName": "Shan.tk",
-    "status": "Automating Workflows",
-    "nationality": "A Proud Indian",
-    "profComp": "Chartered Accountant",
-    "techSkills": [
-      {
-        "name": "Web Development",
-        "link": "https://developer.mozilla.org/en-US/docs/Learn"
-      },
-      {
-        "name": "Python",
-        "link": "https://www.python.org/dev/"
-      },
-      {
-        "name": "Backend Development",
-        "link": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction"
-      },
-      {
-        "name": "MS Office Tools",
-        "link": "https://www.excel-easy.com/"
-      }
-    ],
-    "aOfInt": [
-      {
-        "name": "AI",
-        "link": "https://www.udacity.com/course/intro-to-artificial-intelligence--cs271"
-      },
-      {
-        "name": "ReactJs",
-        "link": "https://reactjs.org/"
-      },
-      {
-        "name": "VueJs",
-        "link": "https://vuejs.org/"
-      },
-      {
-        "name": "Gsap",
-        "link": "https://greensock.com/gsap/"
-      },
-      {
-        "name": "NodeJs",
-        "link": "https://nodejs.dev/"
-      }
-    ]
-  },
+  "name": "Sudharshan TK",
+  "intro": "Chartered Accountant by Profession & Software Developer by Passion. I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Currently Focussing more on Backend Development Like Nodejs and Django. I am Also Interested in Topics such as Accounting, Finance, Taxation.",
+  "taglines": [
+    "Designer, Front-end & Backend Developer",
+    "Chartered Accountant by Profession 💼",
+    "Software Developer by Passion 👨‍💻",
+    "Full Stack Developer 💯",
+    "Absolut Developer 🐱‍🏍",
+    "It’s just a simple matter of programming 🤷‍♀️"
+  ],
+  "bannerImg": "https://i.ibb.co/zxycH9L/PXL-20220121-134535768-rounded-transp-compress.png",
+  "nickName": "Shan.tk",
+  "status": "Automating Workflows",
+  "nationality": "A Proud Indian",
+  "profComp": "Chartered Accountant",
+  "profSkills": [
+    {
+      "name": "Indirect Taxation (IND)",
+      "link": "https://gst.gov.in"
+    },
+    {
+      "name": "Direct Taxation (IND)",
+      "link": "https://www.incometax.gov.in/iec/foportal"
+    },
+    {
+      "name": "Financial Statements",
+      "link": "https://www.investopedia.com/terms/f/financial-statements.asp"
+    },
+    {
+      "name": "Statutory Audits",
+      "link": "https://www.investopedia.com/terms/s/statutory-audit.asp"
+    },
+    {
+      "name": "GST Audits",
+      "link": "https://www.gst.gov.in/"
+    }
+  ],
+  "techSkills": [
+    {
+      "name": "Web Development",
+      "link": "https://developer.mozilla.org/en-US/docs/Learn"
+    },
+    {
+      "name": "Python",
+      "link": "https://www.python.org/dev/"
+    },
+    {
+      "name": "Backend Development",
+      "link": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction"
+    },
+    {
+      "name": "MS Office Tools",
+      "link": "https://www.excel-easy.com/"
+    }
+  ],
+  "aOfInt": [
+    {
+      "name": "AI",
+      "link": "https://www.udacity.com/course/intro-to-artificial-intelligence--cs271"
+    },
+    {
+      "name": "ReactJs",
+      "link": "https://reactjs.org/"
+    },
+    {
+      "name": "VueJs",
+      "link": "https://vuejs.org/"
+    },
+    {
+      "name": "Gsap",
+      "link": "https://greensock.com/gsap/"
+    },
+    {
+      "name": "NodeJs",
+      "link": "https://nodejs.dev/"
+    }
+  ],
   "workProfile": {
     "position": "Audit Assistant",
     "place": "Ford Rhodes Parks LLP"
@@ -75,7 +95,7 @@
     "https://i.ibb.co/FxT2W24/DJI-0566-1.webp",
     "https://i.ibb.co/S0hYMGK/IMG-20200103-135627-01.webp"
   ],
-  "languagesKnown": {
+  "technologies": {
     "mobile": {
       "langs": ["Vuejs", "Nodejs", "Python", "Flutter", "ReactJs"],
       "perct": [93, 79, 47, 41, 32]
@@ -97,5 +117,81 @@
       ],
       "perct": [99, 93, 79, 65, 57, 55, 49, 40, 35, 32, 28, 20]
     }
-  }
+  },
+  "certifications": [
+    {
+      "name": "Data Science Foundations - Level 1",
+      "image": "https://i.ibb.co/KWNYLhw/Data-Science-101-page-0001.jpg",
+      "verifylink": "https://www.credly.com/badges/81f4e841-fb97-44c5-be30-965da5b22e1a",
+      "details": {
+        "title": "Data Science Foundations - Level 1",
+        "description": "This badge earner has an understanding of the possibilities and opportunities that data science, analytics and big data bring to new applications in any industry.",
+        "issued_on": "March 2022",
+        "skills": [
+          {
+            "name": "Data Science",
+            "link": "https://www.credly.com/skills/data-science"
+          },
+          {
+            "name": "Data Scientist Workbench",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Python",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "R Programming",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Statistics",
+            "link": "https://www.credly.com/skills/statistics"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "IBM",
+        "about": "IBM is recognized as a cognitive solutions and cloud platform company with one purpose - to be essential to the world. We do this in part through innovative learning and credentialing programs that help develop and recognize the talent that fuels innovation to change the world. IBM's Digital Badge Program represents our latest endeavor for recognizing this talent through secure, verifiable digital credentials representing skill, achievement, and contribution.",
+        "link": "https://www.credly.com/organizations/ibm"
+      }
+    },
+    {
+      "name": "Data Science Foundations - Level 2",
+      "image": "https://i.ibb.co/KWNYLhw/Data-Science-101-page-0001.jpg",
+      "verifylink": "https://www.credly.com/badges/81f4e841-fb97-44c5-be30-965da5b22e1a",
+      "details": {
+        "title": "Data Science Foundations - Level 2",
+        "description": "This badge earner has an understanding of the possibilities and opportunities that data science, analytics and big data bring to new applications in any industry.",
+        "issued_on": "March 2022",
+        "skills": [
+          {
+            "name": "Data Science",
+            "link": "https://www.credly.com/skills/data-science"
+          },
+          {
+            "name": "Data Scientist Workbench",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Python",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "R Programming",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Statistics",
+            "link": "https://www.credly.com/skills/statistics"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "IBM",
+        "about": "IBM is recognized as a cognitive solutions and cloud platform company with one purpose - to be essential to the world. We do this in part through innovative learning and credentialing programs that help develop and recognize the talent that fuels innovation to change the world. IBM's Digital Badge Program represents our latest endeavor for recognizing this talent through secure, verifiable digital credentials representing skill, achievement, and contribution.",
+        "link": "https://www.credly.com/organizations/ibm"
+      }
+    }
+  ]
 }

@@ -157,7 +157,7 @@ export default {
   data: () => ({
     now: new Date().toLocaleTimeString(),
     clockDiag: false,
-    name: authorData.main.name,
+    name: authorData.name,
     success: false,
     pingstats: 0,
     github: {

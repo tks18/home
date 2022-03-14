@@ -1,6 +1,6 @@
 <template>
   <v-row align="center" class="my-0 py-0">
-    <v-col id="about-aboutmecard" :cols="ismobile ? 12 : 3" class="my-0 py-0">
+    <v-col id="about-aboutmecard" :cols="ismobile ? 12 : 4" class="my-0 py-0">
       <v-card outlined elevation="6">
         <v-card-title class="text-h5 text-center"> Bio </v-card-title>
         <v-divider class="opaque mx-2 my-0" />
@@ -42,8 +42,23 @@
             </v-col>
             <v-col class="my-0 py-0" cols="12" align="left">
               <span class="text-body-1 font-weight-bold">
-                Technicalities:
+                Professional Skills:
               </span>
+              <v-chip-group column>
+                <v-chip
+                  v-for="(skills, index) in authorData.profSkills"
+                  :key="index"
+                  small
+                  color="primary"
+                  class="my-1 mx-1"
+                  @click="gotoUrl(skills.link)"
+                >
+                  {{ skills.name }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+            <v-col class="my-0 py-0" cols="12" align="left">
+              <span class="text-body-1 font-weight-bold"> Tech Skills: </span>
               <v-chip-group column>
                 <v-chip
                   v-for="(skills, index) in authorData.techSkills"
@@ -78,9 +93,14 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col :cols="ismobile ? 12 : 9">
+    <v-col :cols="ismobile ? 12 : 8">
       <v-row>
-        <photo-carousel :bgs="bgs" :duration="6" :ismobile="ismobile" />
+        <photo-carousel
+          :bgs="bgs"
+          transition="flipY"
+          :duration="3"
+          :ismobile="ismobile"
+        />
         <v-col :cols="ismobile ? 12 : 8">
           <v-card
             outlined
@@ -209,7 +229,12 @@
             <span>Click here for More Stats</span>
           </v-tooltip>
         </v-col>
-        <photo-carousel :bgs="bgs" :duration="4" :ismobile="ismobile" />
+        <photo-carousel
+          :bgs="bgs"
+          transition="flipY"
+          :duration="4"
+          :ismobile="ismobile"
+        />
       </v-row>
     </v-col>
   </v-row>
