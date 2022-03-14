@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-full non-touch">
+  <div id="youtube-videos-component" class="column is-full non-touch">
     <v-row :class="ismobile ? 'mx-1' : 'mx-2'">
       <v-col cols="12">
         <h-title-component
@@ -70,6 +70,7 @@
               <v-slide-group :show-arrows="!ismobile">
                 <v-slide-item
                   v-for="(video, index) in videos"
+                  :id="`youtube_video_${video.id.videoId}`"
                   :key="index"
                   class="mx-2"
                 >
@@ -118,6 +119,7 @@
                         <youtube-player
                           :activator="video.model"
                           :video="video"
+                          :ismobile="ismobile"
                           :close-function="yt_video_model"
                           :context-info="contextInfo"
                         />
@@ -181,6 +183,7 @@
 </template>
 
 <script>
+import QS from 'query-string';
 import title_component from '@v/home/components/common/title-component';
 import youtube_player_component from '@c/youtube-player';
 import { channel_data, videos } from '@p/resources/youtube';
@@ -221,9 +224,25 @@ export default {
   },
   methods: {
     yt_video_model(video) {
-      if (this.videos[video.index].model) {
+      const id = this.videos[video.index].id.videoId;
+      this.$router.push({
+        path: `${this.$route.path}?youtube_player=${id}`,
+        hash: 'youtube-videos-component',
+      });
+      if (video.model) {
         this.$set(this.videos[video.index], 'model', false);
-      } else {
+        this.$router.push({
+          path: `${this.$route.path}?goto=youtube-videos-component`,
+          hash: 'youtube-videos-component',
+        });
+      }
+    },
+    load_model() {
+      const params = QS.parse(window.location.search);
+      if (params.youtube_player) {
+        const [video] = this.videos.filter(
+          (vid) => vid.id.videoId === params.youtube_player,
+        );
         this.$set(this.videos[video.index], 'model', true);
       }
     },
@@ -253,6 +272,7 @@ export default {
         });
         this.videos = new_video_array;
         this.loading = false;
+        this.load_model();
       }
     },
     fetchApis() {

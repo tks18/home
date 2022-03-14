@@ -85,7 +85,7 @@ export default {
   },
   data: () => ({
     aboutData: {
-      subtitle: authorData.main.intro,
+      subtitle: authorData.intro,
       image: 'https://i.ibb.co/CWY7dSm/IMG-20220206-130734-Close-up.webp',
     },
   }),
