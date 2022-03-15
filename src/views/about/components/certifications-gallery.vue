@@ -132,7 +132,7 @@ export default {
     animatedArray: {
       title: ' ',
     },
-    certifications: authorData.certifications,
+    certifications: null,
     currentCertificate: null,
     loading: true,
     subtitleQuote:
@@ -159,6 +159,7 @@ export default {
       });
     },
     loadInitialCert() {
+      this.certifications = this.$lodash.shuffle(authorData.certifications);
       [this.currentCertificate] = this.certifications;
       this.loading = false;
     },

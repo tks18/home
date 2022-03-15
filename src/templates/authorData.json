@@ -157,33 +157,25 @@
       }
     },
     {
-      "name": "Data Science Foundations - Level 2",
-      "image": "https://i.ibb.co/KWNYLhw/Data-Science-101-page-0001.jpg",
+      "name": "IBM Blockchain Essentials V2",
+      "image": "https://i.ibb.co/1mBxvBP/IBM-Blockchain-Essentials-page-0001.jpg",
       "verifylink": "https://www.credly.com/badges/81f4e841-fb97-44c5-be30-965da5b22e1a",
       "details": {
-        "title": "Data Science Foundations - Level 2",
-        "description": "This badge earner has an understanding of the possibilities and opportunities that data science, analytics and big data bring to new applications in any industry.",
+        "title": "IBM Blockchain Essentials V2",
+        "description": "This badge earner has developed an understanding of Blockchain principles and practices and how they can be applied within a business environment. They have an understanding of Blockchain and distributed ledger systems, the important concepts and key use cases of Blockchain and how assets can be transferred in a Blockchain network.",
         "issued_on": "March 2022",
         "skills": [
           {
-            "name": "Data Science",
-            "link": "https://www.credly.com/skills/data-science"
+            "name": "Blockchain",
+            "link": "https://www.credly.com/skills/blockchain"
           },
           {
-            "name": "Data Scientist Workbench",
-            "link": "https://www.credly.com/skills/data-scientist-workbench"
+            "name": "Distributed Ledger Technology",
+            "link": "https://www.credly.com/skills/distributed-ledger-technology"
           },
           {
-            "name": "Python",
-            "link": "https://www.credly.com/skills/data-scientist-workbench"
-          },
-          {
-            "name": "R Programming",
-            "link": "https://www.credly.com/skills/data-scientist-workbench"
-          },
-          {
-            "name": "Statistics",
-            "link": "https://www.credly.com/skills/statistics"
+            "name": "Hyperledger",
+            "link": "https://www.credly.com/skills/hyperledger"
           }
         ]
       },
@@ -191,6 +183,201 @@
         "name": "IBM",
         "about": "IBM is recognized as a cognitive solutions and cloud platform company with one purpose - to be essential to the world. We do this in part through innovative learning and credentialing programs that help develop and recognize the talent that fuels innovation to change the world. IBM's Digital Badge Program represents our latest endeavor for recognizing this talent through secure, verifiable digital credentials representing skill, achievement, and contribution.",
         "link": "https://www.credly.com/organizations/ibm"
+      }
+    },
+    {
+      "name": "Programming with Javascript",
+      "image": "https://i.ibb.co/GVs6Y0S/Javascript-Basic.jpg",
+      "verifylink": "https://www.hackerrank.com/certificates/f35f8421dcce",
+      "details": {
+        "title": "Programming with Javascript - Basic",
+        "description": "JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web. This Certificate Holder has basic understanding of topics like, Functions, Currying, Hoisting, Scope, Inheritance, Events and Error Handling.",
+        "issued_on": "July 2021",
+        "skills": [
+          {
+            "name": "Javascript",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          },
+          {
+            "name": "Web Developer",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/Guide"
+          },
+          {
+            "name": "Node.js",
+            "link": "https://developer.mozilla.org/en-US/docs/Glossary/Node.js"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Hackerrank",
+        "about": "HackerRank is a technology hiring platform that is the standard for assessing developer skills for over 2,800+ companies around the world. By enabling tech recruiters and hiring managers to objectively evaluate talent at every stage of the recruiting process, HackerRank helps companies hire skilled developers and innovate faster!",
+        "link": "https://www.hackerrank.com/"
+      }
+    },
+    {
+      "name": "Programming with Python",
+      "image": "https://i.ibb.co/gdqpWrv/Python-Basic.jpg",
+      "verifylink": "https://www.hackerrank.com/certificates/04110c3b3911",
+      "details": {
+        "title": "Programming with Python - Basic",
+        "description": "Python is a widely-used, interpreted, object-oriented, and high-level programming language with dynamic semantics, used for general-purpose programming. This Certificate Holder has basic Understanding of  topics like Scalar Types, Operators and Control Flow, Strings, Collections and Iteration, Modularity, Objects and Types and Classes.",
+        "issued_on": "July 2021",
+        "skills": [
+          {
+            "name": "Python",
+            "link": "https://www.python.org/"
+          },
+          {
+            "name": "Python - Tkinter",
+            "link": "https://docs.python.org/3/library/tkinter.html"
+          },
+          {
+            "name": "GUI Programming",
+            "link": "https://www.tutorialspoint.com/python/python_gui_programming.htm"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Hackerrank",
+        "about": "HackerRank is a technology hiring platform that is the standard for assessing developer skills for over 2,800+ companies around the world. By enabling tech recruiters and hiring managers to objectively evaluate talent at every stage of the recruiting process, HackerRank helps companies hire skilled developers and innovate faster!",
+        "link": "https://www.hackerrank.com/"
+      }
+    },
+    {
+      "name": "Problem Solving",
+      "image": "https://i.ibb.co/hDfKmrT/Problem-Solving-Basic.jpg",
+      "verifylink": "https://www.hackerrank.com/certificates/486930fb9b9e",
+      "details": {
+        "title": "Problem Solving",
+        "description": "Problem solving (with in the context of developing programs) refers to analyzing a problem with the intention of deriving a solution for the problem. This Certificate Holder has basic Understanding of topics Such as Data Structures (such as Arrays, Strings) and Algorithms (such as Sorting and Searching).",
+        "issued_on": "July 2021",
+        "skills": [
+          {
+            "name": "Python",
+            "link": "https://www.python.org/"
+          },
+          {
+            "name": "Data Structures & Algorithms",
+            "link": "https://www.geeksforgeeks.org/data-structures/"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Hackerrank",
+        "about": "HackerRank is a technology hiring platform that is the standard for assessing developer skills for over 2,800+ companies around the world. By enabling tech recruiters and hiring managers to objectively evaluate talent at every stage of the recruiting process, HackerRank helps companies hire skilled developers and innovate faster!",
+        "link": "https://www.hackerrank.com/"
+      }
+    },
+    {
+      "name": "Responsive Web Designing",
+      "image": "https://i.ibb.co/nk0SL24/Responsive-Web-Design.jpg",
+      "verifylink": "https://www.freecodecamp.org/certification/tks18/responsive-web-design",
+      "details": {
+        "title": "Responsive Web Designing",
+        "description": "Responsive web design is about creating web pages that look good on all devices!. This Certificate Holder has allround Experience in Creating Responsive Web Layouts with Applied Accessibility, CSS Grids & Flexbox.",
+        "issued_on": "November 2021",
+        "skills": [
+          {
+            "name": "Javascript",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          },
+          {
+            "name": "Web Development",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/Guide"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "FreeCodeCamp",
+        "about": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546). FreeCodeCamp's Mission is to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
+        "link": "https://www.freecodecamp.org/"
+      }
+    },
+    {
+      "name": "JavaScript Algorithms and Data Structures",
+      "image": "https://i.ibb.co/mTp5vrw/Javascript-Algorithms-Data-Structures.jpg",
+      "verifylink": "https://www.freecodecamp.org/certification/tks18/javascript-algorithms-and-data-structures",
+      "details": {
+        "title": "JavaScript Algorithms and Data Structures",
+        "description": "A data structure is a particular way of organizing and storing data in a computer so that it can be accessed and modified efficiently. An algorithm is an unambiguous specification of how to solve a class of problems. This Certificate Holder has allround Experience in Data Structures, ES6, ReGex, Basic Debugging, Algorithm Scripting, Object Oriented Programming & Functional Programming.",
+        "issued_on": "November 2021",
+        "skills": [
+          {
+            "name": "Data Structures",
+            "link": "https://www.geeksforgeeks.org/data-structures/"
+          },
+          {
+            "name": "Algorithms",
+            "link": "https://www.geeksforgeeks.org/fundamentals-of-algorithms/"
+          },
+          {
+            "name": "OOP",
+            "link": "https://en.wikipedia.org/wiki/Object-oriented_programming"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "FreeCodeCamp",
+        "about": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546). FreeCodeCamp's Mission is to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
+        "link": "https://www.freecodecamp.org/"
+      }
+    },
+    {
+      "name": "Excel Power Query - Advanced",
+      "image": "https://i.ibb.co/xzX9jpq/UC-e3dd3208-d654-4df3-89b6-3a5679cfe8b4.jpg",
+      "verifylink": "https://www.udemy.com/certificate/UC-e3dd3208-d654-4df3-89b6-3a5679cfe8b4/",
+      "details": {
+        "title": "Excel Power Query - Advanced",
+        "description": "Power Query is a data transformation and data preparation engine. Power Query comes with a graphical interface for getting data from sources and a Power Query Editor for applying transformations. Because the engine is available in many products and services, the destination where the data will be stored depends on where Power Query was used. Using Power Query, you can perform the extract, transform, and load (ETL) processing of data.",
+        "issued_on": "January 2022",
+        "skills": [
+          {
+            "name": "Excel's Power Query",
+            "link": "https://docs.microsoft.com/en-us/power-query/"
+          },
+          {
+            "name": "Power Pivot",
+            "link": "https://support.microsoft.com/en-us/office/power-pivot-overview-and-learning-f9001958-7901-4caa-ad80-028a6d2432ed"
+          },
+          {
+            "name": "ETL",
+            "link": "https://www.snowflake.com/guides/what-etl"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Udemy",
+        "about": "Udemy is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Udemy’s video player has functional features like closed captioning and note-taking functions.",
+        "link": "https://www.udemy.com/"
+      }
+    },
+    {
+      "name": "Excel Dynamic Arrays & Functions in Office 365",
+      "image": "https://i.ibb.co/sHLCmCD/UC-7b07dd09-a8d4-4c5a-bfc5-558e11f8d9eb.jpg",
+      "verifylink": "https://www.udemy.com/certificate/UC-7b07dd09-a8d4-4c5a-bfc5-558e11f8d9eb/",
+      "details": {
+        "title": "Excel Dynamic Arrays & Functions in Office 365",
+        "description": "Excel Dynamic Arrays are brand-new. Complex tasks will now be done with SIMPLE Excel formulas. Data analysis in Excel for Microsoft 365 has become simpler than ever. This Certificate Holder knows the Basic Understanding of Excel Calculation Engine, How Dynamic Arrays Work and How to Manipulate Dynamic Arrays.",
+        "issued_on": "January 2022",
+        "skills": [
+          {
+            "name": "Dynamic Arrays",
+            "link": "https://www.ablebits.com/office-addins-blog/2020/07/08/excel-dynamic-arrays-functions-formulas/"
+          },
+          {
+            "name": "Data Analysis",
+            "link": "https://en.wikipedia.org/wiki/Data_analysis"
+          },
+          {
+            "name": "ETL",
+            "link": "https://www.snowflake.com/guides/what-etl"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Udemy",
+        "about": "Udemy is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Udemy’s video player has functional features like closed captioning and note-taking functions.",
+        "link": "https://www.udemy.com/"
       }
     }
   ]
