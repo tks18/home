@@ -183,7 +183,6 @@
 </template>
 
 <script>
-import QS from 'query-string';
 import title_component from '@v/home/components/common/title-component';
 import youtube_player_component from '@c/youtube-player';
 import { channel_data, videos } from '@p/resources/youtube';
@@ -225,20 +224,22 @@ export default {
   methods: {
     yt_video_model(video) {
       const id = this.videos[video.index].id.videoId;
-      this.$router.push({
-        path: `${this.$route.path}?youtube_player=${id}`,
-        hash: 'youtube-videos-component',
-      });
       if (video.model) {
         this.$set(this.videos[video.index], 'model', false);
         this.$router.push({
-          path: `${this.$route.path}?goto=youtube-videos-component`,
+          path: `${this.$route.path}`,
           hash: 'youtube-videos-component',
         });
+      } else {
+        this.$router.push({
+          path: `${this.$route.path}?youtube_player=${id}`,
+          hash: 'youtube-videos-component',
+        });
+        this.load_model();
       }
     },
     load_model() {
-      const params = QS.parse(window.location.search);
+      const params = this.$route.query;
       if (params.youtube_player) {
         const [video] = this.videos.filter(
           (vid) => vid.id.videoId === params.youtube_player,

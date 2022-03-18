@@ -13,6 +13,14 @@
           />
         </v-col>
         <v-col align="center" justify="center" class="text-center" cols="12">
+          <!-- <v-tabs centered grow>
+            <v-tab>Web Design</v-tab>
+            <v-tab>Cloud Management</v-tab>
+            <v-tab>Technology & Platform Development</v-tab>
+            <v-tab>Accounting Advisory</v-tab>
+            <v-tab>Consulting</v-tab>
+            <v-tab>Others</v-tab>
+          </v-tabs> -->
           <v-row align="center" justify="center">
             <v-tooltip
               v-for="(activity, index) in activities"
@@ -36,7 +44,7 @@
                     <v-col align="center" justify="center">
                       <v-img
                         :max-width="ismobile ? 80 : 110"
-                        :src="'/assets/icons/creator/' + activity.asset"
+                        :src="activity.asset"
                       />
                     </v-col>
                   </v-row>
@@ -44,13 +52,7 @@
                     <v-col
                       cols="12"
                       align="center"
-                      class="
-                        text-overline
-                        ma-0
-                        pa-0
-                        text-center
-                        font-weight-bold
-                      "
+                      class="text-overline ma-0 pa-0 text-center font-weight-bold"
                     >
                       {{ activity.activity }}
                     </v-col>
@@ -96,52 +98,52 @@ export default {
     activities() {
       return [
         {
-          asset: 'web coding.svg',
+          asset: 'https://i.ibb.co/30nd1YV/web-coding.png',
           activity: 'Developing Frontends',
           description: 'Developing Classy, Sassy, Professional Grade Frontends',
           tooltip: 'Get to Know What Frameworks I Code for Development',
         },
         {
-          asset: 'picture.svg',
+          asset: 'https://i.ibb.co/xH2ZbFx/picture.png',
           activity: 'Image Manipulation',
           description: 'Well Versed in Post Processing of Photographs',
           tooltip: 'Get to Know What Softwares I Use for Post Processing',
         },
         {
-          asset: 'device.svg',
+          asset: 'https://i.ibb.co/Hgmr79D/device.png',
           activity: 'App Development',
           description: 'Mobile App Development Based on Flutter SDK',
           tooltip: 'Get to Know What i learnt in Flutter',
         },
         {
-          asset: 'idea.svg',
+          asset: 'https://i.ibb.co/9wmnjy3/idea.png',
           activity: 'Hosting Solutions Guidance',
           description:
             'Advising on Suitable and Best Hosting Solutions for a Website / Server',
           tooltip: 'Get to Know What type of Consulting i will give',
         },
         {
-          asset: 'programming.svg',
+          asset: 'https://i.ibb.co/HtyrcKJ/programming.png',
           activity: 'Presentations',
           description: 'Desgining Wonderful and Eye Catching Presentations',
           tooltip:
             'Get to Know What Softwares i use for Designing Presentations',
         },
         {
-          asset: 'layer.svg',
+          asset: 'https://i.ibb.co/7bFKmPq/layer.png',
           activity: 'Architecting Backends',
           description:
             'Constructing Secure and Powerful Backends for Frontends',
           tooltip: 'Get to Know What Languages I Use for Backends',
         },
         {
-          asset: 'speed test.svg',
+          asset: 'https://i.ibb.co/ys3H4gr/speed-test.png',
           activity: 'Video Editing',
           description: 'Editing and Color Grading Videos  for a Cinematic Look',
           tooltip: 'Get to Know What Softwares I Use for Video Editing',
         },
         {
-          asset: 'binary code.svg',
+          asset: 'https://i.ibb.co/x2ZjnxF/binary-code.png',
           activity: 'Data Analytics',
           description:
             'Crunching, Cleaning and Manipluating Data and Getting Insights',
