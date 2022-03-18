@@ -86,7 +86,7 @@
           <v-slide-group
             v-model="currentCertificate"
             active-class="success"
-            show-arrows
+            :show-arrows="!ismobile"
           >
             <v-slide-item
               v-for="(certs, index) in certifications"
