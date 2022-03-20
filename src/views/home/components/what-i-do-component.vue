@@ -31,52 +31,42 @@
               :key="mainindex"
             >
               <v-row align="center" justify="center">
-                <v-tooltip
+                <v-col
                   v-for="(services, index) in activity.services"
                   :key="index"
-                  boottom
-                  transition="slide-y-transition"
+                  v-ripple
+                  :cols="ismobile ? 5 : 3"
+                  align="center"
+                  :class="
+                    (ismobile ? 'mx-1 my-1' : 'mx-3 my-2') + ' point-cursor'
+                  "
+                  justify="center"
                 >
-                  <template #activator="{ on, attrs }">
-                    <v-col
-                      v-ripple
-                      v-bind="attrs"
-                      :cols="ismobile ? 5 : 3"
-                      align="center"
-                      :class="
-                        (ismobile ? 'mx-1 my-1' : 'mx-3 my-2') + ' point-cursor'
-                      "
-                      justify="center"
-                      v-on="on"
-                    >
-                      <v-row align="center">
-                        <v-col align="center" justify="center">
-                          <v-img
-                            :max-width="ismobile ? 80 : 110"
-                            :src="services.asset"
-                          />
-                        </v-col>
-                      </v-row>
-                      <v-row align="center" class="text-center">
-                        <v-col
-                          cols="12"
-                          align="center"
-                          class="text-overline ma-0 pa-0 text-center font-weight-bold"
-                        >
-                          {{ services.activity }}
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          align="center"
-                          class="text-caption ma-0 pa-0 font-weight-light"
-                        >
-                          {{ services.description }}
-                        </v-col>
-                      </v-row>
+                  <v-row align="center">
+                    <v-col align="center" justify="center">
+                      <v-img
+                        :max-width="ismobile ? 80 : 110"
+                        :src="services.asset"
+                      />
                     </v-col>
-                  </template>
-                  <span>Know More</span>
-                </v-tooltip>
+                  </v-row>
+                  <v-row align="center" class="text-center">
+                    <v-col
+                      cols="12"
+                      align="center"
+                      class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                    >
+                      {{ services.activity }}
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      align="center"
+                      class="text-caption ma-0 pa-0 font-weight-light"
+                    >
+                      {{ services.description }}
+                    </v-col>
+                  </v-row>
+                </v-col>
               </v-row>
             </v-tab-item>
           </v-tabs-items>
