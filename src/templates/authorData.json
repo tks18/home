@@ -156,6 +156,27 @@
       ]
     },
     {
+      "name": "Office productivity",
+      "icon": "mdi-progress-wrench",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/Gd43f0y/google.png",
+          "activity": "Google Apps for Business",
+          "description": "Knowledge of Goodle Apps Ecosystem"
+        },
+        {
+          "asset": "https://i.ibb.co/XDFdw0q/office.png",
+          "activity": "Microsoft Office",
+          "description": "Deep Understanding of Microsoft Office Softwares"
+        },
+        {
+          "asset": "https://i.ibb.co/J5h3mc1/documents.png",
+          "activity": "LibreOffice",
+          "description": "Power of Open Source Software"
+        }
+      ]
+    },
+    {
       "name": "Cloud Management",
       "icon": "mdi-cloud-lock",
       "services": [
