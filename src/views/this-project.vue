@@ -10,10 +10,6 @@
     >
       {{ animatedText.mainTitle }}
     </div>
-    <div class="non-touch text-subtitle-2 darken-3 text-center">
-      "Carve your name on hearts, not tombstones." Let you Know my Legacy. Lol
-      xD 😜
-    </div>
     <v-row align="center">
       <v-col cols="12" align="center" justify="center">
         <div class="text-overline">Select Code Base</div>
