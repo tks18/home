@@ -1,6 +1,6 @@
 {
   "name": "portfolio-mat-dark",
-  "version": "0.1.16-0",
+  "version": "0.1.16-1",
   "scripts": {
     "prepare": "husky install && husky add .husky/commit-msg 'npx --no-install commitlint --edit \"$1\"'",
     "stage": "git add",
