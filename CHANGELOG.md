@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.16-1](https://github.com/tks18/home/compare/v0.1.16-0...v0.1.16-1) (2022-03-20)
+
+
+### Features
+
+* **routes/about:** shuffle certificates before init, add more certifications ([23a6d70](https://github.com/tks18/home/commit/23a6d7012b52a46083590e800c1561af39662d22))
+* **routes/home:** introduce category wise services in home ([f1031a6](https://github.com/tks18/home/commit/f1031a63a8cc638752d1395bebca43e6f5fcc22e))
+
+
+### Code Refactoring
+
+* **app:** optimize pdfs, remove obfuscator and misc changes ([1ff2da5](https://github.com/tks18/home/commit/1ff2da5c559d7645b6a1889e6144106df3ef2f85))
+* **routes/project:** remove subtitle from the top ([80e3d01](https://github.com/tks18/home/commit/80e3d015771595a9f7fc51833b5b77f891a14ae6))
+
 ### [0.1.16-0](https://github.com/tks18/matte-portfolio/compare/v0.1.15...v0.1.16-0) (2022-03-14)
 
 
