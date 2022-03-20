@@ -13,62 +13,73 @@
           />
         </v-col>
         <v-col align="center" justify="center" class="text-center" cols="12">
-          <!-- <v-tabs centered grow>
-            <v-tab>Web Design</v-tab>
-            <v-tab>Cloud Management</v-tab>
-            <v-tab>Technology & Platform Development</v-tab>
-            <v-tab>Accounting Advisory</v-tab>
-            <v-tab>Consulting</v-tab>
-            <v-tab>Others</v-tab>
-          </v-tabs> -->
-          <v-row align="center" justify="center">
-            <v-tooltip
-              v-for="(activity, index) in activities"
-              :key="index"
-              top
-              transition="slide-y-transition"
+          <v-tabs
+            v-model="activityTab"
+            centered
+            center-active
+            grow
+            icons-and-text
+          >
+            <v-tabs-slider />
+            <v-tab v-for="(activity, index) in activities" :key="index">
+              {{ activity.name }} <v-icon> {{ activity.icon }} </v-icon>
+            </v-tab>
+          </v-tabs>
+          <v-tabs-items v-model="activityTab" class="py-2">
+            <v-tab-item
+              v-for="(activity, mainindex) in activities"
+              :key="mainindex"
             >
-              <template #activator="{ on, attrs }">
-                <v-col
-                  v-ripple
-                  v-bind="attrs"
-                  :cols="ismobile ? 5 : 2"
-                  align="center"
-                  :class="
-                    (ismobile ? 'mx-1 my-1' : 'mx-3 my-2') + ' point-cursor'
-                  "
-                  justify="center"
-                  v-on="on"
+              <v-row align="center" justify="center">
+                <v-tooltip
+                  v-for="(services, index) in activity.services"
+                  :key="index"
+                  boottom
+                  transition="slide-y-transition"
                 >
-                  <v-row align="center">
-                    <v-col align="center" justify="center">
-                      <v-img
-                        :max-width="ismobile ? 80 : 110"
-                        :src="activity.asset"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row align="center" class="text-center">
+                  <template #activator="{ on, attrs }">
                     <v-col
-                      cols="12"
+                      v-ripple
+                      v-bind="attrs"
+                      :cols="ismobile ? 5 : 3"
                       align="center"
-                      class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                      :class="
+                        (ismobile ? 'mx-1 my-1' : 'mx-3 my-2') + ' point-cursor'
+                      "
+                      justify="center"
+                      v-on="on"
                     >
-                      {{ activity.activity }}
+                      <v-row align="center">
+                        <v-col align="center" justify="center">
+                          <v-img
+                            :max-width="ismobile ? 80 : 110"
+                            :src="services.asset"
+                          />
+                        </v-col>
+                      </v-row>
+                      <v-row align="center" class="text-center">
+                        <v-col
+                          cols="12"
+                          align="center"
+                          class="text-overline ma-0 pa-0 text-center font-weight-bold"
+                        >
+                          {{ services.activity }}
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          align="center"
+                          class="text-caption ma-0 pa-0 font-weight-light"
+                        >
+                          {{ services.description }}
+                        </v-col>
+                      </v-row>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      align="center"
-                      class="text-caption ma-0 pa-0 font-weight-light"
-                    >
-                      {{ activity.description }}
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </template>
-              <span>{{ activity.tooltip }}</span>
-            </v-tooltip>
-          </v-row>
+                  </template>
+                  <span>Know More</span>
+                </v-tooltip>
+              </v-row>
+            </v-tab-item>
+          </v-tabs-items>
         </v-col>
       </v-row>
     </v-container>
@@ -76,6 +87,7 @@
 </template>
 
 <script>
+import authorData from '@t/authorData';
 import title_component from '@v/home/components/common/title-component';
 
 export default {
@@ -93,65 +105,9 @@ export default {
       default: false,
     },
   },
-  data: () => ({}),
-  computed: {
-    activities() {
-      return [
-        {
-          asset: 'https://i.ibb.co/30nd1YV/web-coding.png',
-          activity: 'Developing Frontends',
-          description: 'Developing Classy, Sassy, Professional Grade Frontends',
-          tooltip: 'Get to Know What Frameworks I Code for Development',
-        },
-        {
-          asset: 'https://i.ibb.co/xH2ZbFx/picture.png',
-          activity: 'Image Manipulation',
-          description: 'Well Versed in Post Processing of Photographs',
-          tooltip: 'Get to Know What Softwares I Use for Post Processing',
-        },
-        {
-          asset: 'https://i.ibb.co/Hgmr79D/device.png',
-          activity: 'App Development',
-          description: 'Mobile App Development Based on Flutter SDK',
-          tooltip: 'Get to Know What i learnt in Flutter',
-        },
-        {
-          asset: 'https://i.ibb.co/9wmnjy3/idea.png',
-          activity: 'Hosting Solutions Guidance',
-          description:
-            'Advising on Suitable and Best Hosting Solutions for a Website / Server',
-          tooltip: 'Get to Know What type of Consulting i will give',
-        },
-        {
-          asset: 'https://i.ibb.co/HtyrcKJ/programming.png',
-          activity: 'Presentations',
-          description: 'Desgining Wonderful and Eye Catching Presentations',
-          tooltip:
-            'Get to Know What Softwares i use for Designing Presentations',
-        },
-        {
-          asset: 'https://i.ibb.co/7bFKmPq/layer.png',
-          activity: 'Architecting Backends',
-          description:
-            'Constructing Secure and Powerful Backends for Frontends',
-          tooltip: 'Get to Know What Languages I Use for Backends',
-        },
-        {
-          asset: 'https://i.ibb.co/ys3H4gr/speed-test.png',
-          activity: 'Video Editing',
-          description: 'Editing and Color Grading Videos  for a Cinematic Look',
-          tooltip: 'Get to Know What Softwares I Use for Video Editing',
-        },
-        {
-          asset: 'https://i.ibb.co/x2ZjnxF/binary-code.png',
-          activity: 'Data Analytics',
-          description:
-            'Crunching, Cleaning and Manipluating Data and Getting Insights',
-          tooltip:
-            'Get to Know What Languages and Softwares with Which i Analyze Data',
-        },
-      ];
-    },
-  },
+  data: () => ({
+    activities: authorData.activities,
+    activityTab: 0,
+  }),
 };
 </script>

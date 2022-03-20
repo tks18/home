@@ -118,6 +118,158 @@
       "perct": [99, 93, 79, 65, 57, 55, 49, 40, 35, 32, 28, 20]
     }
   },
+  "activities": [
+    {
+      "name": "Web Design",
+      "icon": "mdi-semantic-web",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/7bFKmPq/layer.png",
+          "activity": "Design Thinking",
+          "description": "Customer-first, intuitive and engaging digital experiences created with design thinking"
+        },
+        {
+          "asset": "https://i.ibb.co/9wmnjy3/idea.png",
+          "activity": "Creative Concepting",
+          "description": "People-centric creative concepting that inspire emotional connections"
+        },
+        {
+          "asset": "https://i.ibb.co/xH2ZbFx/picture.png",
+          "activity": "Creative and Visual Design",
+          "description": "People-inspired, accessible, and visual design work focused on human-centric innovation"
+        },
+        {
+          "asset": "https://i.ibb.co/30nd1YV/web-coding.png",
+          "activity": "UX/UI Design",
+          "description": "User-focused, customer-centric user experience designs that drive long term growth"
+        },
+        {
+          "asset": "https://i.ibb.co/HtyrcKJ/programming.png",
+          "activity": "Visual Prototyping",
+          "description": "Rapid visual prototypes, instant insights to create unforgettable customer experiences"
+        },
+        {
+          "asset": "https://i.ibb.co/hDF5Fp9/web-design-2-1.png",
+          "activity": "Product Design",
+          "description": "Customer-focused, accessible, and creative product design focused on human-centric innovation"
+        }
+      ]
+    },
+    {
+      "name": "Cloud Management",
+      "icon": "mdi-cloud-lock",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/hdTtK6r/cloud-computing-1.png",
+          "activity": "Cloud Deployment",
+          "description": "Consulting, design, migration, integration, managed services, and support"
+        },
+        {
+          "asset": "https://i.ibb.co/cD8n2gt/039-cloud-computing-1.png",
+          "activity": "Cloud Security",
+          "description": "Infrastructure security, Cyber Risk Management & Physical Security"
+        },
+        {
+          "asset": "https://i.ibb.co/ys3H4gr/speed-test.png",
+          "activity": "Cloud Monitoring and Reporting",
+          "description": "Keeping your cloud computing environment safe and secure"
+        },
+        {
+          "asset": "https://i.ibb.co/Dwbyvw7/036-user-1.png",
+          "activity": "Infrastructure Set Up",
+          "description": "Setting up Cloud Services & Softwares"
+        }
+      ]
+    },
+    {
+      "name": "Technology & Platform Development",
+      "icon": "mdi-language-xaml",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/Hgmr79D/device.png",
+          "activity": "Web and Mobile Application Development",
+          "description": "Cross Platform App Development"
+        },
+        {
+          "asset": "https://i.ibb.co/KykT9s3/database-1.png",
+          "activity": "API and Microservices Integration",
+          "description": "Integrating Frontend to Various API's & Services"
+        },
+        {
+          "asset": "https://i.ibb.co/tYxM8KM/011-blueprint-1.png",
+          "activity": "Agile Technology and Tools",
+          "description": "Plan, track, and managing Software Development"
+        },
+        {
+          "asset": "https://i.ibb.co/YhN7YVJ/040-settings-1.png",
+          "activity": "DevOps Consulting and Delivery",
+          "description": "Designed to align development and operations to deliver high-quality software faster"
+        },
+        {
+          "asset": "https://i.ibb.co/HxbBjVR/004-brain-1.png",
+          "activity": "Business Intelligence and Embedded Analytics",
+          "description": "Make data analysis and business intelligence more accessible by any application or user"
+        },
+        {
+          "asset": "https://i.ibb.co/Ydq1Kq3/040-vision-1.png",
+          "activity": "Artificial Intelligence and Machine Learning",
+          "description": "Simulate human behavior in Systems"
+        }
+      ]
+    },
+    {
+      "name": "Accounting Advisory",
+      "icon": "mdi-chart-timeline",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/jR8pYr2/016-geography-0.png",
+          "activity": "GAAP transformation",
+          "description": "GAAP conversion (from local GAAP to Ind AS) including systems"
+        },
+        {
+          "asset": "https://i.ibb.co/pfgGcPT/report-0.png",
+          "activity": "Financial reporting and analysis",
+          "description": "Assistance and advisory in financial reporting and analysis of accounting issues"
+        },
+        {
+          "asset": "https://i.ibb.co/QKhYzg1/043-laptop-0.png",
+          "activity": "Accounting and reporting",
+          "description": "Delivering higher-quality reporting more quickly"
+        },
+        {
+          "asset": "https://i.ibb.co/WkRjdyk/presentation-0.png",
+          "activity": "Data analytics for reporting",
+          "description": "Collecting, analyzing and developing insights from data"
+        }
+      ]
+    },
+    {
+      "name": "Consulting",
+      "icon": "mdi-doctor",
+      "services": [
+        {
+          "asset": "https://i.ibb.co/DbnnhMc/search-0.png",
+          "activity": "Data & Analytics",
+          "description": "Optimise your data assets. Make faster and better decisions."
+        },
+        {
+          "asset": "https://i.ibb.co/w609MXM/044-imagination-0.png",
+          "activity": "Intelligent Automation",
+          "description": "Software robots (bots) that can mimic a human worker."
+        },
+        {
+          "asset": "https://i.ibb.co/dJMtD9Q/045-think-outside-the-box-0.png",
+          "activity": "Financial Services Technology",
+          "description": "Developing the most impactful and innovative FS platform"
+        },
+        {
+          "asset": "https://i.ibb.co/zPnJjWk/021-3d-modeling-0.png",
+          "activity": "Enterprise Apps",
+          "description": "Managing SAP, Oracle, Microsoft Apps"
+        }
+      ]
+    }
+  ],
   "certifications": [
     {
       "name": "Data Science Foundations - Level 1",
