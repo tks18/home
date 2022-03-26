@@ -15,7 +15,7 @@ import { ismobile } from '@p/helpers';
 import { generateWordMaps } from '@p/wordmap';
 
 export default {
-  name: 'ComponentName',
+  name: 'AboutMeTitle',
   data: () => ({
     animatedArray: {
       title: ' ',
