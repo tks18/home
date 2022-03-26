@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.16](https://github.com/tks18/home/compare/v0.1.16-1...v0.1.16) (2022-03-26)
+
+
+### Features
+
+* **routes/about:** use tabs instead of sliders for certification gallery ([2a5da33](https://github.com/tks18/home/commit/2a5da3395cd9667683ed0fd2a771f8f83259c6bb))
+* **routes/home:** add more categories to home services ([f93c2bb](https://github.com/tks18/home/commit/f93c2bb1f00559eab26f16d8c4cc9c10136af080))
+* **routes/home:** fix container, add background & add names and labels ([1cedd0a](https://github.com/tks18/home/commit/1cedd0a5c7658167ba9be2224a3c3001e4c42c7a))
+* **routes/home:** fix hero banner, move to flex layout, more ui/ux improvement ([74bbff8](https://github.com/tks18/home/commit/74bbff8cdc47717f2e3688ecc4a4cced017614a5))
+
+
+### Bug Fixes
+
+* **global/components:** some misc fixes in components which improves the experience ([91ca7df](https://github.com/tks18/home/commit/91ca7dffe889a48b6bcc0650df36bb278df7807a))
+* **router:** fix router to route new urls ([d3b0552](https://github.com/tks18/home/commit/d3b0552c92b70e6e6ddfa3dd4756baefd3b202e2))
+* **routes/about:** some misc fixed to improve ux ([eb60e7b](https://github.com/tks18/home/commit/eb60e7b1eaa1374fbd6e49142732e2ff6b0949fb))
+
+
+### Code Refactoring
+
+* **routes/about:** move to more structured routes folder ([00a4258](https://github.com/tks18/home/commit/00a42586d165888787d189d4f77f06a766770bcc))
+
+
+### Others
+
+* **templates:** reframe taglines in authordata ([c0021c1](https://github.com/tks18/home/commit/c0021c1d05993e10136e43e91c0b4f7e85b3f27b))
+
 ### [0.1.16-1](https://github.com/tks18/home/compare/v0.1.16-0...v0.1.16-1) (2022-03-20)
 
 
