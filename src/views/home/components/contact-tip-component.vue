@@ -8,14 +8,14 @@
         outlined
         class="non-touch point-cursor"
         :type="emailType"
-        @click="handleEmailClick('me@sudharshan.tk')"
+        @click="handleEmailClick('hello@sudharshan.tk')"
       >
         <div class="text">
           <span class="text-overline font-weight-black">Tip:</span>
           <span class="text-subtitle-2">
             Click Here to Contact / You can Contact me through
           </span>
-          <span class="font-weight-black"> me@sudharshan.tk</span>
+          <span class="font-weight-black"> hello@sudharshan.tk</span>
         </div>
       </v-alert>
     </v-container>
@@ -33,7 +33,7 @@ export default {
   },
   data: () => ({
     mailtoLink:
-      'mailto:me@sudharshan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
+      'mailto:hello@sudharshan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
     emailType: 'info',
   }),
   methods: {
@@ -45,8 +45,7 @@ export default {
             type: 'yellow',
             duration: 5000,
             title: 'Email Address Copied !',
-            text:
-              'My Email Address has been Copied to Clipboard. You can Click the below button to Directly open your Mail Client to Send my Mail. Thank You',
+            text: 'My Email Address has been Copied to Clipboard. You can Click the below button to Directly open your Mail Client to Send my Mail. Thank You',
             data: {
               loading: false,
               dark: false,
@@ -71,8 +70,7 @@ export default {
             type: 'error',
             duration: 5000,
             title: 'Error in the Process',
-            text:
-              'Error While Copying the Email Address. No Worries you can Directly Send me a Mail with the Below Button.',
+            text: 'Error While Copying the Email Address. No Worries you can Directly Send me a Mail with the Below Button.',
             data: {
               loading: false,
               dark: true,

@@ -24,7 +24,6 @@
                       contextInfo.viewport.width * 0.25) /
                     5
               "
-              :height="ismobile ? 300 : 400"
               type="card"
             />
           </v-col>
@@ -325,8 +324,7 @@ export default {
           type: 'error',
           duration: 5000,
           title: 'Projects Error',
-          text:
-            'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
+          text: 'Error While Getting Projects Data from the Github Server. Please Reload the Website to Get the Data',
           data: {
             loading: false,
             dark: true,
