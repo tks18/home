@@ -18,7 +18,7 @@
           v-on="on"
           @click="routerPush('/')"
         >
-          Shan.tk ✌{{ ismobile ? '' : ' | Chartered Accountant' }}
+          Shan.tk ✌
         </v-toolbar-title>
       </template>
       <span>Sudharshan TK</span>
@@ -48,7 +48,7 @@ export default {
     github: {
       link: 'https://github.com/tks18',
       icon: 'mdi-github',
-      title: "Shan.tk's Github Profile",
+      title: 'Github Profile',
     },
     avatar: 'https://i.ibb.co/CWY7dSm/IMG-20220206-130734-Close-up.webp',
   }),

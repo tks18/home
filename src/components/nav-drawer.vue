@@ -12,7 +12,7 @@
         <v-avatar
           class="point-cursor non-touch border-light"
           size="125"
-          @click="routerPush('/about')"
+          @click="routerPush('/about/me')"
         >
           <v-img :src="avatar" />
         </v-avatar>
@@ -21,7 +21,7 @@
         <v-list-item-content>
           <v-list-item-title
             class="text-center point-cursor non-touch font-weight-medium"
-            @click="routerPush('/about')"
+            @click="routerPush('/about/me')"
           >
             Sudharshan TK
           </v-list-item-title>
@@ -107,13 +107,13 @@ export default {
         icon: 'mdi-information',
         title: 'About',
         subtitle: 'About Me',
-        link: '/about',
+        link: '/about/me',
       },
       {
         icon: 'mdi-folder-information',
         title: 'About this Project',
         subtitle: 'Know the Code, workings of this Website',
-        link: '/about-this-project',
+        link: '/about/project',
       },
       {
         icon: 'mdi-post',
