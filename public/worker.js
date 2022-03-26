@@ -16,11 +16,11 @@ console.log(
 const cachedPages = [
   '/',
   '/offline.html',
-  '/about',
+  '/about/me',
   '/gallery',
   '/blog',
   '/projects',
-  '/about-this-project',
+  '/about/project',
 ];
 
 self.addEventListener('install', (event) => {

@@ -24,13 +24,13 @@ const routes = [
     changefreq: 'weekly',
   },
   {
-    path: '/about',
+    path: '/about/me',
     lastmod: new Date().toISOString().slice(0, 10),
     priority: 0.6,
     changefreq: 'monthly',
   },
   {
-    path: '/about-this-project',
+    path: '/about/project',
     lastmod: new Date().toISOString().slice(0, 10),
     priority: 0.7,
     changefreq: 'weekly',
