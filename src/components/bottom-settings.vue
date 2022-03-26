@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="activated" inset persistent>
+  <v-bottom-sheet v-model="activated" inset>
     <template #activator="{ on, attrs }">
       <v-list-item v-if="model == 'list'" v-bind="attrs" v-on="on">
         <v-list-item-icon>

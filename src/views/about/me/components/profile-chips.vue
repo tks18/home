@@ -39,6 +39,11 @@ export default {
           id: '#about-aboutmecard',
         },
         {
+          name: 'Certifications',
+          icon: 'mdi-certificate',
+          id: '#about-certifications-gallery',
+        },
+        {
           name: 'Languages Known',
           icon: 'mdi-language-csharp',
           id: '#about-languagesknown',

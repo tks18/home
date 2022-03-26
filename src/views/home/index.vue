@@ -58,7 +58,7 @@ import feedback_component from '@v/home/components/feedback-component';
 export default {
   name: 'Home',
   metaInfo: () => ({
-    title: 'Home',
+    title: 'Sudharshan TK',
   }),
   components: {
     'h-hero-component': hero_component,

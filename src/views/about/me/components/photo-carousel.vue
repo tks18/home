@@ -1,32 +1,22 @@
 <template>
-  <v-tooltip top transition="slide-y-transition">
-    <template #activator="{ on, attrs }">
-      <transition :name="transition" mode="out-in">
-        <v-col
-          :key="animatorKey"
-          v-bind="attrs"
-          :cols="ismobile ? 12 : 4"
-          v-on="on"
-        >
-          <v-card outlined elevation="6">
-            <v-img :src="currentBg" :aspect-ratio="16 / 9">
-              <template #placeholder>
-                <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular indeterminate color="grey lighten-5" />
-                </v-row>
-              </template>
-            </v-img>
-          </v-card>
-        </v-col>
-      </transition>
-    </template>
-    <span>Click here to View My Gallery</span>
-  </v-tooltip>
+  <v-slide-y-transition mode="out-in">
+    <v-col :key="animatorKey" :cols="ismobile ? 12 : 4">
+      <v-card outlined elevation="6">
+        <v-img :src="currentBg" :aspect-ratio="16 / 9">
+          <template #placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular indeterminate color="primary" />
+            </v-row>
+          </template>
+        </v-img>
+      </v-card>
+    </v-col>
+  </v-slide-y-transition>
 </template>
 
 <script>
 export default {
-  name: 'AboutPhotoCarousel',
+  name: 'AboutMePhotoCarousel',
   props: {
     bgs: {
       type: Array,

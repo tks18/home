@@ -2,14 +2,18 @@
   <div id="home-mainhero" class="column is-full non-touch">
     <div
       :class="
-        'hero is-fullheight' +
+        (ismobile ? 'hero is-fullheight' : 'hero is-medium') +
         ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
       "
     >
       <div :class="'hero-body' + (ismobile ? ' ma-1 px-0 py-3' : ' ma-2 pa-8')">
         <div class="container">
-          <div class="columns is-multiline is-centered is-vcentered">
-            <div class="column is-full">
+          <v-row
+            align="center"
+            justify="center"
+            :class="!ismobile ? 'my-2' : ''"
+          >
+            <v-col cols="12" align="center" class="my-1 py-0">
               <div
                 :class="
                   'text text-center font-weight-bold' +
@@ -32,6 +36,8 @@
                   caret-animation="smooth"
                 />
               </div>
+            </v-col>
+            <v-col cols="12" class="my-0 py-0">
               <div
                 :class="
                   'text font-weight-bold my-2 py-2 mx-2 px-2 text-center' +
@@ -56,6 +62,8 @@
                   <span>Click here to Shuffle Emoji's</span>
                 </v-tooltip>
               </div>
+            </v-col>
+            <v-col cols="12" class="my-0 py-0">
               <div
                 :class="
                   'text text-center font-weight-bold' +
@@ -65,82 +73,46 @@
                 I design and code beautifully simple things, and I love what I
                 do.
               </div>
-            </div>
-            <div
-              :class="
-                'column is-half' +
-                (ismobile ? ' has-text-centered ma-2 ' : ' has-text-right')
-              "
-            >
+            </v-col>
+            <v-col :cols="12" align="center" class="my-0 py-0">
               <v-avatar :size="ismobile ? 250 : 380">
-                <v-img :src="heroImg" alt="Main Image" />
-              </v-avatar>
-            </div>
-            <div
-              :class="
-                'column is-centered' +
-                (ismobile ? ' is-full ' : ' is-half ') +
-                ' text text-center text-overline font-weight-bold'
-              "
-            >
-              <v-row v-if="!ismobile" align="center">
-                <v-col cols="8" align="center">
-                  <v-row align="center">
-                    <v-col
-                      v-for="(button, index) in heroButtons"
-                      :key="index"
-                      :cols="
-                        index == heroButtons.length - 1
-                          ? index % 2 == 0
-                            ? 12
-                            : 6
-                          : 6
-                      "
+                <v-img :src="heroImg" alt="Main Image">
+                  <template #placeholder>
+                    <v-row
+                      class="fill-height ma-0"
                       align="center"
+                      justify="center"
                     >
-                      <v-btn
-                        large
-                        elevation="24"
-                        text
-                        raised
-                        outlined
-                        @click="$vuetify.goTo('#' + button.id)"
-                      >
-                        <v-icon> {{ button.icon }} </v-icon>
-                        {{ button.name }}
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-              <v-row v-if="ismobile" align="center">
-                <v-col cols="6" align="right">
-                  <v-btn
-                    elevation="24"
-                    text
-                    raised
-                    outlined
-                    @click="$vuetify.goTo('#home-feedbacktitle')"
+                      <v-progress-circular indeterminate color="primary" />
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-avatar>
+            </v-col>
+            <v-col algin="center" :cols="12" class="my-2 py-0">
+              <div class="text text-center text-overline font-weight-bold">
+                <v-row align="center">
+                  <v-col
+                    v-for="(button, index) in heroButtons"
+                    :key="index"
+                    align="center"
                   >
-                    <v-icon> mdi-alarm-bell </v-icon>
-                    Contact Me
-                  </v-btn>
-                </v-col>
-                <v-col cols="6" align="left">
-                  <v-btn
-                    elevation="24"
-                    text
-                    raised
-                    outlined
-                    @click="$vuetify.goTo('#home-emailme')"
-                  >
-                    <v-icon> mdi-at </v-icon>
-                    Email Me
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </div>
-          </div>
+                    <v-btn
+                      large
+                      elevation="24"
+                      text
+                      raised
+                      outlined
+                      @click="$vuetify.goTo('#' + button.id)"
+                    >
+                      <v-icon> {{ button.icon }} </v-icon>
+                      {{ button.name }}
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-col>
+          </v-row>
         </div>
       </div>
     </div>

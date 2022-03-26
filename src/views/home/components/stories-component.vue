@@ -28,7 +28,6 @@
         <v-skeleton-loader
           class="mx-auto"
           :width="ismobile ? 225 : 250"
-          :height="ismobile ? 300 : 325"
           type="card"
         />
       </div>
@@ -91,7 +90,7 @@
           </template>
           <v-overlay v-if="!ismobile" opacity="0.5" :value="true">
             <v-col align="right">
-              <v-btn icon rounded color="primary" @click="dialog = !dialog">
+              <v-btn icon outlined color="primary" @click="dialog = !dialog">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-col>

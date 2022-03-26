@@ -66,7 +66,7 @@
                     : ' underhover-dark')
                 "
                 v-on="on"
-                @click="$router.push('/about-this-project')"
+                @click="$router.push('/about/project')"
               >
                 Vuetify, Vuejs and More
                 <v-icon color="primary">mdi-heart</v-icon>

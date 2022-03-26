@@ -4,7 +4,7 @@ const metadata = require('./web-metadata');
 
 module.exports = {
   runtimeCompiler: true,
-  publicPath: '',
+  publicPath: '/',
   css: {
     requireModuleExtension: true,
   },

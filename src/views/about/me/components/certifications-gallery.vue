@@ -1,15 +1,14 @@
 <template>
   <v-card>
     <v-card-title
-      id="about-certifications-gallery-title"
+      id="about-me-certifications-gallery-title"
       class="text-capitalize text font-weight-bold no-break-words"
     >
       {{ animatedArray.title }}
     </v-card-title>
-    <v-card-subtitle> {{ subtitleQuote }} </v-card-subtitle>
     <v-card-text>
       <v-row v-if="!loading">
-        <v-tabs-items v-model="currentCertificate">
+        <v-tabs-items v-model="currentCertificate" :value="currentCertificate">
           <v-tab-item
             v-for="(certificate, index) in certifications"
             :key="index"
@@ -52,7 +51,10 @@
                           </span>
                           on
                           <span class="font-weight-black primary--text">
-                            {{ certificate.details.issued_on }}
+                            {{
+                              certificate.details.issued_on
+                                | moment('MMMM, YYYY')
+                            }}
                           </span>
                         </div>
                       </v-hover>
@@ -101,6 +103,7 @@
           <div class="font-weight-bold text-h6">More Certifications</div>
           <v-tabs
             v-model="currentCertificate"
+            :value="currentCertificate"
             centered
             center-active
             icons-and-text
@@ -132,7 +135,7 @@ import { ismobile } from '@p/helpers';
 import { generateWordMaps } from '@p/wordmap';
 
 export default {
-  name: 'AboutCertificationsGallery',
+  name: 'AboutMeCertificationsGallery',
   props: {
     gotoUrl: {
       type: Function,
@@ -146,8 +149,6 @@ export default {
     certifications: null,
     currentCertificate: null,
     loading: true,
-    subtitleQuote:
-      '“The beautiful thing about learning is that no one can take it away from you.” — B.B. King',
   }),
   computed: {
     ismobile() {
@@ -162,7 +163,7 @@ export default {
     render() {
       gsap.tweenToObserver({
         vm: this,
-        elem: '#about-certifications-gallery-title',
+        elem: '#about-me-certifications-gallery-title',
         emoji: false,
         arrayName: 'animatedArray',
         map: generateWordMaps('Certifications'),
@@ -170,7 +171,13 @@ export default {
       });
     },
     loadInitialCert() {
-      this.certifications = this.$lodash.shuffle(authorData.certifications);
+      const sortedCertificates = this.$lodash.orderBy(
+        authorData.certifications,
+        [(cert) => new Date(cert.details.issued_on)],
+        ['desc'],
+      );
+
+      this.certifications = sortedCertificates;
       [this.currentCertificate] = this.certifications;
       this.loading = false;
     },

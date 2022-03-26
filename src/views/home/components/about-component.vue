@@ -7,7 +7,7 @@
             id="abouttitle"
             :title="title"
             arrow="right"
-            link="/about"
+            link="/about/me"
             :large="false"
             :center="false"
             :darker="false"
@@ -29,7 +29,7 @@
                   color="primary"
                   @click="
                     $router.push({
-                      name: 'About',
+                      name: 'About-Me',
                       params: {
                         scroll: true,
                         scrollid: '#about-aboutmecard',
