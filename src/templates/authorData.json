@@ -3,11 +3,11 @@
   "intro": "Chartered Accountant by Profession & Software Developer by Passion. I Create Elegant, Modern, Sleeky UI's. I Love Javascript, Nodejs & Flutter. Currently Focussing more on Backend Development Like Nodejs and Django. I am Also Interested in Topics such as Accounting, Finance, Taxation.",
   "taglines": [
     "Designer, Front-end & Backend Developer",
-    "Chartered Accountant by Profession 💼",
-    "Software Developer by Passion 👨‍💻",
-    "Full Stack Developer 💯",
+    "Chartered Accountant 💼",
+    "Software Developer 👨‍💻",
+    "Full Stack 💯",
     "Absolut Developer 🐱‍🏍",
-    "It’s just a simple matter of programming 🤷‍♀️"
+    "Pythonista 🐍"
   ],
   "bannerImg": "https://i.ibb.co/zxycH9L/PXL-20220121-134535768-rounded-transp-compress.png",
   "nickName": "Shan.tk",
@@ -299,7 +299,7 @@
       "details": {
         "title": "Data Science Foundations - Level 1",
         "description": "This badge earner has an understanding of the possibilities and opportunities that data science, analytics and big data bring to new applications in any industry.",
-        "issued_on": "March 2022",
+        "issued_on": "03-04-2022",
         "skills": [
           {
             "name": "Data Science",
@@ -336,7 +336,7 @@
       "details": {
         "title": "IBM Blockchain Essentials V2",
         "description": "This badge earner has developed an understanding of Blockchain principles and practices and how they can be applied within a business environment. They have an understanding of Blockchain and distributed ledger systems, the important concepts and key use cases of Blockchain and how assets can be transferred in a Blockchain network.",
-        "issued_on": "March 2022",
+        "issued_on": "03-03-2022",
         "skills": [
           {
             "name": "Blockchain",
@@ -365,7 +365,7 @@
       "details": {
         "title": "Programming with Javascript - Basic",
         "description": "JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web. This Certificate Holder has basic understanding of topics like, Functions, Currying, Hoisting, Scope, Inheritance, Events and Error Handling.",
-        "issued_on": "July 2021",
+        "issued_on": "07-29-2021",
         "skills": [
           {
             "name": "Javascript",
@@ -394,7 +394,7 @@
       "details": {
         "title": "Programming with Python - Basic",
         "description": "Python is a widely-used, interpreted, object-oriented, and high-level programming language with dynamic semantics, used for general-purpose programming. This Certificate Holder has basic Understanding of  topics like Scalar Types, Operators and Control Flow, Strings, Collections and Iteration, Modularity, Objects and Types and Classes.",
-        "issued_on": "July 2021",
+        "issued_on": "07-28-2021",
         "skills": [
           {
             "name": "Python",
@@ -423,7 +423,7 @@
       "details": {
         "title": "Problem Solving",
         "description": "Problem solving (with in the context of developing programs) refers to analyzing a problem with the intention of deriving a solution for the problem. This Certificate Holder has basic Understanding of topics Such as Data Structures (such as Arrays, Strings) and Algorithms (such as Sorting and Searching).",
-        "issued_on": "July 2021",
+        "issued_on": "11-07-2021",
         "skills": [
           {
             "name": "Python",
@@ -448,7 +448,7 @@
       "details": {
         "title": "Responsive Web Designing",
         "description": "Responsive web design is about creating web pages that look good on all devices!. This Certificate Holder has allround Experience in Creating Responsive Web Layouts with Applied Accessibility, CSS Grids & Flexbox.",
-        "issued_on": "November 2021",
+        "issued_on": "11-07-2021",
         "skills": [
           {
             "name": "Javascript",
@@ -473,7 +473,7 @@
       "details": {
         "title": "JavaScript Algorithms and Data Structures",
         "description": "A data structure is a particular way of organizing and storing data in a computer so that it can be accessed and modified efficiently. An algorithm is an unambiguous specification of how to solve a class of problems. This Certificate Holder has allround Experience in Data Structures, ES6, ReGex, Basic Debugging, Algorithm Scripting, Object Oriented Programming & Functional Programming.",
-        "issued_on": "November 2021",
+        "issued_on": "11-07-2021",
         "skills": [
           {
             "name": "Data Structures",
@@ -502,7 +502,7 @@
       "details": {
         "title": "Excel Power Query - Advanced",
         "description": "Power Query is a data transformation and data preparation engine. Power Query comes with a graphical interface for getting data from sources and a Power Query Editor for applying transformations. Because the engine is available in many products and services, the destination where the data will be stored depends on where Power Query was used. Using Power Query, you can perform the extract, transform, and load (ETL) processing of data.",
-        "issued_on": "January 2022",
+        "issued_on": "01-23-2022",
         "skills": [
           {
             "name": "Excel's Power Query",
@@ -531,7 +531,7 @@
       "details": {
         "title": "Excel Dynamic Arrays & Functions in Office 365",
         "description": "Excel Dynamic Arrays are brand-new. Complex tasks will now be done with SIMPLE Excel formulas. Data analysis in Excel for Microsoft 365 has become simpler than ever. This Certificate Holder knows the Basic Understanding of Excel Calculation Engine, How Dynamic Arrays Work and How to Manipulate Dynamic Arrays.",
-        "issued_on": "January 2022",
+        "issued_on": "01-26-2022",
         "skills": [
           {
             "name": "Dynamic Arrays",
