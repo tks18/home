@@ -13253,6 +13253,7 @@ __metadata:
     vue: ^2.6.14
     vue-cli-plugin-vuetify: ~2.4.5
     vue-eslint-parser: ^7.11.0
+    vue-gtag: v1.16.1
     vue-jsonld: ^1.0.1
     vue-meta: ^2.4.0
     vue-moment: ^4.1.0
@@ -16849,6 +16850,15 @@ __metadata:
   peerDependencies:
     eslint: ">=5.0.0"
   checksum: 16d8bd31dacd9e5d3cd0fc82354c0cfdb42ee3d2e0c3aeda385b82aa48a59a440de3dc18521ea6535f4b00a54eb248d49a6ea2323fbae0d3c1afa0a00c63fe6c
+  languageName: node
+  linkType: hard
+
+"vue-gtag@npm:v1.16.1":
+  version: 1.16.1
+  resolution: "vue-gtag@npm:1.16.1"
+  peerDependencies:
+    vue: ^2.0.0
+  checksum: f32b8b45af5e20c1add4e89cc21e55eede54171169345958b33cb6e10f6cbbb690bdd6e01b55672c179e24f2914bd2434183edbae8bf6a8c11b1aacdfaa0ac88
   languageName: node
   linkType: hard
 

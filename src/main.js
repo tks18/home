@@ -8,6 +8,7 @@ import Notifications from 'vue-notification';
 import axios from '@p/axios';
 import vuetify from '@p/vuetify';
 import { gsap } from 'gsap';
+import VueGtag from 'vue-gtag';
 import loader from '@c/progress-loader';
 import router from './router';
 import App from './App.vue';
@@ -19,6 +20,15 @@ Vue.use(Notifications);
 Vue.use(meta, {
   refreshOnceOnNavigation: true,
 });
+Vue.use(
+  VueGtag,
+  {
+    config: { id: 'G-8HXX8G7931' },
+    appName: 'Sudharshan TK - Portfolio Website',
+    pageTrackerScreenviewEnabled: true,
+  },
+  router,
+);
 Vue.use(vueJsonLD);
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
