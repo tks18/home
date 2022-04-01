@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.17](https://github.com/tks18/home/compare/v0.1.16...v0.1.17) (2022-04-01)
+
+
+### Features
+
+* **app:** add google analytics for more insightfull data ([5420f03](https://github.com/tks18/home/commit/5420f03728dab4337a0829fc9c4b87f9eb21f7dc))
+* **routes:** introduce blog posts from hashnode through graphql API ([6f78738](https://github.com/tks18/home/commit/6f78738734b75b2133cb6456c6c2850a26d761f4))
+
+
+### Bug Fixes
+
+* **components:** fix bottom settings dialog not rendering properly ([7674efe](https://github.com/tks18/home/commit/7674efea41b658bf3943eff8151d19288c212654))
+* **routes:** remove blog from routes, introduce more helper css and misc changes ([e01f6fe](https://github.com/tks18/home/commit/e01f6feb64efc9d9f21acfceac05ae7529900369))
+
 ### [0.1.16](https://github.com/tks18/home/compare/v0.1.16-1...v0.1.16) (2022-03-26)
 
 
