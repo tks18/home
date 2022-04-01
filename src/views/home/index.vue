@@ -10,7 +10,11 @@
       :title="animatedArray.stories"
       :goto-url="gotoUrl"
     />
-    <h-blog-component :ismobile="ismobile" :title="animatedArray.blog" />
+    <h-blog-component
+      :ismobile="ismobile"
+      :goto-url="gotoUrl"
+      :title="animatedArray.blog"
+    />
     <h-about-component :ismobile="ismobile" :title="animatedArray.about" />
     <h-projects-component
       :ismobile="ismobile"

@@ -28,7 +28,16 @@
   height: inherit;
 }
 
+.transition-blur {
+  transition: backdrop-filter 0.2s ease-in;
+}
+
 .back-blur-light {
+  backdrop-filter: blur(1px) grayscale(0.4);
+  height: inherit;
+}
+
+.back-blur-light-no-inherit {
   backdrop-filter: blur(1px) grayscale(0.4);
 }
 

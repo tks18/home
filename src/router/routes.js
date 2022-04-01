@@ -9,11 +9,6 @@ const routes = [
     component: _import('home'),
   },
   {
-    path: '/blog',
-    name: 'Blog',
-    component: _import('blog'),
-  },
-  {
     path: '/careers',
     name: 'Careers',
     component: _import('careers'),

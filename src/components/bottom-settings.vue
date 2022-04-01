@@ -10,22 +10,16 @@
           <v-list-item-subtitle> Change the Accent Color </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-card
+      <v-btn
         v-if="model == 'icon'"
-        elevation="0"
-        class="ma-1 pa-2 non-touch point-cursor"
+        rounded
+        outlined
+        color="primary"
         v-bind="attrs"
         v-on="on"
       >
-        <v-row align="center" class="mb-2" justify="center">
-          <v-btn fab small color="primary">
-            <v-icon>mdi-cog-refresh</v-icon>
-          </v-btn>
-        </v-row>
-        <v-row align="center" justify="center">
-          <div class="text font-weight-semibold">Settings</div>
-        </v-row>
-      </v-card>
+        <v-icon>mdi-cog-refresh</v-icon> Settings
+      </v-btn>
     </template>
     <v-sheet class="pa-8 mt-auto">
       <v-row align="start" justify="end">

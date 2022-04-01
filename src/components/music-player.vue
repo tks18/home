@@ -1,21 +1,9 @@
 <template>
   <v-bottom-sheet v-model="activated" inset>
     <template #activator="{ on, attrs }">
-      <v-card
-        elevation="0"
-        v-bind="attrs"
-        class="ma-1 pa-2 non-touch point-cursor"
-        v-on="on"
-      >
-        <v-row align="center" class="mb-2" justify="center">
-          <v-btn fab small color="primary" v-bind="attrs" v-on="on">
-            <v-icon>mdi-music</v-icon>
-          </v-btn>
-        </v-row>
-        <v-row align="center" justify="center">
-          <div class="text font-weight-semibold">Music Player</div>
-        </v-row>
-      </v-card>
+      <v-btn rounded outlined color="primary" v-bind="attrs" v-on="on">
+        <v-icon>mdi-music</v-icon> Music Player
+      </v-btn>
     </template>
     <v-card tile>
       <v-slider
@@ -88,8 +76,7 @@ export default {
     changeSeek: 0,
     duration: 0,
     loading: false,
-    clip:
-      'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
+    clip: 'https://gitlab.com/tks18/portfolio-res/-/raw/master/audio/avicii-nights.mp3',
     metadata: {
       name: 'The Nights',
       artist: 'by Avicii',

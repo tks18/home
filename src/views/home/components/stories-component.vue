@@ -11,10 +11,6 @@
           :darker="false"
         />
       </v-col>
-      <v-col align="end" justify="start" class="mr-4">
-        <v-btn icon color="primary"><v-icon>mdi-arrow-left</v-icon></v-btn>
-        <v-btn icon color="primary"><v-icon>mdi-arrow-right</v-icon></v-btn>
-      </v-col>
     </v-row>
     <div
       v-if="loading"
