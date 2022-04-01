@@ -41,7 +41,7 @@
           <v-list-item
             v-for="(nav, index) in navPaths"
             :key="index"
-            @click="routerPush(nav.link)"
+            @click="nav.outside ? windowClick(nav.link) : routerPush(nav.link)"
           >
             <v-list-item-icon>
               <v-icon> {{ nav.icon }} </v-icon>
@@ -119,7 +119,8 @@ export default {
         icon: 'mdi-post',
         title: 'Blog',
         subtitle: 'My Personal Blog',
-        link: '/blog',
+        outside: true,
+        link: 'https://blog.sudharshan.tk',
       },
       {
         icon: 'mdi-notebook-multiple',
