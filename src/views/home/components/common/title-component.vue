@@ -9,7 +9,7 @@
       'non-touch point-cursor text-capitalize' +
       ($vuetify.theme.dark ? ' underhover-light' : ' underhover-dark')
     "
-    @click="link !== '/' && $router.push(link)"
+    @click="link !== '/' && (outside ? gotoUrl(link) : $router.push(link))"
   >
     {{ title }} <v-icon :large="large">mdi-arrow-{{ arrow }}-circle</v-icon>
   </div>
@@ -31,6 +31,10 @@ export default {
       type: String,
       default: 'right',
     },
+    outside: {
+      type: Boolean,
+      default: false,
+    },
     center: {
       type: Boolean,
       default: false,
@@ -48,6 +52,10 @@ export default {
       default: '/',
     },
   },
-  data: () => ({}),
+  data: () => ({
+    gotoUrl: (url) => {
+      window.open(url);
+    },
+  }),
 };
 </script>
