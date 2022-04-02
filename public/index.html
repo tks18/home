@@ -10,6 +10,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name="description" content="<%= htmlWebpackPlugin.options.desc %>" />
     <meta name="keywords" content="<%= htmlWebpackPlugin.options.keywords %>" />
+
     <!-- Twitter Card data -->
     <meta
       name="twitter:card"
@@ -29,9 +30,10 @@
     />
     <meta
       name="twitter:image:src"
-      content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
+      content="<%= htmlWebpackPlugin.options.twitterData.pic %>"
     />
     <!-- Twitter Card data - End -->
+
     <!-- Open Graph data -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= htmlWebpackPlugin.options.url %>" />
@@ -41,7 +43,7 @@
     />
     <meta
       property="og:image"
-      content="<%= htmlWebpackPlugin.options.url %><%= htmlWebpackPlugin.options.twitterData.pic %>"
+      content="<%= htmlWebpackPlugin.options.twitterData.pic %>"
     />
     <meta
       property="og:description"
@@ -52,6 +54,7 @@
       content="<%= htmlWebpackPlugin.options.title %>"
     />
     <!-- Open Graph data - End -->
+
     <!-- Favicons -->
     <link
       rel="apple-touch-icon"
@@ -96,6 +99,7 @@
     />
     <meta name="theme-color" content="#121212" />
     <!-- Favicons - End -->
+
     <link rel="canonical" href="<%= htmlWebpackPlugin.options.url %>" />
     <link
       rel="stylesheet"
@@ -114,8 +118,8 @@
   </head>
   <body>
     <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
         properly without JavaScript enabled. Please enable it to continue.
       </strong>
     </noscript>
