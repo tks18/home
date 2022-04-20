@@ -10,11 +10,11 @@
       :title="animatedArray.stories"
       :goto-url="gotoUrl"
     />
-    <h-blog-component
+    <!-- <h-blog-component
       :ismobile="ismobile"
       :goto-url="gotoUrl"
       :title="animatedArray.blog"
-    />
+    /> -->
     <h-about-component :ismobile="ismobile" :title="animatedArray.about" />
     <h-projects-component
       :ismobile="ismobile"
@@ -51,7 +51,7 @@ import { getOs, getViewport, ismobile } from '@p/helpers';
 import hero_component from '@v/home/components/hero-component';
 import what_i_do_component from '@v/home/components/what-i-do-component';
 import stories_component from '@v/home/components/stories-component';
-import blog_component from '@v/home/components/blog-component';
+// import blog_component from '@v/home/components/blog-component';
 import about_component from '@v/home/components/about-component';
 import projects_component from '@v/home/components/projects-component';
 import youtube_component from '@v/home/components/youtube-component';
@@ -68,7 +68,7 @@ export default {
     'h-hero-component': hero_component,
     'h-what-i-do-component': what_i_do_component,
     'h-stories-component': stories_component,
-    'h-blog-component': blog_component,
+    // 'h-blog-component': blog_component,
     'h-about-component': about_component,
     'h-projects-component': projects_component,
     'h-youtube-component': youtube_component,
@@ -130,11 +130,11 @@ export default {
           map_word: 'Galleria',
           prop: 'gallerytitle',
         },
-        {
-          elem: '#home-blogtitle',
-          map_word: 'My Blog',
-          prop: 'blog',
-        },
+        // {
+        //   elem: '#home-blogtitle',
+        //   map_word: 'My Blog',
+        //   prop: 'blog',
+        // },
         {
           elem: '#home-feedbacktitle',
           map_word: 'Submit your feedback',
