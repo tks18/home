@@ -74,8 +74,8 @@
                 do.
               </div>
             </v-col>
-            <v-col :cols="12" align="center" class="my-0 py-0">
-              <v-avatar :size="ismobile ? 250 : 380">
+            <v-col :cols="12" align="center" class="my-2 py-0">
+              <v-avatar :size="ismobile ? 250 : 350">
                 <v-img :src="heroImg" alt="Main Image">
                   <template #placeholder>
                     <v-row
@@ -156,11 +156,6 @@ export default {
           name: 'What i Do',
           icon: 'mdi-console-network',
           id: 'home-whatiDo',
-        },
-        {
-          name: 'My Blog',
-          icon: 'mdi-post-outline',
-          id: 'home-blogtitle',
         },
         {
           name: 'Projects',
