@@ -130,11 +130,6 @@ export default {
           map_word: 'Galleria',
           prop: 'gallerytitle',
         },
-        // {
-        //   elem: '#home-blogtitle',
-        //   map_word: 'My Blog',
-        //   prop: 'blog',
-        // },
         {
           elem: '#home-feedbacktitle',
           map_word: 'Submit your feedback',
