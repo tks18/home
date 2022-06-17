@@ -6,7 +6,7 @@
           id="blogtitle"
           :title="title"
           arrow="right"
-          link="https://blog.sudharshan.tk"
+          link="https://blog.sudharshan.dev"
           :outside="true"
           :large="false"
           :center="false"

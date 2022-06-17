@@ -120,7 +120,7 @@ export default {
         title: 'Blog',
         subtitle: 'My Personal Blog',
         outside: true,
-        link: 'https://blog.sudharshan.tk',
+        link: 'https://blog.sudharshan.dev',
       },
       {
         icon: 'mdi-notebook-multiple',

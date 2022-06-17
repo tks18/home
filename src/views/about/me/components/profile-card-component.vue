@@ -133,7 +133,7 @@
             :class="$vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light'"
             outlined
             elevation="6"
-            @click="resumeDialog = true"
+            @click="gotoUrl('https://resume.sudharshan.dev')"
           >
             <v-row
               class="inherit-height center-align-div"
@@ -141,56 +141,15 @@
               justify="space-around"
             >
               <v-col align="center">
-                <v-icon>mdi-download</v-icon>
+                <v-icon>mdi-file-document-multiple</v-icon>
                 <div class="text-overline font-weight-bold">
-                  Download my Resume in PDF Format
+                  View my e-resume
                 </div>
               </v-col>
             </v-row>
           </v-card>
         </v-col>
       </v-row>
-      <v-dialog v-model="resumeDialog" width="400">
-        <v-card class="non-touch">
-          <v-card-title>Download Resume</v-card-title>
-          <v-card-text>
-            <v-row class="inherit-height" align="center">
-              <v-col cols="6">
-                <v-card
-                  flat
-                  @click="
-                    gotoUrl('/assets/downloads/resume/Sudharshan-tk-full.pdf')
-                  "
-                >
-                  <v-card-text>
-                    <v-icon> mdi-download </v-icon>
-                    Full Version
-                  </v-card-text>
-                </v-card>
-              </v-col>
-              <v-col cols="6">
-                <v-card
-                  flat
-                  @click="
-                    gotoUrl('/assets/downloads/resume/Sudharshan-tk-short.pdf')
-                  "
-                >
-                  <v-card-text>
-                    <v-icon> mdi-download </v-icon>
-                    Mini Version
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn outlined color="primary" @click="resumeDialog = false">
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
       <v-row>
         <v-col :cols="ismobile ? 12 : 8">
           <v-tooltip top transition="slide-y-transition">
@@ -276,7 +235,6 @@ export default {
     dailyLabels: [],
     dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
     consolMinutes: 0,
-    resumeDialog: false,
   }),
   mounted() {
     this.getLabels();
