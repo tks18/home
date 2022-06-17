@@ -133,7 +133,7 @@
             :class="$vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light'"
             outlined
             elevation="6"
-            @click="gotoUrl('https://resume.sudharshan.tk')"
+            @click="gotoUrl('https://resume.sudharshan.dev')"
           >
             <v-row
               class="inherit-height center-align-div"

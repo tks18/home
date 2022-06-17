@@ -3,7 +3,7 @@
 
 	[plugins.inputs]
 
-	baseUrl = "https://sudharshan.tk"
+	baseUrl = "https://sudharshan.dev"
 
 	sitemapPath = "/sitemap.xml"
 

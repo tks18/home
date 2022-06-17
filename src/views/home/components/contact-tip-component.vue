@@ -8,14 +8,14 @@
         outlined
         class="non-touch point-cursor"
         :type="emailType"
-        @click="handleEmailClick('hello@sudharshan.tk')"
+        @click="handleEmailClick('hello@sudharshan.dev')"
       >
         <div class="text">
           <span class="text-overline font-weight-black">Tip:</span>
           <span class="text-subtitle-2">
             Click Here to Contact / You can Contact me through
           </span>
-          <span class="font-weight-black"> hello@sudharshan.tk</span>
+          <span class="font-weight-black"> hello@sudharshan.dev</span>
         </div>
       </v-alert>
     </v-container>
@@ -33,7 +33,7 @@ export default {
   },
   data: () => ({
     mailtoLink:
-      'mailto:hello@sudharshan.tk?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
+      'mailto:hello@sudharshan.dev?subject=Contacting%20You%20from%20Website&body=Hey%20there%20!%0D%0A%0D%0A',
     emailType: 'info',
   }),
   methods: {

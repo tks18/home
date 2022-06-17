@@ -7,7 +7,7 @@ const twitterData = {
   pic: 'https://i.ibb.co/v1WvYQG/Home-Banner.png',
 };
 const keyWords =
-  'Sudharshan TK, Portfolio, Shan.tk, https://sudharshan.tk, sudharshan.tk, sudharshan, Blog, Portfolio-blog';
+  'Sudharshan TK, Portfolio, Shan.tk, https://sudharshan.dev, sudharshan.dev, sudharshan, Blog, Portfolio-blog';
 
 const webSiteDesc =
   'Organized, top performer and goal-driven individual. Skilled at using Various Programming Languages such as Python & Javascript to Leverage Finance Functions to build a competitive advantage.';
