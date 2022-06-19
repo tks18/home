@@ -95,7 +95,7 @@ export default {
     bottomSettings,
   },
   data: () => ({
-    avatar: 'https://i.ibb.co/7zYdnzs/profile-pic-latest-compress.png',
+    avatar: 'https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png',
     navPaths: [
       {
         icon: 'mdi-home',

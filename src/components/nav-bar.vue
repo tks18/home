@@ -3,8 +3,10 @@
     <v-app-bar-nav-icon @click="navclick()" />
     <v-avatar
       size="38"
-      class="mx-2 non-touch point-cursor"
-      color="primary"
+      :class="
+        'mx-2 non-touch point-cursor ' +
+        ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
+      "
       @click="$router.push('/')"
     >
       <v-img :src="avatar" />
@@ -50,7 +52,7 @@ export default {
       icon: 'mdi-github',
       title: 'Github Profile',
     },
-    avatar: 'https://i.ibb.co/7zYdnzs/profile-pic-latest-compress.png',
+    avatar: 'https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png',
   }),
   methods: {
     navclick() {

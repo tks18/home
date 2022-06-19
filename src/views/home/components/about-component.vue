@@ -86,7 +86,7 @@ export default {
   data: () => ({
     aboutData: {
       subtitle: authorData.intro,
-      image: 'https://i.ibb.co/7zYdnzs/profile-pic-latest-compress.png',
+      image: 'https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png',
     },
   }),
 };
