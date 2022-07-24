@@ -9,11 +9,6 @@ const routes = [
     component: _import('home'),
   },
   {
-    path: '/careers',
-    name: 'Careers',
-    component: _import('careers'),
-  },
-  {
     path: '/gallery',
     name: 'Gallery',
     component: _import('gallery'),
@@ -25,12 +20,12 @@ const routes = [
   },
   {
     path: '/about/me',
-    name: 'About-Me',
+    name: 'About Me',
     component: _import('about/me'),
   },
   {
     path: '/about/project',
-    name: 'About-Project',
+    name: 'About this Project',
     component: _import('about/project'),
   },
 ];
