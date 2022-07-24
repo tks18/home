@@ -1,30 +1,31 @@
 <template>
-  <v-app-bar app dense flat collapse-on-scroll>
+  <v-app-bar app dense elevate-on-scroll>
     <v-app-bar-nav-icon @click="navclick()" />
-    <v-avatar
-      size="38"
-      :class="
-        'mx-2 non-touch point-cursor ' +
-        ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
-      "
-      @click="$router.push('/')"
-    >
-      <v-img :src="avatar" />
-    </v-avatar>
     <v-tooltip bottom transition="slide-y-transition">
       <template #activator="{ on, attrs }">
-        <v-toolbar-title
-          v-ripple
+        <v-avatar
+          size="38"
+          :class="
+            'mx-2 non-touch point-cursor ' +
+            ($vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light')
+          "
           v-bind="attrs"
-          class="font-weight-bold non-touch point-cursor"
           v-on="on"
-          @click="routerPush('/')"
+          @click="$router.push('/')"
         >
-          Shan.tk ✌
-        </v-toolbar-title>
+          <v-img :src="avatar" />
+        </v-avatar>
       </template>
-      <span>Sudharshan TK</span>
+      <span> Go to Home </span>
     </v-tooltip>
+    <v-slide-y-transition mode="out-in">
+      <v-toolbar-title
+        :key="routeKey"
+        class="text-h6 font-weight-black non-touch"
+      >
+        {{ $route.name === 'Home' ? 'Shan.tk ✌' : $route.name }}
+      </v-toolbar-title>
+    </v-slide-y-transition>
     <v-spacer />
     <v-tooltip bottom transition="slide-y-transition">
       <template #activator="{ on, attrs }">
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import authorData from '@t/authorData.json';
+
 export default {
   name: 'NavBar',
   props: {
@@ -47,13 +50,21 @@ export default {
     },
   },
   data: () => ({
+    currentPage: '',
+    routeKey: 0,
     github: {
       link: 'https://github.com/tks18',
       icon: 'mdi-github',
       title: 'Github Profile',
     },
-    avatar: 'https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png',
+    avatar: authorData.logo,
   }),
+  watch: {
+    $route(to) {
+      this.currentPage = to.name;
+      this.routeKey++;
+    },
+  },
   methods: {
     navclick() {
       this.$state.store.navbar.active = true;
