@@ -1,10 +1,5 @@
 <template>
-  <v-card
-    outlined
-    rounded
-    class="column is-full"
-    :class="$vuetify.theme.dark ? ' grad-back-dark' : ' grad-back-light'"
-  >
+  <v-card flat class="column is-full">
     <v-card-text>
       <v-row align="center" justify="center" class="ma-0 pa-0">
         <v-col cols="12" align="center">
@@ -25,8 +20,6 @@
                   v-model="name"
                   prepend-icon="mdi-form-textbox"
                   dense
-                  :persistent-hint="true"
-                  hint="Eg: Sudharshan"
                   label="Name"
                   hide-details="auto"
                   outlined
@@ -39,8 +32,6 @@
                   v-model="email"
                   prepend-icon="mdi-email"
                   dense
-                  :persistent-hint="true"
-                  hint="Eg: cool@coolness.com"
                   label="Email"
                   hide-details="auto"
                   outlined
@@ -59,7 +50,6 @@
                   :full-width="true"
                   :persistent-hint="true"
                   label="Message"
-                  :filled="true"
                   :outlined="true"
                 />
               </v-col>
