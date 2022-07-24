@@ -20,6 +20,21 @@
       >
         <v-icon>mdi-cog-refresh</v-icon> Settings
       </v-btn>
+      <v-btn
+        v-if="model == 'fab'"
+        :class="endofPage ? 'fab-button-bottom' : 'fab-button'"
+        :bottom="true"
+        :absolute="true"
+        :fixed="true"
+        :right="true"
+        color="primary"
+        rounded
+        fab
+        v-bind="attrs"
+        v-on="on"
+      >
+        <v-icon>mdi-tune</v-icon>
+      </v-btn>
     </template>
     <v-sheet class="pa-8 mt-auto">
       <v-row align="start" justify="end">
@@ -146,6 +161,7 @@ export default {
     },
   },
   data: () => ({
+    endofPage: false,
     activated: false,
     colorDiag: false,
     blurDiag: false,
@@ -160,6 +176,7 @@ export default {
     ],
   }),
   mounted() {
+    this.scroll();
     const themecache = JSON.parse(localStorage.getItem('themecache'));
     if (themecache && themecache != null) {
       this.$state.store.botSettings.darkmode = themecache.dark;
@@ -209,6 +226,18 @@ export default {
           },
         }),
       );
+    },
+    scroll() {
+      window.onscroll = () => {
+        if (
+          window.innerHeight + window.pageYOffset >=
+          document.body.offsetHeight - 60
+        ) {
+          this.endofPage = true;
+        } else {
+          this.endofPage = false;
+        }
+      };
     },
   },
 };
