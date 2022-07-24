@@ -8,27 +8,15 @@
     <v-container
       :class="$state.store.botSettings.navBlur ? 'back-blur' : ' ' + ' my-5'"
     >
-      <v-row align="center" justify="center">
-        <v-avatar
-          class="point-cursor non-touch border-light"
-          size="125"
-          @click="routerPush('/about/me')"
-        >
-          <v-img :src="avatar" />
-        </v-avatar>
-      </v-row>
       <v-list-item three-line class="px-2">
         <v-list-item-content>
           <v-list-item-title
-            class="text-center point-cursor non-touch font-weight-medium"
+            class="point-cursor non-touch font-weight-bold"
             @click="routerPush('/about/me')"
           >
             Sudharshan TK
           </v-list-item-title>
-          <v-list-item-subtitle class="text-center non-touch font-italic">
-            (aka Shan.tk)
-          </v-list-item-subtitle>
-          <v-list-item-subtitle class="text-center non-touch font-weight-light">
+          <v-list-item-subtitle class="non-touch font-weight-light">
             Chartered Accountant / Web Developer
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -88,6 +76,7 @@
   </v-navigation-drawer>
 </template>
 <script>
+import authorData from '@t/authorData.json';
 import bottomSettings from './bottom-settings.vue';
 
 export default {
@@ -95,7 +84,7 @@ export default {
     bottomSettings,
   },
   data: () => ({
-    avatar: 'https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png',
+    avatar: authorData.profilePicture,
     navPaths: [
       {
         icon: 'mdi-home',
@@ -127,12 +116,6 @@ export default {
         title: 'Projects',
         subtitle: 'Currently Working Projects and Issues',
         link: '/projects',
-      },
-      {
-        icon: 'mdi-web',
-        title: 'Careers',
-        subtitle: 'Careers',
-        link: '/careers',
       },
       {
         icon: 'mdi-camera',

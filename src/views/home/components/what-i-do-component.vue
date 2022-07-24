@@ -1,15 +1,15 @@
 <template>
-  <div class="column is-full ma-0 pa-0">
+  <div class="column is-full my-1 py-1">
     <v-container class="non-touch">
-      <v-row align="center" justify="center" class="ma-0 pa-0">
-        <v-col cols="12" align="center">
+      <v-row class="my-0 py-0">
+        <v-col cols="12">
           <h-title-component
             id="whatiDo"
             :title="title"
-            arrow="down"
-            :center="true"
-            :large="true"
-            :darker="true"
+            arrow="right"
+            :center="false"
+            :large="false"
+            :darker="false"
           />
         </v-col>
         <v-col align="center" justify="center" class="text-center" cols="12">

@@ -1,7 +1,7 @@
 <template>
-  <div class="column is-full ma-2">
-    <v-row>
-      <v-col align="start" justify="start">
+  <div class="column is-full">
+    <v-row :class="ismobile ? 'ma-0' : 'ma-2'">
+      <v-col cols="12" align="start" justify="start">
         <h-title-component
           id="storytitle"
           :title="title"
@@ -17,13 +17,19 @@
       class="scrollable-x columns ma-1 pa-1 is-vcentered is-mobile"
     >
       <div
-        v-for="n in ismobile ? 1 : 5"
+        v-for="n in ismobile ? 1 : 10"
         :key="n"
-        class="scrollable-x-child column ma-0 pa-0 non-touch"
+        class="scrollable-x-child column ma-0 mx-1 pa-0 non-touch"
       >
         <v-skeleton-loader
           class="mx-auto"
-          :width="ismobile ? 225 : 250"
+          :width="
+            ismobile
+              ? null
+              : (contextInfo.viewport.width -
+                  contextInfo.viewport.width * 0.1) /
+                6
+          "
           type="card"
         />
       </div>
@@ -184,6 +190,10 @@ export default {
     ismobile: {
       type: Boolean,
       default: false,
+    },
+    contextInfo: {
+      type: Object,
+      default: () => {},
     },
     gotoUrl: {
       type: Function,

@@ -229,7 +229,7 @@ export default {
           type: 'error',
           duration: -100,
           title: 'Backend Error',
-          text: 'Error While Connecting to Backend Server. Click the button to check my backup Servers',
+          text: 'Error While Connecting to Backend Server.',
           data: {
             loading: false,
             dark: true,

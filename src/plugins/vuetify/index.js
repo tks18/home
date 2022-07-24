@@ -8,7 +8,7 @@ const options = {
     dark: themecache == null ? false : themecache.dark,
     themes: {
       light: {
-        primary: themecache == null ? '#F44336' : themecache.theme.accent,
+        primary: themecache == null ? '#9c27b0' : themecache.theme.accent,
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',
@@ -17,7 +17,7 @@ const options = {
         warning: '#FFC107',
       },
       dark: {
-        primary: themecache == null ? '#F44336' : themecache.theme.accent,
+        primary: themecache == null ? '#9c27b0' : themecache.theme.accent,
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',

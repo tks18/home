@@ -9,7 +9,8 @@
     "Absolut Developer 🐱‍🏍",
     "Pythonista 🐍"
   ],
-  "bannerImg": "https://i.ibb.co/b16DNTQ/IMG-0483-Copy.png",
+  "logo": "/icons/android-chrome-512x512.png",
+  "profilePicture": "https://i.ibb.co/LzN4PG6/Profile-Picture.png",
   "nickName": "Shan.tk",
   "status": "Automating Workflows",
   "nationality": "A Proud Indian",
@@ -77,8 +78,9 @@
     }
   ],
   "workProfile": {
-    "position": "Audit Assistant",
-    "place": "Ford Rhodes Parks LLP"
+    "position": "Business Intelligence Associate",
+    "place": "PriceWaterhouseCoopers (PwC)",
+    "link": "https://www.pwc.com/"
   },
   "swot": {
     "strengths": ["Vuejs", "NodeJs", "Gsap"],

@@ -150,7 +150,10 @@
                                     </v-btn>
                                   </v-col>
                                   <v-col cols="12" align="center">
-                                    <v-btn color="primary">
+                                    <v-btn
+                                      color="primary"
+                                      @click="openInYoutube(video.id.videoId)"
+                                    >
                                       Visit my Channel
                                       <v-icon right>
                                         mdi-television-classic
@@ -171,12 +174,22 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col v-if="loading" cols="12" align="center">
-        <v-skeleton-loader
-          type="card"
-          class="mx-auto"
-          :width="ismobile ? 'auto' : 400"
-        />
+      <v-col v-if="loading" cols="12">
+        <v-row>
+          <v-col v-for="n in ismobile ? 1 : 3" :key="n">
+            <v-skeleton-loader
+              class="mx-auto"
+              :width="
+                ismobile
+                  ? null
+                  : (contextInfo.viewport.width -
+                      contextInfo.viewport.width * 0.1) /
+                    3
+              "
+              type="card"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </div>
@@ -246,6 +259,9 @@ export default {
         );
         this.$set(this.videos[video.index], 'model', true);
       }
+    },
+    openInYoutube(id) {
+      this.gotoUrl(`https://www.youtube.com/watch?v=${id}`);
     },
     async getChannelData() {
       this.loading = true;

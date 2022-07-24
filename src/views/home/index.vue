@@ -1,12 +1,14 @@
 <template>
   <div class="columns is-multiline">
     <h-hero-component :ismobile="ismobile" />
+    <h-about-component :ismobile="ismobile" :title="animatedArray.about" />
     <h-what-i-do-component
       :ismobile="ismobile"
       :title="animatedArray.whatiDo"
     />
     <h-stories-component
       :ismobile="ismobile"
+      :context-info="contextInfo"
       :title="animatedArray.stories"
       :goto-url="gotoUrl"
     />
@@ -15,7 +17,6 @@
       :goto-url="gotoUrl"
       :title="animatedArray.blog"
     /> -->
-    <h-about-component :ismobile="ismobile" :title="animatedArray.about" />
     <h-projects-component
       :ismobile="ismobile"
       :title="animatedArray.projtitle"
@@ -34,7 +35,6 @@
       :context-info="contextInfo"
       :goto-url="gotoUrl"
     />
-    <h-contact-tip-component :goto-url="gotoUrl" />
     <h-feedback-component
       :title="animatedArray.feedBack"
       :ismobile="ismobile"
@@ -56,7 +56,6 @@ import about_component from '@v/home/components/about-component';
 import projects_component from '@v/home/components/projects-component';
 import youtube_component from '@v/home/components/youtube-component';
 import gallery_component from '@v/home/components/gallery-component';
-import contact_tip_component from '@v/home/components/contact-tip-component';
 import feedback_component from '@v/home/components/feedback-component';
 
 export default {
@@ -73,7 +72,6 @@ export default {
     'h-projects-component': projects_component,
     'h-youtube-component': youtube_component,
     'h-gallery-component': gallery_component,
-    'h-contact-tip-component': contact_tip_component,
     'h-feedback-component': feedback_component,
   },
   data: () => ({
@@ -127,12 +125,12 @@ export default {
         },
         {
           elem: '#home-gallerytitle',
-          map_word: 'Galleria',
+          map_word: 'Photography',
           prop: 'gallerytitle',
         },
         {
           elem: '#home-feedbacktitle',
-          map_word: 'Submit your feedback',
+          map_word: 'Contact Me !',
           prop: 'feedBack',
         },
       ];
