@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.18-0](https://github.com/tks18/home/compare/v0.1.17...v0.1.18-0) (2022-07-24)
+
+
+### Styling 🎨
+
+* **icons:** change website logo, banner & favicons ([4c79aed](https://github.com/tks18/home/commit/4c79aed022a66edff90708c24f9bb8cb5b2e3695))
+
+
+### Others 🔧
+
+* **assets:** replace resume pdf with latest pdf ([21ed6fb](https://github.com/tks18/home/commit/21ed6fb1b1229cf44f5daac67b1b7ea869518237))
+* **assets:** update resume pdf file ([34c7076](https://github.com/tks18/home/commit/34c7076926f8a52e7f562f064f2232ca47cbca82))
+* **data:** update authordata json file with latest information ([b3de94c](https://github.com/tks18/home/commit/b3de94cedb594b05fd652780bbf6e139ac8d652d))
+* **domain:** move to a different domain ([aaf03ea](https://github.com/tks18/home/commit/aaf03ea9fd8dea2de8faad8adccf1c78fb2e78ed))
+* **image:** update profile images across pages ([848f752](https://github.com/tks18/home/commit/848f752e09f69fca8801926769e08df0bdf388c3))
+* **readme:** update readme to reflect latest changes ([f75824e](https://github.com/tks18/home/commit/f75824ebf90e343dc5a6acb6e68cb95b48631e85))
+* update profile pic at various places ([e88f783](https://github.com/tks18/home/commit/e88f78339c2fd5ab85c31c1992f72dce880fe8c6))
+
+
+### CI 🛠
+
+* **versionrc:** update versionrc file with nice emoji for various changelogs ([22f4a3b](https://github.com/tks18/home/commit/22f4a3b0b9a19f130e886a8f33d0f71f79b2b16b))
+
+
+### Performance Improvements 🏎
+
+* removed unwanted components and misc changes related to that ([0be9d12](https://github.com/tks18/home/commit/0be9d12e408a604bc4d69908f7d8ea6e484cdcff))
+* removed unwanted components from home page ([3dbff4f](https://github.com/tks18/home/commit/3dbff4f67a58226b24d746760db547ea320e5275))
+
+
+### Bug Fixes 🛠
+
+* **routes/about:** go to resume webpage instead of resume download ([9cf8228](https://github.com/tks18/home/commit/9cf82284b2dbca5afeaeeadce78235f2c170ef99))
+* **routes/home:** remove blog component from home for clean layout ([c6e1b70](https://github.com/tks18/home/commit/c6e1b708993ef41ecbf5bc7509c3294bbe1db0f2))
+* **views/home:** fix about section by simplifying complex code ([d654119](https://github.com/tks18/home/commit/d654119e40c267d33b6132d77cf854eda3489c48))
+
+
+### Features 🔥
+
+* **views/about/me:** add a new button for downloading resume pdf ([14efba0](https://github.com/tks18/home/commit/14efba045c73dfbc65cdafad3b337cee1db9c6ce))
+* **views/home:** give play on youtube option in youtube player ([8208cd9](https://github.com/tks18/home/commit/8208cd93e3489e4a2cd1b9de5b6b7fb5a9b1e62e))
+
+
+### Code Refactoring 🖌
+
+* **components:** refactor bottom settings component ([902d45f](https://github.com/tks18/home/commit/902d45f922b32a40b5fbd02faabebd79b93e5dbe))
+* **components:** simplify complex code in various components ([fba1295](https://github.com/tks18/home/commit/fba1295e997599f2e6a4fa6e88488de5e4c6e150))
+* **plugins:** change the default primary color theme ([07ac141](https://github.com/tks18/home/commit/07ac1419bcabb0de59f6d66273bd6a694caf9f1a))
+* **routes:** remove unwanted routes, rename route names to a proper name ([347410b](https://github.com/tks18/home/commit/347410bb4dcc0a4a9dfa8d3f42c9f3495a76f61f))
+* **views/home:** completely refactor the hero component in home page ([7d0d7cc](https://github.com/tks18/home/commit/7d0d7ccb35a626f7fd4411f69d14ec9e03bda473))
+* **views/home:** refactor feedback component in home page ([503f854](https://github.com/tks18/home/commit/503f854a9b5479e5e1a756c05065bda2e4abc193))
+* **views/home:** refactor various other components in home page ([d02035b](https://github.com/tks18/home/commit/d02035bd46290fd6158f4e3caa9db5576e1fadc3))
+
 ### [0.1.17](https://github.com/tks18/home/compare/v0.1.16...v0.1.17) (2022-04-01)
 
 
