@@ -1,10 +1,10 @@
 # [![Codacy Badge](https://app.codacy.com/project/badge/Grade/52a27169249242339aaaa0b686f0e785)](https://www.codacy.com/gh/tks18/matte-portfolio/dashboard?utm_source=github.com&utm_medium=referral&utm_content=tks18/matte-portfolio&utm_campaign=Badge_Grade) [![Netlify Status](https://api.netlify.com/api/v1/badges/6b9fff88-ce0f-4c57-ac89-fab309232f4e/deploy-status)](https://app.netlify.com/sites/portfolio-shantk/deploys) ![https://badgen.net/github/checks/tks18/matte-portfolio/master](https://badgen.net/github/checks/tks18/matte-portfolio/master) ![https://badgen.net/github/commits/tks18/matte-portfolio](https://badgen.net/github/commits/tks18/matte-portfolio) ![https://badgen.net/travis/tks18/matte-portfolio](https://badgen.net/travis/tks18/matte-portfolio)
 
-[![Home Banner](https://i.ibb.co/v1WvYQG/Home-Banner.png)](https://sudharshan.dev)
+[![Home Banner](https://i.ibb.co/bdTJD8C/Home-Banner.jpg)](https://sudharshan.dev)
 
 **_Portfolio Website with Inbuilt Gallery, Code Editor, Blog._**
 
-**Website - [sudharshan.dev](https://sudharshan.dev)**
+**Website - [https://sudharshan.dev](https://sudharshan.dev)**
 
 ## Features
 
