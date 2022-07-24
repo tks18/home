@@ -102,11 +102,7 @@
           :ismobile="ismobile"
         />
         <v-col :cols="ismobile ? 12 : 8">
-          <v-card
-            outlined
-            elevation="6"
-            @click="gotoUrl('http://fordrhodesparks.com')"
-          >
+          <v-card outlined elevation="6" @click="gotoUrl(workProfile.link)">
             <v-card-title class="back-blur-no-inherit">
               Work Profile
             </v-card-title>
@@ -127,23 +123,22 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col align="center" cols="12">
-          <v-card
-            :height="ismobile ? null : null"
-            :class="$vuetify.theme.dark ? 'grad-back-dark' : 'grad-back-light'"
-            outlined
-            elevation="6"
-            @click="gotoUrl('https://resume.sudharshan.dev')"
-          >
+        <v-col
+          v-for="(resume, index) in resumes"
+          :key="index"
+          align="center"
+          cols="6"
+        >
+          <v-card outlined elevation="6" @click="gotoUrl(resume.link)">
             <v-row
               class="inherit-height center-align-div"
               align="center"
               justify="space-around"
             >
               <v-col align="center">
-                <v-icon>mdi-file-document-multiple</v-icon>
+                <v-icon>{{ resume.icon }}</v-icon>
                 <div class="text-overline font-weight-bold">
-                  View my e-resume
+                  {{ resume.text }}
                 </div>
               </v-col>
             </v-row>
@@ -235,6 +230,18 @@ export default {
     dailyLabels: [],
     dailyGradients: ['#f72047', '#ffd200', '#1feaea'],
     consolMinutes: 0,
+    resumes: [
+      {
+        link: 'https://resume.sudharshan.dev',
+        icon: 'mdi-file-document-multiple',
+        text: 'View E-Resume',
+      },
+      {
+        link: '/assets/downloads/resume/sudharshantk_cv.pdf',
+        icon: 'mdi-file-pdf-box',
+        text: 'Download PDF Resume',
+      },
+    ],
   }),
   mounted() {
     this.getLabels();
