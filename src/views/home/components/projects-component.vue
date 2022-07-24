@@ -21,7 +21,7 @@
                 ismobile
                   ? null
                   : (contextInfo.viewport.width -
-                      contextInfo.viewport.width * 0.25) /
+                      contextInfo.viewport.width * 0.1) /
                     5
               "
               type="card"
