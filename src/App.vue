@@ -2,7 +2,6 @@
   <v-app id="app has-navbar-fixed-top">
     <navDrawer />
     <navbar :ismobile="ismobile" />
-    <sysBar />
     <Notification group="main" position="top right" />
     <Notification group="worker" position="bottom right" />
     <v-main>
@@ -12,7 +11,7 @@
         </transition>
       </div>
     </v-main>
-    <fabComponent />
+    <bottomSettings model="fab" />
     <foot />
   </v-app>
 </template>
@@ -21,8 +20,7 @@ import navbar from '@c/nav-bar';
 import navDrawer from '@c/nav-drawer';
 import Notification from '@c/notification';
 import foot from '@c/footer';
-import fabComponent from '@c/fab-component';
-import sysBar from '@c/system-bar';
+import bottomSettings from '@c/bottom-settings.vue';
 import { notifications } from '@p/backend';
 import { ismobile } from '@p/helpers';
 
@@ -49,8 +47,7 @@ export default {
     navDrawer,
     Notification,
     foot,
-    fabComponent,
-    sysBar,
+    bottomSettings,
   },
   computed: {
     ismobile() {
