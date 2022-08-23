@@ -3,7 +3,7 @@
   "workbench.preferredDarkColorTheme": "monokai-charcoal (purple)",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "monokai-charcoal (purple)",
+  "workbench.colorTheme": "GitHub Dark Default",
   "workbench.productIconTheme": "material-product-icons",
   "material-icon-theme.folders.associations": {
     "home": "content",
