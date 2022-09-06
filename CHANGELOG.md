@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.18-1](https://github.com/tks18/home/compare/v0.1.18-0...v0.1.18-1) (2022-09-06)
+
+
+### Others 🔧
+
+* change profile image ([44093b9](https://github.com/tks18/home/commit/44093b94fa325329d647d8de9e017ed9c6d8fa7d))
+* change the banner for metadata ([27a8176](https://github.com/tks18/home/commit/27a8176e9a986a729a62b7a725117e7716e3d137))
+* update profile pic & metadata image ([c1f9976](https://github.com/tks18/home/commit/c1f9976fce8b7558a5eb802768da606a5b212c86))
+
 ### [0.1.18-0](https://github.com/tks18/home/compare/v0.1.17...v0.1.18-0) (2022-07-24)
 
 
