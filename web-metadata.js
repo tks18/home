@@ -4,7 +4,7 @@ const { baseSite } = require('./package.json');
 const twitterData = {
   type: 'summary_large_image',
   username: '@shantk18',
-  pic: 'https://i.ibb.co/bdTJD8C/Home-Banner.jpg',
+  pic: 'https://i.ibb.co/3537GyY/Home-Banner.jpg',
 };
 const keyWords =
   'Sudharshan TK, Portfolio, Shan.tk, https://sudharshan.dev, sudharshan.dev, sudharshan, Blog, Portfolio-blog';
