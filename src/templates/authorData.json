@@ -498,6 +498,129 @@
       }
     },
     {
+      "name": "Complete React Developer (w/ Redux, Hooks, GraphQL)",
+      "image": "https://i.ibb.co/z8PWRB0/UC-5fea79a7-ffe8-400b-8097-9315666db8cc.jpg",
+      "verifylink": "https://www.udemy.com/certificate/UC-5fea79a7-ffe8-400b-8097-9315666db8cc/",
+      "details": {
+        "title": "Complete React Developer (w/ Redux, Hooks, GraphQL)",
+        "description": "React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library for building user interfaces based on UI components. It is maintained by Meta (formerly Facebook) and a community of individual developers and companies.",
+        "issued_on": "10-05-2022",
+        "skills": [
+          {
+            "name": "React",
+            "link": "https://www.credly.com/skills/react"
+          },
+          {
+            "name": "React Library",
+            "link": "https://www.credly.com/skills/react-library"
+          },
+          {
+            "name": "Javascript",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          },
+          {
+            "name": "Web Development",
+            "link": "https://developer.mozilla.org/en-US/docs/Web/Guide"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Udemy",
+        "about": "Udemy is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Udemy’s video player has functional features like closed captioning and note-taking functions.",
+        "link": "https://www.udemy.com/"
+      }
+    },
+    {
+      "name": "Advanced DAX for Microsoft Power BI Desktop",
+      "image": "https://i.ibb.co/mJjfKnK/UC-6b7c6712-e3f8-40ee-89dc-dc548cc98a00.jpg",
+      "verifylink": "https://www.udemy.com/certificate/UC-6b7c6712-e3f8-40ee-89dc-dc548cc98a00/",
+      "details": {
+        "title": "Advanced DAX for Microsoft Power BI Desktop",
+        "description": "Power BI is quickly becoming the world's most powerful self-service business intelligence platform, and an absolutely essential tool for data professionals and beginners alike. With Power BI you can connect to hundreds of data sources, build complex relational models using simple and intuitive tools, and design stunning, interactive dashboards from scratch.",
+        "issued_on": "08-10-2022",
+        "skills": [
+          {
+            "name": "Power BI",
+            "link": "https://www.credly.com/skills/power-bi"
+          },
+          {
+            "name": "DAX",
+            "link": "https://www.credly.com/skills/dax"
+          },
+          {
+            "name": "Data Science",
+            "link": "https://www.credly.com/skills/data-science"
+          },
+          {
+            "name": "Data Scientist Workbench",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Python",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "R Programming",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Statistics",
+            "link": "https://www.credly.com/skills/statistics"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Udemy",
+        "about": "Udemy is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Udemy’s video player has functional features like closed captioning and note-taking functions.",
+        "link": "https://www.udemy.com/"
+      }
+    },
+    {
+      "name": "Microsoft Power BI Desktop for Business Intelligence",
+      "image": "https://i.ibb.co/QN5jQjG/UC-765faff8-3584-425e-8de3-ef9911584215.jpg",
+      "verifylink": "https://www.udemy.com/certificate/UC-765faff8-3584-425e-8de3-ef9911584215/",
+      "details": {
+        "title": "Microsoft Power BI Desktop for Business Intelligence",
+        "description": "Power BI is quickly becoming the world's most powerful self-service business intelligence platform, and an absolutely essential tool for data professionals and beginners alike. With Power BI you can connect to hundreds of data sources, build complex relational models using simple and intuitive tools, and design stunning, interactive dashboards from scratch.",
+        "issued_on": "05-20-2022",
+        "skills": [
+          {
+            "name": "Power BI",
+            "link": "https://www.credly.com/skills/power-bi"
+          },
+          {
+            "name": "DAX",
+            "link": "https://www.credly.com/skills/dax"
+          },
+          {
+            "name": "Data Science",
+            "link": "https://www.credly.com/skills/data-science"
+          },
+          {
+            "name": "Data Scientist Workbench",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Python",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "R Programming",
+            "link": "https://www.credly.com/skills/data-scientist-workbench"
+          },
+          {
+            "name": "Statistics",
+            "link": "https://www.credly.com/skills/statistics"
+          }
+        ]
+      },
+      "organisation": {
+        "name": "Udemy",
+        "about": "Udemy is a massive open online course provider, and its learning experience arranges coursework into a series of modules and lessons that can include videos, text notes and assessment tests. Udemy’s video player has functional features like closed captioning and note-taking functions.",
+        "link": "https://www.udemy.com/"
+      }
+    },
+    {
       "name": "Excel Power Query - Advanced",
       "image": "https://i.ibb.co/xzX9jpq/UC-e3dd3208-d654-4df3-89b6-3a5679cfe8b4.jpg",
       "verifylink": "https://www.udemy.com/certificate/UC-e3dd3208-d654-4df3-89b6-3a5679cfe8b4/",

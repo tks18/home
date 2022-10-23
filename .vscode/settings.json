@@ -1,9 +1,9 @@
 {
   // Default Workbench Settings
-  "workbench.preferredDarkColorTheme": "monokai-charcoal (purple)",
+  "workbench.preferredDarkColorTheme": "Shades of Purple",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Shades of Purple",
   "workbench.productIconTheme": "material-product-icons",
   "material-icon-theme.folders.associations": {
     "home": "content",
@@ -91,6 +91,5 @@
   },
   // Miscs
   "explorer.confirmDelete": false,
-  "telemetry.enableTelemetry": false,
-  "telemetry.enableCrashReporter": false
+  "telemetry.enableTelemetry": false
 }
